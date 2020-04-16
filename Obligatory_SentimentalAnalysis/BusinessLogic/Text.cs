@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public class Class1
-    {
-    }
+	public class Text
+	{
+		public string Content { get; set; }
+
+
+	}
 }
