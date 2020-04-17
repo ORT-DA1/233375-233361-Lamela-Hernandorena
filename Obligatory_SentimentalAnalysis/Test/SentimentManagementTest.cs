@@ -229,7 +229,7 @@ namespace Test
         [TestMethod]
         public void VerifyNegativeSentimentContained1()
         {
-            Sentiment sentiment = new Sentiment("No     me gusta", "Positivo");
+            Sentiment sentiment = new Sentiment("No     me gusta", "Negativo");
             manegement.AddSentiment(sentiment);
             Sentiment sentiment2 = new Sentiment("No me gusta para nada", "Negativo");
             manegement.AddSentiment(sentiment2);
@@ -241,9 +241,229 @@ namespace Test
         {
             Sentiment sentiment = new Sentiment("No me gusta en absoluto", "Negativo");
             manegement.AddSentiment(sentiment);
-            Sentiment sentiment2 = new Sentiment("NO   ME GUSTA", "Positivo");
+            Sentiment sentiment2 = new Sentiment("NO   ME GUSTA", "Negativo");
             manegement.AddSentiment(sentiment2);
         }
+
+        [TestMethod]
+        public void VerifyNegativeSentimentNotContained1()
+        {
+            Sentiment sentiment = new Sentiment("Lo odio", "Negativo");
+            manegement.AddSentiment(sentiment);
+            Sentiment sentiment2 = new Sentiment("Lo detesto", "Negativo");
+            manegement.AddSentiment(sentiment2);
+            Assert.IsTrue(manegement.SentimentList.Count == 2);
+        }
+
+        [TestMethod]
+        public void VerifyNegativeSentimentNotContained2()
+        {
+            Sentiment sentiment = new Sentiment("  Lo  odio              ", "Negativo");
+            manegement.AddSentiment(sentiment);
+            Sentiment sentiment2 = new Sentiment("Yo    odio", "Negativo");
+            manegement.AddSentiment(sentiment2);
+            Assert.AreEqual("Lo odio", manegement.SentimentList[0].SentimientText);
+        }
+
+        [TestMethod]
+        public void DeleteNegativeSentiment()
+        {
+            Sentiment sentiment = new Sentiment("Es nefasto", "Negativo");
+            manegement.AddSentiment(sentiment);
+            manegement.DeleteText(sentiment);
+            Assert.IsTrue(manegement.IsEmpty());
+        }
+
+        [TestMethod]
+        public void DeleteThreeNegativesSentiments1()
+        {
+            Sentiment sentiment = new Sentiment("Lo odio", "Negativo");
+            Sentiment sentiment2 = new Sentiment("Lo detesto", "Negativo");
+            Sentiment sentiment3 = new Sentiment("Es nefasto", "Negativo");
+            Sentiment sentiment4 = new Sentiment("De lo peor", "Negativo");
+            manegement.AddSentiment(sentiment);
+            manegement.AddSentiment(sentiment2);
+            manegement.AddSentiment(sentiment3);
+            manegement.AddSentiment(sentiment4);
+            manegement.DeleteText(sentiment2);
+            manegement.DeleteText(sentiment3);
+            manegement.DeleteText(sentiment);
+            Assert.AreEqual("De lo peor", manegement.SentimentList[0].SentimientText);
+        }
+
+        [TestMethod]
+        public void DeleteThreeNegativesSentiments2()
+        {
+            Sentiment sentiment = new Sentiment("Lo odio", "Negativo");
+            Sentiment sentiment2 = new Sentiment("Lo detesto", "Negativo");
+            Sentiment sentiment3 = new Sentiment("Es nefasto", "Negativo");
+            Sentiment sentiment4 = new Sentiment("De lo peor", "Negativo");
+            manegement.AddSentiment(sentiment);
+            manegement.AddSentiment(sentiment2);
+            manegement.AddSentiment(sentiment3);
+            manegement.AddSentiment(sentiment4);
+            manegement.DeleteText(sentiment2);
+            manegement.DeleteText(sentiment3);
+            manegement.DeleteText(sentiment4);
+            Assert.AreEqual("Lo odio", manegement.SentimentList[0].SentimientText);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TextManagementException))]
+        public void DeleteNotExistNegativeSentiment()
+        {
+            Sentiment sentiment = new Sentiment("Lo odio", "Negativo");
+            manegement.AddSentiment(sentiment);
+            manegement.DeleteText(sentiment);
+            manegement.DeleteText(sentiment);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TextManagementException))]
+        public void DeleteNotExistNegativeSentiment2()
+        {
+            Sentiment sentiment = new Sentiment("Me enfada", "Negativo");
+            manegement.AddSentiment(sentiment);
+            Sentiment sentiment2 = new Sentiment("De lo peor", "Negativo");
+            manegement.AddSentiment(sentiment2);
+            manegement.DeleteText(sentiment);
+            manegement.DeleteText(sentiment2);
+            manegement.DeleteText(sentiment2);
+        }
+
+        [TestMethod]
+        public void AddValidSentimentNeutral()
+        {
+            Sentiment sentiment = new Sentiment("Mas o menos", "Neutro");
+            manegement.AddSentiment(sentiment);
+            Assert.IsFalse(manegement.IsEmpty());
+        }
+
+        [TestMethod]
+        public void AddValidSentimentNeutral2()
+        {
+            Sentiment sentiment = new Sentiment("No tengo una opinion formada", "Neutro");
+            manegement.AddSentiment(sentiment);
+            Assert.IsFalse(manegement.IsEmpty());
+        }
+
+        [ExpectedException(typeof(TextManagementException))]
+        [TestMethod]
+        public void VerifyNeutralSentimentContained1()
+        {
+            Sentiment sentiment = new Sentiment("Me da  igual", "Neutral");
+            manegement.AddSentiment(sentiment);
+            Sentiment sentiment2 = new Sentiment("Me da igual, no tengo una posicion firme ", "Neutral");
+            manegement.AddSentiment(sentiment2);
+        }
+
+        [ExpectedException(typeof(TextManagementException))]
+        [TestMethod]
+        public void VerifyNeutralSentimentContained2()
+        {
+            Sentiment sentiment = new Sentiment("Me da igual, no tengo una posicion firme", "Negativo");
+            manegement.AddSentiment(sentiment);
+            Sentiment sentiment2 = new Sentiment("Me da igual", "Negativo");
+            manegement.AddSentiment(sentiment2);
+        }
+
+        [TestMethod]
+        public void VerifyNeutralSentimentNotContained1()
+        {
+            Sentiment sentiment = new Sentiment("Me es indiferente", "Negativo");
+            manegement.AddSentiment(sentiment);
+            Sentiment sentiment2 = new Sentiment("Prefiero no opinar", "Negativo");
+            manegement.AddSentiment(sentiment2);
+            Assert.IsTrue(manegement.SentimentList.Count == 2);
+        }
+
+        [TestMethod]
+        public void VerifyNeutralSentimentNotContained2()
+        {
+            Sentiment sentiment = new Sentiment(" No me afecta    ", "Negativo");
+            manegement.AddSentiment(sentiment);
+            Sentiment sentiment2 = new Sentiment("No me molesta", "Negativo");
+            manegement.AddSentiment(sentiment2);
+            Assert.AreEqual("No me afecta", manegement.SentimentList[0].SentimientText);
+        }
+
+        [TestMethod]
+        public void DeleteNeutralSentiment()
+        {
+            Sentiment sentiment = new Sentiment("Me da igual", "Neutral");
+            manegement.AddSentiment(sentiment);
+            manegement.DeleteText(sentiment);
+            Assert.IsTrue(manegement.IsEmpty());
+        }
+
+        [TestMethod]
+        public void DeleteThreeNeutralsSentiments1()
+        {
+            Sentiment sentiment = new Sentiment("Me da igual", "Neutro");
+            Sentiment sentiment2 = new Sentiment("Me es indiferente", "Neutro");
+            Sentiment sentiment3 = new Sentiment("Prefiero no opinar", "Neutro");
+            Sentiment sentiment4 = new Sentiment("Desconozco del tema", "Neutro");
+            manegement.AddSentiment(sentiment);
+            manegement.AddSentiment(sentiment2);
+            manegement.AddSentiment(sentiment3);
+            manegement.AddSentiment(sentiment4);
+            manegement.DeleteText(sentiment2);
+            manegement.DeleteText(sentiment3);
+            manegement.DeleteText(sentiment);
+            Assert.AreEqual("Desconozco del tema", manegement.SentimentList[0].SentimientText);
+        }
+
+        [TestMethod]
+        public void DeleteThreeNeutralsSentiments2()
+        {
+            Sentiment sentiment = new Sentiment("Me da igual", "Negativo");
+            Sentiment sentiment2 = new Sentiment("Me es indiferente", "Neutro");
+            Sentiment sentiment3 = new Sentiment("Prefiero no opinar", "Neutro");
+            Sentiment sentiment4 = new Sentiment("Desconozco del tema", "Neutro");
+            manegement.AddSentiment(sentiment);
+            manegement.AddSentiment(sentiment2);
+            manegement.AddSentiment(sentiment3);
+            manegement.AddSentiment(sentiment4);
+            manegement.DeleteText(sentiment2);
+            manegement.DeleteText(sentiment3);
+            manegement.DeleteText(sentiment4);
+            Assert.AreEqual("Me da igual", manegement.SentimentList[0].SentimientText);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TextManagementException))]
+        public void DeleteNotExistNeutralSentiment()
+        {
+            Sentiment sentiment = new Sentiment("Me da igual", "Neutral");
+            manegement.AddSentiment(sentiment);
+            manegement.DeleteText(sentiment);
+            manegement.DeleteText(sentiment);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TextManagementException))]
+        public void DeleteNotExistNeutralSentiment2()
+        {
+            Sentiment sentiment = new Sentiment("No me afecta", "Neutral");
+            manegement.AddSentiment(sentiment);
+            Sentiment sentiment2 = new Sentiment("Prefiero no opinar", "Neutral");
+            manegement.AddSentiment(sentiment2);
+            manegement.DeleteText(sentiment);
+            manegement.DeleteText(sentiment2);
+            manegement.DeleteText(sentiment2);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
