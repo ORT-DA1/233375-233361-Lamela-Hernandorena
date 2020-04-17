@@ -5,7 +5,7 @@ using System;
 namespace Test
 {
 	[TestClass]
-	public class TextManegementTest
+	public class SentimentManagementTest
 	{
 
 		SentimentManagement manegement; 
@@ -209,8 +209,49 @@ namespace Test
 
 		}
 
+        [TestMethod]
+        public void AddValidSentimentNegative1()
+        {
+            Sentiment sentiment = new Sentiment("Lo odio", "Negativo");
+            manegement.AddSentiment(sentiment);
+            Assert.IsFalse(manegement.IsEmpty());
+        }
+
+        [TestMethod]
+        public void AddValidSentimentNegative2()
+        {
+            Sentiment sentiment = new Sentiment("Detesto", "Negativo");
+            manegement.AddSentiment(sentiment);
+            Assert.IsFalse(manegement.IsEmpty());
+        }
+
+        [ExpectedException(typeof(TextManagementException))]
+        [TestMethod]
+        public void VerifyNegativeSentimentContained1()
+        {
+            Sentiment sentiment = new Sentiment("No     me gusta", "Positivo");
+            manegement.AddSentiment(sentiment);
+            Sentiment sentiment2 = new Sentiment("No me gusta para nada", "Negativo");
+            manegement.AddSentiment(sentiment2);
+        }
+
+        [ExpectedException(typeof(TextManagementException))]
+        [TestMethod]
+        public void VerifyNegativeSentimentContained2()
+        {
+            Sentiment sentiment = new Sentiment("No me gusta en absoluto", "Negativo");
+            manegement.AddSentiment(sentiment);
+            Sentiment sentiment2 = new Sentiment("NO   ME GUSTA", "Positivo");
+            manegement.AddSentiment(sentiment2);
+        }
 
 
 
-	}
+
+
+
+
+
+
+    }
 }
