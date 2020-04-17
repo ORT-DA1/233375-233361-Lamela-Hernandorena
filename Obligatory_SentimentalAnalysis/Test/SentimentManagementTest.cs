@@ -229,7 +229,7 @@ namespace Test
         [TestMethod]
         public void VerifyNegativeSentimentContained1()
         {
-            Sentiment sentiment = new Sentiment("No     me gusta", "Positivo");
+            Sentiment sentiment = new Sentiment("No     me gusta", "Negativo");
             manegement.AddSentiment(sentiment);
             Sentiment sentiment2 = new Sentiment("No me gusta para nada", "Negativo");
             manegement.AddSentiment(sentiment2);
@@ -241,17 +241,81 @@ namespace Test
         {
             Sentiment sentiment = new Sentiment("No me gusta en absoluto", "Negativo");
             manegement.AddSentiment(sentiment);
-            Sentiment sentiment2 = new Sentiment("NO   ME GUSTA", "Positivo");
+            Sentiment sentiment2 = new Sentiment("NO   ME GUSTA", "Negativo");
             manegement.AddSentiment(sentiment2);
         }
 
+        [TestMethod]
+        public void VerifyNegativeSentimentNotContained1()
+        {
+            Sentiment sentiment = new Sentiment("Lo odio", "Negativo");
+            manegement.AddSentiment(sentiment);
+            Sentiment sentiment2 = new Sentiment("Lo detesto", "Negativo");
+            manegement.AddSentiment(sentiment2);
+            Assert.IsTrue(manegement.SentimentList.Count == 2);
+        }
 
+        [TestMethod]
+        public void VerifyNegativeSentimentNotContained2()
+        {
+            Sentiment sentiment = new Sentiment("  Lo  odio              ", "Negativo");
+            manegement.AddSentiment(sentiment);
+            Sentiment sentiment2 = new Sentiment("Yo    odio", "Negativo");
+            manegement.AddSentiment(sentiment2);
+            Assert.AreEqual("Lo odio", manegement.SentimentList[0].SentimientText);
+        }
 
+        [TestMethod]
+        public void DeleteNegativeSentiment()
+        {
+            Sentiment sentiment = new Sentiment("Es nefasto", "Negativo");
+            manegement.AddSentiment(sentiment);
+            manegement.DeleteText(sentiment);
+            Assert.IsTrue(manegement.IsEmpty());
+        }
 
+        [TestMethod]
+        public void DeleteThreeNegativesSentiments1()
+        {
+            Sentiment sentiment = new Sentiment("Lo odio", "Negativo");
+            Sentiment sentiment2 = new Sentiment("Lo detesto", "Negativo");
+            Sentiment sentiment3 = new Sentiment("Es nefasto", "Negativo");
+            Sentiment sentiment4 = new Sentiment("De lo peor", "Negativo");
+            manegement.AddSentiment(sentiment);
+            manegement.AddSentiment(sentiment2);
+            manegement.AddSentiment(sentiment3);
+            manegement.AddSentiment(sentiment4);
+            manegement.DeleteText(sentiment2);
+            manegement.DeleteText(sentiment3);
+            manegement.DeleteText(sentiment);
+            Assert.AreEqual("De lo peor", manegement.SentimentList[0].SentimientText);
+        }
 
+        [TestMethod]
+        public void DeleteThreeNegativesSentiments2()
+        {
+            Sentiment sentiment = new Sentiment("Lo odio", "Negativo");
+            Sentiment sentiment2 = new Sentiment("Lo detesto", "Negativo");
+            Sentiment sentiment3 = new Sentiment("Es nefasto", "Negativo");
+            Sentiment sentiment4 = new Sentiment("De lo peor", "Negativo");
+            manegement.AddSentiment(sentiment);
+            manegement.AddSentiment(sentiment2);
+            manegement.AddSentiment(sentiment3);
+            manegement.AddSentiment(sentiment4);
+            manegement.DeleteText(sentiment2);
+            manegement.DeleteText(sentiment3);
+            manegement.DeleteText(sentiment4);
+            Assert.AreEqual("Lo odio", manegement.SentimentList[0].SentimientText);
+        }
 
-
-
-
+        [TestMethod]
+        [ExpectedException(typeof(TextManagementException))]
+        public void DeleteNotExistNegativeSentiment()
+        {
+            Sentiment sentiment = new Sentiment("Lo odio", "Negativo");
+            manegement.AddSentiment(sentiment);
+            manegement.DeleteText(sentiment);
+            manegement.DeleteText(sentiment);
+        }
     }
 }
