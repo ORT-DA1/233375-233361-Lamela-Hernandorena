@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{EA2A9660-BBDD-4F55-8549-616C03BF08DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicExceptions", "BusinessLogicExceptions\BusinessLogicExceptions.csproj", "{E804FF3C-2A7D-4D3E-9CBE-7EDCB5A35CCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EA2A9660-BBDD-4F55-8549-616C03BF08DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA2A9660-BBDD-4F55-8549-616C03BF08DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA2A9660-BBDD-4F55-8549-616C03BF08DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E804FF3C-2A7D-4D3E-9CBE-7EDCB5A35CCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E804FF3C-2A7D-4D3E-9CBE-7EDCB5A35CCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E804FF3C-2A7D-4D3E-9CBE-7EDCB5A35CCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E804FF3C-2A7D-4D3E-9CBE-7EDCB5A35CCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

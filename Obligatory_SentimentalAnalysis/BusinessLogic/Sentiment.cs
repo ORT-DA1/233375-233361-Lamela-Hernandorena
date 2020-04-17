@@ -6,12 +6,19 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-	public class Sentiment : Text
+	public class Sentiment
 	{
+
+		public string SentimientText { get; set;  }
+
 		public string SentimentType { get; set; }
 
-		public Sentiment(string text) {
-			Content = text; 
+		
+
+
+		public Sentiment(string text, string type){
+			SentimientText = text;
+			SentimentType = type; 
 		}
 		
 

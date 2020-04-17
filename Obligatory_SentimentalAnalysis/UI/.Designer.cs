@@ -1,6 +1,6 @@
 ﻿namespace UI
 {
-	partial class Form1
+	partial class MainMenu
 	{
 		/// <summary>
 		/// Variable del diseñador necesaria.
@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.txtPositiveSentiment = new System.Windows.Forms.TextBox();
 			this.btnAddPositiveSentiment = new System.Windows.Forms.Button();
@@ -41,24 +41,27 @@
 			// 
 			this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
 			this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+			this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
 			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(763, 591);
+			this.pictureBox1.Size = new System.Drawing.Size(763, 599);
 			this.pictureBox1.TabIndex = 0;
 			this.pictureBox1.TabStop = false;
 			// 
 			// txtPositiveSentiment
 			// 
 			this.txtPositiveSentiment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
-			this.txtPositiveSentiment.Location = new System.Drawing.Point(354, 87);
+			this.txtPositiveSentiment.Location = new System.Drawing.Point(354, 89);
+			this.txtPositiveSentiment.Margin = new System.Windows.Forms.Padding(2);
 			this.txtPositiveSentiment.Name = "txtPositiveSentiment";
-			this.txtPositiveSentiment.Size = new System.Drawing.Size(258, 22);
+			this.txtPositiveSentiment.Size = new System.Drawing.Size(264, 20);
 			this.txtPositiveSentiment.TabIndex = 1;
 			// 
 			// btnAddPositiveSentiment
 			// 
-			this.btnAddPositiveSentiment.Location = new System.Drawing.Point(618, 82);
+			this.btnAddPositiveSentiment.Location = new System.Drawing.Point(622, 79);
+			this.btnAddPositiveSentiment.Margin = new System.Windows.Forms.Padding(2);
 			this.btnAddPositiveSentiment.Name = "btnAddPositiveSentiment";
-			this.btnAddPositiveSentiment.Size = new System.Drawing.Size(145, 33);
+			this.btnAddPositiveSentiment.Size = new System.Drawing.Size(131, 38);
 			this.btnAddPositiveSentiment.TabIndex = 2;
 			this.btnAddPositiveSentiment.Text = "Agregar";
 			this.btnAddPositiveSentiment.UseVisualStyleBackColor = true;
@@ -66,32 +69,34 @@
 			// listPositivesSentiments
 			// 
 			this.listPositivesSentiments.FormattingEnabled = true;
-			this.listPositivesSentiments.ItemHeight = 16;
-			this.listPositivesSentiments.Location = new System.Drawing.Point(409, 214);
+			this.listPositivesSentiments.Location = new System.Drawing.Point(464, 210);
+			this.listPositivesSentiments.Margin = new System.Windows.Forms.Padding(2);
 			this.listPositivesSentiments.Name = "listPositivesSentiments";
-			this.listPositivesSentiments.Size = new System.Drawing.Size(254, 260);
+			this.listPositivesSentiments.Size = new System.Drawing.Size(192, 212);
 			this.listPositivesSentiments.TabIndex = 3;
 			// 
 			// btnDeletePositiveSentiment
 			// 
-			this.btnDeletePositiveSentiment.Location = new System.Drawing.Point(461, 544);
+			this.btnDeletePositiveSentiment.Location = new System.Drawing.Point(455, 547);
+			this.btnDeletePositiveSentiment.Margin = new System.Windows.Forms.Padding(2);
 			this.btnDeletePositiveSentiment.Name = "btnDeletePositiveSentiment";
-			this.btnDeletePositiveSentiment.Size = new System.Drawing.Size(160, 35);
+			this.btnDeletePositiveSentiment.Size = new System.Drawing.Size(165, 28);
 			this.btnDeletePositiveSentiment.TabIndex = 4;
 			this.btnDeletePositiveSentiment.Text = "Eliminar";
 			this.btnDeletePositiveSentiment.UseVisualStyleBackColor = true;
 			// 
-			// Form1
+			// MainMenu
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(763, 591);
+			this.ClientSize = new System.Drawing.Size(764, 599);
 			this.Controls.Add(this.btnDeletePositiveSentiment);
 			this.Controls.Add(this.listPositivesSentiments);
 			this.Controls.Add(this.btnAddPositiveSentiment);
 			this.Controls.Add(this.txtPositiveSentiment);
 			this.Controls.Add(this.pictureBox1);
-			this.Name = "Form1";
+			this.Margin = new System.Windows.Forms.Padding(2);
+			this.Name = "MainMenu";
 			this.Text = "MainMenu";
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
