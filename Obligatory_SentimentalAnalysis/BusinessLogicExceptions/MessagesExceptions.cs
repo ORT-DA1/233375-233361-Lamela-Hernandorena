@@ -8,8 +8,9 @@ namespace BusinessLogic
 {
 	public class MessagesExceptions
 	{
-		public static string ERROR_IS_CONTAINED = "Error el sentimiento ya esta contenido en otro";
-		public static string ERROR_DONT_EXIST = "Error el sentimiento no existe";
+		public static string ERROR_IS_CONTAINED = "Error. Ya esta contenido en otro";
+		public static string ERROR_DONT_EXIST = "Error. No existe";
+		public static string ERROR_IS_EMPTY = "Error. Se encuentra vacio ";
 
 	}
 }
