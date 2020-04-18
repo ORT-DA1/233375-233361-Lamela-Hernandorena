@@ -24,8 +24,8 @@ namespace BusinessLogic
 
 		public void AddEntity(Entity entity)
 		{
-			VerifyFormatAdd(entity); 
 			entity.EntityName = DeleteSpaces(entity.EntityName.Trim()); 
+			VerifyFormatAdd(entity);
 			EntityList.Add(entity); 
 		}
 

@@ -14,7 +14,14 @@ namespace BusinessLogic
 		{
 			EntityName = name;
 		}
-		
+
+
+		public override bool Equals(object obj)
+		{
+			Entity entity = (Entity)obj;
+			return string.Equals(EntityName, entity.EntityName, StringComparison.OrdinalIgnoreCase); 
+		}
+
 
 	}
 }
