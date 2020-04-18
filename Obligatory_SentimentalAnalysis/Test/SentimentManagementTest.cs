@@ -317,5 +317,44 @@ namespace Test
             manegement.DeleteText(sentiment);
             manegement.DeleteText(sentiment);
         }
-    }
+
+
+		[TestMethod]
+		[ExpectedException(typeof(TextManagementException))]
+		public void TryingAddInvalidSentiment()
+		{
+			Sentiment sentiment = new Sentiment("Posible", "Positivo");
+			manegement.AddSentiment(sentiment);
+			Sentiment sentiment2 = new Sentiment("Imposible", "Negativo");
+			manegement.AddSentiment(sentiment2); 
+		}
+
+		[TestMethod]
+		[ExpectedException(typeof(TextManagementException))]
+		public void TryingAddInvalidSentiment2()
+		{
+			Sentiment sentiment = new Sentiment("Imposible", "Negativo");
+			manegement.AddSentiment(sentiment);
+			Sentiment sentiment2 = new Sentiment("Posible", "Positivo");
+			manegement.AddSentiment(sentiment2);
+		}
+
+
+		[TestMethod]
+		[ExpectedException(typeof(TextManagementException))]
+		public void TryingAddRepeteadSentiment()
+		{
+			Sentiment sentiment = new Sentiment("Posible", "Positivo");
+			manegement.AddSentiment(sentiment);
+			Sentiment sentiment2 = new Sentiment("Posible", "Positivo");
+			manegement.AddSentiment(sentiment2);
+		}
+
+
+
+
+
+
+
+	}
 }
