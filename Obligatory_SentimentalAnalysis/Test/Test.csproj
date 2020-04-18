@@ -52,6 +52,7 @@
     <Compile Include="SentimentManagementTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EntityManagementTest.cs" />
+    <Compile Include="PhraseManagementTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
