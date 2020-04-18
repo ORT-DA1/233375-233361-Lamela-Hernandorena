@@ -53,6 +53,17 @@ namespace Test
 
         [TestMethod]
         [ExpectedException(typeof(PhraseManagementException))]
+        public void AddPhraseWithDateAfterToday()
+        {
+
+            DateTime aDate = new DateTime(2020, 12, 29);
+            Phrase phrase = new Phrase("Amo Burger King", aDate);
+            management.AddPhrase(phrase);
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(PhraseManagementException))]
         public void AddInvalidEmptyPhrase()
         {
             Phrase phrase = new Phrase("           ", DateTime.Now);
