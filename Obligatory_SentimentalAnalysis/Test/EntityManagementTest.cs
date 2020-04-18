@@ -110,5 +110,29 @@ namespace Test
 			Assert.IsFalse(result);
 		}
 
+
+
+		[TestMethod]
+		[ExpectedException(typeof(EntityManagementException))]
+		public void AddExtrangeEntitys()
+		{
+			Entity entity = new Entity("Coca Cola");
+			Entity entity2 = new Entity("cOCa coLA");
+			management.AddEntity(entity);
+			management.AddEntity(entity2); 
+			
+		}
+		
+
+		[TestMethod]
+		[ExpectedException(typeof(EntityManagementException))]
+		public void AddEntitysWithSpace()
+		{
+			Entity entity = new Entity("MC           DONALDS");
+			Entity entity2 = new Entity("mc donalds");
+			management.AddEntity(entity);
+			management.AddEntity(entity2); 
+		}
+
 	}
 }
