@@ -43,130 +43,21 @@ namespace Test
 			management.AddPhrase(phrase); 
 		}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	}
+        [TestMethod]
+        public void AddPhraseWithTodayDate()
+        {
+            Phrase phrase = new Phrase("Amo Burger King", DateTime.Now);
+            management.AddPhrase(phrase);
+            Assert.IsFalse(management.IsEmpty());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(PhraseManagementException))]
+        public void AddInvalidEmptyPhrase()
+        {
+            Phrase phrase = new Phrase("           ", DateTime.Now);
+            management.AddPhrase(phrase);
+            
+        }
+    }
 }

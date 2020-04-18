@@ -37,6 +37,10 @@ namespace BusinessLogic
 			{
 				throw new PhraseManagementException(MessagesExceptions.ERROR_IS_EMPTY); 
 			}
+            if (phrase.PhraseDate > DateTime.Now)
+            {
+                throw new PhraseManagementException(MessagesExceptions.ERROR_IS_AFTER_TODAY);
+            }
 		}
 
 		private string DeleteSpaces(string text)

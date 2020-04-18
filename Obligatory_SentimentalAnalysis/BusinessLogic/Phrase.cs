@@ -10,11 +10,20 @@ namespace BusinessLogic
 	{
 		public string TextPhrase { get; set; }
 
+        public DateTime PhraseDate { get; set; }
 
-		public Phrase(string phrase)
+
+
+        public Phrase(string phrase)
 		{
 			TextPhrase = phrase; 
 		}
+
+        public Phrase (string phrase, DateTime date)
+        {
+            TextPhrase = phrase;
+            PhraseDate = date;
+        }
 
 
 	}
