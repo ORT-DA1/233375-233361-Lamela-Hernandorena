@@ -24,7 +24,5 @@ namespace BusinessLogic
             TextPhrase = phrase;
             PhraseDate = date;
         }
-
-
 	}
 }
