@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alarm.cs" />
+    <Compile Include="AlarmManagement.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityManagement.cs" />
     <Compile Include="Phrase.cs" />
