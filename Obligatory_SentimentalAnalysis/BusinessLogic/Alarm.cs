@@ -12,16 +12,26 @@ namespace BusinessLogic
 		public string Type { get; set; }
 		public int QuantityPost { get; set; }
 		public DateTime QuantityTime { get; set; }
-		public bool State { get; set; }
+		public bool Active { get; set; }
 
-		public Alarm(Entity entity, string type, int quantityPost, DateTime quantityTime)
+		public Alarm(Entity entity, string type, int quantityPost)
 		{
 			Entity = entity;
 			Type = type;
 			QuantityPost = quantityPost;
-			QuantityTime = quantityTime; 
+			QuantityTime = DateTime.Now; 
+			Active = false;
+		}
+
+		public override bool Equals(object obj)
+		{
+			Alarm a = (Alarm)obj;
+			return Entity.Equals(a.Entity) && QuantityPost.Equals(a.QuantityPost) && QuantityTime.Equals(a.QuantityTime); 
 		}
 
 
-	}
+
+
+
+	} 
 }

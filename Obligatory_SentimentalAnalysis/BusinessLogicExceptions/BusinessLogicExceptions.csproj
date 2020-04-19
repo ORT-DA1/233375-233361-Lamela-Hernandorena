@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlarmManagementException.cs" />
     <Compile Include="EntityManagementException.cs" />
     <Compile Include="MessagesExceptions.cs" />
     <Compile Include="PhraseManagementException.cs" />
