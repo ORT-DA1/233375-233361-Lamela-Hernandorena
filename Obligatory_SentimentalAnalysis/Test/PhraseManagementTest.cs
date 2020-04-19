@@ -34,10 +34,17 @@ namespace Test
 			Assert.AreEqual("No me gusta Disney", management.PhraseList[0].TextPhrase);  
 		}
 
+        [TestMethod]
+        public void AddValidPhrase3()
+        {
+            Phrase phrase = new Phrase("No       me      gusta   Disney");
+            management.AddPhrase(phrase);
+            Assert.AreEqual("No me gusta Disney", management.PhraseList[0].TextPhrase);
+        }
 
-		[TestMethod]
+        [TestMethod]
 		[ExpectedException(typeof(PhraseManagementException))]
-		public void AddInvalidPhrase()
+		public void AddInvalidPhrase2()
 		{
 			Phrase phrase = new Phrase("");
 			management.AddPhrase(phrase); 
