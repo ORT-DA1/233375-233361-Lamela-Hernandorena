@@ -41,7 +41,20 @@ namespace BusinessLogic
 				throw new AlarmManagementException(MessagesExceptions.ERROR_IS_CONTAINED); 
 			}
 
-			
+			if (AlarmEntityIsNull(alarm))
+            {
+                throw new AlarmManagementException(MessagesExceptions.ERROR_IS_NULL); 
+            }
+
+            if (IsNegativeQuantity(timeAdded))
+            {
+                throw new AlarmManagementException(MessagesExceptions.ERROR_IS_NEGATIVE); 
+            }
+		}
+
+		private bool AlarmEntityIsNull(Alarm alarm)
+		{
+			return alarm.Entity == null;
 		}
 
 

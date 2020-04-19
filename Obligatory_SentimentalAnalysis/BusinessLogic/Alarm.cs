@@ -14,12 +14,12 @@ namespace BusinessLogic
 		public DateTime QuantityTime { get; set; }
 		public bool Active { get; set; }
 
-		public Alarm(Entity entity, string type, int quantityPost)
+		public Alarm(Entity entity, string type, int quantityPost, DateTime actualDate)
 		{
 			Entity = entity;
 			Type = type;
 			QuantityPost = quantityPost;
-			QuantityTime = DateTime.Now; 
+			QuantityTime = actualDate;
 			Active = false;
 		}
 
