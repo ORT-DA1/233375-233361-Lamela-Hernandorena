@@ -9,21 +9,24 @@ namespace BusinessLogic
 	public class Sentiment
 	{
 
+		public enum sentimentType { Positive, Neutral, Negative }
+
 		public string SentimientText { get; set;  }
 
-		public string SentimentType { get; set; }
+		public sentimentType SentimentType { get; set; }
 
-		
-
-
-		public Sentiment(string text, string type){
+		public Sentiment(string text, sentimentType type){
 			SentimientText = text;
-			SentimentType = type; 
+			SentimentType = type ; 
 		}
+
+		public override string ToString()
+		{
+			return SentimientText; 
+		}
+
+
 		
-
-
-
 
 	}
 }
