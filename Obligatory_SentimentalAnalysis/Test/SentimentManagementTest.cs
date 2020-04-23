@@ -27,7 +27,6 @@ namespace Test
 		
 			manegement.AddSentiment(sentiment);
 
-
 			CollectionAssert.Contains(manegement.AllSentiments, sentiment); 
 
 
@@ -328,6 +327,15 @@ namespace Test
 			Assert.AreEqual("Me gusta", sentiment.ToString()); 
 		}
 
+		[TestMethod]
+		public void TestingReduceSpace()
+		{
+			Sentiment sentiment = new Sentiment("Me       gusta", Sentiment.sentimentType.Positive);
+			Sentiment sentiment2 = new Sentiment("Me gusta", Sentiment.sentimentType.Positive);
+			bool areEquals = sentiment.Equals(sentiment2);
+			Assert.IsTrue(areEquals); 
+
+		}
 
 		
 
