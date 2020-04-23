@@ -9,16 +9,16 @@ namespace BusinessLogic
 {
 	public class EntityManagement
 	{
-		public List<Entity> EntityList{ get; set;  }
+		private List<Entity> entityList;
 
 		public EntityManagement()
 		{
-			EntityList = new List<Entity>(); 
+			entityList = new List<Entity>(); 
 		}
 
 		public bool IsEmpty()
 		{
-			return EntityList.Count == 0; 
+			return entityList.Count == 0; 
 		}
 
 
@@ -26,7 +26,7 @@ namespace BusinessLogic
 		{
 			entity.EntityName = DeleteSpaces(entity.EntityName.Trim()); 
 			VerifyFormatAdd(entity);
-			EntityList.Add(entity); 
+			entityList.Add(entity); 
 		}
 
 
@@ -59,7 +59,7 @@ namespace BusinessLogic
 
 		private bool IsContained(Entity entity)
 		{
-			return EntityList.Contains(entity); 
+			return entityList.Contains(entity); 
 		}
 
 
@@ -68,7 +68,7 @@ namespace BusinessLogic
 		public void DeleteEntity(Entity entity)
 		{
 			VerifyFormatDelete(entity);
-			EntityList.Remove(entity);
+			entityList.Remove(entity);
 		}
 
 
@@ -80,16 +80,9 @@ namespace BusinessLogic
 			}
 		}
 
-
-	
-
-
-
-
-
-
-
-
-
+		public Entity [] AllEntities
+		{
+			get { return entityList.ToArray(); }
+		}
 	}
 }
