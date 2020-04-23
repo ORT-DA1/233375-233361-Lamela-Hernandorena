@@ -9,12 +9,12 @@ namespace BusinessLogic
 {
 	public class PhraseManagement
 	{
-		public List<Phrase> PhraseList { get; set;  }
+		private List<Phrase> phraseList; 
 
 
 		public PhraseManagement()
 		{
-			PhraseList = new List<Phrase>(); 
+			phraseList = new List<Phrase>(); 
 		}
 
 
@@ -22,12 +22,12 @@ namespace BusinessLogic
 		{
 			phrase.TextPhrase = DeleteSpaces(phrase.TextPhrase.Trim()); 
 			VerifyFormatAdd(phrase); 
-			PhraseList.Add(phrase); 
+			phraseList.Add(phrase); 
 		}
 
 		public bool IsEmpty()
 		{
-			return PhraseList.Count == 0; 
+			return phraseList.Count == 0; 
 		}
 
 
@@ -41,6 +41,11 @@ namespace BusinessLogic
             {
                 throw new PhraseManagementException(MessagesExceptions.ERROR_IS_AFTER_TODAY);
             }
+			
+			if ((DateTime.Now - phrase.PhraseDate).Days > 365) 
+			{
+				throw new PhraseManagementException(MessagesExceptions.ERROR_IS_ONE_YEAR_BEFORE); 
+			}
 		}
 
 		private string DeleteSpaces(string text)
@@ -52,10 +57,11 @@ namespace BusinessLogic
 
 			return text;
 		}
-
-
-
-
-
+		
+		public Phrase[] AllPhrases
+		{
+			get { return phraseList.ToArray();  }
+		}
+		
 	}
 }
