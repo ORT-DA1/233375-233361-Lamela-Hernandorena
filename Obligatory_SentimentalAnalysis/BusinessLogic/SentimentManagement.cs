@@ -10,15 +10,12 @@ namespace BusinessLogic
     public class SentimentManagement
     {
 
-		
-
-
-		public List<Sentiment> SentimentList { get; set; }
+		private List<Sentiment> sentimentList; 
 		
 
 		public SentimentManagement()
 		{
-			SentimentList = new List<Sentiment>(); 
+			sentimentList = new List<Sentiment>(); 
 		}
 
 
@@ -27,12 +24,12 @@ namespace BusinessLogic
 		{
 			VerifyFormatAdd(sentiment);
 			sentiment.SentimientText = DeleteSpaces(sentiment.SentimientText).Trim();
-			SentimentList.Add(sentiment); 
+			sentimentList.Add(sentiment); 
 		}
 
 		public bool IsEmpty()
 		{
-			return SentimentList.Count == 0; 
+			return sentimentList.Count == 0; 
 		}
 
 
@@ -57,9 +54,9 @@ namespace BusinessLogic
 
 			string element= DeleteSpaces(sentiment.SentimientText.ToLower().Trim()); 
 			
-			for (int i = 0; i < SentimentList.Count() && !toReturn; i++)
+			for (int i = 0; i < sentimentList.Count() && !toReturn; i++)
 			{
-				string listElement = SentimentList.ElementAt(i).SentimientText;
+				string listElement = sentimentList.ElementAt(i).SentimientText;
 				listElement = DeleteSpaces(listElement.ToLower().Trim()); 
 
 				if (element.Contains(listElement) || listElement.Contains(element)) 
@@ -95,12 +92,18 @@ namespace BusinessLogic
 		public void DeleteText(Sentiment sentiment)
 		{
 			VerifyFormatDelete(sentiment); 
-			SentimentList.Remove(sentiment); 
+			sentimentList.Remove(sentiment); 
 		}
 
 		private bool Exist(Sentiment sentiment)
 		{
-			return SentimentList.Contains(sentiment); 
+			return sentimentList.Contains(sentiment); 
+		}
+
+
+		public Sentiment[] AllSentiments
+		{
+			get { return sentimentList.ToArray();  }
 		}
 
 

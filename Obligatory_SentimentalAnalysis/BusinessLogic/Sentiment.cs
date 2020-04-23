@@ -25,8 +25,23 @@ namespace BusinessLogic
 			return SentimientText; 
 		}
 
+		public override bool Equals(object obj)
+		{
+			Sentiment sentiment = (Sentiment)obj;
+			return string.Equals(DeleteSpaces(SentimientText.Trim()), DeleteSpaces(sentiment.SentimientText.Trim()), StringComparison.OrdinalIgnoreCase) && SentimentType.Equals(sentiment.SentimentType);
+		}
 
-		
+		private string DeleteSpaces(string text)
+		{
+			while (text.Contains("  "))
+			{
+				text = text.Replace("  ", " ");
+			}
+
+			return text;
+		}
+
+
 
 	}
 }
