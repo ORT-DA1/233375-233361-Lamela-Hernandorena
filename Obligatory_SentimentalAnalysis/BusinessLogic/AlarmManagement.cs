@@ -9,27 +9,20 @@ namespace BusinessLogic
 {
 	public class AlarmManagement
 	{
-		public List<Alarm> AlarmList { get; set; }
+		private List<Alarm> alarmList;
 
 		public AlarmManagement()
 		{
-			AlarmList = new List<Alarm>(); 
+			alarmList = new List<Alarm>(); 
 		}
 
-		public void AddAlarm(Alarm alarm, double placedTime, bool isDay)
+		public void AddAlarm(Alarm alarm)
 		{
-			ModifyQuantityTime(alarm, placedTime, isDay);
-			VerifyFormatAlarm(alarm, placedTime);
-			AlarmList.Add(alarm); 
+			VerifyFormatAlarm(alarm);
+			alarmList.Add(alarm); 
 		}
 
-
-		public bool IsEmpty()
-		{
-			return AlarmList.Count == 0; 
-		}
-
-		public void VerifyFormatAlarm(Alarm alarm, double timeAdded)
+		public void VerifyFormatAlarm(Alarm alarm)
 		{
 			if (IsNegativeQuantity(alarm.QuantityPost))
 			{
@@ -46,7 +39,7 @@ namespace BusinessLogic
                 throw new AlarmManagementException(MessagesExceptions.ERROR_IS_NULL); 
             }
 
-            if (IsNegativeQuantity(timeAdded))
+            if (IsNegativeQuantity(alarm.QuantityTime))
             {
                 throw new AlarmManagementException(MessagesExceptions.ERROR_IS_NEGATIVE); 
             }
@@ -61,7 +54,7 @@ namespace BusinessLogic
 
 		private bool ExistAlarm(Alarm alarm)
 		{
-			return AlarmList.Contains(alarm); 
+			return alarmList.Contains(alarm); 
 		}
 
 		private bool IsNegativeQuantity(double quantity)
@@ -69,19 +62,9 @@ namespace BusinessLogic
 			return quantity <= 0; 
 		}
 
-		private void ModifyQuantityTime(Alarm alarm, double placedTime, bool isDay)
+		public Alarm[] allAlarms
 		{
-			if (isDay)
-			{
-				alarm.QuantityTime = alarm.QuantityTime.AddDays(placedTime);  
-			}
-			else
-			{
-				alarm.QuantityTime= alarm.QuantityTime.AddHours(placedTime); 
-			}
+			get { return alarmList.ToArray(); }
 		}
-
-
-
 	}
 }

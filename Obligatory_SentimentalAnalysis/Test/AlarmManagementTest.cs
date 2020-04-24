@@ -10,13 +10,13 @@ namespace Test
 	{
 
 		AlarmManagement management;
-		DateTime actualDate;
+		
 		
 		[TestInitialize]
 		public void SetUp()
 		{
 			management = new AlarmManagement();
-			actualDate = DateTime.Now;
+			
 		}
 
 
@@ -24,9 +24,9 @@ namespace Test
 		public void CreateValidNewAlarm()
 		{
 			Entity entity = new Entity("Pedidos ya");
-			Alarm alarm = new Alarm(entity,"Positivo", 50, actualDate);
-			management.AddAlarm(alarm, 10, false); //In this case we put 10 hours
-			Assert.IsFalse(management.IsEmpty()); 
+			Alarm alarm = new Alarm(entity, Alarm.Type.Positive, 50, 5, false);
+			management.AddAlarm(alarm);
+			CollectionAssert.Contains(management.allAlarms, alarm);
 		}
 
 		[TestMethod]
@@ -34,59 +34,38 @@ namespace Test
 		public void CreateInvalidAlarm()
 		{
 			Entity entity = new Entity("Pedidos ya");
-			Alarm alarm = new Alarm(entity, "Positivo", -50, actualDate);
-			management.AddAlarm(alarm, 10, false);//In this case we put 10 hours
+			Alarm alarm = new Alarm(entity, Alarm.Type.Positive, -50, 13, true);
+			management.AddAlarm(alarm);
 		}
-
-
-		[TestMethod]
-		public void VerifyHourAlarm()
-		{
-			Entity entity = new Entity("Pedidos ya");
-			Alarm alarm = new Alarm(entity, "Positivo", 50, actualDate);
-			management.AddAlarm(alarm, 10.0, false);
-			DateTime aDateTime = actualDate.AddHours(10);
-			Assert.AreEqual(aDateTime, management.AlarmList[0].QuantityTime); 
-		}
-
-		[TestMethod]
-		public void VerifyDaysAlarm()
-		{
-			Entity entity = new Entity("Pedidos ya");
-			Alarm alarm = new Alarm(entity, "Positivo", 50, actualDate);
-			management.AddAlarm(alarm, 10.0, true);
-			DateTime aDateTime = actualDate.AddDays(10);
-			Assert.AreEqual(aDateTime, management.AlarmList[0].QuantityTime);
-		}
-
 
 		[TestMethod]
 		public void AddTwoAlarms()
 		{
 			Entity entity = new Entity("Pedidos ya");
-			Alarm alarm = new Alarm(entity, "Negativo", 150, actualDate);
-			Alarm alarm2 = new Alarm(entity, "Positivo", 50, actualDate);
-			management.AddAlarm(alarm, 10.0, false);
-			management.AddAlarm(alarm2, 10.0, true);
-			Assert.IsFalse(management.IsEmpty()); 
+			Entity entity2 = new Entity("Mc Donalds");
+			Alarm alarm = new Alarm(entity, Alarm.Type.Positive, 40, 10, false);
+			Alarm alarm2 = new Alarm(entity2, Alarm.Type.Negative, 30, 20, true);
+			management.AddAlarm(alarm);
+			management.AddAlarm(alarm2);
+			Assert.IsTrue(management.allAlarms.Length == 2);
 		}
 
 		[TestMethod]
 		public void VerifyAlarmState()
 		{
 			Entity entity = new Entity("Pedidos ya");
-			Alarm alarm = new Alarm(entity, "Negativo", 150, actualDate);
-			management.AddAlarm(alarm, 10.0, false);
-			Assert.AreEqual(false, management.AlarmList[0].Active); 
+			Alarm alarm = new Alarm(entity, Alarm.Type.Positive, 150, 30, false);
+			management.AddAlarm(alarm);
+			Assert.AreEqual(false, management.allAlarms[0].Active);
 		}
 
 		[TestMethod]
 		public void VerifyTypeAlarm()
 		{
 			Entity entity = new Entity("Pedidos ya");
-			Alarm alarm = new Alarm(entity, "Negativo", 150, actualDate);
-			management.AddAlarm(alarm, 10.0, false);
-			Assert.AreEqual("Negativo", management.AlarmList[0].Type);
+			Alarm alarm = new Alarm(entity, Alarm.Type.Positive, 150, 30, false);
+			management.AddAlarm(alarm);
+			Assert.AreEqual(Alarm.Type.Positive, management.allAlarms[0].TypeOfAlarm);
 		}
 
 
@@ -95,10 +74,10 @@ namespace Test
 		public void AddRepeteadAlarm()
 		{
 			Entity entity = new Entity("Pedidos ya");
-			Alarm alarm = new Alarm(entity, "Positivo", 50, actualDate);
-			Alarm alarm2 = new Alarm(entity, "Positivo", 50, actualDate); 
-			management.AddAlarm(alarm, 10.0, true);
-			management.AddAlarm(alarm2, 10.0, true);
+			Alarm alarm = new Alarm(entity, Alarm.Type.Positive, 90, 15, false);
+			Alarm alarm2 = new Alarm(entity, Alarm.Type.Positive, 90, 15, false); 
+			management.AddAlarm(alarm);
+			management.AddAlarm(alarm2);
 		}
 
 		[TestMethod]
@@ -106,8 +85,8 @@ namespace Test
 		public void CreateInvalidAlarm2()
 		{
 			Entity entity = null;
-			Alarm alarm = new Alarm(entity, "Positivo", 10, actualDate);
-			management.AddAlarm(alarm, 10, false);
+			Alarm alarm = new Alarm(entity, Alarm.Type.Positive, 90, 15, false);
+			management.AddAlarm(alarm);
 		}
 
 
@@ -116,8 +95,8 @@ namespace Test
 		public void CreateInvalidAlarm3()
 		{
 			Entity entity = new Entity("Coca Cola");
-			Alarm alarm = new Alarm(entity, "Positivo", 10, actualDate);
-			management.AddAlarm(alarm, -10, false);
+			Alarm alarm = new Alarm(entity, Alarm.Type.Positive, 90, -15, false);
+			management.AddAlarm(alarm);
 		}
 	}
 }
