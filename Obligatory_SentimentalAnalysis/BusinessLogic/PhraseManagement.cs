@@ -62,6 +62,8 @@ namespace BusinessLogic
 		{
 			get { return phraseList.ToArray();  }
 		}
+
+		
 		
 	}
 }

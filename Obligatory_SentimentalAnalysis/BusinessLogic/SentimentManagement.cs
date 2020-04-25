@@ -107,6 +107,10 @@ namespace BusinessLogic
 		}
 
 
+		public IEnumerable<Sentiment> SentimentList
+		{
+			get { return sentimentList;  }
+		}
 		
 		
 
