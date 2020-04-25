@@ -28,7 +28,7 @@ namespace Test
 		{
 			Entity entity = new Entity("Coca cola");
 			management.AddEntity(entity);
-			Assert.IsFalse(management.IsEmpty());
+			CollectionAssert.Contains(management.AllEntities, entity);
 		}
 
 
@@ -37,7 +37,7 @@ namespace Test
 		{
 			Entity entity = new Entity("                                                                Mc       Donalds                                              ");
 			management.AddEntity(entity);
-			Assert.AreEqual("Mc Donalds", management.EntityList[0].EntityName); 
+			CollectionAssert.Contains(management.AllEntities, entity);
 		}
 
 
@@ -79,7 +79,7 @@ namespace Test
 			management.AddEntity(entity);
 			management.AddEntity(entity2); 
 			management.DeleteEntity(entity);
-			Assert.AreEqual("Mc donalds", management.EntityList[0].EntityName);
+			CollectionAssert.DoesNotContain(management.AllEntities, entity);
 
 		}
 
@@ -132,6 +132,14 @@ namespace Test
 			Entity entity2 = new Entity("mc donalds");
 			management.AddEntity(entity);
 			management.AddEntity(entity2); 
+		}
+
+		[TestMethod]
+		public void EqualsTest()
+		{
+			Entity entity = new Entity("Coca      Cola");
+			Entity entity2 = new Entity("cOCa coLA");
+			Assert.IsTrue(entity.Equals(entity2));
 		}
 
 	}

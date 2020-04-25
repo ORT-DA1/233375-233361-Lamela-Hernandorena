@@ -15,11 +15,21 @@ namespace BusinessLogic
 			EntityName = name;
 		}
 
+		private string DeleteSpaces(string text)
+		{
+			while (text.Contains("  "))
+			{
+				text = text.Replace("  ", " ");
+			}
+
+			return text;
+		}
+
 
 		public override bool Equals(object obj)
 		{
 			Entity entity = (Entity)obj;
-			return string.Equals(EntityName, entity.EntityName, StringComparison.OrdinalIgnoreCase); 
+			return string.Equals(DeleteSpaces(EntityName.Trim()), DeleteSpaces(entity.EntityName.Trim()), StringComparison.OrdinalIgnoreCase); 
 		}
 
 
