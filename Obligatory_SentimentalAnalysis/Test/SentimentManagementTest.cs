@@ -24,12 +24,11 @@ namespace Test
 		public void AddValidSentimentPositive1()
 		{
 			Sentiment sentiment = new Sentiment("I like it", Sentiment.sentimentType.Positive);
-
-			
 		
 			manegement.AddSentiment(sentiment);
 
-			Assert.IsFalse(manegement.IsEmpty()); 
+			CollectionAssert.Contains(manegement.AllSentiments, sentiment); 
+
 
 		}
 
@@ -39,11 +38,9 @@ namespace Test
 
 			Sentiment sentiment = new Sentiment("Love", Sentiment.sentimentType.Positive);
 
-			
-
 			manegement.AddSentiment(sentiment);
 
-			Assert.IsFalse(manegement.IsEmpty());
+			CollectionAssert.Contains(manegement.AllSentiments, sentiment); 
 		}
 
 
@@ -86,7 +83,8 @@ namespace Test
 			
 			manegement.AddSentiment(sentiment2);
 
-			Assert.IsTrue(manegement.SentimentList.Count == 2); 
+
+			Assert.IsTrue(manegement.AllSentiments.Length==2); 
 		}
 
 
@@ -101,7 +99,8 @@ namespace Test
 			
 			manegement.AddSentiment(sentiment2);
 
-			Assert.AreEqual("Me gusta mucho", manegement.SentimentList[0].SentimientText); 
+			CollectionAssert.Contains(manegement.AllSentiments, sentiment); 
+			
 		}
 
 
@@ -151,29 +150,10 @@ namespace Test
 			manegement.DeleteText(sentiment3);
 			manegement.DeleteText(sentiment);
 
-			Assert.AreEqual("Es precioso", manegement.SentimentList[0].SentimientText); 
+			CollectionAssert.Contains(manegement.AllSentiments, sentiment4); 
 		}
-
-
-		[TestMethod]
-		public void DeleteThreeSentimentPositive2()
-		{
-			Sentiment sentiment = new Sentiment("Me gusta", Sentiment.sentimentType.Positive);
-			Sentiment sentiment2 = new Sentiment("Me encanta", Sentiment.sentimentType.Positive);
-			Sentiment sentiment3 = new Sentiment("Lo amo", Sentiment.sentimentType.Positive);
-			Sentiment sentiment4 = new Sentiment("Es precioso", Sentiment.sentimentType.Positive);
-			manegement.AddSentiment(sentiment);
-			manegement.AddSentiment(sentiment2);
-			manegement.AddSentiment(sentiment3);
-			manegement.AddSentiment(sentiment4);
-			manegement.DeleteText(sentiment2);
-			manegement.DeleteText(sentiment3);
-			manegement.DeleteText(sentiment4);
-
-			Assert.AreEqual("Me gusta", manegement.SentimentList[0].SentimientText);
-		}
-
 		
+
 		[TestMethod]
 		[ExpectedException(typeof(TextManagementException))]
 		public void DeleteNotExistSentiment()
@@ -217,7 +197,7 @@ namespace Test
         {
             Sentiment sentiment = new Sentiment("Lo odio", Sentiment.sentimentType.Negative);
             manegement.AddSentiment(sentiment);
-            Assert.IsFalse(manegement.IsEmpty());
+			CollectionAssert.Contains(manegement.AllSentiments, sentiment); 
         }
 
         [TestMethod]
@@ -225,7 +205,7 @@ namespace Test
         {
             Sentiment sentiment = new Sentiment("Detesto", Sentiment.sentimentType.Negative);
             manegement.AddSentiment(sentiment);
-            Assert.IsFalse(manegement.IsEmpty());
+			CollectionAssert.Contains(manegement.AllSentiments, sentiment); 
         }
 
         [ExpectedException(typeof(TextManagementException))]
@@ -255,7 +235,7 @@ namespace Test
             manegement.AddSentiment(sentiment);
             Sentiment sentiment2 = new Sentiment("Lo detesto", Sentiment.sentimentType.Negative);
             manegement.AddSentiment(sentiment2);
-            Assert.IsTrue(manegement.SentimentList.Count == 2);
+			Assert.IsTrue(manegement.AllSentiments.Length == 2);
         }
 
         [TestMethod]
@@ -265,7 +245,7 @@ namespace Test
             manegement.AddSentiment(sentiment);
             Sentiment sentiment2 = new Sentiment("Yo    odio", Sentiment.sentimentType.Negative);
             manegement.AddSentiment(sentiment2);
-            Assert.AreEqual("Lo odio", manegement.SentimentList[0].SentimientText);
+			CollectionAssert.Contains(manegement.AllSentiments, sentiment); 
         }
 
         [TestMethod]
@@ -291,25 +271,10 @@ namespace Test
             manegement.DeleteText(sentiment2);
             manegement.DeleteText(sentiment3);
             manegement.DeleteText(sentiment);
-            Assert.AreEqual("De lo peor", manegement.SentimentList[0].SentimientText);
+			CollectionAssert.Contains(manegement.AllSentiments, sentiment4); 
         }
 
-        [TestMethod]
-        public void DeleteThreeNegativesSentiments2()
-        {
-            Sentiment sentiment = new Sentiment("Lo odio", Sentiment.sentimentType.Negative);
-            Sentiment sentiment2 = new Sentiment("Lo detesto", Sentiment.sentimentType.Negative);
-            Sentiment sentiment3 = new Sentiment("Es nefasto", Sentiment.sentimentType.Negative);
-            Sentiment sentiment4 = new Sentiment("De lo peor", Sentiment.sentimentType.Negative);
-            manegement.AddSentiment(sentiment);
-            manegement.AddSentiment(sentiment2);
-            manegement.AddSentiment(sentiment3);
-            manegement.AddSentiment(sentiment4);
-            manegement.DeleteText(sentiment2);
-            manegement.DeleteText(sentiment3);
-            manegement.DeleteText(sentiment4);
-            Assert.AreEqual("Lo odio", manegement.SentimentList[0].SentimientText);
-        }
+       
 
         [TestMethod]
         [ExpectedException(typeof(TextManagementException))]
@@ -362,6 +327,15 @@ namespace Test
 			Assert.AreEqual("Me gusta", sentiment.ToString()); 
 		}
 
+		[TestMethod]
+		public void TestingReduceSpace()
+		{
+			Sentiment sentiment = new Sentiment("Me       gusta", Sentiment.sentimentType.Positive);
+			Sentiment sentiment2 = new Sentiment("Me gusta", Sentiment.sentimentType.Positive);
+			bool areEquals = sentiment.Equals(sentiment2);
+			Assert.IsTrue(areEquals); 
+
+		}
 
 		
 
