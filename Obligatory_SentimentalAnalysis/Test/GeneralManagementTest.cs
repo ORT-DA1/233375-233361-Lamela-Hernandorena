@@ -162,10 +162,179 @@ namespace Test
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
+		[TestMethod]
+		public void VerifyAlarms()
+		{
+			Entity entity = new Entity("Coca Cola");
+			management.EntityManagement.AddEntity(entity);
+			Sentiment sentiment = new Sentiment("Me gusta", Sentiment.sentimentType.Positive);
+			management.SentimentManagement.AddSentiment(sentiment);
+			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 1, true);
+			management.AlarmManagement.AddAlarm(aAlarm);
+			Phrase phrase = new Phrase("Me gusta Coca Cola", DateTime.Now, entity, Phrase.typePhrase.Positive);
+			management.PhraseManagement.AddPhrase(phrase);
+			management.UpdateAlarms();
+			Assert.IsTrue(aAlarm.Active);
+		}
 
-		
+		[TestMethod]
+		public void VerifyAlarms2()
+		{
+			Entity entity = new Entity("Coca Cola");
+			Entity entity2 = new Entity("Pepsi");
+			management.EntityManagement.AddEntity(entity);
+			management.EntityManagement.AddEntity(entity2);
+			Sentiment sentiment = new Sentiment("Me gusta", Sentiment.sentimentType.Positive);
+			management.SentimentManagement.AddSentiment(sentiment);
+			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 1, false);
+			management.AlarmManagement.AddAlarm(aAlarm);
+			Phrase phrase = new Phrase("Me gusta Coca Cola", new DateTime(2020,04,24), entity, Phrase.typePhrase.Positive);
+			Phrase phrase2 = new Phrase("Me gusta Pepsi", DateTime.Now, entity2, Phrase.typePhrase.Positive);
+			management.PhraseManagement.AddPhrase(phrase);
+			management.PhraseManagement.AddPhrase(phrase2);
+			management.UpdateAlarms();
+			Assert.IsFalse(aAlarm.Active);
+		}
 
 
+		[TestMethod]
+		public void VerifyAlarms3()
+		{
+			Entity entity = new Entity("Coca Cola");
+			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 1, false);
+			management.AlarmManagement.AddAlarm(aAlarm);
+			management.UpdateAlarms();
+			Assert.IsFalse(aAlarm.Active);
+		}
 
+
+		[TestMethod]
+		public void VerifyAlarms4()
+		{
+			Entity entity = new Entity("Coca Cola");
+			Entity entity2 = new Entity("Pepsi");
+			management.EntityManagement.AddEntity(entity);
+			management.EntityManagement.AddEntity(entity2);
+			Sentiment sentiment = new Sentiment("Me gusta", Sentiment.sentimentType.Positive);
+			management.SentimentManagement.AddSentiment(sentiment);
+			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 2, false);
+			management.AlarmManagement.AddAlarm(aAlarm);
+			Phrase phrase = new Phrase("Me gusta Coca Cola", new DateTime(2020, 04, 25), entity, Phrase.typePhrase.Positive);
+			Phrase phrase2 = new Phrase("Me gusta Pepsi", DateTime.Now, entity2, Phrase.typePhrase.Positive);
+			management.PhraseManagement.AddPhrase(phrase);
+			management.PhraseManagement.AddPhrase(phrase2);
+			management.UpdateAlarms();
+			Assert.IsTrue(aAlarm.Active);
+		}
+
+		[TestMethod]
+		public void VerifyAlarms5()
+		{
+			Entity entity = new Entity("Coca Cola");
+			Entity entity2 = new Entity("Pepsi");
+			management.EntityManagement.AddEntity(entity);
+			management.EntityManagement.AddEntity(entity2);
+			Sentiment sentiment = new Sentiment("Me gusta", Sentiment.sentimentType.Positive);
+			management.SentimentManagement.AddSentiment(sentiment);
+			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 2, false);
+			Alarm aAlarm2 = new Alarm(entity2, Alarm.Type.Negative, 1, 2, false);
+			management.AlarmManagement.AddAlarm(aAlarm);
+			management.AlarmManagement.AddAlarm(aAlarm2);
+			Phrase phrase = new Phrase("Me gusta Coca Cola", new DateTime(2020, 04, 25), entity, Phrase.typePhrase.Positive);
+			Phrase phrase2 = new Phrase("Me gusta Pepsi", DateTime.Now, entity2, Phrase.typePhrase.Positive);
+			management.PhraseManagement.AddPhrase(phrase);
+			management.PhraseManagement.AddPhrase(phrase2);
+			management.UpdateAlarms();
+			Assert.IsFalse(aAlarm2.Active);
+		}
+
+		[TestMethod]
+		public void VerifyAlarms6()
+		{
+			Entity entity = new Entity("Coca Cola");
+			Entity entity2 = new Entity("Pepsi");
+			management.EntityManagement.AddEntity(entity);
+			management.EntityManagement.AddEntity(entity2);
+			Sentiment sentiment = new Sentiment("Me gusta", Sentiment.sentimentType.Positive);
+			management.SentimentManagement.AddSentiment(sentiment);
+			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 2, false);
+			Alarm aAlarm2 = new Alarm(entity2, Alarm.Type.Negative, 1, 2, false);
+			management.AlarmManagement.AddAlarm(aAlarm);
+			management.AlarmManagement.AddAlarm(aAlarm2);
+			Phrase phrase = new Phrase("Me gusta Coca Cola", new DateTime(2020, 04, 25), entity, Phrase.typePhrase.Positive);
+			Phrase phrase2 = new Phrase("Me gusta Pepsi", DateTime.Now, entity2, Phrase.typePhrase.Positive);
+			management.PhraseManagement.AddPhrase(phrase);
+			management.PhraseManagement.AddPhrase(phrase2);
+			management.UpdateAlarms();
+			Assert.IsFalse(aAlarm2.Active);
+		}
+
+		[TestMethod]
+		public void VerifyAlarms7()
+		{
+			Entity entity = new Entity("Coca Cola");
+			Entity entity2 = new Entity("Pepsi");
+			management.EntityManagement.AddEntity(entity);
+			management.EntityManagement.AddEntity(entity2);
+			Sentiment sentiment = new Sentiment("Me gusta", Sentiment.sentimentType.Positive);
+			Sentiment sentiment2 = new Sentiment("Odio", Sentiment.sentimentType.Negative);
+			management.SentimentManagement.AddSentiment(sentiment);
+			management.SentimentManagement.AddSentiment(sentiment2);
+			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 10, 1, false);
+			Alarm aAlarm2 = new Alarm(entity2, Alarm.Type.Negative, 2, 2, false);
+			management.AlarmManagement.AddAlarm(aAlarm);
+			management.AlarmManagement.AddAlarm(aAlarm2);
+			Phrase phrase = new Phrase("Me gusta Coca Cola", new DateTime(2020, 04, 25), entity, Phrase.typePhrase.Positive);
+			Phrase phrase2 = new Phrase("Odio Pepsi", DateTime.Now, entity2, Phrase.typePhrase.Negative);
+			Phrase phrase3 = new Phrase("Odio con todo mi ser a Pepsi", DateTime.Now, entity2, Phrase.typePhrase.Negative);
+			management.PhraseManagement.AddPhrase(phrase);
+			management.PhraseManagement.AddPhrase(phrase2);
+			management.PhraseManagement.AddPhrase(phrase3);
+			management.UpdateAlarms();
+			Assert.IsTrue(aAlarm2.Active);
+			Assert.IsFalse(aAlarm.Active);
+		}
+
+		[TestMethod]
+		public void VerifyAlarms8()
+		{
+			Entity entity = new Entity("Coca Cola");
+			Entity entity2 = new Entity("Pepsi");
+			management.EntityManagement.AddEntity(entity);
+			management.EntityManagement.AddEntity(entity2);
+			Sentiment sentiment = new Sentiment("Me gusta", Sentiment.sentimentType.Positive);
+			Sentiment sentiment2 = new Sentiment("Odio", Sentiment.sentimentType.Negative);
+			management.SentimentManagement.AddSentiment(sentiment);
+			management.SentimentManagement.AddSentiment(sentiment2);
+			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 10, 1, false);
+			Alarm aAlarm2 = new Alarm(entity2, Alarm.Type.Negative, 2, 2, false);
+			management.AlarmManagement.AddAlarm(aAlarm);
+			management.AlarmManagement.AddAlarm(aAlarm2);
+			Phrase phrase = new Phrase("Me gusta Coca Cola", new DateTime(2020, 04, 25), entity, Phrase.typePhrase.Positive);
+			Phrase phrase2 = new Phrase("Odio Pepsi", DateTime.Now, entity2, Phrase.typePhrase.Negative);
+			Phrase phrase3 = new Phrase("Odio con todo mi ser a Pepsi", DateTime.Now, entity2, Phrase.typePhrase.Negative);
+			management.PhraseManagement.AddPhrase(phrase);
+			management.PhraseManagement.AddPhrase(phrase2);
+			management.PhraseManagement.AddPhrase(phrase3);
+			management.UpdateAlarms();
+			Assert.IsTrue(aAlarm2.Active);
+			Assert.IsFalse(aAlarm.Active);
+		}
+
+
+		[TestMethod]
+		public void VerifyAlarms9()
+		{
+			Entity entity = new Entity("Coca Cola");
+			management.EntityManagement.AddEntity(entity);
+			Sentiment sentiment = new Sentiment("Odio", Sentiment.sentimentType.Negative);
+			management.SentimentManagement.AddSentiment(sentiment);
+			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 1, false);
+			management.AlarmManagement.AddAlarm(aAlarm);
+			Phrase phrase = new Phrase("Odio Coca Cola", DateTime.Now, entity, Phrase.typePhrase.Negative);
+			management.PhraseManagement.AddPhrase(phrase);
+			management.UpdateAlarms();
+			Assert.IsFalse(aAlarm.Active);
+		}
 	}
 }

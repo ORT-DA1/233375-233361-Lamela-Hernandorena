@@ -66,5 +66,12 @@ namespace BusinessLogic
 		{
 			get { return alarmList.ToArray(); }
 		}
+
+		public IEnumerable<Alarm> AlarmList
+		{
+			get { return alarmList; }
+		}
+
+
 	}
 }

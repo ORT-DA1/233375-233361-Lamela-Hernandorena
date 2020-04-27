@@ -8,7 +8,10 @@ namespace BusinessLogic
 {
 	public class GeneralManagement
 	{
-		
+
+		public AlarmManagement AlarmManagement { get; set; }
+		public PhraseManagement PhraseManagement { get; set; }
+
 		public EntityManagement EntityManagement { get; set; }
 		public SentimentManagement SentimentManagement { get; set; }
 
@@ -17,7 +20,9 @@ namespace BusinessLogic
 		{
 			
 			EntityManagement = new EntityManagement();
-			SentimentManagement = new SentimentManagement(); 
+			SentimentManagement = new SentimentManagement();
+			AlarmManagement = new AlarmManagement();
+			PhraseManagement = new PhraseManagement();
 		}
 
 
@@ -96,6 +101,44 @@ namespace BusinessLogic
 			}
 
 			return text;
+		}
+
+		public void UpdateAlarms()
+		{
+
+			if (PhraseManagement.PhraseList.Count() > 0)
+			{
+				Phrase lastPhrase = PhraseManagement.PhraseList.ElementAt(PhraseManagement.PhraseList.Count() - 1);
+				DateTime lastDate = lastPhrase.PhraseDate;
+				DateTime minDate = DateTime.Now;
+				int counterPost = 0;
+				foreach (Alarm a in AlarmManagement.AlarmList)
+				{
+					counterPost = 0;
+					foreach (Phrase p in PhraseManagement.PhraseList)
+					{
+						if (a.IsInHours)
+						{
+							minDate = lastDate.AddHours(-a.QuantityTime);
+						}
+						else
+						{
+							minDate = lastDate.AddDays(-a.QuantityTime);
+						}
+						if (p.PhraseDate >= minDate)
+						{
+							if (p.Entity.Equals(a.Entity) && p.TypePhrase.ToString().Equals(a.TypeOfAlarm.ToString()))
+							{
+								counterPost++;
+							}
+						}
+					}
+					if (counterPost >= a.QuantityPost)
+					{
+						a.Active = true;
+					}
+				}
+			}
 		}
 		
 	}
