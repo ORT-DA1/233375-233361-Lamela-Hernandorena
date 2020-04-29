@@ -46,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddEntity.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AddEntity.Designer.cs">
+      <DependentUpon>AddEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddSentiment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AddSentiment.Designer.cs">
+      <DependentUpon>AddSentiment.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +67,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddEntity.resx">
+      <DependentUpon>AddEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddSentiment.resx">
+      <DependentUpon>AddSentiment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -79,6 +97,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogicExceptions\BusinessLogicExceptions.csproj">
+      <Project>{e804ff3c-2a7d-4d3e-9cbe-7edcb5a35ccd}</Project>
+      <Name>BusinessLogicExceptions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{f462043c-ac14-4681-918c-b936247167fe}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -28,89 +28,96 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
-			this.pictureBox1 = new System.Windows.Forms.PictureBox();
-			this.txtPositiveSentiment = new System.Windows.Forms.TextBox();
-			this.btnAddPositiveSentiment = new System.Windows.Forms.Button();
-			this.listPositivesSentiments = new System.Windows.Forms.ListBox();
-			this.btnDeletePositiveSentiment = new System.Windows.Forms.Button();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			this.btnAddSentiment = new System.Windows.Forms.Button();
+			this.btnAddEntity = new System.Windows.Forms.Button();
+			this.btnAddPhrase = new System.Windows.Forms.Button();
+			this.btnAddAlarm = new System.Windows.Forms.Button();
+			this.panelMain = new System.Windows.Forms.Panel();
 			this.SuspendLayout();
 			// 
-			// pictureBox1
+			// btnAddSentiment
 			// 
-			this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-			this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-			this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(763, 599);
-			this.pictureBox1.TabIndex = 0;
-			this.pictureBox1.TabStop = false;
+			this.btnAddSentiment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnAddSentiment.Location = new System.Drawing.Point(24, 161);
+			this.btnAddSentiment.Name = "btnAddSentiment";
+			this.btnAddSentiment.Size = new System.Drawing.Size(214, 72);
+			this.btnAddSentiment.TabIndex = 5;
+			this.btnAddSentiment.Text = "Agregar sentimiento";
+			this.btnAddSentiment.UseVisualStyleBackColor = true;
+			this.btnAddSentiment.Click += new System.EventHandler(this.btnAddSentiment_Click);
 			// 
-			// txtPositiveSentiment
+			// btnAddEntity
 			// 
-			this.txtPositiveSentiment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(112)))), ((int)(((byte)(112)))));
-			this.txtPositiveSentiment.Location = new System.Drawing.Point(354, 89);
-			this.txtPositiveSentiment.Margin = new System.Windows.Forms.Padding(2);
-			this.txtPositiveSentiment.Name = "txtPositiveSentiment";
-			this.txtPositiveSentiment.Size = new System.Drawing.Size(264, 20);
-			this.txtPositiveSentiment.TabIndex = 1;
+			this.btnAddEntity.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnAddEntity.Location = new System.Drawing.Point(24, 264);
+			this.btnAddEntity.Name = "btnAddEntity";
+			this.btnAddEntity.Size = new System.Drawing.Size(214, 69);
+			this.btnAddEntity.TabIndex = 6;
+			this.btnAddEntity.Text = "Agregar entidad";
+			this.btnAddEntity.UseVisualStyleBackColor = true;
 			// 
-			// btnAddPositiveSentiment
+			// btnAddPhrase
 			// 
-			this.btnAddPositiveSentiment.Location = new System.Drawing.Point(622, 79);
-			this.btnAddPositiveSentiment.Margin = new System.Windows.Forms.Padding(2);
-			this.btnAddPositiveSentiment.Name = "btnAddPositiveSentiment";
-			this.btnAddPositiveSentiment.Size = new System.Drawing.Size(131, 38);
-			this.btnAddPositiveSentiment.TabIndex = 2;
-			this.btnAddPositiveSentiment.Text = "Agregar";
-			this.btnAddPositiveSentiment.UseVisualStyleBackColor = true;
+			this.btnAddPhrase.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnAddPhrase.Location = new System.Drawing.Point(24, 365);
+			this.btnAddPhrase.Name = "btnAddPhrase";
+			this.btnAddPhrase.Size = new System.Drawing.Size(214, 73);
+			this.btnAddPhrase.TabIndex = 7;
+			this.btnAddPhrase.Text = "Agregar frase";
+			this.btnAddPhrase.UseVisualStyleBackColor = true;
 			// 
-			// listPositivesSentiments
+			// btnAddAlarm
 			// 
-			this.listPositivesSentiments.FormattingEnabled = true;
-			this.listPositivesSentiments.Location = new System.Drawing.Point(464, 210);
-			this.listPositivesSentiments.Margin = new System.Windows.Forms.Padding(2);
-			this.listPositivesSentiments.Name = "listPositivesSentiments";
-			this.listPositivesSentiments.Size = new System.Drawing.Size(192, 212);
-			this.listPositivesSentiments.TabIndex = 3;
+			this.btnAddAlarm.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnAddAlarm.Location = new System.Drawing.Point(24, 472);
+			this.btnAddAlarm.Name = "btnAddAlarm";
+			this.btnAddAlarm.Size = new System.Drawing.Size(214, 72);
+			this.btnAddAlarm.TabIndex = 8;
+			this.btnAddAlarm.Text = "Agregar alarma";
+			this.btnAddAlarm.UseVisualStyleBackColor = true;
 			// 
-			// btnDeletePositiveSentiment
+			// panelMain
 			// 
-			this.btnDeletePositiveSentiment.Location = new System.Drawing.Point(455, 547);
-			this.btnDeletePositiveSentiment.Margin = new System.Windows.Forms.Padding(2);
-			this.btnDeletePositiveSentiment.Name = "btnDeletePositiveSentiment";
-			this.btnDeletePositiveSentiment.Size = new System.Drawing.Size(165, 28);
-			this.btnDeletePositiveSentiment.TabIndex = 4;
-			this.btnDeletePositiveSentiment.Text = "Eliminar";
-			this.btnDeletePositiveSentiment.UseVisualStyleBackColor = true;
+			this.panelMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.panelMain.Location = new System.Drawing.Point(316, 75);
+			this.panelMain.Name = "panelMain";
+			this.panelMain.Size = new System.Drawing.Size(680, 584);
+			this.panelMain.TabIndex = 9;
 			// 
 			// MainMenu
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(764, 599);
-			this.Controls.Add(this.btnDeletePositiveSentiment);
-			this.Controls.Add(this.listPositivesSentiments);
-			this.Controls.Add(this.btnAddPositiveSentiment);
-			this.Controls.Add(this.txtPositiveSentiment);
-			this.Controls.Add(this.pictureBox1);
-			this.Margin = new System.Windows.Forms.Padding(2);
+			this.ClientSize = new System.Drawing.Size(1019, 737);
+			this.Controls.Add(this.panelMain);
+			this.Controls.Add(this.btnAddAlarm);
+			this.Controls.Add(this.btnAddPhrase);
+			this.Controls.Add(this.btnAddEntity);
+			this.Controls.Add(this.btnAddSentiment);
+			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.Name = "MainMenu";
 			this.Text = "MainMenu";
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.PictureBox pictureBox1;
-		private System.Windows.Forms.TextBox txtPositiveSentiment;
-		private System.Windows.Forms.Button btnAddPositiveSentiment;
-		private System.Windows.Forms.ListBox listPositivesSentiments;
-		private System.Windows.Forms.Button btnDeletePositiveSentiment;
+		private System.Windows.Forms.Button btnAddSentiment;
+		private System.Windows.Forms.Button btnAddEntity;
+		private System.Windows.Forms.Button btnAddPhrase;
+		private System.Windows.Forms.Button btnAddAlarm;
+		private System.Windows.Forms.Panel panelMain;
 	}
 }
 

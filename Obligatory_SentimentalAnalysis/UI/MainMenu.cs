@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +13,20 @@ namespace UI
 {
 	public partial class MainMenu : Form
 	{
+		public GeneralManagement GeneralManagement{get; set;}
+
 		public MainMenu()
 		{
 			InitializeComponent();
+			GeneralManagement = new GeneralManagement(); 
+			
 		}
 
+		private void btnAddSentiment_Click(object sender, EventArgs e)
+		{
+			panelMain.Controls.Clear();
+			UserControl addSentiment = new AddSentiment(GeneralManagement);
+			panelMain.Controls.Add(addSentiment);
+		}
 	}
 }
