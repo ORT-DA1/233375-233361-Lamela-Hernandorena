@@ -27,8 +27,22 @@ namespace BusinessLogic
 
 		public override bool Equals(object obj)
 		{
-			Sentiment sentiment = (Sentiment)obj;
-			return string.Equals(DeleteSpaces(SentimientText.Trim()), DeleteSpaces(sentiment.SentimientText.Trim()), StringComparison.OrdinalIgnoreCase) && SentimentType.Equals(sentiment.SentimentType);
+			if(obj== null)
+			{
+				return false;
+			}
+			else
+			{
+				if (this.GetType() != obj.GetType())
+				{
+					return false;
+				}
+				else
+				{
+					Sentiment sentiment = (Sentiment)obj;
+					return string.Equals(DeleteSpaces(SentimientText.Trim()), DeleteSpaces(sentiment.SentimientText.Trim()), StringComparison.OrdinalIgnoreCase) && SentimentType.Equals(sentiment.SentimentType);
+				}
+			}
 		}
 
 		private string DeleteSpaces(string text)
