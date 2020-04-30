@@ -220,7 +220,7 @@ namespace Test
 			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 2, false);
 			management.AlarmManagement.AddAlarm(aAlarm);
 			Phrase phrase = new Phrase("Me gusta Coca Cola", new DateTime(2020, 04, 25), entity, Phrase.typePhrase.Positive);
-			Phrase phrase2 = new Phrase("Me gusta Pepsi", DateTime.Now, entity2, Phrase.typePhrase.Positive);
+			Phrase phrase2 = new Phrase("Me gusta Pepsi", new DateTime(2020, 04, 26), entity2, Phrase.typePhrase.Positive);
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
 			management.UpdateAlarms();

@@ -108,8 +108,6 @@ namespace BusinessLogic
 
 			if (PhraseManagement.PhraseList.Count() > 0)
 			{
-				Phrase lastPhrase = PhraseManagement.PhraseList.ElementAt(PhraseManagement.PhraseList.Count() - 1);
-				DateTime lastDate = lastPhrase.PhraseDate;
 				DateTime minDate = DateTime.Now;
 				int counterPost = 0;
 				foreach (Alarm a in AlarmManagement.AlarmList)
@@ -119,11 +117,11 @@ namespace BusinessLogic
 					{
 						if (a.IsInHours)
 						{
-							minDate = lastDate.AddHours(-a.QuantityTime);
+							minDate = DateTime.Now.AddHours(-a.QuantityTime);
 						}
 						else
 						{
-							minDate = lastDate.AddDays(-a.QuantityTime);
+							minDate = DateTime.Now.AddDays(-a.QuantityTime);
 						}
 						if (p.PhraseDate >= minDate)
 						{
