@@ -118,5 +118,10 @@ namespace UI
 				initializeListOfSentiment(); 
 			}
 		}
+
+		private void listBoxSentiment_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

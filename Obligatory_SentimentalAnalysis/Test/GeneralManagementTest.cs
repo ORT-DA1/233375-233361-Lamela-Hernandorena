@@ -173,7 +173,11 @@ namespace Test
 			management.AlarmManagement.AddAlarm(aAlarm);
 			Phrase phrase = new Phrase("Me gusta Coca Cola", DateTime.Now, entity, Phrase.typePhrase.Positive);
 			management.PhraseManagement.AddPhrase(phrase);
-			management.UpdateAlarms();
+			MockedTimeProvider provider = new MockedTimeProvider()
+			{
+				MockedDateTime = new DateTime(2019, 10, 1, 19, 10, 30)
+			};
+			management.UpdateAlarms(provider);
 			Assert.IsTrue(aAlarm.Active);
 		}
 
@@ -188,11 +192,15 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment);
 			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 1, false);
 			management.AlarmManagement.AddAlarm(aAlarm);
-			Phrase phrase = new Phrase("Me gusta Coca Cola", new DateTime(2020,04,24), entity, Phrase.typePhrase.Positive);
+			Phrase phrase = new Phrase("Me gusta Coca Cola", new DateTime(2020,04,28), entity, Phrase.typePhrase.Positive);
 			Phrase phrase2 = new Phrase("Me gusta Pepsi", DateTime.Now, entity2, Phrase.typePhrase.Positive);
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
-			management.UpdateAlarms();
+			MockedTimeProvider provider = new MockedTimeProvider()
+			{
+				MockedDateTime = new DateTime(2020, 04, 30, 19, 10, 30)
+			};
+			management.UpdateAlarms(provider);
 			Assert.IsFalse(aAlarm.Active);
 		}
 
@@ -203,7 +211,11 @@ namespace Test
 			Entity entity = new Entity("Coca Cola");
 			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 1, false);
 			management.AlarmManagement.AddAlarm(aAlarm);
-			management.UpdateAlarms();
+			MockedTimeProvider provider = new MockedTimeProvider()
+			{
+				MockedDateTime = new DateTime(2020, 04, 30, 19, 10, 30)
+			};
+			management.UpdateAlarms(provider);
 			Assert.IsFalse(aAlarm.Active);
 		}
 
@@ -223,7 +235,11 @@ namespace Test
 			Phrase phrase2 = new Phrase("Me gusta Pepsi", new DateTime(2020, 04, 26), entity2, Phrase.typePhrase.Positive);
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
-			management.UpdateAlarms();
+			MockedTimeProvider provider = new MockedTimeProvider()
+			{
+				MockedDateTime = new DateTime(2020, 04, 26, 19, 10, 30)
+			};
+			management.UpdateAlarms(provider);
 			Assert.IsTrue(aAlarm.Active);
 		}
 
@@ -241,10 +257,14 @@ namespace Test
 			management.AlarmManagement.AddAlarm(aAlarm);
 			management.AlarmManagement.AddAlarm(aAlarm2);
 			Phrase phrase = new Phrase("Me gusta Coca Cola", new DateTime(2020, 04, 25), entity, Phrase.typePhrase.Positive);
-			Phrase phrase2 = new Phrase("Me gusta Pepsi", DateTime.Now, entity2, Phrase.typePhrase.Positive);
+			Phrase phrase2 = new Phrase("Me gusta Pepsi", new DateTime(2020,04,30), entity2, Phrase.typePhrase.Positive);
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
-			management.UpdateAlarms();
+			MockedTimeProvider provider = new MockedTimeProvider()
+			{
+				MockedDateTime = new DateTime(2020, 04, 30, 19, 10, 30)
+			};
+			management.UpdateAlarms(provider);
 			Assert.IsFalse(aAlarm2.Active);
 		}
 
@@ -256,74 +276,32 @@ namespace Test
 			management.EntityManagement.AddEntity(entity);
 			management.EntityManagement.AddEntity(entity2);
 			Sentiment sentiment = new Sentiment("Me gusta", Sentiment.sentimentType.Positive);
+			Sentiment sentiment2 = new Sentiment("Odio", Sentiment.sentimentType.Negative);
 			management.SentimentManagement.AddSentiment(sentiment);
-			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 2, false);
-			Alarm aAlarm2 = new Alarm(entity2, Alarm.Type.Negative, 1, 2, false);
+			management.SentimentManagement.AddSentiment(sentiment2);
+			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 10, 1, false);
+			Alarm aAlarm2 = new Alarm(entity2, Alarm.Type.Negative, 2, 2, false);
 			management.AlarmManagement.AddAlarm(aAlarm);
 			management.AlarmManagement.AddAlarm(aAlarm2);
 			Phrase phrase = new Phrase("Me gusta Coca Cola", new DateTime(2020, 04, 25), entity, Phrase.typePhrase.Positive);
-			Phrase phrase2 = new Phrase("Me gusta Pepsi", DateTime.Now, entity2, Phrase.typePhrase.Positive);
+			Phrase phrase2 = new Phrase("Odio Pepsi", new DateTime(2020, 04, 25), entity2, Phrase.typePhrase.Negative);
+			Phrase phrase3 = new Phrase("Odio con todo mi ser a Pepsi", new DateTime(2020, 04, 25), entity2, Phrase.typePhrase.Negative);
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
-			management.UpdateAlarms();
-			Assert.IsFalse(aAlarm2.Active);
+			management.PhraseManagement.AddPhrase(phrase3);
+
+			MockedTimeProvider provider = new MockedTimeProvider()
+			{
+				MockedDateTime = new DateTime(2020, 04, 26, 19, 10, 30)
+			};
+			management.UpdateAlarms(provider);
+			Assert.IsTrue(aAlarm2.Active);
+			Assert.IsFalse(aAlarm.Active);
 		}
+
 
 		[TestMethod]
 		public void VerifyAlarms7()
-		{
-			Entity entity = new Entity("Coca Cola");
-			Entity entity2 = new Entity("Pepsi");
-			management.EntityManagement.AddEntity(entity);
-			management.EntityManagement.AddEntity(entity2);
-			Sentiment sentiment = new Sentiment("Me gusta", Sentiment.sentimentType.Positive);
-			Sentiment sentiment2 = new Sentiment("Odio", Sentiment.sentimentType.Negative);
-			management.SentimentManagement.AddSentiment(sentiment);
-			management.SentimentManagement.AddSentiment(sentiment2);
-			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 10, 1, false);
-			Alarm aAlarm2 = new Alarm(entity2, Alarm.Type.Negative, 2, 2, false);
-			management.AlarmManagement.AddAlarm(aAlarm);
-			management.AlarmManagement.AddAlarm(aAlarm2);
-			Phrase phrase = new Phrase("Me gusta Coca Cola", new DateTime(2020, 04, 25), entity, Phrase.typePhrase.Positive);
-			Phrase phrase2 = new Phrase("Odio Pepsi", DateTime.Now, entity2, Phrase.typePhrase.Negative);
-			Phrase phrase3 = new Phrase("Odio con todo mi ser a Pepsi", DateTime.Now, entity2, Phrase.typePhrase.Negative);
-			management.PhraseManagement.AddPhrase(phrase);
-			management.PhraseManagement.AddPhrase(phrase2);
-			management.PhraseManagement.AddPhrase(phrase3);
-			management.UpdateAlarms();
-			Assert.IsTrue(aAlarm2.Active);
-			Assert.IsFalse(aAlarm.Active);
-		}
-
-		[TestMethod]
-		public void VerifyAlarms8()
-		{
-			Entity entity = new Entity("Coca Cola");
-			Entity entity2 = new Entity("Pepsi");
-			management.EntityManagement.AddEntity(entity);
-			management.EntityManagement.AddEntity(entity2);
-			Sentiment sentiment = new Sentiment("Me gusta", Sentiment.sentimentType.Positive);
-			Sentiment sentiment2 = new Sentiment("Odio", Sentiment.sentimentType.Negative);
-			management.SentimentManagement.AddSentiment(sentiment);
-			management.SentimentManagement.AddSentiment(sentiment2);
-			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 10, 1, false);
-			Alarm aAlarm2 = new Alarm(entity2, Alarm.Type.Negative, 2, 2, false);
-			management.AlarmManagement.AddAlarm(aAlarm);
-			management.AlarmManagement.AddAlarm(aAlarm2);
-			Phrase phrase = new Phrase("Me gusta Coca Cola", new DateTime(2020, 04, 25), entity, Phrase.typePhrase.Positive);
-			Phrase phrase2 = new Phrase("Odio Pepsi", DateTime.Now, entity2, Phrase.typePhrase.Negative);
-			Phrase phrase3 = new Phrase("Odio con todo mi ser a Pepsi", DateTime.Now, entity2, Phrase.typePhrase.Negative);
-			management.PhraseManagement.AddPhrase(phrase);
-			management.PhraseManagement.AddPhrase(phrase2);
-			management.PhraseManagement.AddPhrase(phrase3);
-			management.UpdateAlarms();
-			Assert.IsTrue(aAlarm2.Active);
-			Assert.IsFalse(aAlarm.Active);
-		}
-
-
-		[TestMethod]
-		public void VerifyAlarms9()
 		{
 			Entity entity = new Entity("Coca Cola");
 			management.EntityManagement.AddEntity(entity);
@@ -331,9 +309,14 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment);
 			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 1, false);
 			management.AlarmManagement.AddAlarm(aAlarm);
-			Phrase phrase = new Phrase("Odio Coca Cola", DateTime.Now, entity, Phrase.typePhrase.Negative);
+			Phrase phrase = new Phrase("Odio Coca Cola", new DateTime(2020,02,10), entity, Phrase.typePhrase.Negative);
 			management.PhraseManagement.AddPhrase(phrase);
-			management.UpdateAlarms();
+			MockedTimeProvider provider = new MockedTimeProvider()
+			{
+				MockedDateTime = new DateTime(2020, 02, 10, 19, 10, 30)
+			};
+
+			management.UpdateAlarms(provider);
 			Assert.IsFalse(aAlarm.Active);
 		}
 	}

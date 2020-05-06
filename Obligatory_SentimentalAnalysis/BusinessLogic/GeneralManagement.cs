@@ -103,12 +103,12 @@ namespace BusinessLogic
 			return text;
 		}
 
-		public void UpdateAlarms()
+		public void UpdateAlarms(ITimeProvider provider)
 		{
 
 			if (PhraseManagement.PhraseList.Count() > 0)
 			{
-				DateTime minDate = DateTime.Now;
+				DateTime minDate = provider.Now();
 				int counterPost = 0;
 				foreach (Alarm a in AlarmManagement.AlarmList)
 				{
@@ -117,11 +117,11 @@ namespace BusinessLogic
 					{
 						if (a.IsInHours)
 						{
-							minDate = DateTime.Now.AddHours(-a.QuantityTime);
+							minDate = provider.Now().AddHours(-a.QuantityTime);
 						}
 						else
 						{
-							minDate = DateTime.Now.AddDays(-a.QuantityTime);
+							minDate = provider.Now().AddDays(-a.QuantityTime);
 						}
 						if (p.PhraseDate >= minDate)
 						{
