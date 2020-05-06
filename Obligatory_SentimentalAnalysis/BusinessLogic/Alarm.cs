@@ -16,13 +16,8 @@ namespace BusinessLogic
 		public bool IsInHours { get; set; }
 		public Type TypeOfAlarm { get; set; }
 
-		public Alarm(Entity entity, Type type, int quantityPost, int quantityTime, bool isInHours)
+		public Alarm()
 		{
-			Entity = entity;
-			TypeOfAlarm = type;
-			QuantityPost = quantityPost;
-			QuantityTime = quantityTime;
-			IsInHours = isInHours;
 			Active = false;
 		}
 

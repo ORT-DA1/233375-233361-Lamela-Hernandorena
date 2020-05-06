@@ -26,7 +26,10 @@ namespace Test
 		[TestMethod]
 		public void AddValidEntity()
 		{
-			Entity entity = new Entity("Coca cola");
+			Entity entity = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
 			management.AddEntity(entity);
 			CollectionAssert.Contains(management.AllEntities, entity);
 		}
@@ -35,7 +38,10 @@ namespace Test
 		[TestMethod]
 		public void AddValidEntity2()
 		{
-			Entity entity = new Entity("                                                                Mc       Donalds                                              ");
+			Entity entity = new Entity()
+			{
+				EntityName = "                                                                Mc       Donalds                                              "
+			};
 			management.AddEntity(entity);
 			CollectionAssert.Contains(management.AllEntities, entity);
 		}
@@ -45,7 +51,7 @@ namespace Test
 		[ExpectedException(typeof(EntityManagementException))]
 		public void AddInvalidEntity1()
 		{
-			Entity entity = new Entity("");
+			Entity entity = new Entity();
 			management.AddEntity(entity); 
 		}
 
@@ -54,9 +60,15 @@ namespace Test
 		[ExpectedException(typeof(EntityManagementException))]
 		public void AddInvalidEntity2()
 		{
-			Entity entity = new Entity("Coca        Cola");
+			Entity entity = new Entity()
+			{
+				EntityName = "Coca        Cola"
+			};
 			management.AddEntity(entity);
-			Entity entity2 = new Entity("Coca Cola");
+			Entity entity2 = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
 			management.AddEntity(entity); 
 		}
 
@@ -64,7 +76,10 @@ namespace Test
 		[TestMethod]
 		public void DeleteValidEntity()
 		{
-			Entity entity = new Entity("Pedidos Ya");
+			Entity entity = new Entity()
+			{
+				EntityName = "Pedidos Ya"
+			};
 			management.AddEntity(entity);
 			management.DeleteEntity(entity);
 			Assert.IsTrue(management.IsEmpty()); 
@@ -74,8 +89,14 @@ namespace Test
 		[TestMethod]
 		public void DeleteValidEntity2()
 		{
-			Entity entity = new Entity("Pedidos Ya");
-			Entity entity2 = new Entity("       Mc            donalds           "); 
+			Entity entity = new Entity()
+			{
+				EntityName = "Pedidos Ya"
+			};
+			Entity entity2 = new Entity()
+			{
+				EntityName = "       Mc            donalds           "
+			}; 
 			management.AddEntity(entity);
 			management.AddEntity(entity2); 
 			management.DeleteEntity(entity);
@@ -88,7 +109,10 @@ namespace Test
 		[ExpectedException(typeof(EntityManagementException))]
 		public void DeleteInvalidEntity()
 		{
-			Entity entity = new Entity("Pedidos Ya");
+			Entity entity = new Entity()
+			{
+				EntityName = "Pedidos Ya"
+			};
 			management.AddEntity(entity);
 			management.DeleteEntity(entity);
 			management.DeleteEntity(entity);
@@ -105,7 +129,11 @@ namespace Test
 		[TestMethod]
 		public void TestIsEmpty2()
 		{
-			management.AddEntity(new Entity("Pedidos ya")); 
+			Entity entity = new Entity()
+			{
+				EntityName = "Pedidos Ya"
+			};
+			management.AddEntity(entity); 
 			bool result = management.IsEmpty(); 
 			Assert.IsFalse(result);
 		}
@@ -116,8 +144,14 @@ namespace Test
 		[ExpectedException(typeof(EntityManagementException))]
 		public void AddExtrangeEntitys()
 		{
-			Entity entity = new Entity("Coca Cola");
-			Entity entity2 = new Entity("cOCa coLA");
+			Entity entity = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
+			Entity entity2 = new Entity()
+			{
+				EntityName = "cOCa coLA"
+			};
 			management.AddEntity(entity);
 			management.AddEntity(entity2); 
 			
@@ -128,8 +162,14 @@ namespace Test
 		[ExpectedException(typeof(EntityManagementException))]
 		public void AddEntitysWithSpace()
 		{
-			Entity entity = new Entity("MC           DONALDS");
-			Entity entity2 = new Entity("mc donalds");
+			Entity entity = new Entity()
+			{
+				EntityName = "MC           DONALDS"
+			};
+			Entity entity2 = new Entity()
+			{
+				EntityName = "mc donalds"
+			};
 			management.AddEntity(entity);
 			management.AddEntity(entity2); 
 		}
@@ -137,10 +177,15 @@ namespace Test
 		[TestMethod]
 		public void EqualsTest()
 		{
-			Entity entity = new Entity("Coca      Cola");
-			Entity entity2 = new Entity("cOCa coLA");
+			Entity entity = new Entity()
+			{
+				EntityName = "Coca      Cola"
+			};
+			Entity entity2 = new Entity()
+			{
+				EntityName = "cOCa coLA"
+			};
 			Assert.IsTrue(entity.Equals(entity2));
 		}
-
 	}
 }

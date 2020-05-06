@@ -21,7 +21,11 @@ namespace Test
 		[TestMethod]
 		public void AddValidPhrase()
 		{
-			Entity entity = new Entity("Mc donalds"); 
+
+			Entity entity = new Entity()
+			{
+				EntityName = "Mc donalds"
+			};
 			Phrase phrase = new Phrase()
 			{
 				TextPhrase = "Me encanta Mc Donalds",
@@ -37,7 +41,10 @@ namespace Test
 		[TestMethod]
 		public void AddValidPhrase2()
 		{
-			Entity entity = new Entity("Disney");
+			Entity entity = new Entity()
+			{
+				EntityName = "Disney"
+			};
 			Phrase phrase = new Phrase()
 			{
 				TextPhrase = "No me gusta Disney",
@@ -52,7 +59,11 @@ namespace Test
         [TestMethod]
         public void AddValidPhrase3()
         {
-			Entity entity = new Entity("Disney");
+
+			Entity entity = new Entity()
+			{
+				EntityName = "Disney"
+			};
 			Phrase phrase = new Phrase()
 			{
 				TextPhrase= "No       me      gusta   Disney",
@@ -79,7 +90,10 @@ namespace Test
         [TestMethod]
         public void AddPhraseWithTodayDate()
         {
-			Entity entity = new Entity("Burger King");
+			Entity entity = new Entity()
+			{
+				EntityName = "Burger King"
+			};
 			Phrase phrase = new Phrase()
 			{
 				TextPhrase= "Amo Burger King",
@@ -96,7 +110,10 @@ namespace Test
         public void AddPhraseWithDateAfterToday()
         {
 			DateTime aDate = new DateTime(2020, 12, 29);
-			Entity entity = new Entity("Burger King");
+			Entity entity = new Entity()
+			{
+				EntityName = "Burger King"
+			};
 			Phrase phrase = new Phrase()
 			{
 				TextPhrase= "Amo Burger King",
@@ -112,7 +129,7 @@ namespace Test
         [ExpectedException(typeof(PhraseManagementException))]
         public void AddInvalidEmptyPhrase()
         {
-			Entity entity = new Entity("");
+			Entity entity = new Entity();
 			Phrase phrase = new Phrase()
 			{
 				TextPhrase= "           ",
@@ -121,7 +138,6 @@ namespace Test
 			    TypePhrase= Phrase.typePhrase.Neutral
 			};
             management.AddPhrase(phrase);
-            
         }
 
 
@@ -130,7 +146,11 @@ namespace Test
 		public void AddPhraseWithDateBeforeOneYear()
 		{
 			DateTime aDate = new DateTime(2019, 03, 22);
-			Entity entity = new Entity("Burger King");
+			Entity entity = new Entity()
+			{
+				EntityName = "Burger King"
+			};
+
 			Phrase phrase = new Phrase()
 			{
 				TextPhrase= "Amo Burger King",
@@ -145,7 +165,11 @@ namespace Test
 		public void TryingEqualsMethod()
 		{
 			DateTime aDate = new DateTime(2020, 03, 22);
-			Entity entity = new Entity("Burger King");
+
+			Entity entity = new Entity()
+			{
+				EntityName = "Burger King"
+			};
 			Phrase phrase = new Phrase()
 			{
 				TextPhrase= "Amo Burger King",
@@ -169,8 +193,15 @@ namespace Test
 		public void TryingNotEquals()
 		{
 			DateTime aDate = new DateTime(2020, 03, 22);
-			Entity entity = new Entity("Burger King");
-			Entity entity2 = new Entity("Mc Donalds");
+			Entity entity = new Entity()
+			{
+				EntityName = "Burger King"
+			};
+			Entity entity2 = new Entity()
+			{
+				EntityName = "Mc Donalds"
+			};
+
 			Phrase phrase = new Phrase()
 			{
 				TextPhrase= "Amo Burger King",
@@ -188,8 +219,5 @@ namespace Test
 			bool areEquals = phrase.Equals(phrase2);
 			Assert.IsFalse(areEquals);
 		}
-
-
-
 	}
 }

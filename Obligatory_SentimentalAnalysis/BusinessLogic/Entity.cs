@@ -10,9 +10,9 @@ namespace BusinessLogic
 	{
 		public string EntityName { get; set; }
 
-		public Entity(string name)
+		public Entity()
 		{
-			EntityName = name;
+			EntityName = "";
 		}
 
 		private string DeleteSpaces(string text)

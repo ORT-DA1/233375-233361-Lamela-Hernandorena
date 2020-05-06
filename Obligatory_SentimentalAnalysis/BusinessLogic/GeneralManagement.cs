@@ -31,8 +31,8 @@ namespace BusinessLogic
 			int positiveCounter = 0;
 			int negetiveCounter = 0;
 			int entityCounter = 0;
-			Entity entityFound = new Entity(""); 
-	
+			Entity entityFound = new Entity();
+			
 			string textOfPhrase = DeleteSpaces(phrase.TextPhrase.ToLower()); 
 			         //Tipo de variable de los elementos de la lista, el sentiment en minuscula guardo los elementos que estoy recorriendo, y luego va in y la list que voy a recorrer.
 			foreach (Sentiment sentiment in SentimentManagement.SentimentList)

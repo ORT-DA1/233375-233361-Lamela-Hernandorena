@@ -19,7 +19,10 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhrasePositive()
 		{
-			Entity entityExpected = new Entity("Coca Cola");
+			Entity entityExpected = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
 			management.EntityManagement.AddEntity(entityExpected);
 			Sentiment sentiment = new Sentiment()
 			{
@@ -47,7 +50,10 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhraseNegative()
 		{
-			Entity entityExpected = new Entity("Coca Cola");
+			Entity entityExpected = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
 			management.EntityManagement.AddEntity(entityExpected);
 			Sentiment sentiment = new Sentiment()
 			{
@@ -81,7 +87,10 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhraseNeutral()
 		{
-			Entity entityExpected = new Entity("Coca Cola");
+			Entity entityExpected = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
 			management.EntityManagement.AddEntity(entityExpected);
 			Sentiment sentiment = new Sentiment()
 			{
@@ -113,12 +122,12 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhraseNeutralEmptyEntity()
 		{
-			Entity entityExpected = new Entity(""); 
 			Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Me encanta",
 				SentimentType= Sentiment.sentimentType.Positive
 			};
+			Entity entityExpected = new Entity(); 
 			management.SentimentManagement.AddSentiment(sentiment);
 			Phrase phrase = new Phrase()
 			{
@@ -139,7 +148,10 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhraseNeutralEmptySentiment()
 		{
-			Entity entityExpected = new Entity("Rappi");
+			Entity entityExpected = new Entity()
+			{
+				EntityName = "Rappi"
+			};
 			management.EntityManagement.AddEntity(entityExpected);
 			Sentiment sentiment = new Sentiment()
 			{
@@ -175,7 +187,7 @@ namespace Test
 			{
 				TextPhrase= "Me gusta subway",
 				PhraseDate= DateTime.Now,
-				Entity= new Entity(""),
+				Entity= new Entity(),
 				TypePhrase= Phrase.typePhrase.Neutral
 			};
 			Assert.AreEqual(expectedPhrase, phrase);
@@ -194,7 +206,7 @@ namespace Test
 			{
 				TextPhrase= "",
 				PhraseDate= DateTime.Now,
-				Entity= new Entity(""),
+				Entity= new Entity(),
 				TypePhrase= Phrase.typePhrase.Neutral
 			};
 			Assert.AreEqual(expectedPhrase, phrase);
@@ -203,9 +215,15 @@ namespace Test
 		[TestMethod]
 		public void AnalysisPhraseTwoEntities()
 		{
-			Entity entity = new Entity("McDonald's");
+			Entity entity = new Entity()
+			{
+				EntityName = "McDonald's"
+			};
 			management.EntityManagement.AddEntity(entity); 
-			Entity entity2 = new Entity("Starbucks");
+			Entity entity2 = new Entity()
+			{
+				EntityName = "Starbucks"
+			};
 			management.EntityManagement.AddEntity(entity2);
 			Sentiment sentiment = new Sentiment()
 			{
@@ -233,7 +251,10 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhraseTwoSentimentPositive()
 		{
-			Entity entityExpected = new Entity("Rappi");
+			Entity entityExpected = new Entity()
+			{
+				EntityName = "Rappi"
+			};
 			management.EntityManagement.AddEntity(entityExpected);
 			Sentiment sentiment = new Sentiment()
 			{
@@ -267,11 +288,20 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhraseNotContainsEntity()
 		{
-			Entity entityExpected = new Entity("Mc donalds");
+			Entity entityExpected = new Entity()
+			{
+				EntityName = "Mc donalds"
+			};
 			management.EntityManagement.AddEntity(entityExpected); 
-			Entity entity2 = new Entity("Rappi");
+			Entity entity2 = new Entity()
+			{
+				EntityName = "Rappi"
+			};
 			management.EntityManagement.AddEntity(entity2);
-			Entity entity = new Entity("Coca cola");
+			Entity entity = new Entity()
+			{
+				EntityName = "Coca cola"
+			};
 			management.EntityManagement.AddEntity(entity);
 			Sentiment sentiment = new Sentiment()
 			{
@@ -303,7 +333,10 @@ namespace Test
 		[TestMethod]
 		public void VerifyAlarms()
 		{
-			Entity entity = new Entity("Coca Cola");
+			Entity entity = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
 			management.EntityManagement.AddEntity(entity);
 			Sentiment sentiment = new Sentiment()
 			{
@@ -311,7 +344,14 @@ namespace Test
 				SentimentType= Sentiment.sentimentType.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
-			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 1, true);
+			Alarm aAlarm = new Alarm()
+			{
+				Entity = entity,
+				TypeOfAlarm = Alarm.Type.Positive,
+				QuantityPost = 1,
+				QuantityTime = 1,
+				IsInHours = true
+			};
 			management.AlarmManagement.AddAlarm(aAlarm);
 			Phrase phrase = new Phrase()
 			{
@@ -332,8 +372,14 @@ namespace Test
 		[TestMethod]
 		public void VerifyAlarms2()
 		{
-			Entity entity = new Entity("Coca Cola");
-			Entity entity2 = new Entity("Pepsi");
+			Entity entity = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
+			Entity entity2 = new Entity()
+			{
+				EntityName = "Pepsi"
+			};
 			management.EntityManagement.AddEntity(entity);
 			management.EntityManagement.AddEntity(entity2);
 			Sentiment sentiment = new Sentiment()
@@ -342,7 +388,14 @@ namespace Test
 				SentimentType= Sentiment.sentimentType.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
-			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 1, false);
+			Alarm aAlarm = new Alarm()
+			{
+				Entity = entity,
+				TypeOfAlarm = Alarm.Type.Positive,
+				QuantityPost = 1,
+				QuantityTime = 1,
+				IsInHours = false
+			};
 			management.AlarmManagement.AddAlarm(aAlarm);
 			Phrase phrase = new Phrase()
 			{
@@ -372,8 +425,18 @@ namespace Test
 		[TestMethod]
 		public void VerifyAlarms3()
 		{
-			Entity entity = new Entity("Coca Cola");
-			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 1, false);
+			Entity entity = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
+			Alarm aAlarm = new Alarm()
+			{
+				Entity = entity,
+				TypeOfAlarm = Alarm.Type.Positive,
+				QuantityPost = 1,
+				QuantityTime = 1,
+				IsInHours = false
+			};
 			management.AlarmManagement.AddAlarm(aAlarm);
 			MockedTimeProvider provider = new MockedTimeProvider()
 			{
@@ -387,8 +450,14 @@ namespace Test
 		[TestMethod]
 		public void VerifyAlarms4()
 		{
-			Entity entity = new Entity("Coca Cola");
-			Entity entity2 = new Entity("Pepsi");
+			Entity entity = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
+			Entity entity2 = new Entity()
+			{
+				EntityName = "Pepsi"
+			};
 			management.EntityManagement.AddEntity(entity);
 			management.EntityManagement.AddEntity(entity2);
 			Sentiment sentiment = new Sentiment()
@@ -397,7 +466,14 @@ namespace Test
 				SentimentType= Sentiment.sentimentType.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
-			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 2, false);
+			Alarm aAlarm = new Alarm()
+			{
+				Entity = entity,
+				TypeOfAlarm = Alarm.Type.Positive,
+				QuantityPost = 1,
+				QuantityTime = 2,
+				IsInHours = false
+			};
 			management.AlarmManagement.AddAlarm(aAlarm);
 			Phrase phrase = new Phrase()
 			{
@@ -426,8 +502,14 @@ namespace Test
 		[TestMethod]
 		public void VerifyAlarms5()
 		{
-			Entity entity = new Entity("Coca Cola");
-			Entity entity2 = new Entity("Pepsi");
+			Entity entity = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
+			Entity entity2 = new Entity()
+			{
+				EntityName = "Pepsi"
+			};
 			management.EntityManagement.AddEntity(entity);
 			management.EntityManagement.AddEntity(entity2);
 			Sentiment sentiment = new Sentiment()
@@ -436,8 +518,22 @@ namespace Test
 				SentimentType= Sentiment.sentimentType.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
-			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 2, false);
-			Alarm aAlarm2 = new Alarm(entity2, Alarm.Type.Negative, 1, 2, false);
+			Alarm aAlarm = new Alarm()
+			{
+				Entity = entity,
+				TypeOfAlarm = Alarm.Type.Positive,
+				QuantityPost = 1,
+				QuantityTime = 2,
+				IsInHours = false
+			};
+			Alarm aAlarm2 = new Alarm()
+			{
+				Entity = entity2,
+				TypeOfAlarm = Alarm.Type.Negative,
+				QuantityPost = 1,
+				QuantityTime = 2,
+				IsInHours = false
+			};
 			management.AlarmManagement.AddAlarm(aAlarm);
 			management.AlarmManagement.AddAlarm(aAlarm2);
 			Phrase phrase = new Phrase()
@@ -467,8 +563,14 @@ namespace Test
 		[TestMethod]
 		public void VerifyAlarms6()
 		{
-			Entity entity = new Entity("Coca Cola");
-			Entity entity2 = new Entity("Pepsi");
+			Entity entity = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
+			Entity entity2 = new Entity()
+			{
+				EntityName = "Pepsi"
+			};
 			management.EntityManagement.AddEntity(entity);
 			management.EntityManagement.AddEntity(entity2);
 			Sentiment sentiment = new Sentiment()
@@ -483,8 +585,22 @@ namespace Test
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
 			management.SentimentManagement.AddSentiment(sentiment2);
-			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 10, 1, false);
-			Alarm aAlarm2 = new Alarm(entity2, Alarm.Type.Negative, 2, 2, false);
+			Alarm aAlarm = new Alarm()
+			{
+				Entity = entity,
+				TypeOfAlarm = Alarm.Type.Positive,
+				QuantityPost=10,
+				QuantityTime = 1,
+				IsInHours = false
+			};
+			Alarm aAlarm2 = new Alarm()
+			{
+				Entity = entity2,
+				TypeOfAlarm = Alarm.Type.Negative,
+				QuantityPost = 2,
+				QuantityTime = 2,
+				IsInHours = false
+			};
 			management.AlarmManagement.AddAlarm(aAlarm);
 			management.AlarmManagement.AddAlarm(aAlarm2);
 			Phrase phrase = new Phrase()
@@ -525,7 +641,10 @@ namespace Test
 		[TestMethod]
 		public void VerifyAlarms7()
 		{
-			Entity entity = new Entity("Coca Cola");
+			Entity entity = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
 			management.EntityManagement.AddEntity(entity);
 			Sentiment sentiment = new Sentiment()
 			{
@@ -533,7 +652,14 @@ namespace Test
 				SentimentType= Sentiment.sentimentType.Negative
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
-			Alarm aAlarm = new Alarm(entity, Alarm.Type.Positive, 1, 1, false);
+			Alarm aAlarm = new Alarm()
+			{
+				Entity = entity,
+				TypeOfAlarm = Alarm.Type.Positive,
+				QuantityPost = 1,
+				QuantityTime = 1,
+				IsInHours = false
+			};
 			management.AlarmManagement.AddAlarm(aAlarm);
 			Phrase phrase = new Phrase()
 			{
