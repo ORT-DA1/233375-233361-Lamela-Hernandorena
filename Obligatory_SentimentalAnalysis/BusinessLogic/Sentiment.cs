@@ -15,9 +15,7 @@ namespace BusinessLogic
 
 		public sentimentType SentimentType { get; set; }
 
-		public Sentiment(string text, sentimentType type){
-			SentimientText = text;
-			SentimentType = type ; 
+		public Sentiment(){ 
 		}
 
 		public override string ToString()

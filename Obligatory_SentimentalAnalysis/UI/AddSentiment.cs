@@ -36,7 +36,11 @@ namespace UI
 			{
 				try
 				{
-					Sentiment sentiment = new Sentiment(sentimentText, isChecked());
+					Sentiment sentiment = new Sentiment()
+					{
+						SentimientText= sentimentText,
+						SentimentType= isChecked()
+					};
 					generalManagement.SentimentManagement.AddSentiment(sentiment);
 					MessageBox.Show("Sentimiento agregado correctamente");
 					initializeListOfSentiment(); 

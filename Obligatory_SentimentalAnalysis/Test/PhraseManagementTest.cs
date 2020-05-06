@@ -22,7 +22,13 @@ namespace Test
 		public void AddValidPhrase()
 		{
 			Entity entity = new Entity("Mc donalds"); 
-			Phrase phrase = new Phrase("Me encanta Mc Donalds", DateTime.Now, entity, Phrase.typePhrase.Positive);
+			Phrase phrase = new Phrase()
+			{
+				TextPhrase = "Me encanta Mc Donalds",
+				PhraseDate= DateTime.Now,
+				Entity=entity,
+				TypePhrase= Phrase.typePhrase.Positive
+			};
 			management.AddPhrase(phrase);
 			CollectionAssert.Contains(management.AllPhrases, phrase);
 			Assert.IsFalse(management.IsEmpty());
@@ -32,7 +38,13 @@ namespace Test
 		public void AddValidPhrase2()
 		{
 			Entity entity = new Entity("Disney");
-			Phrase phrase = new Phrase("No me gusta Disney", DateTime.Now, entity, Phrase.typePhrase.Negative);
+			Phrase phrase = new Phrase()
+			{
+				TextPhrase = "No me gusta Disney",
+				PhraseDate= DateTime.Now,
+				Entity= entity,
+				TypePhrase= Phrase.typePhrase.Negative
+			};
 			management.AddPhrase(phrase);
 			CollectionAssert.Contains(management.AllPhrases, phrase);
 		}
@@ -41,7 +53,13 @@ namespace Test
         public void AddValidPhrase3()
         {
 			Entity entity = new Entity("Disney");
-			Phrase phrase = new Phrase("No       me      gusta   Disney", DateTime.Now, entity, Phrase.typePhrase.Negative);
+			Phrase phrase = new Phrase()
+			{
+				TextPhrase= "No       me      gusta   Disney",
+				PhraseDate= DateTime.Now,
+				Entity= entity,
+				TypePhrase= Phrase.typePhrase.Negative
+			};
             management.AddPhrase(phrase);
 			CollectionAssert.Contains(management.AllPhrases, phrase);
 			Assert.IsFalse(management.IsEmpty()); 
@@ -51,7 +69,10 @@ namespace Test
 		[ExpectedException(typeof(PhraseManagementException))]
 		public void AddInvalidPhrase2()
 		{
-			Phrase phrase = new Phrase("");
+			Phrase phrase = new Phrase()
+			{
+				TextPhrase= ""
+			};
 			management.AddPhrase(phrase); 
 		}
 
@@ -59,7 +80,13 @@ namespace Test
         public void AddPhraseWithTodayDate()
         {
 			Entity entity = new Entity("Burger King");
-			Phrase phrase = new Phrase("Amo Burger King", DateTime.Now, entity, Phrase.typePhrase.Positive);
+			Phrase phrase = new Phrase()
+			{
+				TextPhrase= "Amo Burger King",
+				PhraseDate= DateTime.Now,
+				Entity= entity,
+				TypePhrase= Phrase.typePhrase.Positive
+			};
             management.AddPhrase(phrase);
 			CollectionAssert.Contains(management.AllPhrases, phrase);
 		}
@@ -70,7 +97,13 @@ namespace Test
         {
 			DateTime aDate = new DateTime(2020, 12, 29);
 			Entity entity = new Entity("Burger King");
-			Phrase phrase = new Phrase("Amo Burger King", aDate, entity, Phrase.typePhrase.Positive);
+			Phrase phrase = new Phrase()
+			{
+				TextPhrase= "Amo Burger King",
+				PhraseDate= aDate,
+				Entity= entity,
+				TypePhrase= Phrase.typePhrase.Positive
+			};
 			management.AddPhrase(phrase);
         }
 
@@ -80,7 +113,13 @@ namespace Test
         public void AddInvalidEmptyPhrase()
         {
 			Entity entity = new Entity("");
-			Phrase phrase = new Phrase("           ", DateTime.Now,entity, Phrase.typePhrase.Neutral);
+			Phrase phrase = new Phrase()
+			{
+				TextPhrase= "           ",
+				PhraseDate= DateTime.Now,
+				Entity= entity,
+			    TypePhrase= Phrase.typePhrase.Neutral
+			};
             management.AddPhrase(phrase);
             
         }
@@ -92,7 +131,13 @@ namespace Test
 		{
 			DateTime aDate = new DateTime(2019, 03, 22);
 			Entity entity = new Entity("Burger King");
-			Phrase phrase = new Phrase("Amo Burger King", aDate, entity, Phrase.typePhrase.Positive);
+			Phrase phrase = new Phrase()
+			{
+				TextPhrase= "Amo Burger King",
+				PhraseDate= aDate,
+				Entity= entity,
+				TypePhrase= Phrase.typePhrase.Positive
+			};
 			management.AddPhrase(phrase);
 		}
 
@@ -101,8 +146,20 @@ namespace Test
 		{
 			DateTime aDate = new DateTime(2020, 03, 22);
 			Entity entity = new Entity("Burger King");
-			Phrase phrase = new Phrase("Amo Burger King", aDate, entity, Phrase.typePhrase.Positive);
-			Phrase phrase2 = new Phrase("Amo Burger King", aDate, entity, Phrase.typePhrase.Positive);
+			Phrase phrase = new Phrase()
+			{
+				TextPhrase= "Amo Burger King",
+				PhraseDate= aDate,
+				Entity= entity,
+				TypePhrase= Phrase.typePhrase.Positive
+			};
+			Phrase phrase2 = new Phrase()
+			{
+				TextPhrase= "Amo Burger King",
+				PhraseDate= aDate,
+				Entity= entity,
+				TypePhrase= Phrase.typePhrase.Positive
+			};
 			bool areEquals = phrase.Equals(phrase2);
 			Assert.IsTrue(areEquals); 
 		}
@@ -114,8 +171,20 @@ namespace Test
 			DateTime aDate = new DateTime(2020, 03, 22);
 			Entity entity = new Entity("Burger King");
 			Entity entity2 = new Entity("Mc Donalds");
-			Phrase phrase = new Phrase("Amo Burger King", aDate, entity, Phrase.typePhrase.Positive);
-			Phrase phrase2 = new Phrase("Amo Mc Donalds", aDate, entity2, Phrase.typePhrase.Positive);
+			Phrase phrase = new Phrase()
+			{
+				TextPhrase= "Amo Burger King",
+				PhraseDate= aDate,
+				Entity= entity,
+				TypePhrase= Phrase.typePhrase.Positive
+			};
+			Phrase phrase2 = new Phrase()
+			{
+				TextPhrase= "Amo Mc Donalds",
+				PhraseDate= aDate,
+				Entity= entity2,
+				TypePhrase= Phrase.typePhrase.Positive
+			};
 			bool areEquals = phrase.Equals(phrase2);
 			Assert.IsFalse(areEquals);
 		}

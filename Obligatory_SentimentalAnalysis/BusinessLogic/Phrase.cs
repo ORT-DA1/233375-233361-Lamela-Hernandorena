@@ -18,19 +18,11 @@ namespace BusinessLogic
 
 		public typePhrase TypePhrase { get; set;  }
 
-        public Phrase(string phrase)
-		{
-			TextPhrase = phrase;
-			
-		}
+       
 
-        public Phrase (string phrase, DateTime date, Entity entity, typePhrase type)
+        public Phrase ()
         {
-            TextPhrase = phrase;
-            PhraseDate = date;
-			TypePhrase = type;
-			Entity = entity; 
-			
+          
         }
 
 
