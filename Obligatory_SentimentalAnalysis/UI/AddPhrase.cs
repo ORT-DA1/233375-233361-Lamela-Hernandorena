@@ -43,6 +43,7 @@ namespace UI
 
 		private void AddPhraseUI()
 		{
+
 			string phraseText = textBoxPhrase.Text;
 			DateTime phraseDate = dateTimePickerPhraseDate.Value;
 
@@ -58,6 +59,8 @@ namespace UI
 			};
 			generalManagement.AnalysisPhrase(phrase);
 			generalManagement.PhraseManagement.AddPhrase(phrase);
+			RealTimeProvider timeNow = new RealTimeProvider(); 
+			generalManagement.UpdateAlarms(timeNow); 
 			MessageBox.Show("Se ha agregado una frase correctamente");
 			DeleteText(); 
 		}

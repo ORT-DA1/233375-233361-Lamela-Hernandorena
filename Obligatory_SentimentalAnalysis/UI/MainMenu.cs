@@ -54,5 +54,12 @@ namespace UI
             UserControl addAlarm = new AddAlarm (GeneralManagement);
             panelMain.Controls.Add(addAlarm);
         }
-    }
+
+		private void btnReport_Click(object sender, EventArgs e)
+		{
+			panelMain.Controls.Clear();
+			UserControl reportPhrases = new ReportAnalysisPhrase(GeneralManagement);
+			panelMain.Controls.Add(reportPhrases);
+		}
+	}
 }
