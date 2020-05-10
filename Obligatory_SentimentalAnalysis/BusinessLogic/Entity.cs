@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,13 +26,27 @@ namespace BusinessLogic
 			return text;
 		}
 
-
-		public override bool Equals(object obj)
+		public override string ToString()
 		{
-			Entity entity = (Entity)obj;
-			return string.Equals(DeleteSpaces(EntityName.Trim()), DeleteSpaces(entity.EntityName.Trim()), StringComparison.OrdinalIgnoreCase); 
+			return EntityName;
 		}
 
 
+		public override bool Equals(object obj)
+		{
+			if (obj == null)
+			{
+				return false;
+			}
+			else if (this.GetType() != obj.GetType())
+			{
+				return false;
+			}
+			else
+			{
+				Entity entity = (Entity)obj;
+				return string.Equals(DeleteSpaces(EntityName.Trim()), DeleteSpaces(entity.EntityName.Trim()), StringComparison.OrdinalIgnoreCase);
+			}
+		}
 	}
 }

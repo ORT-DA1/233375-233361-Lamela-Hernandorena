@@ -133,6 +133,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AddSentiment";
             this.Size = new System.Drawing.Size(510, 474);
+            this.Load += new System.EventHandler(this.AddSentiment_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

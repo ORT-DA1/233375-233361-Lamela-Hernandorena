@@ -127,5 +127,10 @@ namespace UI
 		{
 
 		}
+
+		private void AddSentiment_Load(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
