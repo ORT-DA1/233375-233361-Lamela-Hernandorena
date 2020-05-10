@@ -29,16 +29,23 @@ namespace UI
 			panelMain.Controls.Add(addSentiment);
 		}
 
-		private void panelMain_Paint(object sender, PaintEventArgs e)
-		{
-
-		}
+		
 
 		private void btnAddEntity_Click(object sender, EventArgs e)
 		{
 			panelMain.Controls.Clear();
 			UserControl addEntity = new AddEntity(GeneralManagement);
 			panelMain.Controls.Add(addEntity);
+
+		}
+
+		private void btnAddPhrase_Click(object sender, EventArgs e)
+		{
+
+			panelMain.Controls.Clear();
+			UserControl addPhrase = new AddPhrase(GeneralManagement);
+			panelMain.Controls.Add(addPhrase);
+
 		}
 	}
 }
