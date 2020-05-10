@@ -62,6 +62,7 @@
             this.textBoxSentiment.Name = "textBoxSentiment";
             this.textBoxSentiment.Size = new System.Drawing.Size(270, 20);
             this.textBoxSentiment.TabIndex = 2;
+            this.textBoxSentiment.TextChanged += new System.EventHandler(this.TextBoxSentiment_TextChanged);
             // 
             // btnAdd
             // 

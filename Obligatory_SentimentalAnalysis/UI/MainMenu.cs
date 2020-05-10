@@ -47,5 +47,12 @@ namespace UI
 			panelMain.Controls.Add(addPhrase);
 
 		}
-	}
+
+        private void BtnAddAlarm_Click(object sender, EventArgs e)
+        {
+            panelMain.Controls.Clear();
+            UserControl addAlarm = new AddAlarm (GeneralManagement);
+            panelMain.Controls.Add(addAlarm);
+        }
+    }
 }

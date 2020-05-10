@@ -26,7 +26,7 @@ namespace BusinessLogic
 		{
 			if (IsNegativeQuantity(alarm.QuantityPost))
 			{
-				throw new AlarmManagementException(MessagesExceptions.ERROR_IS_NEGATIVE); 
+				throw new AlarmManagementException(MessagesExceptions.ERROR_IS_NEGATIVE_POSTS); 
 			}
 
 			if (ExistAlarm(alarm))
@@ -41,7 +41,7 @@ namespace BusinessLogic
 
             if (IsNegativeQuantity(alarm.QuantityTime))
             {
-                throw new AlarmManagementException(MessagesExceptions.ERROR_IS_NEGATIVE); 
+                throw new AlarmManagementException(MessagesExceptions.ERROR_IS_NEGATIVE_TIME); 
             }
 		}
 

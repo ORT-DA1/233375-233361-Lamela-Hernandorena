@@ -132,5 +132,10 @@ namespace UI
 		{
 
 		}
-	}
+
+        private void TextBoxSentiment_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
