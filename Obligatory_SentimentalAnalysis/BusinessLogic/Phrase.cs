@@ -28,9 +28,23 @@ namespace BusinessLogic
 
 		public override bool Equals(object obj)
 		{
-			Phrase phrase = (Phrase)obj;
-			return string.Equals(TextPhrase, phrase.TextPhrase, StringComparison.OrdinalIgnoreCase) && Entity.Equals(phrase.Entity) 
-				&& TypePhrase.Equals(phrase.TypePhrase);
+			if(obj == null)
+			{
+				return false;
+			}
+			else
+			{
+				if(GetType() != obj.GetType())
+				{
+					return false;
+				}
+				else
+				{
+					Phrase phrase = (Phrase)obj;
+					return string.Equals(TextPhrase, phrase.TextPhrase, StringComparison.OrdinalIgnoreCase) && Entity.Equals(phrase.Entity)
+						&& TypePhrase.Equals(phrase.TypePhrase);
+				}
+			}
 		}
 	}
 }

@@ -71,6 +71,7 @@
 			this.btnAddPhrase.TabIndex = 7;
 			this.btnAddPhrase.Text = "Agregar frase";
 			this.btnAddPhrase.UseVisualStyleBackColor = true;
+			this.btnAddPhrase.Click += new System.EventHandler(this.btnAddPhrase_Click);
 			// 
 			// btnAddAlarm
 			// 

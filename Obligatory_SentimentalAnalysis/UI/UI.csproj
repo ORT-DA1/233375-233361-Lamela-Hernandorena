@@ -52,6 +52,12 @@
     <Compile Include="AddEntity.Designer.cs">
       <DependentUpon>AddEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddPhrase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AddPhrase.Designer.cs">
+      <DependentUpon>AddPhrase.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddSentiment.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -69,6 +75,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddEntity.resx">
       <DependentUpon>AddEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddPhrase.resx">
+      <DependentUpon>AddPhrase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddSentiment.resx">
       <DependentUpon>AddSentiment.cs</DependentUpon>

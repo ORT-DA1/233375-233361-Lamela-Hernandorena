@@ -28,5 +28,13 @@ namespace UI
 			UserControl addSentiment = new AddSentiment(GeneralManagement);
 			panelMain.Controls.Add(addSentiment);
 		}
+
+		private void btnAddPhrase_Click(object sender, EventArgs e)
+		{
+
+			panelMain.Controls.Clear();
+			UserControl addPhrase = new AddPhrase(GeneralManagement);
+			panelMain.Controls.Add(addPhrase);
+		}
 	}
 }
