@@ -135,6 +135,10 @@
       <Project>{f462043c-ac14-4681-918c-b936247167fe}</Project>
       <Name>BusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{58fa009c-9b73-40e4-83ae-af3a484183be}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

@@ -28,7 +28,7 @@ namespace UI
 		{
 			string sentimentText = textBoxSentiment.Text;
 
-			if (isChecked().Equals(Sentiment.sentimentType.Neutral))
+			if (isChecked().Equals(Sentiment.TypeSentiment.Neutral))
 			{
 				MessageBox.Show("Debe seleccionar si el tipo de sentimiento."); 
 			}
@@ -67,21 +67,21 @@ namespace UI
 			listBoxSentiment.DataSource = generalManagement.SentimentManagement.AllSentiments;  
 		}
 		
-		private Sentiment.sentimentType isChecked()
+		private Sentiment.TypeSentiment isChecked()
 		{
 			if (radioButtonNegative.Checked)
 			{
-				return Sentiment.sentimentType.Negative; 
+				return Sentiment.TypeSentiment.Negative; 
 			}
 			else
 			{
 				if (radioButtonPositive.Checked)
 				{
-					return Sentiment.sentimentType.Positive;
+					return Sentiment.TypeSentiment.Positive;
 				}
 				else
 				{
-					return Sentiment.sentimentType.Neutral; 
+					return Sentiment.TypeSentiment.Neutral; 
 				}
 			}
 		}

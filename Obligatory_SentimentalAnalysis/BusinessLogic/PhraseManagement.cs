@@ -1,4 +1,5 @@
 ﻿using BusinessLogicExceptions;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace BusinessLogic
 
 		public void AddPhrase(Phrase phrase)
 		{
-			phrase.TextPhrase = DeleteSpaces(phrase.TextPhrase.Trim()); 
+			phrase.TextPhrase = Utilities.DeleteSpaces(phrase.TextPhrase.Trim()); 
 			VerifyFormatAdd(phrase); 
 			phraseList.Add(phrase); 
 		}
@@ -29,7 +30,6 @@ namespace BusinessLogic
 		{
 			return phraseList.Count == 0; 
 		}
-
 
 		private void VerifyFormatAdd(Phrase phrase)
 		{
@@ -46,16 +46,6 @@ namespace BusinessLogic
 			{
 				throw new PhraseManagementException(MessagesExceptions.ERROR_IS_ONE_YEAR_BEFORE); 
 			}
-		}
-
-		private string DeleteSpaces(string text)
-		{
-			while (text.Contains("  "))
-			{
-				text = text.Replace("  ", " ");
-			}
-
-			return text;
 		}
 		
 		public Phrase[] AllPhrases

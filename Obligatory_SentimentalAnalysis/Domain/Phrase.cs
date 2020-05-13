@@ -14,9 +14,9 @@ namespace BusinessLogic
 
 		public Entity Entity { get; set;  }
 
-		public enum typePhrase { Positive, Neutral, Negative} 
+		public enum TypePhrase { Positive, Neutral, Negative} 
 
-		public typePhrase TypePhrase { get; set;  }
+		public TypePhrase PhraseType { get; set;  }
 
        
 
@@ -42,7 +42,7 @@ namespace BusinessLogic
 				{
 					Phrase phrase = (Phrase)obj;
 					return string.Equals(TextPhrase, phrase.TextPhrase, StringComparison.OrdinalIgnoreCase) && Entity.Equals(phrase.Entity)
-						&& TypePhrase.Equals(phrase.TypePhrase);
+						&& PhraseType.Equals(phrase.PhraseType);
 				}
 			}
 		}

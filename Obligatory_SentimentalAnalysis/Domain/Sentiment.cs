@@ -1,19 +1,20 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks; 
 
 namespace BusinessLogic
 {
 	public class Sentiment
 	{
 
-		public enum sentimentType { Positive, Neutral, Negative }
+		public enum TypeSentiment { Positive, Neutral, Negative }
 
 		public string SentimientText { get; set;  }
 
-		public sentimentType SentimentType { get; set; }
+		public TypeSentiment SentimentType { get; set; }
 
 		public Sentiment(){ 
 		}
@@ -38,22 +39,9 @@ namespace BusinessLogic
 				else
 				{
 					Sentiment sentiment = (Sentiment)obj;
-					return string.Equals(DeleteSpaces(SentimientText.Trim()), DeleteSpaces(sentiment.SentimientText.Trim()), StringComparison.OrdinalIgnoreCase) && SentimentType.Equals(sentiment.SentimentType);
+					return string.Equals(Utilities.DeleteSpaces(SentimientText.Trim()), Utilities.DeleteSpaces(sentiment.SentimientText.Trim()), StringComparison.OrdinalIgnoreCase) && SentimentType.Equals(sentiment.SentimentType);
 				}
 			}
 		}
-
-		private string DeleteSpaces(string text)
-		{
-			while (text.Contains("  "))
-			{
-				text = text.Replace("  ", " ");
-			}
-
-			return text;
-		}
-
-
-
 	}
 }

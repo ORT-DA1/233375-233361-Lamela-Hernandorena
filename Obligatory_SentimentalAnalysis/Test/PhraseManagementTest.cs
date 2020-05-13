@@ -31,7 +31,7 @@ namespace Test
 				TextPhrase = "Me encanta Mc Donalds",
 				PhraseDate= DateTime.Now,
 				Entity=entity,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType = Phrase.TypePhrase.Positive
 			};
 			management.AddPhrase(phrase);
 			CollectionAssert.Contains(management.AllPhrases, phrase);
@@ -50,7 +50,7 @@ namespace Test
 				TextPhrase = "No me gusta Disney",
 				PhraseDate= DateTime.Now,
 				Entity= entity,
-				TypePhrase= Phrase.typePhrase.Negative
+				PhraseType= Phrase.TypePhrase.Negative
 			};
 			management.AddPhrase(phrase);
 			CollectionAssert.Contains(management.AllPhrases, phrase);
@@ -69,7 +69,7 @@ namespace Test
 				TextPhrase= "No       me      gusta   Disney",
 				PhraseDate= DateTime.Now,
 				Entity= entity,
-				TypePhrase= Phrase.typePhrase.Negative
+				PhraseType= Phrase.TypePhrase.Negative
 			};
             management.AddPhrase(phrase);
 			CollectionAssert.Contains(management.AllPhrases, phrase);
@@ -99,7 +99,7 @@ namespace Test
 				TextPhrase= "Amo Burger King",
 				PhraseDate= DateTime.Now,
 				Entity= entity,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType= Phrase.TypePhrase.Positive
 			};
             management.AddPhrase(phrase);
 			CollectionAssert.Contains(management.AllPhrases, phrase);
@@ -119,7 +119,7 @@ namespace Test
 				TextPhrase= "Amo Burger King",
 				PhraseDate= aDate,
 				Entity= entity,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType= Phrase.TypePhrase.Positive
 			};
 			management.AddPhrase(phrase);
         }
@@ -135,7 +135,7 @@ namespace Test
 				TextPhrase= "           ",
 				PhraseDate= DateTime.Now,
 				Entity= entity,
-			    TypePhrase= Phrase.typePhrase.Neutral
+			    PhraseType= Phrase.TypePhrase.Neutral
 			};
             management.AddPhrase(phrase);
         }
@@ -156,7 +156,7 @@ namespace Test
 				TextPhrase= "Amo Burger King",
 				PhraseDate= aDate,
 				Entity= entity,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType= Phrase.TypePhrase.Positive
 			};
 			management.AddPhrase(phrase);
 		}
@@ -175,14 +175,14 @@ namespace Test
 				TextPhrase= "Amo Burger King",
 				PhraseDate= aDate,
 				Entity= entity,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType= Phrase.TypePhrase.Positive
 			};
 			Phrase phrase2 = new Phrase()
 			{
 				TextPhrase= "Amo Burger King",
 				PhraseDate= aDate,
 				Entity= entity,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType= Phrase.TypePhrase.Positive
 			};
 			bool areEquals = phrase.Equals(phrase2);
 			Assert.IsTrue(areEquals); 
@@ -207,14 +207,14 @@ namespace Test
 				TextPhrase= "Amo Burger King",
 				PhraseDate= aDate,
 				Entity= entity,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType= Phrase.TypePhrase.Positive
 			};
 			Phrase phrase2 = new Phrase()
 			{
 				TextPhrase= "Amo Mc Donalds",
 				PhraseDate= aDate,
 				Entity= entity2,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType= Phrase.TypePhrase.Positive
 			};
 			bool areEquals = phrase.Equals(phrase2);
 			Assert.IsFalse(areEquals);

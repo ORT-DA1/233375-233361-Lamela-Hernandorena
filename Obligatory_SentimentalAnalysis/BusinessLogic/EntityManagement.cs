@@ -1,4 +1,5 @@
 ﻿using BusinessLogicExceptions;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,23 +25,10 @@ namespace BusinessLogic
 
 		public void AddEntity(Entity entity)
 		{
-			entity.EntityName = DeleteSpaces(entity.EntityName.Trim()); 
+			entity.EntityName = Utilities.DeleteSpaces(entity.EntityName.Trim()); 
 			VerifyFormatAdd(entity);
 			entityList.Add(entity); 
 		}
-
-
-
-		private string DeleteSpaces(string text)
-		{
-			while (text.Contains("  "))
-			{
-				text = text.Replace("  ", " ");
-			}
-
-			return text;
-		}
-
 
 		private void VerifyFormatAdd(Entity entity)
 		{
@@ -56,14 +44,10 @@ namespace BusinessLogic
 
 		}
 
-
 		private bool IsContained(Entity entity)
 		{
 			return entityList.Contains(entity); 
 		}
-
-
-
 
 		public void DeleteEntity(Entity entity)
 		{

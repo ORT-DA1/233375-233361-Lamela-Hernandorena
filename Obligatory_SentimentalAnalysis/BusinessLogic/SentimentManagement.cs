@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,21 +9,17 @@ namespace BusinessLogic
 {
     public class SentimentManagement
     {
-
 		private List<Sentiment> sentimentList; 
 		
-
 		public SentimentManagement()
 		{
 			sentimentList = new List<Sentiment>(); 
 		}
 
-
-
 		public void AddSentiment(Sentiment sentiment)
 		{
 			VerifyFormatAdd(sentiment);
-			sentiment.SentimientText = DeleteSpaces(sentiment.SentimientText).Trim();
+			sentiment.SentimientText = Utilities.DeleteSpaces(sentiment.SentimientText).Trim();
 			sentimentList.Add(sentiment); 
 		}
 
@@ -31,7 +27,6 @@ namespace BusinessLogic
 		{
 			return sentimentList.Count == 0; 
 		}
-
 
 		private void VerifyFormatAdd(Sentiment sentiment)
 		{
@@ -47,17 +42,16 @@ namespace BusinessLogic
 
 		}
 
-
 		private bool IsContained(Sentiment sentiment)
 		{
 			bool toReturn = false;
 
-			string element= DeleteSpaces(sentiment.SentimientText.ToLower().Trim()); 
+			string element= Utilities.DeleteSpaces(sentiment.SentimientText.ToLower().Trim()); 
 			
 			for (int i = 0; i < sentimentList.Count() && !toReturn; i++)
 			{
 				string listElement = sentimentList.ElementAt(i).SentimientText;
-				listElement = DeleteSpaces(listElement.ToLower().Trim()); 
+				listElement = Utilities.DeleteSpaces(listElement.ToLower().Trim()); 
 
 				if (element.Contains(listElement) || listElement.Contains(element)) 
 				{                                    
@@ -68,18 +62,6 @@ namespace BusinessLogic
 			return toReturn;
 		}
 
-
-		private string DeleteSpaces(string text)
-		{
-			while (text.Contains("  "))
-			{
-				text = text.Replace("  ", " ");
-			}
-
-			return text;
-		}
-
-
 		private void VerifyFormatDelete(Sentiment sentiment)
 		{
 			if (!Exist(sentiment))
@@ -87,7 +69,6 @@ namespace BusinessLogic
 				throw new TextManagementException(MessagesExceptions.ERROR_DONT_EXIST); 
 			}
 		}
-
 
 		public void DeleteText(Sentiment sentiment)
 		{
@@ -100,25 +81,14 @@ namespace BusinessLogic
 			return sentimentList.Contains(sentiment); 
 		}
 
-
 		public Sentiment[] AllSentiments
 		{
 			get { return sentimentList.ToArray();  }
 		}
 
-
 		public IEnumerable<Sentiment> SentimentList
 		{
 			get { return sentimentList;  }
 		}
-		
-		
-
-
-
-	
-
-
-
     }
 }

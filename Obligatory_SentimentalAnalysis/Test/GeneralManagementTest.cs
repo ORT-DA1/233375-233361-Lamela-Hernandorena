@@ -27,7 +27,7 @@ namespace Test
 			Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Me gusta",
-				SentimentType= Sentiment.sentimentType.Positive
+				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment); 
 			Phrase phrase = new Phrase()
@@ -40,7 +40,7 @@ namespace Test
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType= Phrase.TypePhrase.Positive
 			};
 			Assert.AreEqual(expectedPhrase, phrase); 
 			
@@ -58,13 +58,13 @@ namespace Test
 			Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Me disgusta",
-				SentimentType= Sentiment.sentimentType.Negative
+				SentimentType= Sentiment.TypeSentiment.Negative
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
 			Sentiment sentiment2 = new Sentiment()
 			{
 				SentimientText= "Me encanta",
-				SentimentType= Sentiment.sentimentType.Positive
+				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment2);
 			Phrase phrase = new Phrase()
@@ -77,7 +77,7 @@ namespace Test
 				TextPhrase= "Me disgusta Coca Cola",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				TypePhrase= Phrase.typePhrase.Negative
+				PhraseType = Phrase.TypePhrase.Negative
 			};
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
@@ -95,13 +95,13 @@ namespace Test
 			Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Me disgusta",
-				SentimentType= Sentiment.sentimentType.Negative
+				SentimentType= Sentiment.TypeSentiment.Negative
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
 			Sentiment sentiment2 = new Sentiment()
 			{
 				SentimientText= "Me encanta",
-				SentimentType= Sentiment.sentimentType.Positive
+				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment2);
 			Phrase phrase = new Phrase()
@@ -114,7 +114,7 @@ namespace Test
 				TextPhrase= "Me disgusta me encanta Coca Cola",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				TypePhrase= Phrase.typePhrase.Neutral
+				PhraseType= Phrase.TypePhrase.Neutral
 			};
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
@@ -125,7 +125,7 @@ namespace Test
 			Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Me encanta",
-				SentimentType= Sentiment.sentimentType.Positive
+				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			Entity entityExpected = new Entity(); 
 			management.SentimentManagement.AddSentiment(sentiment);
@@ -139,7 +139,7 @@ namespace Test
 				TextPhrase= "Me encanta",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				TypePhrase= Phrase.typePhrase.Neutral
+				PhraseType = Phrase.TypePhrase.Neutral
 			};
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
@@ -156,7 +156,7 @@ namespace Test
 			Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Me encanta",
-				SentimentType= Sentiment.sentimentType.Positive
+				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
 			Phrase phrase = new Phrase()
@@ -169,7 +169,7 @@ namespace Test
 				TextPhrase= "Rappi",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				TypePhrase= Phrase.typePhrase.Neutral
+				PhraseType = Phrase.TypePhrase.Neutral
 			};
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
@@ -188,7 +188,7 @@ namespace Test
 				TextPhrase= "Me gusta subway",
 				PhraseDate= DateTime.Now,
 				Entity= new Entity(),
-				TypePhrase= Phrase.typePhrase.Neutral
+				PhraseType = Phrase.TypePhrase.Neutral
 			};
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
@@ -207,7 +207,7 @@ namespace Test
 				TextPhrase= "",
 				PhraseDate= DateTime.Now,
 				Entity= new Entity(),
-				TypePhrase= Phrase.typePhrase.Neutral
+				PhraseType = Phrase.TypePhrase.Neutral
 			};
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
@@ -228,7 +228,7 @@ namespace Test
 			Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Me encanta",
-				SentimentType= Sentiment.sentimentType.Positive
+				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
 			Phrase phrase = new Phrase()
@@ -241,7 +241,7 @@ namespace Test
 				TextPhrase= "Me encanta McDonald's y también Starbucks",
 				PhraseDate= DateTime.Now,
 				Entity= entity,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType= Phrase.TypePhrase.Positive
 			};
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
@@ -259,13 +259,13 @@ namespace Test
 			Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Me encanta",
-				SentimentType= Sentiment.sentimentType.Positive
+				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
 			Sentiment sentiment2 = new Sentiment()
 			{
 				SentimientText= "Me gusta",
-				SentimentType= Sentiment.sentimentType.Positive
+				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment2);
 			Phrase phrase = new Phrase()
@@ -278,7 +278,7 @@ namespace Test
 				TextPhrase= "Me gusta me encanta Rappi",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType= Phrase.TypePhrase.Positive
 			};
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
@@ -306,13 +306,13 @@ namespace Test
 			Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Me encanta",
-				SentimentType= Sentiment.sentimentType.Positive
+				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
 			Sentiment sentiment2 = new Sentiment()
 			{
 				SentimientText= "Me gusta",
-				SentimentType= Sentiment.sentimentType.Positive
+				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment2);
 			Phrase phrase = new Phrase()
@@ -325,7 +325,7 @@ namespace Test
 				TextPhrase= "Me gusta Mc       donalds",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType= Phrase.TypePhrase.Positive
 			};
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
@@ -341,7 +341,7 @@ namespace Test
 			Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Me gusta",
-				SentimentType= Sentiment.sentimentType.Positive
+				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
 			Alarm aAlarm = new Alarm()
@@ -358,7 +358,7 @@ namespace Test
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= DateTime.Now,
 				Entity= entity,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType = Phrase.TypePhrase.Positive
 			};
 			management.PhraseManagement.AddPhrase(phrase);
 			MockedTimeProvider provider = new MockedTimeProvider()
@@ -385,7 +385,7 @@ namespace Test
 			Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Me gusta",
-				SentimentType= Sentiment.sentimentType.Positive
+				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
 			Alarm aAlarm = new Alarm()
@@ -402,14 +402,14 @@ namespace Test
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= new DateTime(2020,04,28),
 				Entity= entity,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType= Phrase.TypePhrase.Positive
 			};
 			Phrase phrase2 = new Phrase()
 			{
 				TextPhrase= "Me gusta Pepsi",
 				PhraseDate= DateTime.Now,
 				Entity= entity2,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType = Phrase.TypePhrase.Positive
 			};
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
@@ -463,7 +463,7 @@ namespace Test
 			Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Me gusta",
-				SentimentType= Sentiment.sentimentType.Positive
+				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
 			Alarm aAlarm = new Alarm()
@@ -480,14 +480,14 @@ namespace Test
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= new DateTime(2020, 04, 25),
 				Entity= entity,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType= Phrase.TypePhrase.Positive
 			};
 			Phrase phrase2 = new Phrase()
 			{
 				TextPhrase="Me gusta Pepsi",
 				PhraseDate= new DateTime(2020, 04, 26),
 				Entity= entity2,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType = Phrase.TypePhrase.Positive
 			};
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
@@ -515,7 +515,7 @@ namespace Test
 			Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Me gusta",
-				SentimentType= Sentiment.sentimentType.Positive
+				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
 			Alarm aAlarm = new Alarm()
@@ -541,14 +541,14 @@ namespace Test
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= new DateTime(2020, 04, 25),
 				Entity= entity,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType= Phrase.TypePhrase.Positive
 			};
 			Phrase phrase2 = new Phrase()
 			{
 				TextPhrase= "Me gusta Pepsi",
 				PhraseDate= new DateTime(2020,04,30),
 				Entity= entity2,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType= Phrase.TypePhrase.Positive
 			};
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
@@ -576,12 +576,12 @@ namespace Test
 			Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Me gusta",
-				SentimentType= Sentiment.sentimentType.Positive
+				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			Sentiment sentiment2 = new Sentiment()
 			{
 				SentimientText= "Odio",
-				SentimentType= Sentiment.sentimentType.Negative
+				SentimentType= Sentiment.TypeSentiment.Negative
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
 			management.SentimentManagement.AddSentiment(sentiment2);
@@ -608,21 +608,21 @@ namespace Test
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= new DateTime(2020, 04, 25),
 				Entity= entity,
-				TypePhrase= Phrase.typePhrase.Positive
+				PhraseType= Phrase.TypePhrase.Positive
 			};
 			Phrase phrase2 = new Phrase()
 			{
 				TextPhrase= "Odio Pepsi",
 				PhraseDate= new DateTime(2020, 04, 25),
 				Entity= entity2,
-				TypePhrase= Phrase.typePhrase.Negative
+				PhraseType= Phrase.TypePhrase.Negative
 			};
 			Phrase phrase3 = new Phrase()
 			{
 				TextPhrase= "Odio con todo mi ser a Pepsi",
 				PhraseDate=  new DateTime(2020, 04, 25),
 				Entity= entity2,
-				TypePhrase= Phrase.typePhrase.Negative
+				PhraseType= Phrase.TypePhrase.Negative
 			};
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
@@ -649,7 +649,7 @@ namespace Test
 			Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Odio",
-				SentimentType= Sentiment.sentimentType.Negative
+				SentimentType= Sentiment.TypeSentiment.Negative
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
 			Alarm aAlarm = new Alarm()
@@ -666,7 +666,7 @@ namespace Test
 				TextPhrase= "Odio Coca Cola",
 				PhraseDate= new DateTime(2020,02,10),
 				Entity= entity,
-				TypePhrase= Phrase.typePhrase.Negative
+				PhraseType= Phrase.TypePhrase.Negative
 			};
 			management.PhraseManagement.AddPhrase(phrase);
 			MockedTimeProvider provider = new MockedTimeProvider()

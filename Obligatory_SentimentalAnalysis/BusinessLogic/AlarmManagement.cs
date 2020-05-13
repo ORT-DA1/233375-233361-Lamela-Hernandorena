@@ -1,4 +1,5 @@
 ﻿using BusinessLogicExceptions;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace BusinessLogic
 
 		private void VerifyFormatAlarm(Alarm alarm)
 		{
-			if (IsNegativeQuantity(alarm.QuantityPost))
+			if (Utilities.IsNegativeQuantity(alarm.QuantityPost))
 			{
 				throw new AlarmManagementException(MessagesExceptions.ERROR_IS_NEGATIVE_POSTS); 
 			}
@@ -39,7 +40,7 @@ namespace BusinessLogic
                 throw new AlarmManagementException(MessagesExceptions.ERROR_IS_NULL); 
             }
 
-            if (IsNegativeQuantity(alarm.QuantityTime))
+            if (Utilities.IsNegativeQuantity(alarm.QuantityTime))
             {
                 throw new AlarmManagementException(MessagesExceptions.ERROR_IS_NEGATIVE_TIME); 
             }
@@ -50,17 +51,11 @@ namespace BusinessLogic
 			return alarm.Entity == null;
 		}
 
-
-
 		private bool ExistAlarm(Alarm alarm)
 		{
 			return alarmList.Contains(alarm); 
 		}
 
-		private bool IsNegativeQuantity(double quantity)
-		{
-			return quantity <= 0; 
-		}
 
 		public Alarm[] allAlarms
 		{

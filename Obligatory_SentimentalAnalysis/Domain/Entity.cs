@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain; 
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
@@ -14,16 +15,6 @@ namespace BusinessLogic
 		public Entity()
 		{
 			EntityName = "";
-		}
-
-		private string DeleteSpaces(string text)
-		{
-			while (text.Contains("  "))
-			{
-				text = text.Replace("  ", " ");
-			}
-
-			return text;
 		}
 
 		public override string ToString()
@@ -45,7 +36,7 @@ namespace BusinessLogic
 			else
 			{
 				Entity entity = (Entity)obj;
-				return string.Equals(DeleteSpaces(EntityName.Trim()), DeleteSpaces(entity.EntityName.Trim()), StringComparison.OrdinalIgnoreCase);
+				return string.Equals(Utilities.DeleteSpaces(EntityName.Trim()), Utilities.DeleteSpaces(entity.EntityName.Trim()), StringComparison.OrdinalIgnoreCase);
 			}
 		}
 	}
