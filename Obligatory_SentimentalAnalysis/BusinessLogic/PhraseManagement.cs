@@ -31,7 +31,7 @@ namespace BusinessLogic
 		}
 
 
-		public void VerifyFormatAdd(Phrase phrase)
+		private void VerifyFormatAdd(Phrase phrase)
 		{
 			if (String.IsNullOrEmpty(phrase.TextPhrase))
 			{

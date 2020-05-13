@@ -22,7 +22,7 @@ namespace BusinessLogic
 			alarmList.Add(alarm); 
 		}
 
-		public void VerifyFormatAlarm(Alarm alarm)
+		private void VerifyFormatAlarm(Alarm alarm)
 		{
 			if (IsNegativeQuantity(alarm.QuantityPost))
 			{
