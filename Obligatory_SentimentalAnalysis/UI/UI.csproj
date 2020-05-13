@@ -136,21 +136,16 @@
       <Name>BusinessLogic</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\AgregarAlarma.png" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\AgregarEntidades.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\MenuPrincipal.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\AgregarFrase.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\AnalisisDeFrase.png" />
+    <Content Include="Images\AgregarAlarma.png" />
+    <Content Include="Images\AgregarEntidades.png" />
+    <Content Include="Images\AgregarFrase.png" />
+    <Content Include="Images\AgregarSentimientos.png" />
+    <Content Include="Images\AnalisisDeFrase.png" />
+    <Content Include="Images\MenuPrincipal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

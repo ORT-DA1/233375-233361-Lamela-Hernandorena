@@ -63,9 +63,9 @@ namespace UI.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap AgregarAlarma {
+        internal static System.Drawing.Bitmap AgregarAlarma1 {
             get {
-                object obj = ResourceManager.GetObject("AgregarAlarma", resourceCulture);
+                object obj = ResourceManager.GetObject("AgregarAlarma1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace UI.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap AgregarEntidades {
+        internal static System.Drawing.Bitmap AgregarEntidades1 {
             get {
-                object obj = ResourceManager.GetObject("AgregarEntidades", resourceCulture);
+                object obj = ResourceManager.GetObject("AgregarEntidades1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,19 @@ namespace UI.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap AnalisisDeFrase {
+        internal static System.Drawing.Bitmap AgregarSentimientos {
             get {
-                object obj = ResourceManager.GetObject("AnalisisDeFrase", resourceCulture);
+                object obj = ResourceManager.GetObject("AgregarSentimientos", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap AnalisisDeFrase1 {
+            get {
+                object obj = ResourceManager.GetObject("AnalisisDeFrase1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

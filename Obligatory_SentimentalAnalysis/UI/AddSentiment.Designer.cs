@@ -30,7 +30,6 @@ namespace UI
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddSentiment));
 			this.textBoxSentiment = new System.Windows.Forms.TextBox();
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.listBoxSentiment = new System.Windows.Forms.ListBox();
@@ -41,9 +40,10 @@ namespace UI
 			// 
 			// textBoxSentiment
 			// 
-			this.textBoxSentiment.Location = new System.Drawing.Point(174, 74);
+			this.textBoxSentiment.Location = new System.Drawing.Point(232, 91);
+			this.textBoxSentiment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.textBoxSentiment.Name = "textBoxSentiment";
-			this.textBoxSentiment.Size = new System.Drawing.Size(275, 20);
+			this.textBoxSentiment.Size = new System.Drawing.Size(365, 22);
 			this.textBoxSentiment.TabIndex = 2;
 			this.textBoxSentiment.TextChanged += new System.EventHandler(this.TextBoxSentiment_TextChanged);
 			// 
@@ -55,9 +55,10 @@ namespace UI
 			this.btnAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
 			this.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 			this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnAdd.Location = new System.Drawing.Point(154, 184);
+			this.btnAdd.Location = new System.Drawing.Point(205, 226);
+			this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(150, 31);
+			this.btnAdd.Size = new System.Drawing.Size(200, 38);
 			this.btnAdd.TabIndex = 3;
 			this.btnAdd.UseVisualStyleBackColor = false;
 			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -68,9 +69,11 @@ namespace UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.listBoxSentiment.FormattingEnabled = true;
-			this.listBoxSentiment.Location = new System.Drawing.Point(135, 302);
+			this.listBoxSentiment.ItemHeight = 16;
+			this.listBoxSentiment.Location = new System.Drawing.Point(180, 372);
+			this.listBoxSentiment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.listBoxSentiment.Name = "listBoxSentiment";
-			this.listBoxSentiment.Size = new System.Drawing.Size(201, 199);
+			this.listBoxSentiment.Size = new System.Drawing.Size(267, 244);
 			this.listBoxSentiment.TabIndex = 4;
 			this.listBoxSentiment.SelectedIndexChanged += new System.EventHandler(this.listBoxSentiment_SelectedIndexChanged);
 			// 
@@ -82,9 +85,10 @@ namespace UI
 			this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
 			this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 			this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnDelete.Location = new System.Drawing.Point(154, 538);
+			this.btnDelete.Location = new System.Drawing.Point(205, 662);
+			this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.btnDelete.Name = "btnDelete";
-			this.btnDelete.Size = new System.Drawing.Size(158, 33);
+			this.btnDelete.Size = new System.Drawing.Size(211, 41);
 			this.btnDelete.TabIndex = 5;
 			this.btnDelete.UseVisualStyleBackColor = false;
 			this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -93,9 +97,10 @@ namespace UI
 			// 
 			this.radioButtonNegative.AutoSize = true;
 			this.radioButtonNegative.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-			this.radioButtonNegative.Location = new System.Drawing.Point(345, 126);
+			this.radioButtonNegative.Location = new System.Drawing.Point(460, 155);
+			this.radioButtonNegative.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.radioButtonNegative.Name = "radioButtonNegative";
-			this.radioButtonNegative.Size = new System.Drawing.Size(68, 17);
+			this.radioButtonNegative.Size = new System.Drawing.Size(85, 21);
 			this.radioButtonNegative.TabIndex = 8;
 			this.radioButtonNegative.TabStop = true;
 			this.radioButtonNegative.Text = "Negativo";
@@ -105,9 +110,10 @@ namespace UI
 			// 
 			this.radioButtonPositive.AutoSize = true;
 			this.radioButtonPositive.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-			this.radioButtonPositive.Location = new System.Drawing.Point(189, 126);
+			this.radioButtonPositive.Location = new System.Drawing.Point(252, 155);
+			this.radioButtonPositive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.radioButtonPositive.Name = "radioButtonPositive";
-			this.radioButtonPositive.Size = new System.Drawing.Size(62, 17);
+			this.radioButtonPositive.Size = new System.Drawing.Size(78, 21);
 			this.radioButtonPositive.TabIndex = 9;
 			this.radioButtonPositive.TabStop = true;
 			this.radioButtonPositive.Text = "Positivo";
@@ -115,19 +121,19 @@ namespace UI
 			// 
 			// AddSentiment
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Control;
-			this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+			this.BackgroundImage = global::UI.Properties.Resources.AgregarSentimientos;
 			this.Controls.Add(this.radioButtonPositive);
 			this.Controls.Add(this.radioButtonNegative);
 			this.Controls.Add(this.btnDelete);
 			this.Controls.Add(this.listBoxSentiment);
 			this.Controls.Add(this.btnAdd);
 			this.Controls.Add(this.textBoxSentiment);
-			this.Margin = new System.Windows.Forms.Padding(2);
+			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.Name = "AddSentiment";
-			this.Size = new System.Drawing.Size(466, 638);
+			this.Size = new System.Drawing.Size(621, 785);
 			this.Load += new System.EventHandler(this.AddSentiment_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
