@@ -61,5 +61,10 @@ namespace UI
 			UserControl reportPhrases = new ReportAnalysisPhrase(GeneralManagement);
 			panelMain.Controls.Add(reportPhrases);
 		}
+
+		private void btnExit_Click(object sender, EventArgs e)
+		{
+			Application.Exit(); 
+		}
 	}
 }

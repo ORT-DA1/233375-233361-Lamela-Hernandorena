@@ -29,47 +29,37 @@
 		private void InitializeComponent()
 		{
 			this.grdPhrases = new System.Windows.Forms.DataGridView();
-			this.labelPhrase = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.grdPhrases)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// grdPhrases
 			// 
+			this.grdPhrases.BackgroundColor = System.Drawing.SystemColors.Control;
 			this.grdPhrases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.grdPhrases.Location = new System.Drawing.Point(21, 95);
+			this.grdPhrases.Location = new System.Drawing.Point(2, 78);
+			this.grdPhrases.Margin = new System.Windows.Forms.Padding(2);
 			this.grdPhrases.Name = "grdPhrases";
 			this.grdPhrases.ReadOnly = true;
 			this.grdPhrases.RowTemplate.Height = 24;
-			this.grdPhrases.Size = new System.Drawing.Size(592, 450);
+			this.grdPhrases.Size = new System.Drawing.Size(450, 440);
 			this.grdPhrases.TabIndex = 0;
-			// 
-			// labelPhrase
-			// 
-			this.labelPhrase.AutoSize = true;
-			this.labelPhrase.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.labelPhrase.Location = new System.Drawing.Point(241, 27);
-			this.labelPhrase.Name = "labelPhrase";
-			this.labelPhrase.Size = new System.Drawing.Size(165, 25);
-			this.labelPhrase.TabIndex = 1;
-			this.labelPhrase.Text = "Reporte de frases";
 			// 
 			// ReportAnalysisPhrase
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.labelPhrase);
+			this.BackgroundImage = global::UI.Properties.Resources.AnalisisDeFrase;
 			this.Controls.Add(this.grdPhrases);
+			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "ReportAnalysisPhrase";
-			this.Size = new System.Drawing.Size(680, 584);
+			this.Size = new System.Drawing.Size(460, 638);
 			((System.ComponentModel.ISupportInitialize)(this.grdPhrases)).EndInit();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
 		#endregion
 
 		private System.Windows.Forms.DataGridView grdPhrases;
-		private System.Windows.Forms.Label labelPhrase;
 	}
 }

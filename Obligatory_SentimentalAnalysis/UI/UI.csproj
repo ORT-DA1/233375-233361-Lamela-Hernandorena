@@ -108,6 +108,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="ReportAnalysisPhrase.resx">
       <DependentUpon>ReportAnalysisPhrase.cs</DependentUpon>
@@ -134,6 +135,22 @@
       <Project>{f462043c-ac14-4681-918c-b936247167fe}</Project>
       <Name>BusinessLogic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\AgregarAlarma.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AgregarEntidades.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MenuPrincipal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AgregarFrase.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AnalisisDeFrase.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
