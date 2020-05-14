@@ -29,9 +29,7 @@ namespace UI
 		{
 			cmbEntities.DataSource = generalManagement.EntityManagement.AllEntities;
 		}
-
-
-
+		
 		private void RefreshGridAlarms()
 		{
 			grdAlarms.DataSource = generalManagement.AlarmManagement.allAlarms;
@@ -130,6 +128,8 @@ namespace UI
 			CleanRadioButtons();
 			textBoxQuantityPost.Text = "";
 			textBoxQuantityTime.Text = "";
+			labelError.Text = "";
+			labelError.Visible = true; 
 		}
 
 		private void CleanRadioButtons()
@@ -144,24 +144,29 @@ namespace UI
 		{
 			if (cmbEntities.SelectedIndex == -1)
 			{
-				MessageBox.Show("Error. Debe seleccionar una entidad");
+				labelError.Visible = true;
+				labelError.Text = "Error. Debe seleccionar una entidad"; 
 			}
 			else if (!IsCheckedTypeOfAlarm())
 			{
-				MessageBox.Show("Error. Debe seleccionar un tipo de alarma");
+				labelError.Visible = true;
+				labelError.Text = "Error. Debe seleccionar un tipo de alarma"; 
 
 			}
 			else if (!IsCheckedQuantityTime())
 			{
-				MessageBox.Show("Error. Debe seleccionar dias u horas.");
+				labelError.Visible = true;
+				labelError.Text = "Error. Debe seleccionar dias u horas."; 
 			}
 			else if (textBoxQuantityPost.Text.Equals(""))
 			{
-				MessageBox.Show("Error. Debe seleccionar la cantidad de posts.");
+				labelError.Visible = true;
+				labelError.Text = "Error. Debe seleccionar la cantidad de posts."; 
 			}
 			else if (textBoxQuantityTime.Text.Equals(""))
 			{
-				MessageBox.Show("Error. Debe seleccionar un plazo de tiempo.");
+				labelError.Visible = true;
+				labelError.Text = "Error. Debe seleccionar un plazo de tiempo."; 
 			}
 			else
 			{
@@ -175,9 +180,10 @@ namespace UI
 				}
 				catch (AlarmManagementException exc)
 				{
-					MessageBox.Show(exc.Message);
+					labelError.Visible = true;
+					labelError.Text = exc.Message; 
 				}
-				catch (Exception exc)
+				catch (Exception)
 				{
 					MessageBox.Show("Error interno en el sistema");
 				}

@@ -25,31 +25,30 @@ namespace UI
 
 		private void btnAgregar_Click(object sender, EventArgs e)
 		{
-
 			try
 			{
 				AddPhraseUI(); 
 			}
 			catch (PhraseManagementException exp)
 			{
-				MessageBox.Show(exp.Message); 
+				labelError.Visible = true;
+				labelError.Text = exp.Message; 
 			}
-			catch(Exception exp2)
+			catch(Exception)
 			{
 				MessageBox.Show("Error interno del sistema."); 
 			}
-			
 		}
 
 		private void AddPhraseUI()
 		{
-
 			string phraseText = textBoxPhrase.Text;
 			DateTime phraseDate = dateTimePickerPhraseDate.Value;
 
 			if (dateTimePickerPhraseDate.Value== null)
 			{
-				MessageBox.Show("Debe seleccionar la fecha de la frase");
+				labelError.Visible = true;
+				labelError.Text = "Debe seleccionar la fecha de la frase"; 
 			}
 
 			Phrase phrase = new Phrase()
@@ -68,6 +67,8 @@ namespace UI
 		private void DeleteText()
 		{
 			textBoxPhrase.Text = "";
+			labelError.Visible = false;
+			labelError.Text = ""; 
 		}
 
 	}

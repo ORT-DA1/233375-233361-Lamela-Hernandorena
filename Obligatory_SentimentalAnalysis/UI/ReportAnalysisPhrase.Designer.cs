@@ -36,23 +36,23 @@
 			// 
 			this.grdPhrases.BackgroundColor = System.Drawing.SystemColors.Control;
 			this.grdPhrases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.grdPhrases.Location = new System.Drawing.Point(3, 96);
-			this.grdPhrases.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.grdPhrases.Location = new System.Drawing.Point(2, 78);
+			this.grdPhrases.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.grdPhrases.Name = "grdPhrases";
 			this.grdPhrases.ReadOnly = true;
 			this.grdPhrases.RowTemplate.Height = 24;
-			this.grdPhrases.Size = new System.Drawing.Size(600, 542);
-			this.grdPhrases.TabIndex = 0;
+			this.grdPhrases.Size = new System.Drawing.Size(450, 440);
+			this.grdPhrases.TabIndex = 1;
 			// 
 			// ReportAnalysisPhrase
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackgroundImage = global::UI.Properties.Resources.AnalisisDeFrase1;
 			this.Controls.Add(this.grdPhrases);
-			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.Name = "ReportAnalysisPhrase";
-			this.Size = new System.Drawing.Size(613, 785);
+			this.Size = new System.Drawing.Size(460, 638);
 			((System.ComponentModel.ISupportInitialize)(this.grdPhrases)).EndInit();
 			this.ResumeLayout(false);
 

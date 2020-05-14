@@ -56,7 +56,7 @@ namespace UI
 				    grdPhrases.Columns[i].Name = "Entidad";
 				}
 
-				if (str == "TypePhrase")
+				if (str == "PhraseType")
 				{
 					grdPhrases.Columns[i].HeaderText = "Tipo de frase";
 					grdPhrases.Columns[i].Name = "Tipo de frase";

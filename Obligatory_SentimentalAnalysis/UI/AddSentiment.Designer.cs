@@ -36,16 +36,17 @@ namespace UI
 			this.btnDelete = new System.Windows.Forms.Button();
 			this.radioButtonNegative = new System.Windows.Forms.RadioButton();
 			this.radioButtonPositive = new System.Windows.Forms.RadioButton();
+			this.groupBoxTypeSentiment = new System.Windows.Forms.GroupBox();
+			this.labelError = new System.Windows.Forms.Label();
+			this.groupBoxTypeSentiment.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// textBoxSentiment
 			// 
-			this.textBoxSentiment.Location = new System.Drawing.Point(232, 91);
-			this.textBoxSentiment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.textBoxSentiment.Location = new System.Drawing.Point(174, 74);
 			this.textBoxSentiment.Name = "textBoxSentiment";
-			this.textBoxSentiment.Size = new System.Drawing.Size(365, 22);
-			this.textBoxSentiment.TabIndex = 2;
-			this.textBoxSentiment.TextChanged += new System.EventHandler(this.TextBoxSentiment_TextChanged);
+			this.textBoxSentiment.Size = new System.Drawing.Size(275, 20);
+			this.textBoxSentiment.TabIndex = 1;
 			// 
 			// btnAdd
 			// 
@@ -55,11 +56,10 @@ namespace UI
 			this.btnAdd.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
 			this.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 			this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnAdd.Location = new System.Drawing.Point(205, 226);
-			this.btnAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnAdd.Location = new System.Drawing.Point(154, 184);
 			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(200, 38);
-			this.btnAdd.TabIndex = 3;
+			this.btnAdd.Size = new System.Drawing.Size(150, 31);
+			this.btnAdd.TabIndex = 5;
 			this.btnAdd.UseVisualStyleBackColor = false;
 			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
 			// 
@@ -69,13 +69,10 @@ namespace UI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.listBoxSentiment.FormattingEnabled = true;
-			this.listBoxSentiment.ItemHeight = 16;
-			this.listBoxSentiment.Location = new System.Drawing.Point(180, 372);
-			this.listBoxSentiment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.listBoxSentiment.Location = new System.Drawing.Point(135, 302);
 			this.listBoxSentiment.Name = "listBoxSentiment";
-			this.listBoxSentiment.Size = new System.Drawing.Size(267, 244);
-			this.listBoxSentiment.TabIndex = 4;
-			this.listBoxSentiment.SelectedIndexChanged += new System.EventHandler(this.listBoxSentiment_SelectedIndexChanged);
+			this.listBoxSentiment.Size = new System.Drawing.Size(201, 199);
+			this.listBoxSentiment.TabIndex = 6;
 			// 
 			// btnDelete
 			// 
@@ -85,11 +82,10 @@ namespace UI
 			this.btnDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
 			this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 			this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnDelete.Location = new System.Drawing.Point(205, 662);
-			this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnDelete.Location = new System.Drawing.Point(154, 538);
 			this.btnDelete.Name = "btnDelete";
-			this.btnDelete.Size = new System.Drawing.Size(211, 41);
-			this.btnDelete.TabIndex = 5;
+			this.btnDelete.Size = new System.Drawing.Size(158, 33);
+			this.btnDelete.TabIndex = 7;
 			this.btnDelete.UseVisualStyleBackColor = false;
 			this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
 			// 
@@ -97,12 +93,10 @@ namespace UI
 			// 
 			this.radioButtonNegative.AutoSize = true;
 			this.radioButtonNegative.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-			this.radioButtonNegative.Location = new System.Drawing.Point(460, 155);
-			this.radioButtonNegative.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.radioButtonNegative.Location = new System.Drawing.Point(165, 9);
 			this.radioButtonNegative.Name = "radioButtonNegative";
-			this.radioButtonNegative.Size = new System.Drawing.Size(85, 21);
-			this.radioButtonNegative.TabIndex = 8;
-			this.radioButtonNegative.TabStop = true;
+			this.radioButtonNegative.Size = new System.Drawing.Size(68, 17);
+			this.radioButtonNegative.TabIndex = 4;
 			this.radioButtonNegative.Text = "Negativo";
 			this.radioButtonNegative.UseVisualStyleBackColor = false;
 			// 
@@ -110,31 +104,53 @@ namespace UI
 			// 
 			this.radioButtonPositive.AutoSize = true;
 			this.radioButtonPositive.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-			this.radioButtonPositive.Location = new System.Drawing.Point(252, 155);
-			this.radioButtonPositive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.radioButtonPositive.Checked = true;
+			this.radioButtonPositive.Location = new System.Drawing.Point(20, 9);
 			this.radioButtonPositive.Name = "radioButtonPositive";
-			this.radioButtonPositive.Size = new System.Drawing.Size(78, 21);
-			this.radioButtonPositive.TabIndex = 9;
+			this.radioButtonPositive.Size = new System.Drawing.Size(62, 17);
+			this.radioButtonPositive.TabIndex = 3;
 			this.radioButtonPositive.TabStop = true;
 			this.radioButtonPositive.Text = "Positivo";
 			this.radioButtonPositive.UseVisualStyleBackColor = false;
 			// 
+			// groupBoxTypeSentiment
+			// 
+			this.groupBoxTypeSentiment.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+			this.groupBoxTypeSentiment.Controls.Add(this.radioButtonNegative);
+			this.groupBoxTypeSentiment.Controls.Add(this.radioButtonPositive);
+			this.groupBoxTypeSentiment.Location = new System.Drawing.Point(165, 122);
+			this.groupBoxTypeSentiment.Name = "groupBoxTypeSentiment";
+			this.groupBoxTypeSentiment.Size = new System.Drawing.Size(249, 26);
+			this.groupBoxTypeSentiment.TabIndex = 2;
+			this.groupBoxTypeSentiment.TabStop = false;
+			// 
+			// labelError
+			// 
+			this.labelError.AutoSize = true;
+			this.labelError.ForeColor = System.Drawing.Color.Red;
+			this.labelError.Location = new System.Drawing.Point(162, 168);
+			this.labelError.Name = "labelError";
+			this.labelError.Size = new System.Drawing.Size(28, 13);
+			this.labelError.TabIndex = 8;
+			this.labelError.Visible = false;
+			// 
 			// AddSentiment
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.BackgroundImage = global::UI.Properties.Resources.AgregarSentimientos;
-			this.Controls.Add(this.radioButtonPositive);
-			this.Controls.Add(this.radioButtonNegative);
+			this.Controls.Add(this.labelError);
+			this.Controls.Add(this.groupBoxTypeSentiment);
 			this.Controls.Add(this.btnDelete);
 			this.Controls.Add(this.listBoxSentiment);
 			this.Controls.Add(this.btnAdd);
 			this.Controls.Add(this.textBoxSentiment);
-			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "AddSentiment";
-			this.Size = new System.Drawing.Size(621, 785);
-			this.Load += new System.EventHandler(this.AddSentiment_Load);
+			this.Size = new System.Drawing.Size(466, 638);
+			this.groupBoxTypeSentiment.ResumeLayout(false);
+			this.groupBoxTypeSentiment.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -147,5 +163,7 @@ namespace UI
 		private System.Windows.Forms.Button btnDelete;
 		private System.Windows.Forms.RadioButton radioButtonNegative;
 		private System.Windows.Forms.RadioButton radioButtonPositive;
+		private System.Windows.Forms.GroupBox groupBoxTypeSentiment;
+		private System.Windows.Forms.Label labelError;
 	}
 }

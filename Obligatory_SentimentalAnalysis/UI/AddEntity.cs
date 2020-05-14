@@ -23,33 +23,11 @@ namespace UI
 			DisplayButton();
 		}
 
-		private void AddEntity_Load(object sender, EventArgs e)
-		{
-
-		}
-
-		private void lblAddSentiment_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void label1_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void textBoxEntity_TextChanged(object sender, EventArgs e)
-		{
-
-		}
-
 		private void InitializeListOfEntities()
 		{
 			listBoxEntities.DataSource = generalManagement.EntityManagement.AllEntities;
 		}
-
-
-
+		
 		private void DisplayButton()
 		{
 			if (generalManagement.EntityManagement.AllEntities.Length > 0)
@@ -75,9 +53,10 @@ namespace UI
 			}
 			catch (EntityManagementException ex)
 			{
-				MessageBox.Show(ex.Message);
+				labelError.Visible = true;
+				labelError.Text = ex.Message; 
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				MessageBox.Show("Error interno del sistema");
 			}
@@ -95,13 +74,16 @@ namespace UI
 		private void DeleteText()
 		{
 			textBoxEntity.Text = "";
+			labelError.Visible = false;
+			labelError.Text = ""; 
 		}
 
 		private void btnDelete_Click(object sender, EventArgs e)
 		{
 			if (this.listBoxEntities.SelectedIndex == -1)
 			{
-				MessageBox.Show("Seleccione una entidad a eliminar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				labelError.Visible = true;
+				labelError.Text = "Error seleccione una entidad a eliminar"; 
 			}
 			else
 			{

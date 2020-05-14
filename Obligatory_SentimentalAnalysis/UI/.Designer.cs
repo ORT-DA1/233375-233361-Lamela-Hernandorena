@@ -49,10 +49,10 @@ namespace UI
 			this.btnAddSentiment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 			this.btnAddSentiment.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
 			this.btnAddSentiment.Location = new System.Drawing.Point(11, 264);
-			this.btnAddSentiment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.btnAddSentiment.Margin = new System.Windows.Forms.Padding(2);
 			this.btnAddSentiment.Name = "btnAddSentiment";
 			this.btnAddSentiment.Size = new System.Drawing.Size(284, 54);
-			this.btnAddSentiment.TabIndex = 5;
+			this.btnAddSentiment.TabIndex = 1;
 			this.btnAddSentiment.UseVisualStyleBackColor = false;
 			this.btnAddSentiment.Click += new System.EventHandler(this.btnAddSentiment_Click);
 			// 
@@ -65,10 +65,10 @@ namespace UI
 			this.btnAddEntity.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 			this.btnAddEntity.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
 			this.btnAddEntity.Location = new System.Drawing.Point(11, 334);
-			this.btnAddEntity.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.btnAddEntity.Margin = new System.Windows.Forms.Padding(2);
 			this.btnAddEntity.Name = "btnAddEntity";
 			this.btnAddEntity.Size = new System.Drawing.Size(284, 53);
-			this.btnAddEntity.TabIndex = 6;
+			this.btnAddEntity.TabIndex = 2;
 			this.btnAddEntity.UseVisualStyleBackColor = false;
 			this.btnAddEntity.Click += new System.EventHandler(this.btnAddEntity_Click);
 			// 
@@ -83,7 +83,7 @@ namespace UI
 			this.btnAddPhrase.Location = new System.Drawing.Point(11, 419);
 			this.btnAddPhrase.Name = "btnAddPhrase";
 			this.btnAddPhrase.Size = new System.Drawing.Size(284, 51);
-			this.btnAddPhrase.TabIndex = 7;
+			this.btnAddPhrase.TabIndex = 3;
 			this.btnAddPhrase.UseVisualStyleBackColor = false;
 			this.btnAddPhrase.Click += new System.EventHandler(this.btnAddPhrase_Click);
 			// 
@@ -96,10 +96,10 @@ namespace UI
 			this.btnAddAlarm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 			this.btnAddAlarm.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
 			this.btnAddAlarm.Location = new System.Drawing.Point(11, 498);
-			this.btnAddAlarm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.btnAddAlarm.Margin = new System.Windows.Forms.Padding(2);
 			this.btnAddAlarm.Name = "btnAddAlarm";
 			this.btnAddAlarm.Size = new System.Drawing.Size(284, 49);
-			this.btnAddAlarm.TabIndex = 8;
+			this.btnAddAlarm.TabIndex = 4;
 			this.btnAddAlarm.UseVisualStyleBackColor = false;
 			this.btnAddAlarm.Click += new System.EventHandler(this.BtnAddAlarm_Click);
 			// 
@@ -107,7 +107,7 @@ namespace UI
 			// 
 			this.panelMain.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.panelMain.Location = new System.Drawing.Point(317, 0);
-			this.panelMain.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.panelMain.Margin = new System.Windows.Forms.Padding(2);
 			this.panelMain.Name = "panelMain";
 			this.panelMain.Size = new System.Drawing.Size(460, 638);
 			this.panelMain.TabIndex = 9;
@@ -121,10 +121,10 @@ namespace UI
 			this.btnReport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 			this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
 			this.btnReport.Location = new System.Drawing.Point(11, 572);
-			this.btnReport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.btnReport.Margin = new System.Windows.Forms.Padding(2);
 			this.btnReport.Name = "btnReport";
 			this.btnReport.Size = new System.Drawing.Size(284, 46);
-			this.btnReport.TabIndex = 10;
+			this.btnReport.TabIndex = 5;
 			this.btnReport.UseVisualStyleBackColor = false;
 			this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
 			// 
@@ -140,7 +140,7 @@ namespace UI
 			this.btnExit.Location = new System.Drawing.Point(12, 37);
 			this.btnExit.Name = "btnExit";
 			this.btnExit.Size = new System.Drawing.Size(58, 52);
-			this.btnExit.TabIndex = 11;
+			this.btnExit.TabIndex = 6;
 			this.btnExit.UseVisualStyleBackColor = false;
 			this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
 			// 
@@ -158,7 +158,7 @@ namespace UI
 			this.Controls.Add(this.btnAddPhrase);
 			this.Controls.Add(this.btnAddEntity);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.Margin = new System.Windows.Forms.Padding(2);
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "MainMenu";

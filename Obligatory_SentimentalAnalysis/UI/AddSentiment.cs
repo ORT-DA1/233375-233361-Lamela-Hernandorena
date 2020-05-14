@@ -30,7 +30,8 @@ namespace UI
 
 			if (isChecked().Equals(Sentiment.TypeSentiment.Neutral))
 			{
-				MessageBox.Show("Debe seleccionar si el tipo de sentimiento."); 
+				labelError.Visible = true;
+				labelError.Text ="Debe seleccionar el tipo de sentimiento."; 
 			}
 			else
 			{
@@ -51,11 +52,13 @@ namespace UI
 				}
 				catch (TextManagementException exc)
 				{
-					MessageBox.Show(exc.Message); 
+					labelError.Visible = true; 
+					labelError.Text = exc.Message; 
 				}
 				catch(ArgumentNullException exp2)
 				{
-					MessageBox.Show(exp2.Message); 
+					labelError.Visible = true;
+					labelError.Text = exp2.Message; 
 				}
 			}
 			
@@ -91,7 +94,9 @@ namespace UI
 		{
 			textBoxSentiment.Text = "";
 			radioButtonNegative.Checked = false;
-			radioButtonPositive.Checked = false; 
+			radioButtonPositive.Checked = false;
+			labelError.Text = "";
+			labelError.Visible = false; 
 		}
 
 		private void DisplayButton()
@@ -111,7 +116,8 @@ namespace UI
 		{
 			if (this.listBoxSentiment.SelectedIndex == -1)
 			{
-				MessageBox.Show("Seleccione un sentimiento a eliminar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				labelError.Visible = true;
+				labelError.Text = "Error Seleccione un sentimiento a eliminar"; 
 			}
 			else
 			{
@@ -122,20 +128,6 @@ namespace UI
 				initializeListOfSentiment(); 
 			}
 		}
-
-		private void listBoxSentiment_SelectedIndexChanged(object sender, EventArgs e)
-		{
-
-		}
-
-		private void AddSentiment_Load(object sender, EventArgs e)
-		{
-
-		}
-
-        private void TextBoxSentiment_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+		
     }
 }
