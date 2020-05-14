@@ -37,7 +37,7 @@ namespace Test
 				IsInHours = false
 			};
 			management.AddAlarm(alarm);
-			CollectionAssert.Contains(management.allAlarms, alarm);
+			CollectionAssert.Contains(management.AllAlarms, alarm);
 		}
 
 		[TestMethod]
@@ -88,7 +88,7 @@ namespace Test
 			};
 			management.AddAlarm(alarm);
 			management.AddAlarm(alarm2);
-			Assert.IsTrue(management.allAlarms.Length == 2);
+			Assert.IsTrue(management.AllAlarms.Length == 2);
 		}
 
 		[TestMethod]
@@ -107,7 +107,7 @@ namespace Test
 				IsInHours = false
 			};
 			management.AddAlarm(alarm);
-			Assert.AreEqual(false, management.allAlarms[0].Active);
+			Assert.AreEqual(false, management.AllAlarms[0].Active);
 		}
 
 		[TestMethod]
@@ -126,7 +126,7 @@ namespace Test
 				IsInHours= false
 			};
 			management.AddAlarm(alarm);
-			Assert.AreEqual(Alarm.Type.Positive, management.allAlarms[0].TypeOfAlarm);
+			Assert.AreEqual(Alarm.Type.Positive, management.AllAlarms[0].TypeOfAlarm);
 		}
 
 

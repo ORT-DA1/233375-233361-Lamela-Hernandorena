@@ -32,7 +32,7 @@ namespace BusinessLogic
 			
 			string textOfPhrase = Utilities.DeleteSpaces(phrase.TextPhrase.ToLower()); 
 			         //Tipo de variable de los elementos de la lista, el sentiment en minuscula guardo los elementos que estoy recorriendo, y luego va in y la list que voy a recorrer.
-			foreach (Sentiment sentiment in SentimentManagement.SentimentList)
+			foreach (Sentiment sentiment in SentimentManagement.AllSentiments)
 			{
 				string sentimentOfList = Utilities.DeleteSpaces(sentiment.SentimientText.ToLower()); // este es el sentimiento que estoy agarrando en la recorrida
 
@@ -51,7 +51,7 @@ namespace BusinessLogic
 				}
 			}
 			
-			foreach (Entity entity in EntityManagement.EntityList)
+			foreach (Entity entity in EntityManagement.AllEntities)
 			{
 				string entityOfList = Utilities.DeleteSpaces(entity.EntityName.ToLower()); 
 
@@ -93,14 +93,14 @@ namespace BusinessLogic
 		public void UpdateAlarms(ITimeProvider provider)
 		{
 
-			if (PhraseManagement.PhraseList.Count() > 0)
+			if (PhraseManagement.AllPhrases.Length > 0)
 			{
 				DateTime minDate = provider.Now();
 				int counterPost = 0;
-				foreach (Alarm a in AlarmManagement.AlarmList)
+				foreach (Alarm a in AlarmManagement.AllAlarms)
 				{
 					counterPost = 0;
-					foreach (Phrase p in PhraseManagement.PhraseList)
+					foreach (Phrase p in PhraseManagement.AllPhrases)
 					{
 						if (a.IsInHours)
 						{

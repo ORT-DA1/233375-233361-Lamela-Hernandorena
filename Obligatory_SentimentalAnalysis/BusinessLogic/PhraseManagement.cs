@@ -52,13 +52,5 @@ namespace BusinessLogic
 		{
 			get { return phraseList.ToArray();  }
 		}
-
-
-		public IEnumerable<Phrase> PhraseList
-		{
-			get { return phraseList; }
-		}
-
-
 	}
 }
