@@ -27,22 +27,22 @@ namespace BusinessLogic
 		{
 			if (Utilities.IsNegativeQuantity(alarm.QuantityPost))
 			{
-				throw new AlarmManagementException(MessagesExceptions.ERROR_IS_NEGATIVE_POSTS); 
+				throw new AlarmManagementException(MessagesExceptions.ErrorIsNegativePosts); 
 			}
 
 			if (ExistAlarm(alarm))
 			{
-				throw new AlarmManagementException(MessagesExceptions.ERROR_IS_CONTAINED); 
+				throw new AlarmManagementException(MessagesExceptions.ErrorIsContained); 
 			}
 
 			if (AlarmEntityIsNull(alarm))
             {
-                throw new AlarmManagementException(MessagesExceptions.ERROR_IS_NULL); 
+                throw new AlarmManagementException(MessagesExceptions.ErrorIsNull); 
             }
 
             if (Utilities.IsNegativeQuantity(alarm.QuantityTime))
             {
-                throw new AlarmManagementException(MessagesExceptions.ERROR_IS_NEGATIVE_TIME); 
+                throw new AlarmManagementException(MessagesExceptions.ErrorIsNegativeTime); 
             }
 		}
 
