@@ -1,9 +1,5 @@
 ﻿using Domain;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -16,7 +12,6 @@ namespace BusinessLogic
 
 		public GeneralManagement()
 		{
-			
 			EntityManagement = new EntityManagement();
 			SentimentManagement = new SentimentManagement();
 			AlarmManagement = new AlarmManagement();
@@ -27,15 +22,11 @@ namespace BusinessLogic
 		{
 			int positiveCounter = 0;
 			int negetiveCounter = 0;
-			int entityCounter = 0;
-			Entity entityFound = new Entity();
-			
 			string textOfPhrase = Utilities.DeleteSpaces(phrase.TextPhrase.ToLower()); 
-			         //Tipo de variable de los elementos de la lista, el sentiment en minuscula guardo los elementos que estoy recorriendo, y luego va in y la list que voy a recorrer.
+
 			foreach (Sentiment sentiment in SentimentManagement.AllSentiments)
 			{
-				string sentimentOfList = Utilities.DeleteSpaces(sentiment.SentimientText.ToLower()); // este es el sentimiento que estoy agarrando en la recorrida
-
+				string sentimentOfList = Utilities.DeleteSpaces(sentiment.SentimientText.ToLower());
 
 				if (textOfPhrase.Contains(sentimentOfList))
 				{
@@ -47,32 +38,47 @@ namespace BusinessLogic
 					{
 						negetiveCounter++; 
 					}
-					
 				}
 			}
-			
+			Entity entityFound = FindEntity(textOfPhrase); 
+			phrase.Entity = entityFound;
+			phrase.PhraseType = SetTypeOfPhrase(positiveCounter, negetiveCounter);
+			if (IsNotAssociatedEntity(entityFound))
+			{
+				phrase.PhraseType = Phrase.TypePhrase.Neutral;
+			}
+		}
+
+		private Entity FindEntity(string textOfPhrase)
+		{
+			int entityCounter = 0;
+			Entity entityFound = new Entity(); 
+
 			foreach (Entity entity in EntityManagement.AllEntities)
 			{
-				string entityOfList = Utilities.DeleteSpaces(entity.EntityName.ToLower()); 
+				string entityOfList = Utilities.DeleteSpaces(entity.EntityName.ToLower());
 
-				if (textOfPhrase.Contains(entityOfList) && (entityCounter < 1)) //Tiene que entrar con 0 solamente, sino con 1 entra dos veces
+				if (textOfPhrase.Contains(entityOfList) && (entityCounter < 1))
 				{
 					entityCounter++;
 					entityFound = entity; 
 				}
 			}
-			
-			phrase.Entity = entityFound;
-			phrase.PhraseType = SetTypeOfPhrase(positiveCounter, negetiveCounter);
-
-			if (entityFound.EntityName.Equals(""))
-			{
-				phrase.PhraseType = Phrase.TypePhrase.Neutral; 
-			}
+			return entityFound; 
 		}
+
+		private bool IsNotAssociatedEntity(Entity entity)
+		{
+			return entity.EntityName.Equals(""); 
+		}
+		
 
 		private Phrase.TypePhrase SetTypeOfPhrase(int counterPositive, int counterNegative)
 		{
+			const int MinimumQuantityNegativeSentiments = 1;
+			const int MinimumQuantityPositiveSentiments = 1;
+			const int AnyQuantitySentiments = 0; 
+
 			if (counterNegative >= 1 && counterPositive == 0)
 			{
 				return Phrase.TypePhrase.Negative; 
@@ -124,7 +130,6 @@ namespace BusinessLogic
 					}
 				}
 			}
-		}
-		
+		}		
 	}
 }

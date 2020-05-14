@@ -1,15 +1,11 @@
 ﻿using Domain;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks; 
+
 
 namespace BusinessLogic
 {
 	public class Sentiment
 	{
-
 		public enum TypeSentiment { Positive, Neutral, Negative }
 
 		public string SentimientText { get; set;  }
@@ -39,7 +35,9 @@ namespace BusinessLogic
 				else
 				{
 					Sentiment sentiment = (Sentiment)obj;
-					return string.Equals(Utilities.DeleteSpaces(SentimientText.Trim()), Utilities.DeleteSpaces(sentiment.SentimientText.Trim()), StringComparison.OrdinalIgnoreCase) && SentimentType.Equals(sentiment.SentimentType);
+					return string.Equals(Utilities.DeleteSpaces(SentimientText.Trim()), 
+						Utilities.DeleteSpaces(sentiment.SentimientText.Trim()), 
+						StringComparison.OrdinalIgnoreCase) && SentimentType.Equals(sentiment.SentimentType);
 				}
 			}
 		}

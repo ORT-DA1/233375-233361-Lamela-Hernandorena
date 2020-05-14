@@ -1,10 +1,6 @@
 ﻿using System;
 using Domain; 
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BusinessLogic
 {
@@ -22,7 +18,6 @@ namespace BusinessLogic
 			return EntityName;
 		}
 
-
 		public override bool Equals(object obj)
 		{
 			if (obj == null)
@@ -36,7 +31,9 @@ namespace BusinessLogic
 			else
 			{
 				Entity entity = (Entity)obj;
-				return string.Equals(Utilities.DeleteSpaces(EntityName.Trim()), Utilities.DeleteSpaces(entity.EntityName.Trim()), StringComparison.OrdinalIgnoreCase);
+				return string.Equals(Utilities.DeleteSpaces(EntityName.Trim()), 
+					Utilities.DeleteSpaces(entity.EntityName.Trim()), 
+					StringComparison.OrdinalIgnoreCase);
 			}
 		}
 	}

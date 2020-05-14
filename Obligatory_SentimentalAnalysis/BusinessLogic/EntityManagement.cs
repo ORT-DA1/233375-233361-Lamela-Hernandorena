@@ -2,9 +2,7 @@
 using Domain;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BusinessLogic
 {
@@ -54,7 +52,6 @@ namespace BusinessLogic
 			VerifyFormatDelete(entity);
 			entityList.Remove(entity);
 		}
-
 
 		private void VerifyFormatDelete(Entity entity)
 		{

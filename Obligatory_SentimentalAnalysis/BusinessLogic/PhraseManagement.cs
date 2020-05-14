@@ -2,9 +2,7 @@
 using Domain;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BusinessLogic
 {
@@ -33,6 +31,7 @@ namespace BusinessLogic
 
 		private void VerifyFormatAdd(Phrase phrase)
 		{
+			const int DaysOfTheYear = 365; 
 			if (String.IsNullOrEmpty(phrase.TextPhrase))
 			{
 				throw new PhraseManagementException(MessagesExceptions.ERROR_IS_EMPTY); 
@@ -42,7 +41,7 @@ namespace BusinessLogic
                 throw new PhraseManagementException(MessagesExceptions.ERROR_IS_AFTER_TODAY);
             }
 			
-			if ((DateTime.Now - phrase.PhraseDate).Days > 365) 
+			if ((DateTime.Now - phrase.PhraseDate).Days > DaysOfTheYear) 
 			{
 				throw new PhraseManagementException(MessagesExceptions.ERROR_IS_ONE_YEAR_BEFORE); 
 			}
