@@ -85,10 +85,5 @@ namespace BusinessLogic
 		{
 			get { return sentimentList.ToArray();  }
 		}
-
-		public IEnumerable<Sentiment> SentimentList
-		{
-			get { return sentimentList;  }
-		}
     }
 }

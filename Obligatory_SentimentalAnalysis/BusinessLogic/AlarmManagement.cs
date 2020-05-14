@@ -57,16 +57,9 @@ namespace BusinessLogic
 		}
 
 
-		public Alarm[] allAlarms
+		public Alarm[] AllAlarms
 		{
 			get { return alarmList.ToArray(); }
 		}
-
-		public IEnumerable<Alarm> AlarmList
-		{
-			get { return alarmList; }
-		}
-
-
 	}
 }

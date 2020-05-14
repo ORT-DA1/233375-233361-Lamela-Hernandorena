@@ -32,7 +32,7 @@ namespace UI
 		
 		private void RefreshGridAlarms()
 		{
-			grdAlarms.DataSource = generalManagement.AlarmManagement.allAlarms;
+			grdAlarms.DataSource = generalManagement.AlarmManagement.AllAlarms;
 			//ChangeValuesOfGrid();
 		}
 

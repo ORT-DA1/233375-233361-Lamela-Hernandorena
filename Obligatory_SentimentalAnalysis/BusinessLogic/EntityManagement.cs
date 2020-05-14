@@ -68,11 +68,5 @@ namespace BusinessLogic
 		{
 			get { return entityList.ToArray(); }
 		}
-
-
-		public IEnumerable<Entity> EntityList
-		{
-			get { return entityList;  }
-		}
 	}
 }
