@@ -91,7 +91,7 @@ namespace Test
 		}
 
 		[TestMethod]
-		public void VerifyAlarmState()
+		public void VerifyAlarm()
 		{
 			Entity entity = new Entity()
 			{
@@ -106,62 +106,16 @@ namespace Test
 				IsInHours = false
 			};
 			management.AddAlarm(alarm);
-			Assert.AreEqual(false, management.AllAlarms[0].Active);
-		}
-
-		[TestMethod]
-		public void VerifyTypeAlarm()
-		{
-			Entity entity = new Entity()
-			{
-				EntityName = "Pedidos ya"
-			};
-			Alarm alarm = new Alarm()
-			{
-				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
-				QuantityPost = 150,
-				QuantityTime = 30,
-				IsInHours= false
-			};
-			management.AddAlarm(alarm);
-			Assert.AreEqual(Alarm.Type.Positive, management.AllAlarms[0].TypeOfAlarm);
+			CollectionAssert.Contains(management.AllAlarms, alarm);
 		}
 
 
-		[TestMethod]
-		[ExpectedException(typeof(AlarmManagementException))]
-		public void AddRepeteadAlarm()
-		{
-			Entity entity = new Entity()
-			{
-				EntityName = "Pedidos ya"
-			};
-			Alarm alarm = new Alarm()
-			{
-				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
-				QuantityPost = 90,
-				QuantityTime = 15,
-				IsInHours = false
-			};
-			Alarm alarm2 = new Alarm()
-			{
-				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
-				QuantityPost = 90,
-				QuantityTime = 15,
-				IsInHours = false
-			}; 
-			management.AddAlarm(alarm);
-			management.AddAlarm(alarm2);
-		}
 
 		[TestMethod]
 		[ExpectedException(typeof(AlarmManagementException))]
 		public void CreateInvalidAlarm2()
 		{
-			Entity entity = null;
+			Entity entity = new Entity();
 			Alarm alarm = new Alarm()
 			{
 				Entity = entity,

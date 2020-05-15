@@ -98,38 +98,14 @@ namespace BusinessLogic
 
 		public void UpdateAlarms(ITimeProvider provider)
 		{
-
 			if (PhraseManagement.AllPhrases.Length > 0)
 			{
 				DateTime minDate = provider.Now();
-				int counterPost = 0;
-				foreach (Alarm a in AlarmManagement.AllAlarms)
+				foreach (IAlarm a in AlarmManagement.AllAlarms)
 				{
-					counterPost = 0;
-					foreach (Phrase p in PhraseManagement.AllPhrases)
-					{
-						if (a.IsInHours)
-						{
-							minDate = provider.Now().AddHours(-a.QuantityTime);
-						}
-						else
-						{
-							minDate = provider.Now().AddDays(-a.QuantityTime);
-						}
-						if (p.PhraseDate >= minDate)
-						{
-							if (p.Entity.Equals(a.Entity) && p.PhraseType.ToString().Equals(a.TypeOfAlarm.ToString()))
-							{
-								counterPost++;
-							}
-						}
-					}
-					if (counterPost >= a.QuantityPost)
-					{
-						a.Active = true;
-					}
+					a.UpdateState(PhraseManagement.AllPhrases, minDate);
 				}
 			}
-		}		
+		}
 	}
 }

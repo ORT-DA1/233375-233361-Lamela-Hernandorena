@@ -7,53 +7,20 @@ namespace BusinessLogic
 {
 	public class AlarmManagement
 	{
-		private List<Alarm> alarmList;
+		private List<IAlarm> alarmList;
 
 		public AlarmManagement()
 		{
-			alarmList = new List<Alarm>(); 
+			alarmList = new List<IAlarm>(); 
 		}
 
-		public void AddAlarm(Alarm alarm)
+		public void AddAlarm(IAlarm alarm)
 		{
-			VerifyFormatAlarm(alarm);
+			alarm.VerifyFormatAlarm();
 			alarmList.Add(alarm); 
 		}
 
-		private void VerifyFormatAlarm(Alarm alarm)
-		{
-			if (Utilities.IsNegativeQuantity(alarm.QuantityPost))
-			{
-				throw new AlarmManagementException(MessagesExceptions.ErrorIsNegativePosts); 
-			}
-
-			if (ExistAlarm(alarm))
-			{
-				throw new AlarmManagementException(MessagesExceptions.ErrorIsContained); 
-			}
-
-			if (AlarmEntityIsNull(alarm))
-            {
-                throw new AlarmManagementException(MessagesExceptions.ErrorIsNull); 
-            }
-
-            if (Utilities.IsNegativeQuantity(alarm.QuantityTime))
-            {
-                throw new AlarmManagementException(MessagesExceptions.ErrorIsNegativeTime); 
-            }
-		}
-
-		private bool AlarmEntityIsNull(Alarm alarm)
-		{
-			return alarm.Entity == null;
-		}
-
-		private bool ExistAlarm(Alarm alarm)
-		{
-			return alarmList.Contains(alarm); 
-		}
-
-		public Alarm[] AllAlarms
+		public IAlarm[] AllAlarms
 		{
 			get { return alarmList.ToArray(); }
 		}

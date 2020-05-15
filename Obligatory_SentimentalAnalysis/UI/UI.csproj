@@ -85,6 +85,12 @@
     <Compile Include="ReportAnalysisPhrase.Designer.cs">
       <DependentUpon>ReportAnalysisPhrase.cs</DependentUpon>
     </Compile>
+    <Compile Include="SelectAlarm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SelectAlarm.Designer.cs">
+      <DependentUpon>SelectAlarm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddAlarm.resx">
       <DependentUpon>AddAlarm.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,6 +118,9 @@
     </Compile>
     <EmbeddedResource Include="ReportAnalysisPhrase.resx">
       <DependentUpon>ReportAnalysisPhrase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectAlarm.resx">
+      <DependentUpon>SelectAlarm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

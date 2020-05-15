@@ -144,7 +144,7 @@ namespace Test
 		}
 
 
-		[ExpectedException(typeof(ArgumentNullException))]
+		[ExpectedException(typeof(TextManagementException))]
 		[TestMethod]
 		public void NotAddInvalidadSentimentPositive1()
 		{
@@ -159,7 +159,7 @@ namespace Test
 
 		
 		[TestMethod]
-		[ExpectedException(typeof(ArgumentNullException))]
+		[ExpectedException(typeof(TextManagementException))]
 		public void NotAddInvalidSentimentPositive2()
 		{
 			Sentiment sentiment = new Sentiment()
@@ -260,7 +260,7 @@ namespace Test
 		}
 
 		[TestMethod]
-		[ExpectedException(typeof(ArgumentNullException))]
+		[ExpectedException(typeof(TextManagementException))]
 		public void TryingDeleteEmptySentiment()
 		{
 			Sentiment sentiment = new Sentiment()

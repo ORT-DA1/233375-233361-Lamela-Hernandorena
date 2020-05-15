@@ -13,7 +13,15 @@ namespace UI
 		{
 			InitializeComponent();
 			generalManagement = management;
+			InitializeCalendar(); 
 
+		}
+
+		private void InitializeCalendar()
+		{
+			dateTimePickerPhraseDate.Value = DateTime.Now;
+			dateTimePickerPhraseDate.MinDate = DateTime.Now.AddYears(-1);
+			dateTimePickerPhraseDate.MaxDate = DateTime.Now; 
 		}
 
 		private void btnAgregar_Click(object sender, EventArgs e)

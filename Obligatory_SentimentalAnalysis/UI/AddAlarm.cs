@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using BusinessLogic;
 using BusinessLogicExceptions;
+using Domain;
 
 namespace UI
 {
@@ -14,104 +15,25 @@ namespace UI
 			InitializeComponent();
 			generalManagement = management;
 			InitializeEntities();
-			RefreshGridAlarms();
-			ChangeNameOfColumnGrid();
+			InitializeAlarms(); 
 			DeleteText();
 		}
+
+
 
 		private void InitializeEntities()
 		{
 			cmbEntities.DataSource = generalManagement.EntityManagement.AllEntities;
 		}
-		
-		private void RefreshGridAlarms()
-		{
-			grdAlarms.DataSource = generalManagement.AlarmManagement.AllAlarms;
-			//ChangeValuesOfGrid();
-		}
 
-		private void ChangeNameOfColumnGrid()
+		private void InitializeAlarms()
 		{
-			for (int i = 0; i < grdAlarms.Columns.Count; i++)
+			listBoxAlarms.Items.Clear();
+			foreach(IAlarm alarm in generalManagement.AlarmManagement.AllAlarms)
 			{
-
-				string str = grdAlarms.Columns[i].HeaderText;
-				if (str == "Entity")
-				{
-					grdAlarms.Columns[i].HeaderText = "Entidad";
-					grdAlarms.Columns[i].Name = "Entidad";
-				}
-
-				if (str == "TypeOfAlarm")
-				{
-					grdAlarms.Columns[i].HeaderText = "Tipo de alarma";
-					grdAlarms.Columns[i].Name = "Tipo de alarma";
-				
-				}
-
-				if (str == "QuantityPost")
-				{
-					grdAlarms.Columns[i].HeaderText = "Cantidad de posts";
-					grdAlarms.Columns[i].Name = "Cantidad de posts";
-				}
-
-				if (str == "QuantityTime")
-				{
-					grdAlarms.Columns[i].HeaderText = "Cantidad de tiempo";
-					grdAlarms.Columns[i].Name = "Cantidad de tiempo";
-				}
-
-				if (str == "Active")
-				{
-					grdAlarms.Columns[i].HeaderText = "Estado";
-					grdAlarms.Columns[i].Name = "Estado";
-				}
-
-				if (str == "IsInHours")
-				{
-					grdAlarms.Columns[i].HeaderText = "En horas";
-					grdAlarms.Columns[i].Name = "En horas";
-				}
+				listBoxAlarms.Items.Add(alarm.Show()); 
 			}
 		}
-
-		/*
-
-		private void ChangeValuesOfGrid()
-		{
-			DataGridViewColumn TipoDeAlarma = new DataGridViewColumn();
-
-
-			TipoDeAlarma.Name("Tipo de alarma"); 
-
-			grdAlarms.Columns.Add()
-
-
-			for (int column = 0; column < grdAlarms.Columns.Count; column++)
-			{
-				for (int row = 0; row < grdAlarms.Rows.Count; row++)
-				{
-
-					if (grdAlarms.Columns[column].Name.Equals("Tipo de alarma"))
-					{
-						string typeAlarm = grdAlarms.Rows[row].Cells[column].FormattedValue.ToString();
-
-						if (typeAlarm.Equals("Positive"))
-						{
-							grdAlarms.Rows[row].Cells[column].Value = "Positivo";
-						}
-						else
-						{
-							grdAlarms.Rows[row].Cells[column].Value = "Negativo";
-						}
-
-					}
-				}
-			}
-		}
-
-	*/ 
-
 
 		private void DeleteText()
 		{
@@ -169,8 +91,6 @@ namespace UI
 					AddAlarmUI();
 					MessageBox.Show("Alarma agregada con exito");
 					DeleteText();
-					RefreshGridAlarms();
-
 				}
 				catch (FormatException ex)
 				{
@@ -201,6 +121,7 @@ namespace UI
 				IsInHours = IsInHoursTimeFrame()
 			};
 			generalManagement.AlarmManagement.AddAlarm(alarmToAdd);
+			InitializeAlarms(); 
 		}
 
 		private Alarm.Type TypeOfAlarmChecked()

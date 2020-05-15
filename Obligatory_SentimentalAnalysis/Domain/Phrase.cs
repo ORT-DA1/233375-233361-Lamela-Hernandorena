@@ -16,7 +16,6 @@ namespace BusinessLogic
 		public TypePhrase PhraseType { get; set;  }
 
        
-
         public Phrase ()
         {
           

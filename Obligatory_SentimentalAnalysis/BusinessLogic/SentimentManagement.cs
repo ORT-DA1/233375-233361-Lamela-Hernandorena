@@ -69,9 +69,11 @@ namespace BusinessLogic
 			}
 		}
 
+
+		
 		public void DeleteText(Sentiment sentiment)
 		{
-			VerifyFormatDelete(sentiment); 
+			VerifyFormatDelete(sentiment);
 			sentimentList.Remove(sentiment); 
 		}
 
@@ -79,6 +81,8 @@ namespace BusinessLogic
 		{
 			return sentimentList.Contains(sentiment); 
 		}
+
+
 
 		public Sentiment[] AllSentiments
 		{

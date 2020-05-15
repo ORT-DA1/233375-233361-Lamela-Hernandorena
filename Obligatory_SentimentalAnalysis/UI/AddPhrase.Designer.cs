@@ -64,12 +64,9 @@ namespace UI
 			// 
 			this.dateTimePickerPhraseDate.Location = new System.Drawing.Point(152, 160);
 			this.dateTimePickerPhraseDate.Margin = new System.Windows.Forms.Padding(2);
-			this.dateTimePickerPhraseDate.MaxDate = new System.DateTime(2020, 5, 13, 21, 52, 8, 872);
-			this.dateTimePickerPhraseDate.MinDate = new System.DateTime(2019, 5, 13, 21, 52, 8, 871);
 			this.dateTimePickerPhraseDate.Name = "dateTimePickerPhraseDate";
 			this.dateTimePickerPhraseDate.Size = new System.Drawing.Size(208, 20);
 			this.dateTimePickerPhraseDate.TabIndex = 2;
-			this.dateTimePickerPhraseDate.Value = new System.DateTime(2020, 5, 13, 21, 52, 8, 872);
 			// 
 			// labelError
 			// 

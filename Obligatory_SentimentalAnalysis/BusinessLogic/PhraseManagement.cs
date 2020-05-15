@@ -10,12 +10,10 @@ namespace BusinessLogic
 	{
 		private List<Phrase> phraseList; 
 
-
 		public PhraseManagement()
 		{
 			phraseList = new List<Phrase>(); 
 		}
-
 
 		public void AddPhrase(Phrase phrase)
 		{
@@ -46,7 +44,7 @@ namespace BusinessLogic
 				throw new PhraseManagementException(MessagesExceptions.ErrorIsOneYearBefore); 
 			}
 		}
-		
+
 		public Phrase[] AllPhrases
 		{
 			get { return phraseList.ToArray();  }

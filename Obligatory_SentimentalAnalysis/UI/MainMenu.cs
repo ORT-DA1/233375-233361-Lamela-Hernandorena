@@ -44,8 +44,8 @@ namespace UI
         private void BtnAddAlarm_Click(object sender, EventArgs e)
         {
             panelMain.Controls.Clear();
-            UserControl addAlarm = new AddAlarm (GeneralManagement);
-            panelMain.Controls.Add(addAlarm);
+            UserControl selectAlarm = new SelectAlarm (GeneralManagement);
+            panelMain.Controls.Add(selectAlarm);
         }
 
 		private void btnReport_Click(object sender, EventArgs e)
