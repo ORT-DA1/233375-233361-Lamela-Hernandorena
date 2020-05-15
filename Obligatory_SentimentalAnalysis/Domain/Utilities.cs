@@ -8,7 +8,7 @@ namespace Domain
 		{
 			return quantity <= 0;
 		}
-
+		
 		public static string DeleteSpaces(string text)
 		{
 			while (text.Contains("  "))

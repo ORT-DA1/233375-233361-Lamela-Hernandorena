@@ -40,18 +40,15 @@ namespace UI
 					initializeListOfSentiment(); 
 					DeleteText();
 					DisplayButton(); 
-
-
 				}
 				catch (TextManagementException exc)
 				{
 					labelError.Visible = true; 
 					labelError.Text = exc.Message; 
 				}
-				catch(ArgumentNullException exp2)
+				catch (Exception)
 				{
-					labelError.Visible = true;
-					labelError.Text = exp2.Message; 
+					MessageBox.Show("Error interno del sistema");
 				}
 			}
 			

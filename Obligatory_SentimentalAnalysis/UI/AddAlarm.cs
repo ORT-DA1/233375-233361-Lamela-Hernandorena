@@ -172,6 +172,11 @@ namespace UI
 					RefreshGridAlarms();
 
 				}
+				catch (FormatException ex)
+				{
+					labelError.Text = "El campo debe ser numerico";
+				}
+
 				catch (AlarmManagementException exc)
 				{
 					labelError.Visible = true;

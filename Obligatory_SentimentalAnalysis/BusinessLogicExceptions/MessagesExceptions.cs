@@ -3,13 +3,13 @@ namespace BusinessLogic
 {
 	public class MessagesExceptions
 	{
-		public static string ERROR_IS_CONTAINED = "Error. Ya esta contenido en otro.";
-		public static string ERROR_DONT_EXIST = "Error. No existe.";
-		public static string ERROR_IS_EMPTY = "Error. El texto no puede ser vacio.";
-        public static string ERROR_IS_AFTER_TODAY = "Error. La fecha de la frase no puede ser posterior a la del dia.";
-		public static string ERROR_IS_NEGATIVE_POSTS = "Error. La cantidad de post no puede ser negativa.";
-        public static string ERROR_IS_NEGATIVE_TIME = "Error. El plazo de tiempo no puede ser negativo.";
-        public static string ERROR_IS_NULL = "Error. No trae una entidad.";
-		public static string ERROR_IS_ONE_YEAR_BEFORE = "Error. La fecha de la frase solo puede ser a lo sumo un año menor."; 
+		public static string ErrorIsContained = "Error. Ya esta contenido en otro.";
+		public static string ErrorDontExist = "Error. No existe.";
+		public static string ErrorIsEmpty = "Error. El texto no puede ser vacio.";
+        public static string ErrorIsAfterToday = "Error. La fecha de la frase no puede ser posterior a la del dia.";
+		public static string ErrorIsNegativePosts = "Error. La cantidad de post no puede ser negativa.";
+        public static string ErrorIsNegativeTime = "Error. El plazo de tiempo no puede ser negativo.";
+        public static string ErrorIsNull = "Error. No trae una entidad.";
+		public static string ErrorIsOneYearBefore = "Error. La fecha de la frase solo puede ser a lo sumo un año menor."; 
 	}
 }

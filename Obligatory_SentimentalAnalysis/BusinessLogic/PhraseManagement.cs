@@ -34,16 +34,16 @@ namespace BusinessLogic
 			const int DaysOfTheYear = 365; 
 			if (String.IsNullOrEmpty(phrase.TextPhrase))
 			{
-				throw new PhraseManagementException(MessagesExceptions.ERROR_IS_EMPTY); 
+				throw new PhraseManagementException(MessagesExceptions.ErrorIsEmpty); 
 			}
             if (phrase.PhraseDate > DateTime.Now)
             {
-                throw new PhraseManagementException(MessagesExceptions.ERROR_IS_AFTER_TODAY);
+                throw new PhraseManagementException(MessagesExceptions.ErrorIsAfterToday);
             }
 			
 			if ((DateTime.Now - phrase.PhraseDate).Days > DaysOfTheYear) 
 			{
-				throw new PhraseManagementException(MessagesExceptions.ERROR_IS_ONE_YEAR_BEFORE); 
+				throw new PhraseManagementException(MessagesExceptions.ErrorIsOneYearBefore); 
 			}
 		}
 		

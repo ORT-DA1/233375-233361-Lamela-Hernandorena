@@ -31,12 +31,12 @@ namespace BusinessLogic
 		{
 			if (String.IsNullOrEmpty(sentiment.SentimientText.Trim()))
 			{
-				throw new ArgumentNullException();
+				throw new TextManagementException(MessagesExceptions.ErrorIsEmpty);
 			}
 
 			if (IsContained(sentiment))
 			{
-				throw new TextManagementException(MessagesExceptions.ERROR_IS_CONTAINED); 
+				throw new TextManagementException(MessagesExceptions.ErrorIsContained); 
 			}
 
 		}
@@ -65,7 +65,7 @@ namespace BusinessLogic
 		{
 			if (!Exist(sentiment))
 			{
-				throw new TextManagementException(MessagesExceptions.ERROR_DONT_EXIST); 
+				throw new TextManagementException(MessagesExceptions.ErrorDontExist); 
 			}
 		}
 

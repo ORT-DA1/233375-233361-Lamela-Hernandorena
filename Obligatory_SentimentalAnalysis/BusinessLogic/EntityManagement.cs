@@ -32,12 +32,12 @@ namespace BusinessLogic
 		{
 				if (String.IsNullOrEmpty(entity.EntityName.Trim()))
 				{
-					throw new EntityManagementException(MessagesExceptions.ERROR_IS_EMPTY);
+					throw new EntityManagementException(MessagesExceptions.ErrorIsEmpty);
 				}
 
 				if (IsContained(entity))
 				{
-					throw new EntityManagementException(MessagesExceptions.ERROR_IS_CONTAINED);
+					throw new EntityManagementException(MessagesExceptions.ErrorIsContained);
 				}
 
 		}
@@ -57,7 +57,7 @@ namespace BusinessLogic
 		{
 			if (!IsContained(entity))
 			{
-				throw new EntityManagementException(MessagesExceptions.ERROR_DONT_EXIST);
+				throw new EntityManagementException(MessagesExceptions.ErrorDontExist);
 			}
 		}
 
