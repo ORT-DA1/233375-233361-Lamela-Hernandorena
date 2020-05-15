@@ -1,5 +1,5 @@
 ﻿using System;
-
+using BusinessLogicExceptions; 
 
 namespace Domain
 {
@@ -14,14 +14,49 @@ namespace Domain
 		public enum TypePhrase { Positive, Neutral, Negative} 
 
 		public TypePhrase PhraseType { get; set;  }
-
-       
+		
         public Phrase ()
         {
           
         }
 
+		public void VerifyFormat()
+		{
+			const int DaysOfTheYear = 365;
+			if (String.IsNullOrEmpty(TextPhrase))
+			{
+				throw new PhraseManagementException(MessagesExceptions.ErrorIsEmpty);
+			}
+			if (PhraseDate > DateTime.Now)
+			{
+				throw new PhraseManagementException(MessagesExceptions.ErrorIsAfterToday);
+			}
 
+			if ((DateTime.Now - PhraseDate).Days > DaysOfTheYear)
+			{
+				throw new PhraseManagementException(MessagesExceptions.ErrorIsOneYearBefore);
+			}
+		}
+
+		public void SetTypeOfPhrase(int counterPositive, int counterNegative)
+		{
+			if (counterNegative >= 1 && counterPositive == 0)
+			{
+				PhraseType= TypePhrase.Negative;
+			}
+			else
+			{
+				if (counterPositive >= 1 && counterNegative == 0)   
+				{
+					PhraseType = TypePhrase.Positive;
+				}
+				else
+				{
+					PhraseType = TypePhrase.Neutral;
+				}
+			}
+		}
+		
 		public override bool Equals(object obj)
 		{
 			if(obj == null)

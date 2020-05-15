@@ -1,6 +1,4 @@
-﻿using BusinessLogicExceptions;
-using Domain;
-using System;
+﻿using Domain;
 using System.Collections.Generic;
 
 
@@ -18,7 +16,7 @@ namespace BusinessLogic
 		public void AddPhrase(Phrase phrase)
 		{
 			phrase.TextPhrase = Utilities.DeleteSpaces(phrase.TextPhrase.Trim()); 
-			VerifyFormatAdd(phrase); 
+			phrase.VerifyFormat(); 
 			phraseList.Add(phrase); 
 		}
 
@@ -26,25 +24,7 @@ namespace BusinessLogic
 		{
 			return phraseList.Count == 0; 
 		}
-
-		private void VerifyFormatAdd(Phrase phrase)
-		{
-			const int DaysOfTheYear = 365; 
-			if (String.IsNullOrEmpty(phrase.TextPhrase))
-			{
-				throw new PhraseManagementException(MessagesExceptions.ErrorIsEmpty); 
-			}
-            if (phrase.PhraseDate > DateTime.Now)
-            {
-                throw new PhraseManagementException(MessagesExceptions.ErrorIsAfterToday);
-            }
-			
-			if ((DateTime.Now - phrase.PhraseDate).Days > DaysOfTheYear) 
-			{
-				throw new PhraseManagementException(MessagesExceptions.ErrorIsOneYearBefore); 
-			}
-		}
-
+		
 		public Phrase[] AllPhrases
 		{
 			get { return phraseList.ToArray();  }

@@ -33,7 +33,7 @@ namespace BusinessLogic
 					if (sentiment.SentimentType.Equals(Sentiment.TypeSentiment.Positive))
 					{
 						positiveCounter++;
-						sentiment.IsAssociated = true; 
+						sentiment.IsAssociated = true;  //Pasarlo
 					}
 					else
 					{
@@ -44,8 +44,8 @@ namespace BusinessLogic
 			}
 			Entity entityFound = FindEntity(textOfPhrase); 
 			phrase.Entity = entityFound;
-			phrase.PhraseType = SetTypeOfPhrase(positiveCounter, negetiveCounter);
-			if (IsNotAssociatedEntity(entityFound))
+			phrase.SetTypeOfPhrase(positiveCounter, negetiveCounter);
+			if (entityFound.IsEmptyEntity())
 			{
 				phrase.PhraseType = Phrase.TypePhrase.Neutral;
 			}
@@ -68,44 +68,15 @@ namespace BusinessLogic
 			}
 			return entityFound; 
 		}
-
-		private bool IsNotAssociatedEntity(Entity entity)
-		{
-			return entity.EntityName.Equals(""); 
-		}
 		
-
-		private Phrase.TypePhrase SetTypeOfPhrase(int counterPositive, int counterNegative)
-		{
-			const int MinimumQuantityNegativeSentiments = 1;
-			const int MinimumQuantityPositiveSentiments = 1;
-			const int AnyQuantitySentiments = 0; 
-
-			if (counterNegative >= 1 && counterPositive == 0)
-			{
-				return Phrase.TypePhrase.Negative; 
-			}
-			else
-			{
-				if (counterPositive >= 1 && counterNegative == 0)
-				{
-					return Phrase.TypePhrase.Positive;
-				}
-				else
-				{
-					return Phrase.TypePhrase.Neutral;
-				}
-			}
-		}
-
 		public void UpdateAlarms(ITimeProvider provider)
 		{
 			if (PhraseManagement.AllPhrases.Length > 0)
 			{
 				DateTime minDate = provider.Now();
-				foreach (IAlarm a in AlarmManagement.AllAlarms)
+				foreach (IAlarm alarm in AlarmManagement.AllAlarms)
 				{
-					a.UpdateState(PhraseManagement.AllPhrases, minDate);
+					alarm.UpdateState(PhraseManagement.AllPhrases, minDate);
 				}
 			}
 		}

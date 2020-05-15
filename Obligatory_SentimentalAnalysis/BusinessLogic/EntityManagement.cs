@@ -1,6 +1,5 @@
 ﻿using BusinessLogicExceptions;
 using Domain;
-using System;
 using System.Collections.Generic;
 
 
@@ -23,23 +22,18 @@ namespace BusinessLogic
 
 		public void AddEntity(Entity entity)
 		{
-			entity.EntityName = Utilities.DeleteSpaces(entity.EntityName.Trim()); 
+			entity.EntityName = Utilities.DeleteSpaces(entity.EntityName.Trim());
+			entity.VerifyFormat(); 
 			VerifyFormatAdd(entity);
 			entityList.Add(entity); 
 		}
 
 		private void VerifyFormatAdd(Entity entity)
 		{
-				if (String.IsNullOrEmpty(entity.EntityName.Trim()))
-				{
-					throw new EntityManagementException(MessagesExceptions.ErrorIsEmpty);
-				}
-
-				if (IsContained(entity))
-				{
-					throw new EntityManagementException(MessagesExceptions.ErrorIsContained);
-				}
-
+			if (IsContained(entity))
+			{
+				throw new EntityManagementException(MessagesExceptions.ErrorIsContained);
+			}
 		}
 
 		private bool IsContained(Entity entity)

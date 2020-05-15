@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace BusinessLogic
+namespace BusinessLogicExceptions
 {
 	public class TextManagementException: Exception
 	{

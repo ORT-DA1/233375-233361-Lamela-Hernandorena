@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using BusinessLogic;
+using BusinessLogicExceptions;
+using BusinessLogic; 
 using Domain; 
 
 namespace UI

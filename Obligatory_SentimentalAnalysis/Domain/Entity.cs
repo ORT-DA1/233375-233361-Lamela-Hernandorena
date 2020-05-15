@@ -1,5 +1,5 @@
 ﻿using System;
-using Domain; 
+using BusinessLogicExceptions; 
 
 
 namespace Domain
@@ -16,6 +16,19 @@ namespace Domain
 		public override string ToString()
 		{
 			return EntityName;
+		}
+
+		public void VerifyFormat()
+		{
+			if (String.IsNullOrEmpty(EntityName.Trim()))
+			{
+				throw new EntityManagementException(MessagesExceptions.ErrorIsEmpty);
+			}
+		}
+
+		public bool IsEmptyEntity()
+		{
+			return EntityName.Equals("");  
 		}
 
 		public override bool Equals(object obj)

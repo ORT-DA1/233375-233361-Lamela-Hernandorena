@@ -1,5 +1,5 @@
-﻿using Domain;
-using System;
+﻿using System;
+using BusinessLogicExceptions; 
 
 
 namespace Domain 
@@ -21,6 +21,22 @@ namespace Domain
 		public override string ToString()
 		{
 			return SentimientText; 
+		}
+
+		public void VerifyFormat()
+		{
+			if (String.IsNullOrEmpty(SentimientText.Trim()))
+			{
+				throw new TextManagementException(MessagesExceptions.ErrorIsEmpty);
+			}
+		}
+
+		public void VerifyFormatToDelete()
+		{
+			if (IsAssociated)
+			{
+				throw new TextManagementException(MessagesExceptions.ErrorIsAssociated); 
+			}
 		}
 
 		public override bool Equals(object obj)

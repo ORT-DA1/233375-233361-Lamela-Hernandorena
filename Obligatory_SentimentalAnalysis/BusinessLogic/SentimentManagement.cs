@@ -1,5 +1,4 @@
 ﻿using Domain;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using BusinessLogicExceptions; 
@@ -18,6 +17,7 @@ namespace BusinessLogic
 
 		public void AddSentiment(Sentiment sentiment)
 		{
+			sentiment.VerifyFormat(); 
 			VerifyFormatAdd(sentiment);
 			sentiment.SentimientText = Utilities.DeleteSpaces(sentiment.SentimientText).Trim();
 			sentimentList.Add(sentiment); 
@@ -30,16 +30,10 @@ namespace BusinessLogic
 
 		private void VerifyFormatAdd(Sentiment sentiment)
 		{
-			if (String.IsNullOrEmpty(sentiment.SentimientText.Trim()))
-			{
-				throw new TextManagementException(MessagesExceptions.ErrorIsEmpty);
-			}
-
 			if (IsContained(sentiment))
 			{
 				throw new TextManagementException(MessagesExceptions.ErrorIsContained); 
 			}
-
 		}
 
 		private bool IsContained(Sentiment sentiment)
@@ -68,16 +62,12 @@ namespace BusinessLogic
 			{
 				throw new TextManagementException(MessagesExceptions.ErrorDontExist); 
 			}
-			if (sentiment.IsAssociated)
-			{
-				throw new TextManagementException(MessagesExceptions.ErrorIsAssociated); 
-			}
+
 		}
 
-
-		
 		public void DeleteText(Sentiment sentiment)
 		{
+			sentiment.VerifyFormatToDelete(); 
 			VerifyFormatDelete(sentiment);
 			sentimentList.Remove(sentiment); 
 		}
@@ -86,8 +76,6 @@ namespace BusinessLogic
 		{
 			return sentimentList.Contains(sentiment); 
 		}
-
-
 
 		public Sentiment[] AllSentiments
 		{
