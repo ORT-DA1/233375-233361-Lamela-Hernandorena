@@ -41,19 +41,10 @@ namespace UI
 			{
 				cmbEntities.SelectedIndex = 0;
 			}
-			CleanRadioButtons();
 			textBoxQuantityPost.Text = "";
 			textBoxQuantityTime.Text = "";
 			labelError.Text = "";
 			labelError.Visible = true; 
-		}
-
-		private void CleanRadioButtons()
-		{
-			radioButtonDays.Checked = false;
-			radioButtonHours.Checked = false;
-			radioButtonNegative.Checked = false;
-			radioButtonPositive.Checked = false;
 		}
 
 		private void BtnAddAlarm_Click(object sender, EventArgs e)

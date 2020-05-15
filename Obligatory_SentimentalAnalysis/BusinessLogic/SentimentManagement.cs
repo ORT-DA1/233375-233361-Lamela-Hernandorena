@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BusinessLogicExceptions; 
 
 
 namespace BusinessLogic
@@ -66,6 +67,10 @@ namespace BusinessLogic
 			if (!Exist(sentiment))
 			{
 				throw new TextManagementException(MessagesExceptions.ErrorDontExist); 
+			}
+			if (sentiment.IsAssociated)
+			{
+				throw new TextManagementException(MessagesExceptions.ErrorIsAssociated); 
 			}
 		}
 

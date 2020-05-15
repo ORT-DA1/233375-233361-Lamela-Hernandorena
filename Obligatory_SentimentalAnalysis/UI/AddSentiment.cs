@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using BusinessLogic;
+using Domain; 
 
 namespace UI
 {
@@ -13,7 +14,7 @@ namespace UI
 		{
 			InitializeComponent();
 			generalManagement = management;
-			initializeListOfSentiment();
+			InitializeListOfSentiment();
 			DisplayButton();
 		}
 
@@ -37,7 +38,7 @@ namespace UI
 					};
 					generalManagement.SentimentManagement.AddSentiment(sentiment);
 					MessageBox.Show("Sentimiento agregado correctamente");
-					initializeListOfSentiment(); 
+					InitializeListOfSentiment(); 
 					DeleteText();
 					DisplayButton(); 
 				}
@@ -55,7 +56,7 @@ namespace UI
 		}
 
 
-		private void initializeListOfSentiment()
+		private void InitializeListOfSentiment()
 		{
 			listBoxSentiment.DataSource = generalManagement.SentimentManagement.AllSentiments;  
 		}
@@ -83,8 +84,6 @@ namespace UI
 		private void DeleteText()
 		{
 			textBoxSentiment.Text = "";
-			radioButtonNegative.Checked = false;
-			radioButtonPositive.Checked = false;
 			labelError.Text = "";
 			labelError.Visible = false; 
 		}
@@ -111,11 +110,19 @@ namespace UI
 			}
 			else
 			{
-				Sentiment sentiment = (Sentiment)listBoxSentiment.SelectedItem; 
-				generalManagement.SentimentManagement.DeleteText(sentiment);
-				DisplayButton();
-				MessageBox.Show("El sentimiento se ha eliminado con exito.");
-				initializeListOfSentiment(); 
+				try
+				{
+					Sentiment sentiment = (Sentiment)listBoxSentiment.SelectedItem;
+					generalManagement.SentimentManagement.DeleteText(sentiment);
+					DisplayButton();
+					MessageBox.Show("El sentimiento se ha eliminado con exito.");
+					InitializeListOfSentiment();
+				}catch(TextManagementException exc)
+				{
+					labelError.Visible = true;
+					labelError.Text = exc.Message; 
+				}
+				
 			}
 		}
 		

@@ -2,7 +2,7 @@
 using Domain; 
 
 
-namespace BusinessLogic
+namespace Domain
 {
 	public class Entity
 	{

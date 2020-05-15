@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using BusinessLogicExceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Domain; 
 
 namespace Test
 {
@@ -145,6 +146,67 @@ namespace Test
 				IsInHours = false
 			};
 			management.AddAlarm(alarm);
+		}
+
+		[TestMethod]
+		public void TestingMethodShow()
+		{
+			Entity entity = new Entity()
+			{
+				EntityName = "Pedidos ya"
+			};
+			Alarm alarm = new Alarm()
+			{
+				Entity = entity,
+				TypeOfAlarm = Alarm.Type.Positive,
+				QuantityPost = 150,
+				QuantityTime = 30,
+				IsInHours = false
+			};
+			management.AddAlarm(alarm); 
+			Assert.AreEqual(alarm.Show(), management.AllAlarms[0].Show()); 
+		}
+
+
+		[TestMethod]
+		public void TestingAddNegativeAlarm()
+		{
+			Entity entity = new Entity()
+			{
+				EntityName = "Pedidos ya"
+			};
+			Alarm alarm = new Alarm()
+			{
+				Entity = entity,
+				TypeOfAlarm = Alarm.Type.Negative,
+				QuantityPost = 150,
+				QuantityTime = 30,
+				IsInHours = false, 
+				Active=true
+			};
+			management.AddAlarm(alarm);
+			Assert.AreEqual(alarm.Show(), management.AllAlarms[0].Show());
+			CollectionAssert.Contains(management.AllAlarms, alarm); 
+		}
+
+		[TestMethod]
+		public void TestingMethodShow2()
+		{
+			Entity entity = new Entity()
+			{
+				EntityName = "Pedidos ya"
+			};
+			Alarm alarm = new Alarm()
+			{
+				Entity = entity,
+				TypeOfAlarm = Alarm.Type.Positive,
+				QuantityPost = 150,
+				QuantityTime = 30,
+				IsInHours = false,
+				Active = true
+			};
+			management.AddAlarm(alarm);
+			Assert.AreEqual(alarm.Show(), management.AllAlarms[0].Show());
 		}
 	}
 }

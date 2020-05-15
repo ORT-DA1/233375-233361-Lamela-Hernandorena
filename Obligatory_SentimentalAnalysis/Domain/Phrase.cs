@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace BusinessLogic
+namespace Domain
 {
 	public class Phrase
 	{

@@ -1,9 +1,7 @@
-﻿
-using BusinessLogicExceptions;
-using Domain;
+﻿using BusinessLogicExceptions;
 using System;
 
-namespace BusinessLogic
+namespace Domain
 {
 	public class Alarm:IAlarm
 	{

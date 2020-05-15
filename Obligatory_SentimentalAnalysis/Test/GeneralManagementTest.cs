@@ -1,5 +1,6 @@
 ﻿using System;
 using BusinessLogic;
+using Domain; 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Test

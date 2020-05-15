@@ -2,7 +2,7 @@
 using System;
 
 
-namespace BusinessLogic
+namespace Domain 
 {
 	public class Sentiment
 	{
@@ -12,7 +12,10 @@ namespace BusinessLogic
 
 		public TypeSentiment SentimentType { get; set; }
 
-		public Sentiment(){ 
+		public bool IsAssociated { get; set; }
+
+		public Sentiment(){
+			IsAssociated = false; 
 		}
 
 		public override string ToString()

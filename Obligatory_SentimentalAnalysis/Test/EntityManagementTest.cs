@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using BusinessLogicExceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Domain; 
 
 namespace Test
 {

@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using BusinessLogic;
 using BusinessLogicExceptions;
+using Domain; 
 
 namespace UI
 {

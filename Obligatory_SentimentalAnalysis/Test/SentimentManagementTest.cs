@@ -1,6 +1,6 @@
 ﻿using BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+using Domain; 
 
 namespace Test
 {
@@ -525,7 +525,22 @@ namespace Test
 
 		}
 
-		
+		[TestMethod]
+		[ExpectedException(typeof(TextManagementException))]
+		public void TestDeleteAssosiatedPhrase()
+		{
+			Sentiment sentiment = new Sentiment()
+			{
+				SentimientText = "Me gusta",
+				SentimentType = Sentiment.TypeSentiment.Positive,
+				IsAssociated = true
+				
+			};
+			manegement.AddSentiment(sentiment);
+			manegement.DeleteText(sentiment); 
+		}
+
+
 
 
 

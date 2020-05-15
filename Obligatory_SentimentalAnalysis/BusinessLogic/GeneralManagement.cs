@@ -33,10 +33,12 @@ namespace BusinessLogic
 					if (sentiment.SentimentType.Equals(Sentiment.TypeSentiment.Positive))
 					{
 						positiveCounter++;
+						sentiment.IsAssociated = true; 
 					}
 					else
 					{
-						negetiveCounter++; 
+						negetiveCounter++;
+						sentiment.IsAssociated = true; 
 					}
 				}
 			}
