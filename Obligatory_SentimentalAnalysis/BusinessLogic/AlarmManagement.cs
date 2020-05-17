@@ -15,7 +15,7 @@ namespace BusinessLogic
 
 		public void AddAlarm(IAlarm alarm)
 		{
-			alarm.VerifyFormatAlarm();
+			alarm.VerifyFormat();
 			alarmList.Add(alarm); 
 		}
 

@@ -3,7 +3,7 @@ using System;
 
 namespace Domain
 {
-	public class Alarm:IAlarm
+	public class Alarm : IAlarm
 	{
 		public Entity Entity { get; set; }
 		public enum Type { Positive, Negative }
@@ -21,13 +21,14 @@ namespace Domain
 		public void UpdateState(Phrase[] phrases, DateTime date)
 		{
 			int counterPost = 0;
+			Active = false; 
 			DateTime minDate = date;
-			foreach (Phrase p in phrases)
+			foreach (Phrase phrase in phrases)
 			{
 				minDate = DeterminateMinDate(date);
-				if (p.PhraseDate >= minDate)
+				if (phrase.PhraseDate >= minDate)
 				{
-					if (p.Entity.Equals(Entity) && p.PhraseType.ToString().Equals(TypeOfAlarm.ToString()))
+					if (phrase.Entity.Equals(Entity) && phrase.PhraseType.ToString().Equals(TypeOfAlarm.ToString()))
 					{
 						counterPost++;
 					}
@@ -79,7 +80,7 @@ namespace Domain
 			return minDate;
 		}
 
-		public void VerifyFormatAlarm()
+		public void VerifyFormat()
 		{
 			if (Utilities.IsNegativeQuantity(QuantityPost))
 			{
