@@ -53,17 +53,20 @@ namespace BusinessLogic
 
 		private Entity FindEntity(string textOfPhrase)
 		{
-			int entityCounter = 0;
+			int minUbication = 9999; 
 			Entity entityFound = new Entity(); 
 
 			foreach (Entity entity in EntityManagement.AllEntities)
 			{
 				string entityOfList = Utilities.DeleteSpaces(entity.EntityName.ToLower());
-
-				if (textOfPhrase.Contains(entityOfList) && (entityCounter < 1))
+				
+				if (textOfPhrase.Contains(entityOfList))
 				{
-					entityCounter++;
-					entityFound = entity; 
+					if(textOfPhrase.IndexOf(entityOfList) < minUbication)
+					{
+						minUbication = textOfPhrase.IndexOf(entityOfList);
+						entityFound = entity;
+					}
 				}
 			}
 			return entityFound; 
