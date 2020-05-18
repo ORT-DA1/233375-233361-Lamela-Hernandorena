@@ -25,7 +25,7 @@ namespace UI
 			dateTimePickerPhraseDate.MaxDate = DateTime.Now; 
 		}
 
-		private void btnAgregar_Click(object sender, EventArgs e)
+		private void btnAddPhrase_Click(object sender, EventArgs e)
 		{
 			try
 			{
@@ -63,10 +63,10 @@ namespace UI
 			RealTimeProvider timeNow = new RealTimeProvider(); 
 			generalManagement.UpdateAlarms(timeNow); 
 			MessageBox.Show("Se ha agregado una frase correctamente");
-			DeleteText(); 
+			ClearAllFields(); 
 		}
 
-		private void DeleteText()
+		private void ClearAllFields()
 		{
 			textBoxPhrase.Text = "";
 			labelError.Visible = false;

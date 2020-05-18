@@ -182,7 +182,7 @@ namespace Test
 				QuantityPost = 150,
 				QuantityTime = 30,
 				IsInHours = false, 
-				Active=true
+				IsActive=true
 			};
 			management.AddAlarm(alarm);
 			Assert.AreEqual(alarm.Show(), management.AllAlarms[0].Show());
@@ -203,7 +203,7 @@ namespace Test
 				QuantityPost = 150,
 				QuantityTime = 30,
 				IsInHours = false,
-				Active = true
+				IsActive = true
 			};
 			management.AddAlarm(alarm);
 			Assert.AreEqual(alarm.Show(), management.AllAlarms[0].Show());

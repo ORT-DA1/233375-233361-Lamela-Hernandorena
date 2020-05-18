@@ -367,7 +367,7 @@ namespace Test
 				MockedDateTime = new DateTime(2019, 10, 1, 19, 10, 30)
 			};
 			management.UpdateAlarms(provider);
-			Assert.IsTrue(aAlarm.Active);
+			Assert.IsTrue(aAlarm.IsActive);
 		}
 
 		[TestMethod]
@@ -419,7 +419,7 @@ namespace Test
 				MockedDateTime = new DateTime(2020, 04, 30, 19, 10, 30)
 			};
 			management.UpdateAlarms(provider);
-			Assert.IsFalse(aAlarm.Active);
+			Assert.IsFalse(aAlarm.IsActive);
 		}
 
 
@@ -444,7 +444,7 @@ namespace Test
 				MockedDateTime = new DateTime(2020, 04, 30, 19, 10, 30)
 			};
 			management.UpdateAlarms(provider);
-			Assert.IsFalse(aAlarm.Active);
+			Assert.IsFalse(aAlarm.IsActive);
 		}
 
 
@@ -497,7 +497,7 @@ namespace Test
 				MockedDateTime = new DateTime(2020, 04, 26, 19, 10, 30)
 			};
 			management.UpdateAlarms(provider);
-			Assert.IsTrue(aAlarm.Active);
+			Assert.IsTrue(aAlarm.IsActive);
 		}
 
 		[TestMethod]
@@ -558,7 +558,7 @@ namespace Test
 				MockedDateTime = new DateTime(2020, 04, 30, 19, 10, 30)
 			};
 			management.UpdateAlarms(provider);
-			Assert.IsFalse(aAlarm2.Active);
+			Assert.IsFalse(aAlarm2.IsActive);
 		}
 
 		[TestMethod]
@@ -634,8 +634,8 @@ namespace Test
 				MockedDateTime = new DateTime(2020, 04, 26, 19, 10, 30)
 			};
 			management.UpdateAlarms(provider);
-			Assert.IsTrue(aAlarm2.Active);
-			Assert.IsFalse(aAlarm.Active);
+			Assert.IsTrue(aAlarm2.IsActive);
+			Assert.IsFalse(aAlarm.IsActive);
 		}
 
 
@@ -676,7 +676,7 @@ namespace Test
 			};
 
 			management.UpdateAlarms(provider);
-			Assert.IsFalse(aAlarm.Active);
+			Assert.IsFalse(aAlarm.IsActive);
 		}
 	}
 }

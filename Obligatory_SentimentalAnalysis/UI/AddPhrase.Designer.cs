@@ -58,7 +58,7 @@ namespace UI
 			this.btnAddPhrase.Size = new System.Drawing.Size(158, 38);
 			this.btnAddPhrase.TabIndex = 3;
 			this.btnAddPhrase.UseVisualStyleBackColor = false;
-			this.btnAddPhrase.Click += new System.EventHandler(this.btnAgregar_Click);
+			this.btnAddPhrase.Click += new System.EventHandler(this.btnAddPhrase_Click);
 			// 
 			// dateTimePickerPhraseDate
 			// 

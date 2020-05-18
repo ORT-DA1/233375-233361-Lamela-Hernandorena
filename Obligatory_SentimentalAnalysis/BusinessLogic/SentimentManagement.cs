@@ -40,14 +40,14 @@ namespace BusinessLogic
 		{
 			bool toReturn = false;
 
-			string element= Utilities.DeleteSpaces(sentiment.SentimientText.ToLower().Trim()); 
+			string sentimentText= Utilities.DeleteSpaces(sentiment.SentimientText.ToLower().Trim()); 
 			
 			for (int i = 0; i < sentimentList.Count() && !toReturn; i++)
 			{
-				string listElement = sentimentList.ElementAt(i).SentimientText;
-				listElement = Utilities.DeleteSpaces(listElement.ToLower().Trim()); 
+				string currentSentiment = sentimentList.ElementAt(i).SentimientText;
+				currentSentiment = Utilities.DeleteSpaces(currentSentiment.ToLower().Trim()); 
 
-				if (element.Contains(listElement) || listElement.Contains(element)) 
+				if (sentimentText.Contains(currentSentiment) || currentSentiment.Contains(sentimentText)) 
 				{                                    
 					toReturn = true;
 				}
@@ -58,23 +58,23 @@ namespace BusinessLogic
 
 		private void VerifyFormatDelete(Sentiment sentiment)
 		{
-			if (!Exist(sentiment))
+			if (IsNotContained(sentiment))
 			{
 				throw new TextManagementException(MessagesExceptions.ErrorDontExist); 
 			}
 
 		}
 
-		public void DeleteText(Sentiment sentiment)
+		public void DeleteSentiment(Sentiment sentiment)
 		{
 			sentiment.VerifyFormatToDelete(); 
 			VerifyFormatDelete(sentiment);
 			sentimentList.Remove(sentiment); 
 		}
 
-		private bool Exist(Sentiment sentiment)
+		private bool IsNotContained(Sentiment sentiment)
 		{
-			return sentimentList.Contains(sentiment); 
+			return !sentimentList.Contains(sentiment); 
 		}
 
 		public Sentiment[] AllSentiments

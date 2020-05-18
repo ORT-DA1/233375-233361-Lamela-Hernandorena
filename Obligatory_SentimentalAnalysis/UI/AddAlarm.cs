@@ -15,12 +15,9 @@ namespace UI
 			InitializeComponent();
 			generalManagement = management;
 			InitializeEntities();
-			InitializeAlarms(); 
-			DeleteText();
+			InitializeAlarms();
+			ClearAllFields();
 		}
-
-
-
 		private void InitializeEntities()
 		{
 			cmbEntities.DataSource = generalManagement.EntityManagement.AllEntities;
@@ -29,13 +26,13 @@ namespace UI
 		private void InitializeAlarms()
 		{
 			listBoxAlarms.Items.Clear();
-			foreach(IAlarm alarm in generalManagement.AlarmManagement.AllAlarms)
+			foreach (IAlarm alarm in generalManagement.AlarmManagement.AllAlarms)
 			{
-				listBoxAlarms.Items.Add(alarm.Show()); 
+				listBoxAlarms.Items.Add(alarm.Show());
 			}
 		}
 
-		private void DeleteText()
+		private void ClearAllFields()
 		{
 			if (generalManagement.EntityManagement.AllEntities.Length > 0)
 			{
@@ -44,7 +41,7 @@ namespace UI
 			textBoxQuantityPost.Text = "";
 			textBoxQuantityTime.Text = "";
 			labelError.Text = "";
-			labelError.Visible = true; 
+			labelError.Visible = true;
 		}
 
 		private void BtnAddAlarm_Click(object sender, EventArgs e)
@@ -52,28 +49,28 @@ namespace UI
 			if (cmbEntities.SelectedIndex == -1)
 			{
 				labelError.Visible = true;
-				labelError.Text = "Error. Debe seleccionar una entidad"; 
+				labelError.Text = "Error. Debe seleccionar una entidad";
 			}
 			else if (!IsCheckedTypeOfAlarm())
 			{
 				labelError.Visible = true;
-				labelError.Text = "Error. Debe seleccionar un tipo de alarma"; 
+				labelError.Text = "Error. Debe seleccionar un tipo de alarma";
 
 			}
 			else if (!IsCheckedQuantityTime())
 			{
 				labelError.Visible = true;
-				labelError.Text = "Error. Debe seleccionar dias u horas."; 
+				labelError.Text = "Error. Debe seleccionar dias u horas.";
 			}
 			else if (textBoxQuantityPost.Text.Equals(""))
 			{
 				labelError.Visible = true;
-				labelError.Text = "Error. Debe seleccionar la cantidad de posts."; 
+				labelError.Text = "Error. Debe seleccionar la cantidad de posts.";
 			}
 			else if (textBoxQuantityTime.Text.Equals(""))
 			{
 				labelError.Visible = true;
-				labelError.Text = "Error. Debe seleccionar un plazo de tiempo."; 
+				labelError.Text = "Error. Debe seleccionar un plazo de tiempo.";
 			}
 			else
 			{
@@ -81,9 +78,9 @@ namespace UI
 				{
 					AddAlarmUI();
 					MessageBox.Show("Alarma agregada con exito");
-					DeleteText();
+					ClearAllFields();
 				}
-				catch (FormatException ex)
+				catch (FormatException)
 				{
 					labelError.Text = "El campo debe ser numerico";
 				}
@@ -91,7 +88,7 @@ namespace UI
 				catch (AlarmManagementException exc)
 				{
 					labelError.Visible = true;
-					labelError.Text = exc.Message; 
+					labelError.Text = exc.Message;
 				}
 				catch (Exception)
 				{
@@ -112,7 +109,7 @@ namespace UI
 				IsInHours = IsInHoursTimeFrame()
 			};
 			generalManagement.AlarmManagement.AddAlarm(alarmToAdd);
-			InitializeAlarms(); 
+			InitializeAlarms();
 		}
 
 		private Alarm.Type TypeOfAlarmChecked()
@@ -143,9 +140,15 @@ namespace UI
 			return radioButtonDays.Checked || radioButtonHours.Checked;
 		}
 
+		private bool NotIsNumeric(KeyPressEventArgs e)
+		{
+			return !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '-');
+		}
+
+
 		private void TextBoxQuantityPost_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '-'))
+			if (NotIsNumeric(e))
 			{
 				e.Handled = true;
 				MessageBox.Show("Debe ingresar solo numeros");
@@ -154,7 +157,7 @@ namespace UI
 
 		private void TextBoxQuantityTime_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '-') && (e.KeyChar != '.'))
+			if (NotIsNumeric(e))
 			{
 				e.Handled = true;
 				MessageBox.Show("Debe ingresar solo numeros");

@@ -16,14 +16,14 @@ namespace UI
 			InitializeComponent();
 			generalManagement = management;
 			InitializeListOfSentiment();
-			DisplayButton();
+			DisplayDeleteButton();
 		}
 
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
 			string sentimentText = textBoxSentiment.Text;
 
-			if (isChecked().Equals(Sentiment.TypeSentiment.Neutral))
+			if (IsCheckedType().Equals(Sentiment.TypeSentiment.Neutral))
 			{
 				labelError.Visible = true;
 				labelError.Text ="Debe seleccionar el tipo de sentimiento."; 
@@ -35,13 +35,13 @@ namespace UI
 					Sentiment sentiment = new Sentiment()
 					{
 						SentimientText= sentimentText,
-						SentimentType= isChecked()
+						SentimentType= IsCheckedType()
 					};
 					generalManagement.SentimentManagement.AddSentiment(sentiment);
 					MessageBox.Show("Sentimiento agregado correctamente");
 					InitializeListOfSentiment(); 
-					DeleteText();
-					DisplayButton(); 
+					ClearAllFields();
+					DisplayDeleteButton(); 
 				}
 				catch (TextManagementException exc)
 				{
@@ -62,7 +62,7 @@ namespace UI
 			listBoxSentiment.DataSource = generalManagement.SentimentManagement.AllSentiments;  
 		}
 		
-		private Sentiment.TypeSentiment isChecked()
+		private Sentiment.TypeSentiment IsCheckedType()
 		{
 			if (radioButtonNegative.Checked)
 			{
@@ -82,14 +82,14 @@ namespace UI
 		}
 
 
-		private void DeleteText()
+		private void ClearAllFields()
 		{
 			textBoxSentiment.Text = "";
 			labelError.Text = "";
 			labelError.Visible = false; 
 		}
 
-		private void DisplayButton()
+		private void DisplayDeleteButton()
 		{
 			if (generalManagement.SentimentManagement.AllSentiments.Length > 0)
 			{
@@ -104,7 +104,7 @@ namespace UI
 
 		private void btnDelete_Click(object sender, EventArgs e)
 		{
-			if (this.listBoxSentiment.SelectedIndex == -1)
+			if (listBoxSentiment.SelectedIndex == -1)
 			{
 				labelError.Visible = true;
 				labelError.Text = "Error Seleccione un sentimiento a eliminar"; 
@@ -114,8 +114,8 @@ namespace UI
 				try
 				{
 					Sentiment sentiment = (Sentiment)listBoxSentiment.SelectedItem;
-					generalManagement.SentimentManagement.DeleteText(sentiment);
-					DisplayButton();
+					generalManagement.SentimentManagement.DeleteSentiment(sentiment);
+					DisplayDeleteButton();
 					MessageBox.Show("El sentimiento se ha eliminado con exito.");
 					InitializeListOfSentiment();
 				}catch(TextManagementException exc)

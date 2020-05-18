@@ -14,7 +14,7 @@ namespace UI
 			InitializeComponent();
 			generalManagement = management;
 			InitializeListOfEntities();
-			DisplayButton();
+			DisplayDeleteButton();
 		}
 
 		private void InitializeListOfEntities()
@@ -22,7 +22,7 @@ namespace UI
 			listBoxEntities.DataSource = generalManagement.EntityManagement.AllEntities;
 		}
 		
-		private void DisplayButton()
+		private void DisplayDeleteButton()
 		{
 			if (generalManagement.EntityManagement.AllEntities.Length > 0)
 			{
@@ -40,10 +40,10 @@ namespace UI
 			try
 			{
 				AddEntityUI();
-				MessageBox.Show("Entidad agregada correctamente");
+				MessageBox.Show("Entidad agregada correctamente.");
 				InitializeListOfEntities();
-				DeleteText();
-				DisplayButton();
+				ClearAllFields();
+				DisplayDeleteButton();
 			}
 			catch (EntityManagementException ex)
 			{
@@ -65,7 +65,7 @@ namespace UI
 			generalManagement.EntityManagement.AddEntity(entity);
 		}
 
-		private void DeleteText()
+		private void ClearAllFields()
 		{
 			textBoxEntity.Text = "";
 			labelError.Visible = false;
@@ -74,7 +74,7 @@ namespace UI
 
 		private void btnDelete_Click(object sender, EventArgs e)
 		{
-			if (this.listBoxEntities.SelectedIndex == -1)
+			if (listBoxEntities.SelectedIndex == -1)
 			{
 				labelError.Visible = true;
 				labelError.Text = "Error seleccione una entidad a eliminar"; 
@@ -82,8 +82,8 @@ namespace UI
 			else
 			{
 				DeleteEntityUI();
-				DisplayButton();
-				MessageBox.Show("El sentimiento se ha eliminado con exito.");
+				DisplayDeleteButton();
+				MessageBox.Show("La entidad se ha eliminado con exito.");
 				InitializeListOfEntities();
 			}
 		}

@@ -9,19 +9,19 @@ namespace Domain
 		public enum Type { Positive, Negative }
 		public int QuantityPost { get; set; }
 		public int QuantityTime { get; set; }
-		public bool Active { get; set; }
+		public bool IsActive { get; set; }
 		public bool IsInHours { get; set; }
 		public Type TypeOfAlarm { get; set; }
 
 		public Alarm()
 		{
-			Active = false;
+			IsActive = false;
 		}
 
 		public void UpdateState(Phrase[] phrases, DateTime date)
 		{
 			int counterPost = 0;
-			Active = false; 
+			IsActive = false; 
 			DateTime minDate = date;
 			foreach (Phrase phrase in phrases)
 			{
@@ -36,14 +36,14 @@ namespace Domain
 			}
 			if (counterPost >= QuantityPost)
 			{
-				Active = true;
+				IsActive = true;
 			}
 		}
 
 		public string Show()
 		{
 			string state = "";
-			if (Active)
+			if (IsActive)
 			{
 				state = "activa";
 			}

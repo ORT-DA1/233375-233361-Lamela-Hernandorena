@@ -12,10 +12,10 @@ namespace Domain
 
 		public TypeSentiment SentimentType { get; set; }
 
-		public bool IsAssociated { get; set; }
+		public bool IsAssociatedToPhrase { get; set; }
 
 		public Sentiment(){
-			IsAssociated = false; 
+			IsAssociatedToPhrase = false; 
 		}
 
 		public override string ToString()
@@ -33,7 +33,7 @@ namespace Domain
 
 		public void VerifyFormatToDelete()
 		{
-			if (IsAssociated)
+			if (IsAssociatedToPhrase)
 			{
 				throw new TextManagementException(MessagesExceptions.ErrorIsAssociated); 
 			}

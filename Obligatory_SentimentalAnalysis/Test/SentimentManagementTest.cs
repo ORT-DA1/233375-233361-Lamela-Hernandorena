@@ -182,7 +182,7 @@ namespace Test
 				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			manegement.AddSentiment(sentiment);
-			manegement.DeleteText(sentiment);
+			manegement.DeleteSentiment(sentiment);
 			Assert.IsTrue(manegement.IsEmpty()); 
 		}
 
@@ -215,9 +215,9 @@ namespace Test
 			manegement.AddSentiment(sentiment2);
 			manegement.AddSentiment(sentiment3);
 			manegement.AddSentiment(sentiment4);
-			manegement.DeleteText(sentiment2);
-			manegement.DeleteText(sentiment3);
-			manegement.DeleteText(sentiment);
+			manegement.DeleteSentiment(sentiment2);
+			manegement.DeleteSentiment(sentiment3);
+			manegement.DeleteSentiment(sentiment);
 
 			CollectionAssert.Contains(manegement.AllSentiments, sentiment4); 
 		}
@@ -233,8 +233,8 @@ namespace Test
 				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			manegement.AddSentiment(sentiment);
-			manegement.DeleteText(sentiment);
-			manegement.DeleteText(sentiment); 
+			manegement.DeleteSentiment(sentiment);
+			manegement.DeleteSentiment(sentiment); 
 		}
 
 
@@ -254,9 +254,9 @@ namespace Test
 				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			manegement.AddSentiment(sentiment2); 
-			manegement.DeleteText(sentiment);
-			manegement.DeleteText(sentiment2);
-			manegement.DeleteText(sentiment2); 
+			manegement.DeleteSentiment(sentiment);
+			manegement.DeleteSentiment(sentiment2);
+			manegement.DeleteSentiment(sentiment2); 
 			
 		}
 
@@ -270,14 +270,14 @@ namespace Test
 				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			manegement.AddSentiment(sentiment);
-			manegement.DeleteText(sentiment);
+			manegement.DeleteSentiment(sentiment);
 			Sentiment sentiment2 = new Sentiment()
 			{
 				SentimientText= "Me encanta",
 				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			manegement.AddSentiment(sentiment2);
-			manegement.DeleteText(sentiment2);
+			manegement.DeleteSentiment(sentiment2);
 
 		}
 
@@ -386,7 +386,7 @@ namespace Test
 				SentimentType= Sentiment.TypeSentiment.Negative
 			};
             manegement.AddSentiment(sentiment);
-            manegement.DeleteText(sentiment);
+            manegement.DeleteSentiment(sentiment);
             Assert.IsTrue(manegement.IsEmpty());
         }
 
@@ -417,9 +417,9 @@ namespace Test
             manegement.AddSentiment(sentiment2);
             manegement.AddSentiment(sentiment3);
             manegement.AddSentiment(sentiment4);
-            manegement.DeleteText(sentiment2);
-            manegement.DeleteText(sentiment3);
-            manegement.DeleteText(sentiment);
+            manegement.DeleteSentiment(sentiment2);
+            manegement.DeleteSentiment(sentiment3);
+            manegement.DeleteSentiment(sentiment);
 			CollectionAssert.Contains(manegement.AllSentiments, sentiment4); 
         }
 
@@ -435,8 +435,8 @@ namespace Test
 				SentimentType= Sentiment.TypeSentiment.Negative
 			};
             manegement.AddSentiment(sentiment);
-            manegement.DeleteText(sentiment);
-            manegement.DeleteText(sentiment);
+            manegement.DeleteSentiment(sentiment);
+            manegement.DeleteSentiment(sentiment);
         }
 
 
@@ -534,11 +534,11 @@ namespace Test
 			{
 				SentimientText = "Me gusta",
 				SentimentType = Sentiment.TypeSentiment.Positive,
-				IsAssociated = true
+				IsAssociatedToPhrase = true
 				
 			};
 			manegement.AddSentiment(sentiment);
-			manegement.DeleteText(sentiment); 
+			manegement.DeleteSentiment(sentiment); 
 		}
 
 
