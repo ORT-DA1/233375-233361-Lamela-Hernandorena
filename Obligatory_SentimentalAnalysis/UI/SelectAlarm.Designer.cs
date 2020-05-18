@@ -72,7 +72,6 @@
 			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "SelectAlarm";
 			this.Size = new System.Drawing.Size(613, 785);
-			this.Load += new System.EventHandler(this.SelectAlarm_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

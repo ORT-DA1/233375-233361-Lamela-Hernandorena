@@ -11,6 +11,6 @@ namespace BusinessLogicExceptions
         public static string ErrorIsNegativeTime = "Error. El plazo de tiempo no puede ser negativo.";
         public static string ErrorIsNull = "Error. No trae una entidad.";
 		public static string ErrorIsOneYearBefore = "Error. La fecha de la frase solo puede ser a lo sumo un año menor.";
-		public static string ErrorIsAssociated = "Error. El sentimiento esta asociado a una frase, no puede ser eliminado."; 
+		public static string ErrorIsAssociated = "Error. El sentimiento esta asociado a una frase."; 
 	}
 }

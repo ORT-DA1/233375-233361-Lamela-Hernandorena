@@ -30,13 +30,13 @@ namespace BusinessLogic
 
 		private void VerifyFormatAdd(Sentiment sentiment)
 		{
-			if (IsContained(sentiment))
+			if (IsPartOfAnotherSentiment(sentiment))
 			{
 				throw new TextManagementException(MessagesExceptions.ErrorIsContained); 
 			}
 		}
 
-		private bool IsContained(Sentiment sentiment)
+		private bool IsPartOfAnotherSentiment(Sentiment sentiment)
 		{
 			bool toReturn = false;
 
