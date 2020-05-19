@@ -39,7 +39,7 @@
 			this.panelAlarms.Margin = new System.Windows.Forms.Padding(4);
 			this.panelAlarms.Name = "panelAlarms";
 			this.panelAlarms.Size = new System.Drawing.Size(613, 679);
-			this.panelAlarms.TabIndex = 0;
+			this.panelAlarms.TabIndex = 2;
 			// 
 			// cmbSelectTypeAlarm
 			// 

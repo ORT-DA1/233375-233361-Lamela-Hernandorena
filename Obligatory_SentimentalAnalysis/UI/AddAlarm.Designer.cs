@@ -50,7 +50,7 @@
 			this.cmbEntities.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbEntities.FormattingEnabled = true;
 			this.cmbEntities.Location = new System.Drawing.Point(111, 122);
-			this.cmbEntities.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.cmbEntities.Margin = new System.Windows.Forms.Padding(4);
 			this.cmbEntities.Name = "cmbEntities";
 			this.cmbEntities.Size = new System.Drawing.Size(160, 24);
 			this.cmbEntities.TabIndex = 1;
@@ -60,7 +60,7 @@
 			this.radioButtonPositive.AutoSize = true;
 			this.radioButtonPositive.Checked = true;
 			this.radioButtonPositive.Location = new System.Drawing.Point(8, 17);
-			this.radioButtonPositive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.radioButtonPositive.Margin = new System.Windows.Forms.Padding(4);
 			this.radioButtonPositive.Name = "radioButtonPositive";
 			this.radioButtonPositive.Size = new System.Drawing.Size(78, 21);
 			this.radioButtonPositive.TabIndex = 3;
@@ -72,7 +72,7 @@
 			// 
 			this.radioButtonNegative.AutoSize = true;
 			this.radioButtonNegative.Location = new System.Drawing.Point(119, 16);
-			this.radioButtonNegative.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.radioButtonNegative.Margin = new System.Windows.Forms.Padding(4);
 			this.radioButtonNegative.Name = "radioButtonNegative";
 			this.radioButtonNegative.Size = new System.Drawing.Size(85, 21);
 			this.radioButtonNegative.TabIndex = 4;
@@ -82,7 +82,7 @@
 			// textBoxQuantityPost
 			// 
 			this.textBoxQuantityPost.Location = new System.Drawing.Point(204, 262);
-			this.textBoxQuantityPost.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.textBoxQuantityPost.Margin = new System.Windows.Forms.Padding(4);
 			this.textBoxQuantityPost.Name = "textBoxQuantityPost";
 			this.textBoxQuantityPost.Size = new System.Drawing.Size(145, 22);
 			this.textBoxQuantityPost.TabIndex = 5;
@@ -91,7 +91,7 @@
 			// textBoxQuantityTime
 			// 
 			this.textBoxQuantityTime.Location = new System.Drawing.Point(204, 330);
-			this.textBoxQuantityTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.textBoxQuantityTime.Margin = new System.Windows.Forms.Padding(4);
 			this.textBoxQuantityTime.Name = "textBoxQuantityTime";
 			this.textBoxQuantityTime.Size = new System.Drawing.Size(145, 22);
 			this.textBoxQuantityTime.TabIndex = 6;
@@ -102,10 +102,10 @@
 			this.radioButtonDays.AutoSize = true;
 			this.radioButtonDays.Checked = true;
 			this.radioButtonDays.Location = new System.Drawing.Point(8, 17);
-			this.radioButtonDays.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.radioButtonDays.Margin = new System.Windows.Forms.Padding(4);
 			this.radioButtonDays.Name = "radioButtonDays";
 			this.radioButtonDays.Size = new System.Drawing.Size(57, 21);
-			this.radioButtonDays.TabIndex = 7;
+			this.radioButtonDays.TabIndex = 8;
 			this.radioButtonDays.TabStop = true;
 			this.radioButtonDays.Text = "Dias";
 			this.radioButtonDays.UseVisualStyleBackColor = true;
@@ -114,10 +114,10 @@
 			// 
 			this.radioButtonHours.AutoSize = true;
 			this.radioButtonHours.Location = new System.Drawing.Point(95, 18);
-			this.radioButtonHours.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.radioButtonHours.Margin = new System.Windows.Forms.Padding(4);
 			this.radioButtonHours.Name = "radioButtonHours";
 			this.radioButtonHours.Size = new System.Drawing.Size(67, 21);
-			this.radioButtonHours.TabIndex = 8;
+			this.radioButtonHours.TabIndex = 9;
 			this.radioButtonHours.Text = "Horas";
 			this.radioButtonHours.UseVisualStyleBackColor = true;
 			// 
@@ -130,7 +130,7 @@
 			this.btnAddAlarm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 			this.btnAddAlarm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.btnAddAlarm.Location = new System.Drawing.Point(204, 398);
-			this.btnAddAlarm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.btnAddAlarm.Margin = new System.Windows.Forms.Padding(4);
 			this.btnAddAlarm.Name = "btnAddAlarm";
 			this.btnAddAlarm.Size = new System.Drawing.Size(205, 49);
 			this.btnAddAlarm.TabIndex = 9;
@@ -143,9 +143,9 @@
 			this.groupBoxTypeAlarm.Controls.Add(this.radioButtonPositive);
 			this.groupBoxTypeAlarm.Controls.Add(this.radioButtonNegative);
 			this.groupBoxTypeAlarm.Location = new System.Drawing.Point(231, 181);
-			this.groupBoxTypeAlarm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.groupBoxTypeAlarm.Margin = new System.Windows.Forms.Padding(4);
 			this.groupBoxTypeAlarm.Name = "groupBoxTypeAlarm";
-			this.groupBoxTypeAlarm.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.groupBoxTypeAlarm.Padding = new System.Windows.Forms.Padding(4);
 			this.groupBoxTypeAlarm.Size = new System.Drawing.Size(233, 48);
 			this.groupBoxTypeAlarm.TabIndex = 2;
 			this.groupBoxTypeAlarm.TabStop = false;
@@ -156,11 +156,11 @@
 			this.groupBoxTypeTime.Controls.Add(this.radioButtonDays);
 			this.groupBoxTypeTime.Controls.Add(this.radioButtonHours);
 			this.groupBoxTypeTime.Location = new System.Drawing.Point(395, 319);
-			this.groupBoxTypeTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.groupBoxTypeTime.Margin = new System.Windows.Forms.Padding(4);
 			this.groupBoxTypeTime.Name = "groupBoxTypeTime";
-			this.groupBoxTypeTime.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.groupBoxTypeTime.Padding = new System.Windows.Forms.Padding(4);
 			this.groupBoxTypeTime.Size = new System.Drawing.Size(195, 48);
-			this.groupBoxTypeTime.TabIndex = 21;
+			this.groupBoxTypeTime.TabIndex = 7;
 			this.groupBoxTypeTime.TabStop = false;
 			// 
 			// labelError
@@ -178,10 +178,10 @@
 			this.listBoxAlarms.FormattingEnabled = true;
 			this.listBoxAlarms.ItemHeight = 16;
 			this.listBoxAlarms.Location = new System.Drawing.Point(41, 476);
-			this.listBoxAlarms.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.listBoxAlarms.Margin = new System.Windows.Forms.Padding(4);
 			this.listBoxAlarms.Name = "listBoxAlarms";
 			this.listBoxAlarms.Size = new System.Drawing.Size(547, 164);
-			this.listBoxAlarms.TabIndex = 23;
+			this.listBoxAlarms.TabIndex = 10;
 			// 
 			// AddAlarm
 			// 
@@ -197,7 +197,7 @@
 			this.Controls.Add(this.textBoxQuantityTime);
 			this.Controls.Add(this.textBoxQuantityPost);
 			this.Controls.Add(this.cmbEntities);
-			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "AddAlarm";
 			this.Size = new System.Drawing.Size(613, 679);
 			this.groupBoxTypeAlarm.ResumeLayout(false);
