@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alarm.cs" />
+    <Compile Include="Author.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="IAlarm.cs" />
     <Compile Include="Phrase.cs" />

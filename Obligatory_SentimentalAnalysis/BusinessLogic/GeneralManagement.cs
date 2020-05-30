@@ -9,6 +9,7 @@ namespace BusinessLogic
 		public PhraseManagement PhraseManagement { get; set; }
 		public EntityManagement EntityManagement { get; set; }
 		public SentimentManagement SentimentManagement { get; set; }
+        public AuthorManagement AuthorManagement { get; set; }
 
 		public GeneralManagement()
 		{
@@ -16,6 +17,7 @@ namespace BusinessLogic
 			SentimentManagement = new SentimentManagement();
 			AlarmManagement = new AlarmManagement();
 			PhraseManagement = new PhraseManagement();
+            AuthorManagement = new AuthorManagement(); 
 		}
 
 		public void AnalysisPhrase(Phrase phrase)
@@ -71,6 +73,13 @@ namespace BusinessLogic
 			}
 			return entityFound; 
 		}
+
+        public void DeleteAuthorPhrases(Author author)
+        {
+            author.DeleteAllPhrases();
+            PhraseManagement.DeletePhrasesOfAuthor(author); 
+        }
+
 		
 		public void UpdateAlarms(ITimeProvider provider)
 		{

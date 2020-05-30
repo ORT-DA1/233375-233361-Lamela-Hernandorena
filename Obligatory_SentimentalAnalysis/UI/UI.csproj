@@ -70,6 +70,12 @@
     <Compile Include="AddSentiment.Designer.cs">
       <DependentUpon>AddSentiment.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdmAuthors.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AdmAuthors.Designer.cs">
+      <DependentUpon>AdmAuthors.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddSentiment.resx">
       <DependentUpon>AddSentiment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdmAuthors.resx">
+      <DependentUpon>AdmAuthors.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
@@ -153,12 +162,13 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Images\AgregadoAutores.png" />
     <Content Include="Images\AgregarAlarma.png" />
     <Content Include="Images\AgregarEntidades.png" />
-    <Content Include="Images\AgregarFrase.png" />
+    <None Include="Images\MenuPrincipal.png" />
+    <None Include="Images\AgregarFrase.png" />
     <Content Include="Images\AgregarSentimientos.png" />
     <Content Include="Images\AnalisisDeFrase.png" />
-    <Content Include="Images\MenuPrincipal.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

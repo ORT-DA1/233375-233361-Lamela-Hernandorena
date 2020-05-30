@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlarmManagement.cs" />
+    <Compile Include="AuthorManagement.cs" />
     <Compile Include="EntityManagement.cs" />
     <Compile Include="GeneralManagement.cs" />
     <Compile Include="ITimeProvider.cs" />

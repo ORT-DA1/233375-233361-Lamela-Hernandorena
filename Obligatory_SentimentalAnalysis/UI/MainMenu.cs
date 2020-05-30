@@ -59,5 +59,12 @@ namespace UI
 		{
 			Application.Exit(); 
 		}
-	}
+
+        private void btnAuthors_Click(object sender, EventArgs e)
+        {
+            panelMain.Controls.Clear();
+            UserControl admAuthors = new AdmAuthors(GeneralManagement);
+            panelMain.Controls.Add(admAuthors); 
+        }
+    }
 }

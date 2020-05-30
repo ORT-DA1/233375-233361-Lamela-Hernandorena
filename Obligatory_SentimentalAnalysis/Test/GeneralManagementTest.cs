@@ -8,13 +8,22 @@ namespace Test
 	[TestClass]
 	public class GeneralManagementTest
 	{
-		GeneralManagement management; 
+		GeneralManagement management;
+        Author author; 
 
 		[TestInitialize]
 		public void SetUp()
 		{
 			management = new GeneralManagement();
-		}
+            author = new Author()
+            {
+                UserName = "Josami",
+                Name = "Joaquin",
+                LastName = "Lamela",
+                BirthDate = new DateTime(2000, 02, 29)
+            };
+            management.AuthorManagement.AddAuthor(author); 
+        }
 
 
 		[TestMethod]
@@ -33,16 +42,18 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment); 
 			Phrase phrase = new Phrase()
 			{
-				TextPhrase= "Me gusta Coca Cola"
-			}; 
+				TextPhrase= "Me gusta Coca Cola",
+                PhraseAuthor = author
+            }; 
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase); 
 			
 		}
@@ -70,16 +81,18 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment2);
 			Phrase phrase = new Phrase()
 			{
-				TextPhrase= "Me disgusta Coca Cola"
-			};
+				TextPhrase= "Me disgusta Coca Cola",
+                PhraseAuthor = author
+            };
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
 				TextPhrase= "Me disgusta Coca Cola",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				PhraseType = Phrase.TypePhrase.Negative
-			};
+				PhraseType = Phrase.TypePhrase.Negative,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
@@ -107,16 +120,18 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment2);
 			Phrase phrase = new Phrase()
 			{
-				TextPhrase= "Me disgusta me encanta Coca Cola"
-			};
+				TextPhrase= "Me disgusta me encanta Coca Cola",
+                PhraseAuthor = author
+            };
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
 				TextPhrase= "Me disgusta me encanta Coca Cola",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				PhraseType= Phrase.TypePhrase.Neutral
-			};
+				PhraseType= Phrase.TypePhrase.Neutral,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
@@ -132,16 +147,18 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment);
 			Phrase phrase = new Phrase()
 			{
-				TextPhrase= "Me encanta"
-			};
+				TextPhrase= "Me encanta",
+                PhraseAuthor = author
+            };
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
 				TextPhrase= "Me encanta",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				PhraseType = Phrase.TypePhrase.Neutral
-			};
+				PhraseType = Phrase.TypePhrase.Neutral,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
@@ -170,8 +187,9 @@ namespace Test
 				TextPhrase= "Rappi",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				PhraseType = Phrase.TypePhrase.Neutral
-			};
+				PhraseType = Phrase.TypePhrase.Neutral,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
@@ -189,8 +207,9 @@ namespace Test
 				TextPhrase= "Me gusta subway",
 				PhraseDate= DateTime.Now,
 				Entity= new Entity(),
-				PhraseType = Phrase.TypePhrase.Neutral
-			};
+				PhraseType = Phrase.TypePhrase.Neutral,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
@@ -208,8 +227,9 @@ namespace Test
 				TextPhrase= "",
 				PhraseDate= DateTime.Now,
 				Entity= new Entity(),
-				PhraseType = Phrase.TypePhrase.Neutral
-			};
+				PhraseType = Phrase.TypePhrase.Neutral,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
@@ -242,8 +262,9 @@ namespace Test
 				TextPhrase= "Me encanta McDonald's y también Starbucks",
 				PhraseDate= DateTime.Now,
 				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
@@ -271,16 +292,18 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment2);
 			Phrase phrase = new Phrase()
 			{
-				TextPhrase= "Me gusta me encanta Rappi"
-			};
+				TextPhrase= "Me gusta me encanta Rappi",
+                PhraseAuthor = author
+            };
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
 				TextPhrase= "Me gusta me encanta Rappi",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
@@ -318,16 +341,18 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment2);
 			Phrase phrase = new Phrase()
 			{
-				TextPhrase= "Me gusta Mc       donalds"
-			};
+				TextPhrase= "Me gusta Mc       donalds",
+                PhraseAuthor = author
+            };
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
 				TextPhrase= "Me gusta Mc       donalds",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
@@ -359,8 +384,9 @@ namespace Test
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= DateTime.Now,
 				Entity= entity,
-				PhraseType = Phrase.TypePhrase.Positive
-			};
+				PhraseType = Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			management.PhraseManagement.AddPhrase(phrase);
 			MockedTimeProvider provider = new MockedTimeProvider()
 			{
@@ -403,15 +429,17 @@ namespace Test
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= new DateTime(2020,04,28),
 				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			Phrase phrase2 = new Phrase()
 			{
 				TextPhrase= "Me gusta Pepsi",
 				PhraseDate= DateTime.Now,
 				Entity= entity2,
-				PhraseType = Phrase.TypePhrase.Positive
-			};
+				PhraseType = Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
 			MockedTimeProvider provider = new MockedTimeProvider()
@@ -481,15 +509,17 @@ namespace Test
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= new DateTime(2020, 04, 25),
 				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			Phrase phrase2 = new Phrase()
 			{
 				TextPhrase="Me gusta Pepsi",
 				PhraseDate= new DateTime(2020, 04, 26),
 				Entity= entity2,
-				PhraseType = Phrase.TypePhrase.Positive
-			};
+				PhraseType = Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
 			MockedTimeProvider provider = new MockedTimeProvider()
@@ -542,15 +572,17 @@ namespace Test
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= new DateTime(2020, 04, 25),
 				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			Phrase phrase2 = new Phrase()
 			{
 				TextPhrase= "Me gusta Pepsi",
 				PhraseDate= new DateTime(2020,04,30),
 				Entity= entity2,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
 			MockedTimeProvider provider = new MockedTimeProvider()
@@ -609,22 +641,25 @@ namespace Test
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= new DateTime(2020, 04, 25),
 				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			Phrase phrase2 = new Phrase()
 			{
 				TextPhrase= "Odio Pepsi",
 				PhraseDate= new DateTime(2020, 04, 25),
 				Entity= entity2,
-				PhraseType= Phrase.TypePhrase.Negative
-			};
+				PhraseType= Phrase.TypePhrase.Negative,
+                PhraseAuthor = author
+            };
 			Phrase phrase3 = new Phrase()
 			{
 				TextPhrase= "Odio con todo mi ser a Pepsi",
 				PhraseDate=  new DateTime(2020, 04, 25),
 				Entity= entity2,
-				PhraseType= Phrase.TypePhrase.Negative
-			};
+				PhraseType= Phrase.TypePhrase.Negative,
+                PhraseAuthor = author
+            };
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
 			management.PhraseManagement.AddPhrase(phrase3);
@@ -667,8 +702,9 @@ namespace Test
 				TextPhrase= "Odio Coca Cola",
 				PhraseDate= new DateTime(2020,02,10),
 				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Negative
-			};
+				PhraseType= Phrase.TypePhrase.Negative,
+                PhraseAuthor = author
+            };
 			management.PhraseManagement.AddPhrase(phrase);
 			MockedTimeProvider provider = new MockedTimeProvider()
 			{
@@ -678,5 +714,58 @@ namespace Test
 			management.UpdateAlarms(provider);
 			Assert.IsFalse(aAlarm.IsActive);
 		}
-	}
+
+
+
+        [TestMethod]
+        public void DeleteAllPhrases()
+        {
+            Entity entityExpected = new Entity()
+            {
+                EntityName = "Mc donalds"
+            };
+            management.EntityManagement.AddEntity(entityExpected);
+            Entity entity2 = new Entity()
+            {
+                EntityName = "Rappi"
+            };
+            management.EntityManagement.AddEntity(entity2);
+            Entity entity = new Entity()
+            {
+                EntityName = "Coca cola"
+            };
+            management.EntityManagement.AddEntity(entity);
+            Sentiment sentiment = new Sentiment()
+            {
+                SentimientText = "Me encanta",
+                SentimentType = Sentiment.TypeSentiment.Positive
+            };
+            management.SentimentManagement.AddSentiment(sentiment);
+            Sentiment sentiment2 = new Sentiment()
+            {
+                SentimientText = "Me gusta",
+                SentimentType = Sentiment.TypeSentiment.Positive
+            };
+            management.SentimentManagement.AddSentiment(sentiment2);
+            Phrase phrase = new Phrase()
+            {
+                TextPhrase = "Me gusta Mc       donalds",
+                PhraseDate = DateTime.Now,
+                PhraseAuthor = author
+            };
+            management.PhraseManagement.AddPhrase(phrase); 
+            Phrase phrase2 = new Phrase()
+            {
+                TextPhrase = "No me gusta Rappi",
+                PhraseDate = DateTime.Now,
+                Entity = entity2,
+                PhraseType = Phrase.TypePhrase.Negative,
+                PhraseAuthor = author
+            };
+            management.PhraseManagement.AddPhrase(phrase2);
+            management.DeleteAuthorPhrases(author);
+            Assert.IsTrue(management.PhraseManagement.AllPhrases.Length == 0);
+            Assert.IsTrue(author.AllAuthorPhrases.Length == 0); 
+        }
+    }
 }

@@ -51,6 +51,12 @@ namespace UI
 					grdPhrases.Columns[i].Name = "Tipo de frase";
 				}
 
+                if(columnName == "PhraseAuthor")
+                {
+                    grdPhrases.Columns[i].HeaderText = "Autor";
+                    grdPhrases.Columns[i].Name = "Autor";
+                }
+
 			}
 		}
 

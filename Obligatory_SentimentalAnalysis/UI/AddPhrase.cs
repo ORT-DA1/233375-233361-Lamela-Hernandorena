@@ -14,9 +14,10 @@ namespace UI
 		{
 			InitializeComponent();
 			generalManagement = management;
-			InitializeCalendar(); 
-
-		}
+			InitializeCalendar();
+            InitializeListOfAuthors();
+            DisplayAddButton();
+        }
 
 		private void InitializeCalendar()
 		{
@@ -24,6 +25,11 @@ namespace UI
 			dateTimePickerPhraseDate.MinDate = DateTime.Now.AddYears(-1);
 			dateTimePickerPhraseDate.MaxDate = DateTime.Now; 
 		}
+
+        private void InitializeListOfAuthors()
+        {
+            listBoxAuthors.DataSource = generalManagement.AuthorManagement.AllAuthors;
+        }
 
 		private void btnAddPhrase_Click(object sender, EventArgs e)
 		{
@@ -53,17 +59,28 @@ namespace UI
 				labelError.Text = "Debe seleccionar la fecha de la frase"; 
 			}
 
-			Phrase phrase = new Phrase()
-			{
-				TextPhrase = phraseText, 
-				PhraseDate = phraseDate
-			};
-			generalManagement.AnalysisPhrase(phrase);
-			generalManagement.PhraseManagement.AddPhrase(phrase);
-			RealTimeProvider timeNow = new RealTimeProvider(); 
-			generalManagement.UpdateAlarms(timeNow); 
-			MessageBox.Show("Se ha agregado una frase correctamente");
-			ClearAllFields(); 
+            if (listBoxAuthors.SelectedIndex == -1)
+            {
+                labelError.Visible = true;
+                labelError.Text = "Error seleccione un autor para la frase";
+            }
+            else
+            {
+                Phrase phrase = new Phrase()
+                {
+                    TextPhrase = phraseText,
+                    PhraseDate = phraseDate,
+                    PhraseAuthor = (Author)listBoxAuthors.SelectedItem
+                };
+                generalManagement.AnalysisPhrase(phrase);
+                generalManagement.PhraseManagement.AddPhrase(phrase); 
+                RealTimeProvider timeNow = new RealTimeProvider();
+                generalManagement.UpdateAlarms(timeNow);
+                MessageBox.Show("Se ha agregado una frase correctamente");
+                ClearAllFields();
+            }
+
+            
 		}
 
 		private void ClearAllFields()
@@ -73,5 +90,18 @@ namespace UI
 			labelError.Text = ""; 
 		}
 
-	}
+        private void DisplayAddButton()
+        {
+            if (generalManagement.AuthorManagement.AllAuthors.Length > 0)
+            {
+                btnAddPhrase.Enabled = true;
+            }
+            else
+            {
+                btnAddPhrase.Enabled = false;
+            }
+        }
+
+
+    }
 }

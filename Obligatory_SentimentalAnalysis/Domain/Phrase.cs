@@ -14,6 +14,7 @@ namespace Domain
 		public enum TypePhrase { Positive, Neutral, Negative} 
 
 		public TypePhrase PhraseType { get; set;  }
+        public Author PhraseAuthor { get; set; }
 		
         public Phrase ()
         {

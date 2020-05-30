@@ -17,10 +17,16 @@ namespace BusinessLogic
 		{
 			phrase.TextPhrase = Utilities.DeleteSpaces(phrase.TextPhrase.Trim()); 
 			phrase.VerifyFormat(); 
-			phraseList.Add(phrase); 
+			phraseList.Add(phrase);
+            phrase.PhraseAuthor.AddPhrase(phrase); 
 		}
 
-		public bool IsEmpty()
+        public void DeletePhrasesOfAuthor(Author author)
+        {
+            phraseList.RemoveAll(phrase => phrase.PhraseAuthor.Equals(author));            
+        }
+
+        public bool IsEmpty()
 		{
 			return phraseList.Count == 0; 
 		}

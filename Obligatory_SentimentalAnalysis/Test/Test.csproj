@@ -56,6 +56,7 @@
     <Compile Include="PhraseManagementTest.cs" />
     <Compile Include="AlarmManagementTest.cs" />
     <Compile Include="GeneralManagementTest.cs" />
+    <Compile Include="AuthorManagementTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
