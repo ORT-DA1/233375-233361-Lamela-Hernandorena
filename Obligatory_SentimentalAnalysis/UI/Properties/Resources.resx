@@ -121,11 +121,11 @@
   <data name="AnalisisDeFrase1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\AnalisisDeFrase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AgregadoAutores" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\AgregadoAutores.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="AgregarEntidades1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\AgregarEntidades.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MenuPrincipal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\MenuPrincipal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AgregarAlarma1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\AgregarAlarma.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,10 +133,13 @@
   <data name="AgregarSentimientos" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\AgregarSentimientos.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="MenuPrincipal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\MenuPrincipal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="AgregarFrase" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\AgregarFrase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AgregadoAutores" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\AgregadoAutores.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="btnModificar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\btnModificar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

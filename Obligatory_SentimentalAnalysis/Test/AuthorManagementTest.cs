@@ -260,7 +260,80 @@ namespace Test
             Assert.IsTrue(author.AllAuthorPhrases.Length==0);
         }
 
+        [TestMethod]
+        public void UpdateAuthorInfo()
+        {
+            Author authorToModificate = new Author()
+            {
+                Name = "Agustin",
+                LastName = "Hernandorena",
+                UserName = "agus",
+                BirthDate = new DateTime(2000, 04, 01)
+            };
 
+            Author copyAuthor = new Author()
+            {
+                Name = "Agustin",
+                LastName = "Hernandorena",
+                UserName = "agush2000",
+                BirthDate = new DateTime(2000, 04, 01)
+            };
 
+            management.UpdateAuthorInformation(authorToModificate, copyAuthor);
+            Assert.AreEqual(authorToModificate, copyAuthor);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(AuthorException))]
+        public void UpdateAuthorWithIncorrectInfo()
+        {
+            Author author = new Author()
+            {
+                Name = "Agustin",
+                LastName = "Hernandorena",
+                UserName = "agustin1",
+                BirthDate = new DateTime(2000, 04, 01)
+            };
+            management.AddAuthor(author);
+
+            Author authorToModificate = new Author()
+            {
+                Name = "Agustin",
+                LastName = "Hernandorena",
+                UserName = "agus",
+                BirthDate = new DateTime(2000, 04, 01)
+            };
+            
+            Author copyAuthor = new Author()
+            {
+                Name = "Agustin",
+                LastName = "Hernandorena",
+                UserName = "agustin1",
+                BirthDate = new DateTime(2000, 04, 01)
+            };
+            management.UpdateAuthorInformation(authorToModificate, copyAuthor);
+        }
+
+        [TestMethod]
+        public void UpdateAuthorWithTheSameInfo()
+        {
+            Author authorToModificate = new Author()
+            {
+                Name = "Agustin",
+                LastName = "Hernandorena",
+                UserName = "agus",
+                BirthDate = new DateTime(2000, 04, 01)
+            };
+
+            Author copyAuthor = new Author()
+            {
+                Name = "Agustin",
+                LastName = "Hernandorena",
+                UserName = "agus",
+                BirthDate = new DateTime(2000, 04, 01)
+            };
+            management.UpdateAuthorInformation(authorToModificate, copyAuthor);
+            Assert.AreEqual(authorToModificate, copyAuthor);
+        }
     }
 }

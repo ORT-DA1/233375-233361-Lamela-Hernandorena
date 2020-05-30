@@ -1,7 +1,7 @@
 ﻿using BusinessLogicExceptions;
 using Domain;
 using System.Collections.Generic;
-
+using System.Security.Permissions;
 
 namespace BusinessLogic
 {
@@ -27,6 +27,35 @@ namespace BusinessLogic
             VerifyFormatDelete(author);
             authorList.Remove(author);
         }
+
+        public void UpdateAuthorInformation(Author authorToModificate, Author copyAuthor)
+        {
+            FormatFields(copyAuthor);
+            copyAuthor.VerifyFormat();
+            verifyFormatModificateAuthor(copyAuthor, authorToModificate);
+            CopyInformationAuthorToAuthor(authorToModificate, copyAuthor);
+        }
+
+        private void verifyFormatModificateAuthor(Author copyAuthor, Author authorToModificate)
+        {
+            if (!copyAuthor.Equals(authorToModificate))
+            {
+                if (IsContained(copyAuthor))
+                {
+                    throw new AuthorException(MessagesExceptions.ErrorAuthorExist);
+                }
+            }
+
+        }
+
+        private void CopyInformationAuthorToAuthor(Author authorToModificate, Author copyAuthor)
+        {
+            authorToModificate.Name = copyAuthor.Name;
+            authorToModificate.LastName = copyAuthor.LastName;
+            authorToModificate.UserName = copyAuthor.UserName;
+            authorToModificate.BirthDate = copyAuthor.BirthDate;
+        }
+
 
         private void VerifyFormatDelete(Author author)
         {
@@ -57,9 +86,9 @@ namespace BusinessLogic
 
         private void FormatFields(Author author)
         {
-            author.UserName = Utilities.DeleteSpaces(author.UserName);
-            author.Name = Utilities.DeleteSpaces(author.Name);
-            author.LastName = Utilities.DeleteSpaces(author.LastName);
+            author.UserName = Utilities.DeleteSpaces(author.UserName.Trim());
+            author.Name = Utilities.DeleteSpaces(author.Name.Trim());
+            author.LastName = Utilities.DeleteSpaces(author.LastName.Trim());
         }
 
         public Author[] AllAuthors

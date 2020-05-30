@@ -162,6 +162,7 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Images\btnModificar.png" />
     <None Include="Images\AgregadoAutores.png" />
     <Content Include="Images\AgregarAlarma.png" />
     <Content Include="Images\AgregarEntidades.png" />

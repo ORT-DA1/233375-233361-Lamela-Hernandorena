@@ -17,6 +17,7 @@ namespace UI
 			DisplayDeleteButton();
 		}
 
+
 		private void InitializeListOfEntities()
 		{
 			listBoxEntities.DataSource = generalManagement.EntityManagement.AllEntities;

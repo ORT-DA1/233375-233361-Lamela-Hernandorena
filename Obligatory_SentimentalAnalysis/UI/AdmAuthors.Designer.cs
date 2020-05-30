@@ -37,6 +37,7 @@
             this.btnModify = new System.Windows.Forms.Button();
             this.listBoxAuthors = new System.Windows.Forms.ListBox();
             this.labelError = new System.Windows.Forms.Label();
+            this.btnModifyAuthor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxUserName
@@ -110,6 +111,7 @@
             this.btnModify.Size = new System.Drawing.Size(163, 42);
             this.btnModify.TabIndex = 6;
             this.btnModify.UseVisualStyleBackColor = false;
+            this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
             // 
             // listBoxAuthors
             // 
@@ -125,14 +127,26 @@
             this.labelError.ForeColor = System.Drawing.Color.Red;
             this.labelError.Location = new System.Drawing.Point(147, 283);
             this.labelError.Name = "labelError";
-            this.labelError.Size = new System.Drawing.Size(96, 13);
+            this.labelError.Size = new System.Drawing.Size(0, 13);
             this.labelError.TabIndex = 8;
+            // 
+            // btnModifyAuthor
+            // 
+            this.btnModifyAuthor.BackgroundImage = global::UI.Properties.Resources.btnModificar;
+            this.btnModifyAuthor.FlatAppearance.BorderSize = 0;
+            this.btnModifyAuthor.Location = new System.Drawing.Point(150, 238);
+            this.btnModifyAuthor.Name = "btnModifyAuthor";
+            this.btnModifyAuthor.Size = new System.Drawing.Size(163, 42);
+            this.btnModifyAuthor.TabIndex = 9;
+            this.btnModifyAuthor.UseVisualStyleBackColor = true;
+            this.btnModifyAuthor.Click += new System.EventHandler(this.btnModifyAuthor_Click);
             // 
             // AdmAuthors
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::UI.Properties.Resources.AgregadoAutores;
+            this.Controls.Add(this.btnModifyAuthor);
             this.Controls.Add(this.labelError);
             this.Controls.Add(this.listBoxAuthors);
             this.Controls.Add(this.btnModify);
@@ -160,5 +174,6 @@
         private System.Windows.Forms.Button btnModify;
         private System.Windows.Forms.ListBox listBoxAuthors;
         private System.Windows.Forms.Label labelError;
+        private System.Windows.Forms.Button btnModifyAuthor;
     }
 }

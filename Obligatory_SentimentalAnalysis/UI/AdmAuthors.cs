@@ -10,12 +10,15 @@ using System.Windows.Forms;
 using BusinessLogic;
 using BusinessLogicExceptions;
 using Domain;
+using System.Threading;
 
 namespace UI
 {
     public partial class AdmAuthors : UserControl
     {
-        private GeneralManagement generalManagement; 
+        private GeneralManagement generalManagement;
+
+        private Author authorToModify;
 
         public AdmAuthors(GeneralManagement management)
         {
@@ -24,7 +27,15 @@ namespace UI
             InitializeListOfAuthors();
             DisplayDeleteAndModifyButton();
             ClearAllFields();
-            InitializeCalendar(); 
+            InitializeCalendar();
+            DisableModifyAuthorButton();
+        }
+
+
+        private void DisableModifyAuthorButton()
+        {
+            btnModifyAuthor.Visible = false;
+            btnModifyAuthor.Enabled = false;
         }
 
         private void btnAddAuthor_Click(object sender, EventArgs e)
@@ -32,7 +43,7 @@ namespace UI
             try
             {
                 AddAuthorUI();
-                MessageBox.Show("Author agregado correctamente.");
+                MessageBox.Show("Autor agregado correctamente.");
                 InitializeListOfAuthors();
                 ClearAllFields();
                 DisplayDeleteAndModifyButton();
@@ -116,6 +127,74 @@ namespace UI
             dateTimePickerBirth.MinDate = DateTime.Now.AddYears(-100); 
             dateTimePickerBirth.MaxDate = DateTime.Now.AddYears(-13);
         }
+
+        private void btnModify_Click(object sender, EventArgs e)
+        {
+            if (listBoxAuthors.SelectedIndex == -1)
+            {
+                labelError.Visible = true;
+                labelError.Text = "Error seleccione un autor a modificar.";
+            }
+            else
+            {
+                authorToModify = (Author)listBoxAuthors.SelectedItem;
+                ChargeAuthorInformation(authorToModify);
+                btnModifyAuthor.Visible = true;
+                btnModifyAuthor.Enabled = true; 
+                btnAddAuthor.Visible = false;
+                btnAddAuthor.Enabled = false;
+            }
+        }
+
+        private void ChargeAuthorInformation(Author aAuthor)
+        {
+            textBoxUserName.Text = aAuthor.UserName;
+            textBoxName.Text = aAuthor.Name;
+            textBoxLastname.Text = aAuthor.LastName;
+            dateTimePickerBirth.Value = aAuthor.BirthDate;
+        }
+
+        private void modifyAuthorUI()
+        {
+            Author copyAutor = new Author()
+            {
+                Name = textBoxName.Text,
+                LastName = textBoxLastname.Text,
+                UserName = textBoxUserName.Text,
+                BirthDate = dateTimePickerBirth.Value
+            };
+            generalManagement.AuthorManagement.UpdateAuthorInformation(authorToModify, copyAutor);
+        }
+
+        public void DisplayAddButton()
+        {
+            btnAddAuthor.Visible = true;
+            btnAddAuthor.Enabled = true;
+            btnModifyAuthor.Visible = false;
+            btnModifyAuthor.Enabled = false;
+        }
         
+
+        private void btnModifyAuthor_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                modifyAuthorUI();
+                MessageBox.Show("Autor modificado correctamente.");
+                InitializeListOfAuthors();
+                ClearAllFields();
+                DisplayDeleteAndModifyButton();
+                DisplayAddButton();
+            }
+            catch (AuthorException ex)
+            {
+                labelError.Visible = true;
+                labelError.Text = ex.Message;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error interno del sistema");
+            }
+        }
     }
 }
