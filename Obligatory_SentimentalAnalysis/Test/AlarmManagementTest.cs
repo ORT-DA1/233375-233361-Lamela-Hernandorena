@@ -16,7 +16,6 @@ namespace Test
 		public void SetUp()
 		{
 			management = new AlarmManagement();
-
 		}
 
 
@@ -208,5 +207,91 @@ namespace Test
 			management.AddAlarm(alarm);
 			Assert.AreEqual(alarm.Show(), management.AllAlarms[0].Show());
 		}
-	}
+
+        //Test of the new type of Alarm
+
+        [TestMethod]
+        public void CreateValidAuthorAlarm()
+        {
+            AuthorAlarm alarm = new AuthorAlarm()
+            {
+                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                QuantityPost = 50,
+                QuantityTime = 5,
+                IsInHours = false
+            };
+            management.AddAlarm(alarm);
+            CollectionAssert.Contains(management.AllAlarms, alarm);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(AlarmManagementException))]
+        public void CreateInvalidAuthorAlarm()
+        {
+
+            AuthorAlarm alarm = new AuthorAlarm()
+            {
+                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                QuantityPost = -50,
+                QuantityTime = 13,
+                IsInHours = true
+            };
+            management.AddAlarm(alarm);
+        }
+
+
+        [TestMethod]
+        public void AddTwoAuthorsAlarms()
+        {
+            AuthorAlarm alarm = new AuthorAlarm()
+            {
+                
+                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                QuantityPost = 40,
+                QuantityTime = 10,
+                IsInHours = false
+            };
+            AuthorAlarm alarm2 = new AuthorAlarm()
+            {
+                TypeOfAlarm = AuthorAlarm.Type.Negative,
+                QuantityPost = 30,
+                QuantityTime = 20,
+                IsInHours = true
+            };
+            management.AddAlarm(alarm);
+            management.AddAlarm(alarm2);
+            Assert.IsTrue(management.AllAlarms.Length == 2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(AlarmManagementException))]
+        public void CreateInvalidAuthorAlarmQuantityTimeNegative()
+        {
+            AuthorAlarm alarm = new AuthorAlarm()
+            {
+                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                QuantityPost = 90,
+                QuantityTime = -15,
+                IsInHours = false
+            };
+            management.AddAlarm(alarm);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(AlarmManagementException))]
+        public void CreateInvalidQuantityPostAuthorAlarm()
+        {
+            AuthorAlarm alarm = new AuthorAlarm()
+            {
+                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                QuantityPost = 100000,
+                QuantityTime = 10,
+                IsInHours = false
+            };
+            management.AddAlarm(alarm);
+        }
+
+
+
+    }
 }
