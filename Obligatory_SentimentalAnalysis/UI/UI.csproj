@@ -52,6 +52,12 @@
     <Compile Include="AddAlarm.Designer.cs">
       <DependentUpon>AddAlarm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddAuthorAlarm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AddAuthorAlarm.Designer.cs">
+      <DependentUpon>AddAuthorAlarm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddEntity.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -99,6 +105,9 @@
     </Compile>
     <EmbeddedResource Include="AddAlarm.resx">
       <DependentUpon>AddAlarm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddAuthorAlarm.resx">
+      <DependentUpon>AddAuthorAlarm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddEntity.resx">
       <DependentUpon>AddEntity.cs</DependentUpon>
@@ -169,6 +178,7 @@
     <None Include="Images\MenuPrincipal.png" />
     <None Include="Images\AgregarFrase.png" />
     <Content Include="Images\AgregarSentimientos.png" />
+    <None Include="Images\AlarmaAutores.png" />
     <Content Include="Images\AnalisisDeFrase.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

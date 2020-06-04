@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BusinessLogicExceptions; 
 
 namespace Domain
@@ -22,7 +23,38 @@ namespace Domain
         
         public string Show()
         {
-            throw new NotImplementedException();
+            string state = "";
+            if (IsActive)
+            {
+                state = "activa";
+            }
+            else
+            {
+                state = "inactiva";
+            }
+
+            string returnText = "Alarma de tipo: " + TranslateTypeOfAlarm() + " con estado: " + state;
+            if (IsActive)
+            {
+                returnText = returnText + " con los autores: ";
+                foreach (Author author in participantsAuthors)
+                {
+                    returnText = returnText + " " + author.UserName + " ";
+                }
+            }
+            return returnText;
+        }
+
+        private string TranslateTypeOfAlarm()
+        {
+            if (TypeOfAlarm.ToString().Equals("Positive"))
+            {
+                return "positiva";
+            }
+            else
+            {
+                return "negativa";
+            }
         }
 
         public Author[] AllAuthorsWhoActiveAlarm
@@ -32,9 +64,19 @@ namespace Domain
 
         public void UpdateState(Phrase[] phrases, DateTime date)
         {
-            int counterPost = 0;
+
+            participantsAuthors.Clear();
             IsActive = false;
             DateTime minDate = date;
+            Author[] participants = new Author[phrases.Length];
+            List<Author> participants2 = new List<Author>();
+            for(int i=0; i < participants.Length; i++)
+            {
+                participants[i] = new Author();
+                participants[i].UserName = "";
+            }
+            int[] quantity = new int[phrases.Length];
+            int index = 0;
             foreach (Phrase phrase in phrases)
             {
                 minDate = DeterminateMinDate(date);
@@ -42,18 +84,27 @@ namespace Domain
                 {
                     if (phrase.PhraseType.ToString().Equals(TypeOfAlarm.ToString()))
                     {
-                        counterPost++;
-                        participantsAuthors.Add(phrase.PhraseAuthor);
+                        int currentIndex = Array.FindIndex(participants, p => p.Equals(phrase.PhraseAuthor));
+                        if (currentIndex == -1)
+                        {
+                            participants[index] = phrase.PhraseAuthor;
+                            quantity[index]++;
+                        }
+                        else
+                        {
+                            quantity[currentIndex]++;
+                        }
+                        index++;
                     }
                 }
             }
-            if (counterPost >= QuantityPost)
+            for(int i=0; i<quantity.Length; i++)
             {
-                IsActive = true;
-            }
-            else
-            {
-                participantsAuthors.Clear();
+                if(quantity[i] >= QuantityPost)
+                {
+                    participantsAuthors.Add(participants[i]);
+                    IsActive = true;
+                }
             }
         }
 

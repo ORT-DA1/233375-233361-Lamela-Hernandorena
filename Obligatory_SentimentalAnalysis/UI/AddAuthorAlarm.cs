@@ -1,57 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
-using BusinessLogicExceptions;
 using Domain;
+using BusinessLogicExceptions;
 
 namespace UI
 {
-	public partial class AddAlarm : UserControl
-	{
-		private GeneralManagement generalManagement;
-		public AddAlarm(GeneralManagement management)
-		{
-			InitializeComponent();
-			generalManagement = management;
-			InitializeEntities();
+    public partial class AddAuthorAlarm : UserControl
+    {
+        private GeneralManagement generalManagement;
+        
+        public AddAuthorAlarm(GeneralManagement management)
+        {
+            InitializeComponent();
+            generalManagement = management;
 			InitializeAlarms();
 			ClearAllFields();
 		}
-		private void InitializeEntities()
-		{
-			cmbEntities.DataSource = generalManagement.EntityManagement.AllEntities;
-		}
 
 		private void InitializeAlarms()
-		{
-			listBoxAlarms.Items.Clear();
-			foreach (IAlarm alarm in generalManagement.AlarmManagement.AllAlarms)
-			{
-				listBoxAlarms.Items.Add(alarm.Show());
-			}
-		}
+        {
+            listBoxAuthorAlarms.Items.Clear();
+            foreach (IAlarm alarm in generalManagement.AlarmManagement.AllAlarms)
+            {
+                listBoxAuthorAlarms.Items.Add(alarm.Show());
+            }
+        }
 
-		private void ClearAllFields()
-		{
-			if (generalManagement.EntityManagement.AllEntities.Length > 0)
-			{
-				cmbEntities.SelectedIndex = 0;
-			}
-			textBoxQuantityPost.Text = "";
-			textBoxQuantityTime.Text = "";
-			labelError.Text = "";
-			labelError.Visible = true;
-		}
+        private void ClearAllFields()
+        {
+            textBoxQuantityPost.Text = "";
+            textBoxQuantityTime.Text = "";
+            labelError.Text = "";
+            labelError.Visible = true;
+        }
 
-		private void BtnAddAlarm_Click(object sender, EventArgs e)
-		{
-			if (cmbEntities.SelectedIndex == -1)
-			{
-				labelError.Visible = true;
-				labelError.Text = "Error. Debe seleccionar una entidad";
-			}
-			else if (!IsCheckedTypeOfAlarm())
+        private void addAlarm_Click(object sender, EventArgs e)
+        {
+			
+			if (!IsCheckedTypeOfAlarm())
 			{
 				labelError.Visible = true;
 				labelError.Text = "Error. Debe seleccionar un tipo de alarma";
@@ -100,9 +94,8 @@ namespace UI
 		private void AddAlarmUI()
 		{
 
-			Alarm alarmToAdd = new Alarm()
+			AuthorAlarm alarmToAdd = new AuthorAlarm()
 			{
-				Entity = (Entity)cmbEntities.SelectedItem,
 				QuantityPost = int.Parse(textBoxQuantityPost.Text),
 				QuantityTime = int.Parse(textBoxQuantityTime.Text),
 				TypeOfAlarm = TypeOfAlarmChecked(),
@@ -112,15 +105,15 @@ namespace UI
 			InitializeAlarms();
 		}
 
-		private Alarm.Type TypeOfAlarmChecked()
+		private AuthorAlarm.Type TypeOfAlarmChecked()
 		{
 			if (radioButtonPositive.Checked)
 			{
-				return Alarm.Type.Positive;
+				return AuthorAlarm.Type.Positive;
 			}
 			else
 			{
-				return Alarm.Type.Negative;
+				return AuthorAlarm.Type.Negative;
 			}
 		}
 
@@ -128,7 +121,6 @@ namespace UI
 		{
 			return radioButtonHours.Checked;
 		}
-
 
 		private bool IsCheckedTypeOfAlarm()
 		{
@@ -164,8 +156,8 @@ namespace UI
 			}
 		}
 
-		
 	}
+
+
+
 }
-
-

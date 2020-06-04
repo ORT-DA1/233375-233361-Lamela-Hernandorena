@@ -1,6 +1,6 @@
 ﻿namespace UI
 {
-    partial class AddAlarm
+    partial class AddAuthorAlarm
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,31 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cmbEntities = new System.Windows.Forms.ComboBox();
+            this.groupBoxTypeAlarm = new System.Windows.Forms.GroupBox();
             this.radioButtonPositive = new System.Windows.Forms.RadioButton();
             this.radioButtonNegative = new System.Windows.Forms.RadioButton();
             this.textBoxQuantityPost = new System.Windows.Forms.TextBox();
             this.textBoxQuantityTime = new System.Windows.Forms.TextBox();
+            this.listBoxAuthorAlarms = new System.Windows.Forms.ListBox();
+            this.addAlarm = new System.Windows.Forms.Button();
+            this.labelError = new System.Windows.Forms.Label();
+            this.groupBoxTypeTime = new System.Windows.Forms.GroupBox();
             this.radioButtonDays = new System.Windows.Forms.RadioButton();
             this.radioButtonHours = new System.Windows.Forms.RadioButton();
-            this.btnAddAlarm = new System.Windows.Forms.Button();
-            this.groupBoxTypeAlarm = new System.Windows.Forms.GroupBox();
-            this.groupBoxTypeTime = new System.Windows.Forms.GroupBox();
-            this.labelError = new System.Windows.Forms.Label();
-            this.listBoxAlarms = new System.Windows.Forms.ListBox();
             this.groupBoxTypeAlarm.SuspendLayout();
             this.groupBoxTypeTime.SuspendLayout();
             this.SuspendLayout();
             // 
-            // cmbEntities
+            // groupBoxTypeAlarm
             // 
-            this.cmbEntities.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.cmbEntities.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbEntities.FormattingEnabled = true;
-            this.cmbEntities.Location = new System.Drawing.Point(83, 99);
-            this.cmbEntities.Name = "cmbEntities";
-            this.cmbEntities.Size = new System.Drawing.Size(121, 21);
-            this.cmbEntities.TabIndex = 1;
+            this.groupBoxTypeAlarm.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBoxTypeAlarm.Controls.Add(this.radioButtonPositive);
+            this.groupBoxTypeAlarm.Controls.Add(this.radioButtonNegative);
+            this.groupBoxTypeAlarm.Location = new System.Drawing.Point(159, 76);
+            this.groupBoxTypeAlarm.Name = "groupBoxTypeAlarm";
+            this.groupBoxTypeAlarm.Size = new System.Drawing.Size(175, 39);
+            this.groupBoxTypeAlarm.TabIndex = 3;
+            this.groupBoxTypeAlarm.TabStop = false;
             // 
             // radioButtonPositive
             // 
@@ -78,19 +78,60 @@
             // 
             // textBoxQuantityPost
             // 
-            this.textBoxQuantityPost.Location = new System.Drawing.Point(153, 213);
+            this.textBoxQuantityPost.Location = new System.Drawing.Point(159, 130);
             this.textBoxQuantityPost.Name = "textBoxQuantityPost";
             this.textBoxQuantityPost.Size = new System.Drawing.Size(110, 20);
-            this.textBoxQuantityPost.TabIndex = 5;
-            this.textBoxQuantityPost.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxQuantityPost_KeyPress);
+            this.textBoxQuantityPost.TabIndex = 6;
             // 
             // textBoxQuantityTime
             // 
-            this.textBoxQuantityTime.Location = new System.Drawing.Point(153, 268);
+            this.textBoxQuantityTime.Location = new System.Drawing.Point(159, 174);
             this.textBoxQuantityTime.Name = "textBoxQuantityTime";
             this.textBoxQuantityTime.Size = new System.Drawing.Size(110, 20);
-            this.textBoxQuantityTime.TabIndex = 6;
-            this.textBoxQuantityTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxQuantityTime_KeyPress);
+            this.textBoxQuantityTime.TabIndex = 7;
+            // 
+            // listBoxAuthorAlarms
+            // 
+            this.listBoxAuthorAlarms.FormattingEnabled = true;
+            this.listBoxAuthorAlarms.Location = new System.Drawing.Point(29, 300);
+            this.listBoxAuthorAlarms.Name = "listBoxAuthorAlarms";
+            this.listBoxAuthorAlarms.Size = new System.Drawing.Size(395, 186);
+            this.listBoxAuthorAlarms.TabIndex = 8;
+            // 
+            // addAlarm
+            // 
+            this.addAlarm.BackColor = System.Drawing.Color.Transparent;
+            this.addAlarm.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.addAlarm.FlatAppearance.BorderSize = 0;
+            this.addAlarm.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.addAlarm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.addAlarm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addAlarm.Location = new System.Drawing.Point(152, 217);
+            this.addAlarm.Name = "addAlarm";
+            this.addAlarm.Size = new System.Drawing.Size(164, 41);
+            this.addAlarm.TabIndex = 9;
+            this.addAlarm.UseVisualStyleBackColor = false;
+            this.addAlarm.Click += new System.EventHandler(this.addAlarm_Click);
+            // 
+            // labelError
+            // 
+            this.labelError.AutoSize = true;
+            this.labelError.Location = new System.Drawing.Point(187, 265);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(0, 13);
+            this.labelError.TabIndex = 10;
+            // 
+            // groupBoxTypeTime
+            // 
+            this.groupBoxTypeTime.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBoxTypeTime.Controls.Add(this.radioButtonDays);
+            this.groupBoxTypeTime.Controls.Add(this.radioButtonHours);
+            this.groupBoxTypeTime.Location = new System.Drawing.Point(300, 160);
+            this.groupBoxTypeTime.Name = "groupBoxTypeTime";
+            this.groupBoxTypeTime.Size = new System.Drawing.Size(146, 39);
+            this.groupBoxTypeTime.TabIndex = 11;
+            this.groupBoxTypeTime.TabStop = false;
+         
             // 
             // radioButtonDays
             // 
@@ -114,75 +155,19 @@
             this.radioButtonHours.Text = "Horas";
             this.radioButtonHours.UseVisualStyleBackColor = true;
             // 
-            // btnAddAlarm
-            // 
-            this.btnAddAlarm.BackColor = System.Drawing.Color.Transparent;
-            this.btnAddAlarm.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.btnAddAlarm.FlatAppearance.BorderSize = 0;
-            this.btnAddAlarm.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnAddAlarm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnAddAlarm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddAlarm.Location = new System.Drawing.Point(153, 323);
-            this.btnAddAlarm.Name = "btnAddAlarm";
-            this.btnAddAlarm.Size = new System.Drawing.Size(154, 40);
-            this.btnAddAlarm.TabIndex = 9;
-            this.btnAddAlarm.UseVisualStyleBackColor = false;
-            this.btnAddAlarm.Click += new System.EventHandler(this.BtnAddAlarm_Click);
-            // 
-            // groupBoxTypeAlarm
-            // 
-            this.groupBoxTypeAlarm.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.groupBoxTypeAlarm.Controls.Add(this.radioButtonPositive);
-            this.groupBoxTypeAlarm.Controls.Add(this.radioButtonNegative);
-            this.groupBoxTypeAlarm.Location = new System.Drawing.Point(173, 147);
-            this.groupBoxTypeAlarm.Name = "groupBoxTypeAlarm";
-            this.groupBoxTypeAlarm.Size = new System.Drawing.Size(175, 39);
-            this.groupBoxTypeAlarm.TabIndex = 2;
-            this.groupBoxTypeAlarm.TabStop = false;
-            // 
-            // groupBoxTypeTime
-            // 
-            this.groupBoxTypeTime.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.groupBoxTypeTime.Controls.Add(this.radioButtonDays);
-            this.groupBoxTypeTime.Controls.Add(this.radioButtonHours);
-            this.groupBoxTypeTime.Location = new System.Drawing.Point(296, 259);
-            this.groupBoxTypeTime.Name = "groupBoxTypeTime";
-            this.groupBoxTypeTime.Size = new System.Drawing.Size(146, 39);
-            this.groupBoxTypeTime.TabIndex = 7;
-            this.groupBoxTypeTime.TabStop = false;
-            // 
-            // labelError
-            // 
-            this.labelError.AutoSize = true;
-            this.labelError.ForeColor = System.Drawing.Color.Red;
-            this.labelError.Location = new System.Drawing.Point(150, 307);
-            this.labelError.Name = "labelError";
-            this.labelError.Size = new System.Drawing.Size(0, 13);
-            this.labelError.TabIndex = 22;
-            // 
-            // listBoxAlarms
-            // 
-            this.listBoxAlarms.FormattingEnabled = true;
-            this.listBoxAlarms.Location = new System.Drawing.Point(31, 387);
-            this.listBoxAlarms.Name = "listBoxAlarms";
-            this.listBoxAlarms.Size = new System.Drawing.Size(411, 134);
-            this.listBoxAlarms.TabIndex = 10;
-            // 
-            // AddAlarm
+            // AddAuthorAlarm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.BackgroundImage = global::UI.Properties.Resources.AgregarAlarma1;
-            this.Controls.Add(this.listBoxAlarms);
-            this.Controls.Add(this.labelError);
+            this.BackgroundImage = global::UI.Properties.Resources.AlarmaAutores;
             this.Controls.Add(this.groupBoxTypeTime);
-            this.Controls.Add(this.groupBoxTypeAlarm);
-            this.Controls.Add(this.btnAddAlarm);
+            this.Controls.Add(this.labelError);
+            this.Controls.Add(this.addAlarm);
+            this.Controls.Add(this.listBoxAuthorAlarms);
             this.Controls.Add(this.textBoxQuantityTime);
             this.Controls.Add(this.textBoxQuantityPost);
-            this.Controls.Add(this.cmbEntities);
-            this.Name = "AddAlarm";
+            this.Controls.Add(this.groupBoxTypeAlarm);
+            this.Name = "AddAuthorAlarm";
             this.Size = new System.Drawing.Size(460, 552);
             this.groupBoxTypeAlarm.ResumeLayout(false);
             this.groupBoxTypeAlarm.PerformLayout();
@@ -194,17 +179,17 @@
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox cmbEntities;
+
+        private System.Windows.Forms.GroupBox groupBoxTypeAlarm;
         private System.Windows.Forms.RadioButton radioButtonPositive;
         private System.Windows.Forms.RadioButton radioButtonNegative;
         private System.Windows.Forms.TextBox textBoxQuantityPost;
         private System.Windows.Forms.TextBox textBoxQuantityTime;
+        private System.Windows.Forms.ListBox listBoxAuthorAlarms;
+        private System.Windows.Forms.Button addAlarm;
+        private System.Windows.Forms.Label labelError;
+        private System.Windows.Forms.GroupBox groupBoxTypeTime;
         private System.Windows.Forms.RadioButton radioButtonDays;
         private System.Windows.Forms.RadioButton radioButtonHours;
-        private System.Windows.Forms.Button btnAddAlarm;
-        private System.Windows.Forms.GroupBox groupBoxTypeAlarm;
-        private System.Windows.Forms.GroupBox groupBoxTypeTime;
-		private System.Windows.Forms.Label labelError;
-        private System.Windows.Forms.ListBox listBoxAlarms;
     }
 }

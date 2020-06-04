@@ -24,6 +24,7 @@ namespace UI
 		private void InitiliazeComboAlarms()
 		{
 			cmbSelectTypeAlarm.Items.Add("Alarma de sentimiento");
+			cmbSelectTypeAlarm.Items.Add("Alarma de autores");
 			cmbSelectTypeAlarm.SelectedIndex = 0;
 		}
 
@@ -37,6 +38,12 @@ namespace UI
 					panelAlarms.Controls.Clear();
 					UserControl addAlarm = new AddAlarm(generalManagement);
 					panelAlarms.Controls.Add(addAlarm);
+				}
+				if(index == 1)
+				{
+					panelAlarms.Controls.Clear();
+					UserControl addAuthorAlarm = new AddAuthorAlarm(generalManagement);
+					panelAlarms.Controls.Add(addAuthorAlarm);
 				}
 			}
 		}
