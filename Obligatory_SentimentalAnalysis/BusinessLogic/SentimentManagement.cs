@@ -1,18 +1,18 @@
 ﻿using Domain;
 using System.Collections.Generic;
 using System.Linq;
-using BusinessLogicExceptions; 
-
+using BusinessLogicExceptions;
+using Persistence;
 
 namespace BusinessLogic
 {
     public class SentimentManagement
     {
-		private List<Sentiment> sentimentList; 
+        private SentimentPersistence sentimentPersistence; 
 		
 		public SentimentManagement()
 		{
-			sentimentList = new List<Sentiment>(); 
+            sentimentPersistence = new SentimentPersistence(); 
 		}
 
 		public void AddSentiment(Sentiment sentiment)
@@ -20,12 +20,12 @@ namespace BusinessLogic
 			sentiment.VerifyFormat(); 
 			VerifyFormatAdd(sentiment);
 			sentiment.SentimientText = Utilities.DeleteSpaces(sentiment.SentimientText).Trim();
-			sentimentList.Add(sentiment); 
+            sentimentPersistence.AddSentiment(sentiment); 
 		}
 
 		public bool IsEmpty()
 		{
-			return sentimentList.Count == 0; 
+			return sentimentPersistence.IsEmpty(); 
 		}
 
 		private void VerifyFormatAdd(Sentiment sentiment)
@@ -42,9 +42,9 @@ namespace BusinessLogic
 
 			string sentimentText= Utilities.DeleteSpaces(sentiment.SentimientText.ToLower().Trim()); 
 			
-			for (int i = 0; i < sentimentList.Count() && !toReturn; i++)
+			for (int i = 0; i < QuantityOFAllSentiments() && !toReturn; i++)
 			{
-				string currentSentiment = sentimentList.ElementAt(i).SentimientText;
+				string currentSentiment = AllSentiments[i].SentimientText;
 				currentSentiment = Utilities.DeleteSpaces(currentSentiment.ToLower().Trim()); 
 
 				if (sentimentText.Contains(currentSentiment) || currentSentiment.Contains(sentimentText)) 
@@ -69,17 +69,27 @@ namespace BusinessLogic
 		{
 			sentiment.VerifyFormatToDelete(); 
 			VerifyFormatDelete(sentiment);
-			sentimentList.Remove(sentiment); 
+			sentimentPersistence.DeleteSentiment(sentiment); 
 		}
 
 		private bool IsNotContained(Sentiment sentiment)
 		{
-			return !sentimentList.Contains(sentiment); 
+			return !sentimentPersistence.IsContained(sentiment); 
 		}
 
 		public Sentiment[] AllSentiments
 		{
-			get { return sentimentList.ToArray();  }
-		}
+            get { return sentimentPersistence.AllSentiments(); }
+        }
+
+        private int QuantityOFAllSentiments()
+        {
+            return sentimentPersistence.QuantityOfAllSentiments(); 
+        }
+
+        public void EmptySentiment()
+        {
+            sentimentPersistence.DeleteAll();
+        }
     }
 }

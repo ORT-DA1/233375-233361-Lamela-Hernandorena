@@ -55,6 +55,7 @@
     <Compile Include="EntityPersistence.cs" />
     <Compile Include="PhrasePersistence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SentimentPersistence.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
