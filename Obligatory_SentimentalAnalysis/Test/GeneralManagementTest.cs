@@ -34,6 +34,7 @@ namespace Test
             management.AuthorManagement.AddAuthor(author2);
             management.EntityManagement.EmptyEntity();
             management.SentimentManagement.EmptySentiment();
+			management.PhraseManagement.EmptyPhrase();
         }
 
         [TestCleanup]
@@ -41,6 +42,7 @@ namespace Test
         {
             management = new GeneralManagement();
             management.SentimentManagement.EmptySentiment();
+			management.PhraseManagement.EmptyPhrase();
         }
 
 

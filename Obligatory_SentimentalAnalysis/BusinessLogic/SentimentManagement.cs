@@ -28,6 +28,11 @@ namespace BusinessLogic
 			return sentimentPersistence.IsEmpty(); 
 		}
 
+		public void UpdateAssociatedSentiment(Sentiment sentiment)
+		{
+			sentimentPersistence.UpdateAssociatedSentiment(sentiment);
+		}
+
 		private void VerifyFormatAdd(Sentiment sentiment)
 		{
 			if (IsPartOfAnotherSentiment(sentiment))

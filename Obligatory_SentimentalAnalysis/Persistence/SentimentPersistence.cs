@@ -31,6 +31,24 @@ namespace Persistence
             }
         }
 
+        public void UpdateAssociatedSentiment(Sentiment sentiment)
+        {
+
+            using (Context ctx = new Context())
+            {
+                try
+                {
+                    var sentimentOfDb = ctx.Sentiments.SingleOrDefault(s => s.Id == sentiment.Id);
+                    sentimentOfDb.IsAssociatedToPhrase = true;
+                    ctx.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new EntityManagementException("Error asociando sentimiento.", ex);
+                }
+            }
+        }
+
         public bool IsEmpty()
         {
             using (Context ctx = new Context())

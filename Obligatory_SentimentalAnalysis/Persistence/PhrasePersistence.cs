@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Persistence
 {
@@ -22,6 +23,7 @@ namespace Persistence
                 try
                 {
                     ctx.Phrases.Add(phrase);
+                    ctx.Entry(phrase.Entity).State = EntityState.Unchanged;
                     ctx.SaveChanges();
                 }
                 catch (Exception ex)
@@ -58,11 +60,32 @@ namespace Persistence
                 }
             }
         }
+
+        public void DeleteAll()
+        {
+            using (Context ctx = new Context())
+            {
+                try
+                {
+                    foreach (Phrase phrase in ctx.Phrases.ToList())
+                    {
+                        ctx.Phrases.Remove(phrase);
+                        ctx.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new PhraseManagementException("Error eliminando las phrases", ex);
+                }
+            }
+        }
+        
+        //agregar include de author
         public Phrase[] AllPhrases()
         {
             using (Context ctx = new Context())
             {
-                return ctx.Phrases.Where(p => !p.IsDeleted).ToArray();
+                return ctx.Phrases.Where(p => !p.IsDeleted).Include("Entity").ToArray();
             }
         }
     }

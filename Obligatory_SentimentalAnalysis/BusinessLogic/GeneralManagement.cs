@@ -35,13 +35,12 @@ namespace BusinessLogic
 					if (sentiment.SentimentType.Equals(Sentiment.TypeSentiment.Positive))
 					{
 						positiveCounter++;
-						sentiment.IsAssociatedToPhrase = true;
 					}
 					else
 					{
 						negetiveCounter++;
-						sentiment.IsAssociatedToPhrase = true;
 					}
+					SentimentManagement.UpdateAssociatedSentiment(sentiment);
 				}
 			}
 			Entity entityFound = FindEntity(textOfPhrase);
@@ -55,26 +54,26 @@ namespace BusinessLogic
 
 		private Entity FindEntity(string textOfPhrase)
 		{
-			int minUbication = 9999; 
-			Entity entityFound = new Entity(); 
+			int minUbication = 9999;
+			Entity entityFound = new Entity();
 
 			foreach (Entity entity in EntityManagement.AllEntities)
 			{
 				string entityOfList = Utilities.DeleteSpaces(entity.EntityName.ToLower());
-				
+
 				if (textOfPhrase.Contains(entityOfList))
 				{
-					if(textOfPhrase.IndexOf(entityOfList) < minUbication)
+					if (textOfPhrase.IndexOf(entityOfList) < minUbication)
 					{
 						minUbication = textOfPhrase.IndexOf(entityOfList);
 						entityFound = entity;
 					}
 				}
 			}
-			return entityFound; 
+			return entityFound;
 		}
 
-        public void DeleteAuthorPhrases(Author author)
+		public void DeleteAuthorPhrases(Author author)
         {
             author.DeleteAllPhrases();
             PhraseManagement.DeletePhrasesOfAuthor(author); 

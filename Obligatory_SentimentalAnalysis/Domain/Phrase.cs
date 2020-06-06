@@ -9,7 +9,7 @@ namespace Domain
 
 		public DateTime PhraseDate { get; set; }
 
-		public Entity Entity { get; set; }
+		public  Entity Entity { get; set; }
 
 		public enum TypePhrase { Positive, Neutral, Negative }
 

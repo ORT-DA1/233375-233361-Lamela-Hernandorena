@@ -22,6 +22,7 @@ namespace BusinessLogic
             phrase.PhraseAuthor.AddPhrase(phrase); 
 		}
 
+
         public void DeletePhrasesOfAuthor(Author author)
         {
 			phrasePersistence.DeletePhrasesOfAuthor(author);         
@@ -34,7 +35,13 @@ namespace BusinessLogic
 		
 		public Phrase[] AllPhrases
 		{
-			get{ return phrasePersistence.AllPhrases();
+			get { return phrasePersistence.AllPhrases(); }
+		}
+
+		public void EmptyPhrase()
+		{
+			phrasePersistence.DeleteAll();
 		}
 	}
 }
+	

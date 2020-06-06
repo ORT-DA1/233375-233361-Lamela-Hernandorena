@@ -1,141 +1,155 @@
 ﻿using System;
 using BusinessLogic;
 using BusinessLogicExceptions;
-using Domain; 
+using Domain;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Test
 {
-	[TestClass]
-	public class PhraseManagementTest
-	{
+    [TestClass]
+    public class PhraseManagementTest
+    {
 
-		PhraseManagement management;
+        PhraseManagement management;
+        EntityManagement entityManagement;
         Author author;
 
         [TestInitialize]
         public void SetUp()
         {
             management = new PhraseManagement();
+            entityManagement = new EntityManagement();
+            management.EmptyPhrase();
+            entityManagement.EmptyEntity();
             author = new Author()
             {
                 UserName = "Josami",
                 Name = "Joaquin",
                 LastName = "Lamela",
                 BirthDate = new DateTime(2000, 02, 29)
-            }; 
+            };
+        }
+
+        [TestCleanup]
+        public void CleanUp()
+        {
+            management = new PhraseManagement();
+            management.EmptyPhrase();
+            entityManagement = new EntityManagement();
+            entityManagement.EmptyEntity();
         }
 
 
-		[TestMethod]
-		public void AddValidPhrase()
-		{
-
-			Entity entity = new Entity()
-			{
-				EntityName = "Mc donalds"
-			};
-        Phrase phrase = new Phrase()
+        [TestMethod]
+        public void AddValidPhrase()
         {
-            TextPhrase = "Me encanta Mc Donalds",
-            PhraseDate = DateTime.Now,
-            Entity = entity,
-            PhraseType = Phrase.TypePhrase.Positive,
-            PhraseAuthor = author
-			};
-			management.AddPhrase(phrase);
-			CollectionAssert.Contains(management.AllPhrases, phrase);
-			Assert.IsFalse(management.IsEmpty());
-		}
-
-		[TestMethod]
-		public void AddValidPhrase2()
-		{
-			Entity entity = new Entity()
-			{
-				EntityName = "Disney"
-			};
-			Phrase phrase = new Phrase()
-			{
-				TextPhrase = "No me gusta Disney",
-				PhraseDate= DateTime.Now,
-				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Negative,
+            Entity entity = new Entity()
+            {
+                EntityName = "Mc donalds"
+            };
+            entityManagement.AddEntity(entity);
+            Phrase phrase = new Phrase()
+            {
+                TextPhrase = "Me encanta Mc Donalds",
+                PhraseDate = DateTime.Now,
+                Entity = entity,
+                PhraseType = Phrase.TypePhrase.Positive,
                 PhraseAuthor = author
             };
-			management.AddPhrase(phrase);
-			CollectionAssert.Contains(management.AllPhrases, phrase);
-		}
+            management.AddPhrase(phrase);
+            CollectionAssert.Contains(management.AllPhrases, phrase);
+        }
+
+        [TestMethod]
+        public void AddValidPhrase2()
+        {
+            Entity entity = new Entity()
+            {
+                EntityName = "Disney"
+            };
+            entityManagement.AddEntity(entity);
+            Phrase phrase = new Phrase()
+            {
+                TextPhrase = "No me gusta Disney",
+                PhraseDate = DateTime.Now,
+                Entity = entity,
+                PhraseType = Phrase.TypePhrase.Negative,
+                PhraseAuthor = author
+            };
+            management.AddPhrase(phrase);
+            CollectionAssert.Contains(management.AllPhrases, phrase);
+        }
 
         [TestMethod]
         public void AddValidPhrase3()
         {
 
-			Entity entity = new Entity()
-			{
-				EntityName = "Disney"
-			};
-			Phrase phrase = new Phrase()
-			{
-				TextPhrase= "No       me      gusta   Disney",
-				PhraseDate= DateTime.Now,
-				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Negative,
+            Entity entity = new Entity()
+            {
+                EntityName = "Disney"
+            };
+            entityManagement.AddEntity(entity);
+            Phrase phrase = new Phrase()
+            {
+                TextPhrase = "No       me      gusta   Disney",
+                PhraseDate = DateTime.Now,
+                Entity = entity,
+                PhraseType = Phrase.TypePhrase.Negative,
                 PhraseAuthor = author
             };
             management.AddPhrase(phrase);
-			CollectionAssert.Contains(management.AllPhrases, phrase);
-			Assert.IsFalse(management.IsEmpty()); 
-		}
+            CollectionAssert.Contains(management.AllPhrases, phrase);
+        }
 
         [TestMethod]
-		[ExpectedException(typeof(PhraseManagementException))]
-		public void AddInvalidPhrase2()
-		{
-			Phrase phrase = new Phrase()
-			{
-				TextPhrase= ""
-			};
-			management.AddPhrase(phrase); 
-		}
+        [ExpectedException(typeof(PhraseManagementException))]
+        public void AddInvalidPhrase2()
+        {
+            Phrase phrase = new Phrase()
+            {
+                TextPhrase = ""
+            };
+            management.AddPhrase(phrase);
+        }
 
         [TestMethod]
         public void AddPhraseWithTodayDate()
         {
-			Entity entity = new Entity()
-			{
-				EntityName = "Burger King"
-			};
-			Phrase phrase = new Phrase()
-			{
-				TextPhrase= "Amo Burger King",
-				PhraseDate= DateTime.Now,
-				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Positive,
+            Entity entity = new Entity()
+            {
+                EntityName = "Burger King"
+            };
+            entityManagement.AddEntity(entity);
+            Phrase phrase = new Phrase()
+            {
+                TextPhrase = "Amo Burger King",
+                PhraseDate = DateTime.Now,
+                Entity = entity,
+                PhraseType = Phrase.TypePhrase.Positive,
                 PhraseAuthor = author
             };
             management.AddPhrase(phrase);
-			CollectionAssert.Contains(management.AllPhrases, phrase);
-		}
+            CollectionAssert.Contains(management.AllPhrases, phrase);
+        }
 
         [TestMethod]
         [ExpectedException(typeof(PhraseManagementException))]
         public void AddPhraseWithDateAfterToday()
         {
-			DateTime aDate = new DateTime(2020, 12, 29);
-			Entity entity = new Entity()
-			{
-				EntityName = "Burger King"
-			};
-			Phrase phrase = new Phrase()
-			{
-				TextPhrase= "Amo Burger King",
-				PhraseDate= aDate,
-				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Positive,
+            DateTime aDate = new DateTime(2020, 12, 29);
+            Entity entity = new Entity()
+            {
+                EntityName = "Burger King"
+            };
+            Phrase phrase = new Phrase()
+            {
+                TextPhrase = "Amo Burger King",
+                PhraseDate = aDate,
+                Entity = entity,
+                PhraseType = Phrase.TypePhrase.Positive,
                 PhraseAuthor = author
             };
-			management.AddPhrase(phrase);
+            management.AddPhrase(phrase);
         }
 
 
@@ -143,102 +157,102 @@ namespace Test
         [ExpectedException(typeof(PhraseManagementException))]
         public void AddInvalidEmptyPhrase()
         {
-			Entity entity = new Entity();
-			Phrase phrase = new Phrase()
-			{
-				TextPhrase= "           ",
-				PhraseDate= DateTime.Now,
-				Entity= entity,
-			    PhraseType= Phrase.TypePhrase.Neutral,
+            Entity entity = new Entity();
+            Phrase phrase = new Phrase()
+            {
+                TextPhrase = "           ",
+                PhraseDate = DateTime.Now,
+                Entity = entity,
+                PhraseType = Phrase.TypePhrase.Neutral,
                 PhraseAuthor = author
             };
             management.AddPhrase(phrase);
         }
 
 
-		[TestMethod]
-		[ExpectedException(typeof(PhraseManagementException))]
-		public void AddPhraseWithDateBeforeOneYear()
-		{
-			DateTime aDate = new DateTime(2019, 03, 22);
-			Entity entity = new Entity()
-			{
-				EntityName = "Burger King"
-			};
+        [TestMethod]
+        [ExpectedException(typeof(PhraseManagementException))]
+        public void AddPhraseWithDateBeforeOneYear()
+        {
+            DateTime aDate = new DateTime(2019, 03, 22);
+            Entity entity = new Entity()
+            {
+                EntityName = "Burger King"
+            };
 
-			Phrase phrase = new Phrase()
-			{
-				TextPhrase= "Amo Burger King",
-				PhraseDate= aDate,
-				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Positive,
+            Phrase phrase = new Phrase()
+            {
+                TextPhrase = "Amo Burger King",
+                PhraseDate = aDate,
+                Entity = entity,
+                PhraseType = Phrase.TypePhrase.Positive,
                 PhraseAuthor = author
             };
-			management.AddPhrase(phrase);
-		}
+            management.AddPhrase(phrase);
+        }
 
-		[TestMethod]
-		public void TryingEqualsMethod()
-		{
-			DateTime aDate = new DateTime(2020, 03, 22);
+        [TestMethod]
+        public void TryingEqualsMethod()
+        {
+            DateTime aDate = new DateTime(2020, 03, 22);
 
-			Entity entity = new Entity()
-			{
-				EntityName = "Burger King"
-			};
-			Phrase phrase = new Phrase()
-			{
-				TextPhrase= "Amo Burger King",
-				PhraseDate= aDate,
-				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Positive,
+            Entity entity = new Entity()
+            {
+                EntityName = "Burger King"
+            };
+            Phrase phrase = new Phrase()
+            {
+                TextPhrase = "Amo Burger King",
+                PhraseDate = aDate,
+                Entity = entity,
+                PhraseType = Phrase.TypePhrase.Positive,
                 PhraseAuthor = author
             };
-			Phrase phrase2 = new Phrase()
-			{
-				TextPhrase= "Amo Burger King",
-				PhraseDate= aDate,
-				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Positive,
+            Phrase phrase2 = new Phrase()
+            {
+                TextPhrase = "Amo Burger King",
+                PhraseDate = aDate,
+                Entity = entity,
+                PhraseType = Phrase.TypePhrase.Positive,
                 PhraseAuthor = author
             };
-			bool areEquals = phrase.Equals(phrase2);
-			Assert.IsTrue(areEquals); 
-		}
+            bool areEquals = phrase.Equals(phrase2);
+            Assert.IsTrue(areEquals);
+        }
 
 
-		[TestMethod]
-		public void TryingNotEquals()
-		{
-			DateTime aDate = new DateTime(2020, 03, 22);
-			Entity entity = new Entity()
-			{
-				EntityName = "Burger King"
-			};
-			Entity entity2 = new Entity()
-			{
-				EntityName = "Mc Donalds"
-			};
+        [TestMethod]
+        public void TryingNotEquals()
+        {
+            DateTime aDate = new DateTime(2020, 03, 22);
+            Entity entity = new Entity()
+            {
+                EntityName = "Burger King"
+            };
+            Entity entity2 = new Entity()
+            {
+                EntityName = "Mc Donalds"
+            };
 
-			Phrase phrase = new Phrase()
-			{
-				TextPhrase= "Amo Burger King",
-				PhraseDate= aDate,
-				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Positive,
+            Phrase phrase = new Phrase()
+            {
+                TextPhrase = "Amo Burger King",
+                PhraseDate = aDate,
+                Entity = entity,
+                PhraseType = Phrase.TypePhrase.Positive,
                 PhraseAuthor = author
             };
-			Phrase phrase2 = new Phrase()
-			{
-				TextPhrase= "Amo Mc Donalds",
-				PhraseDate= aDate,
-				Entity= entity2,
-				PhraseType= Phrase.TypePhrase.Positive,
+            Phrase phrase2 = new Phrase()
+            {
+                TextPhrase = "Amo Mc Donalds",
+                PhraseDate = aDate,
+                Entity = entity2,
+                PhraseType = Phrase.TypePhrase.Positive,
                 PhraseAuthor = author
             };
-			bool areEquals = phrase.Equals(phrase2);
-			Assert.IsFalse(areEquals);
-		}
+            bool areEquals = phrase.Equals(phrase2);
+            Assert.IsFalse(areEquals);
+        }
 
         [TestMethod]
         public void DeleteAllPhrasesOfAuthor()
@@ -274,7 +288,7 @@ namespace Test
             management.DeletePhrasesOfAuthor(author);
 
             CollectionAssert.DoesNotContain(management.AllPhrases, phrase);
-            CollectionAssert.DoesNotContain(management.AllPhrases, phrase2); 
+            CollectionAssert.DoesNotContain(management.AllPhrases, phrase2);
         }
     }
 }
