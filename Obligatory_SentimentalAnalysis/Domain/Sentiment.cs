@@ -16,6 +16,8 @@ namespace Domain
 
         public int Id { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public Sentiment(){
 			IsAssociatedToPhrase = false; 
 		}

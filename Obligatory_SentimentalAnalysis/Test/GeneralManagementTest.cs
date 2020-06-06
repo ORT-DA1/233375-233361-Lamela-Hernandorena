@@ -33,13 +33,14 @@ namespace Test
             };
             management.AuthorManagement.AddAuthor(author2);
             management.EntityManagement.EmptyEntity();
+            management.SentimentManagement.EmptySentiment();
         }
 
         [TestCleanup]
         public void CleanUp()
         {
             management = new GeneralManagement();
-            management.EntityManagement.EmptyEntity();
+            management.SentimentManagement.EmptySentiment();
         }
 
 
