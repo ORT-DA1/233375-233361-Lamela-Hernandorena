@@ -215,7 +215,7 @@ namespace Test
         {
             AuthorAlarm alarm = new AuthorAlarm()
             {
-                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
                 QuantityPost = 50,
                 QuantityTime = 5,
                 IsInHours = false
@@ -231,7 +231,7 @@ namespace Test
 
             AuthorAlarm alarm = new AuthorAlarm()
             {
-                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
                 QuantityPost = -50,
                 QuantityTime = 13,
                 IsInHours = true
@@ -246,14 +246,14 @@ namespace Test
             AuthorAlarm alarm = new AuthorAlarm()
             {
                 
-                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
                 QuantityPost = 40,
                 QuantityTime = 10,
                 IsInHours = false
             };
             AuthorAlarm alarm2 = new AuthorAlarm()
             {
-                TypeOfAlarm = AuthorAlarm.Type.Negative,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Negative,
                 QuantityPost = 30,
                 QuantityTime = 20,
                 IsInHours = true
@@ -269,7 +269,7 @@ namespace Test
         {
             AuthorAlarm alarm = new AuthorAlarm()
             {
-                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
                 QuantityPost = 90,
                 QuantityTime = -15,
                 IsInHours = false
@@ -283,7 +283,7 @@ namespace Test
         {
             AuthorAlarm alarm = new AuthorAlarm()
             {
-                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
                 QuantityPost = 100000,
                 QuantityTime = 10,
                 IsInHours = false

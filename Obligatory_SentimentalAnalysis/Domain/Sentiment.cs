@@ -14,7 +14,9 @@ namespace Domain
 
 		public bool IsAssociatedToPhrase { get; set; }
 
-		public Sentiment(){
+        public int Id { get; set; }
+
+        public Sentiment(){
 			IsAssociatedToPhrase = false; 
 		}
 

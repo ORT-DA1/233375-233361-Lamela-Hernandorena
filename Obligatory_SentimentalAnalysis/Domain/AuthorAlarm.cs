@@ -7,12 +7,13 @@ namespace Domain
 {
     public class AuthorAlarm : IAlarm
     {
-        public enum Type { Positive, Negative }
+        public enum TypeOfNewAlarm { Positive, Negative }
         public int QuantityPost { get; set; }
         public int QuantityTime { get; set; }
         public bool IsActive { get; set; }
         public bool IsInHours { get; set; }
-        public Type TypeOfAlarm { get; set; }
+        public TypeOfNewAlarm TypeOfAlarm { get; set; }
+        public int Id { get; set; }
 
         private List<Author> participantsAuthors;
 

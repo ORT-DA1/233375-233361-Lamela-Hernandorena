@@ -105,15 +105,15 @@ namespace UI
 			InitializeAlarms();
 		}
 
-		private AuthorAlarm.Type TypeOfAlarmChecked()
+		private AuthorAlarm.TypeOfNewAlarm TypeOfAlarmChecked()
 		{
 			if (radioButtonPositive.Checked)
 			{
-				return AuthorAlarm.Type.Positive;
+				return AuthorAlarm.TypeOfNewAlarm.Positive;
 			}
 			else
 			{
-				return AuthorAlarm.Type.Negative;
+				return AuthorAlarm.TypeOfNewAlarm.Negative;
 			}
 		}
 

@@ -13,6 +13,7 @@ namespace Domain
         public string Name { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
+        public int Id { get; set; }
 
         private List<Phrase> authorPhraseList; 
         

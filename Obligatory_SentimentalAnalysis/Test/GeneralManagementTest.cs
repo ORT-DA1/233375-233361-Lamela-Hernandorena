@@ -31,11 +31,20 @@ namespace Test
                 LastName = "Hernandorena",
                 BirthDate = new DateTime(2000, 04, 01)
             };
-            management.AuthorManagement.AddAuthor(author2); 
+            management.AuthorManagement.AddAuthor(author2);
+            management.EntityManagement.EmptyEntity();
+        }
+
+        [TestCleanup]
+        public void CleanUp()
+        {
+            management = new GeneralManagement();
+            management.EntityManagement.EmptyEntity();
         }
 
 
-		[TestMethod]
+
+        [TestMethod]
 		public void AnalysisOfPhrasePositive()
 		{
 			Entity entityExpected = new Entity()
@@ -792,7 +801,7 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment);
             AuthorAlarm aAlarm = new AuthorAlarm()
 			{
-				TypeOfAlarm = AuthorAlarm.Type.Positive,
+				TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
 				QuantityPost = 1,
 				QuantityTime = 1,
 				IsInHours = true
@@ -837,7 +846,7 @@ namespace Test
             management.SentimentManagement.AddSentiment(sentiment);
             AuthorAlarm aAlarm = new AuthorAlarm()
             {
-                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
                 QuantityPost = 1,
                 QuantityTime = 1,
                 IsInHours = false
@@ -875,7 +884,7 @@ namespace Test
         {
             AuthorAlarm aAlarm = new AuthorAlarm()
             {
-                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
                 QuantityPost = 1,
                 QuantityTime = 1,
                 IsInHours = false
@@ -912,7 +921,7 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment);
 			AuthorAlarm aAlarm = new AuthorAlarm()
 			{
-				TypeOfAlarm = AuthorAlarm.Type.Positive,
+				TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
 				QuantityPost = 2,
 				QuantityTime = 1,
 				IsInHours = false
@@ -952,7 +961,7 @@ namespace Test
 		{
 			AuthorAlarm aAlarm = new AuthorAlarm()
 			{
-				TypeOfAlarm = AuthorAlarm.Type.Positive,
+				TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
 				QuantityPost = 2,
 				QuantityTime = 1,
 				IsInHours = false
@@ -966,7 +975,7 @@ namespace Test
 		{
 			AuthorAlarm aAlarm = new AuthorAlarm()
 			{
-				TypeOfAlarm = AuthorAlarm.Type.Positive,
+				TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
 				QuantityPost = 1,
 				QuantityTime = 1,
 				IsInHours = false
@@ -1032,7 +1041,7 @@ namespace Test
             management.SentimentManagement.AddSentiment(sentiment);
             AuthorAlarm aAlarm = new AuthorAlarm()
             {
-                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
                 QuantityPost = 1,
                 QuantityTime = 2,
                 IsInHours = false
@@ -1087,14 +1096,14 @@ namespace Test
             management.SentimentManagement.AddSentiment(sentiment);
             AuthorAlarm aAlarm = new AuthorAlarm()
             {
-                TypeOfAlarm = AuthorAlarm.Type.Negative,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Negative,
                 QuantityPost = 1,
                 QuantityTime = 2,
                 IsInHours = false
             };
             AuthorAlarm aAlarm2 = new AuthorAlarm()
             {
-                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
                 QuantityPost = 1,
                 QuantityTime = 2,
                 IsInHours = false

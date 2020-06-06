@@ -7,8 +7,9 @@ namespace Domain
 	public class Entity
 	{
 		public string EntityName { get; set; }
-
-		public Entity()
+        public int Id { get; set; }
+        public bool IsDeleted { get; set; }
+        public Entity()
 		{
 			EntityName = "";
 		}

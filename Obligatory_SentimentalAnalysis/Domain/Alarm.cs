@@ -12,8 +12,8 @@ namespace Domain
 		public bool IsActive { get; set; }
 		public bool IsInHours { get; set; }
 		public Type TypeOfAlarm { get; set; }
-
-		public Alarm()
+        public int Id { get; set; }
+        public Alarm()
 		{
 			IsActive = false;
 		}
