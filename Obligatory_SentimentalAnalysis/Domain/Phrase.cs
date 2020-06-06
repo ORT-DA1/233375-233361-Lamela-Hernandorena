@@ -7,17 +7,19 @@ namespace Domain
 	{
 		public string TextPhrase { get; set; }
 
-        public DateTime PhraseDate { get; set; }
+		public DateTime PhraseDate { get; set; }
 
-		public Entity Entity { get; set;  }
+		public Entity Entity { get; set; }
 
-		public enum TypePhrase { Positive, Neutral, Negative} 
+		public enum TypePhrase { Positive, Neutral, Negative }
 
-		public TypePhrase PhraseType { get; set;  }
-    
-        public int Id { get; set; }
+		public TypePhrase PhraseType { get; set; }
 
-        public Author PhraseAuthor { get; set; }
+		public int Id { get; set; }
+
+		public Author PhraseAuthor { get; set; }
+
+		public bool IsDeleted {get;set;}
 		
         public Phrase ()
         {

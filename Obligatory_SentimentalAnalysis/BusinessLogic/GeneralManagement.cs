@@ -24,7 +24,7 @@ namespace BusinessLogic
 		{
 			int positiveCounter = 0;
 			int negetiveCounter = 0;
-			string textOfPhrase = Utilities.DeleteSpaces(phrase.TextPhrase.ToLower()); 
+			string textOfPhrase = Utilities.DeleteSpaces(phrase.TextPhrase.ToLower());
 
 			foreach (Sentiment sentiment in SentimentManagement.AllSentiments)
 			{
@@ -35,16 +35,16 @@ namespace BusinessLogic
 					if (sentiment.SentimentType.Equals(Sentiment.TypeSentiment.Positive))
 					{
 						positiveCounter++;
-						sentiment.IsAssociatedToPhrase = true;  
+						sentiment.IsAssociatedToPhrase = true;
 					}
 					else
 					{
 						negetiveCounter++;
-						sentiment.IsAssociatedToPhrase = true; 
+						sentiment.IsAssociatedToPhrase = true;
 					}
 				}
 			}
-			Entity entityFound = FindEntity(textOfPhrase); 
+			Entity entityFound = FindEntity(textOfPhrase);
 			phrase.Entity = entityFound;
 			phrase.SetTypeOfPhrase(positiveCounter, negetiveCounter);
 			if (entityFound.IsEmptyEntity())
