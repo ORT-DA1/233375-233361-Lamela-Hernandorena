@@ -1,19 +1,25 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using BusinessLogicExceptions; 
 
 
 namespace Domain 
 {
+    [Table("Sentiments_Table")]
 	public class Sentiment
 	{
 		public enum TypeSentiment { Positive, Neutral, Negative }
 
-		public string SentimientText { get; set;  }
+        [Required]
+        public string SentimientText { get; set;  }
 
-		public TypeSentiment SentimentType { get; set; }
+        [Required]
+        public TypeSentiment SentimentType { get; set; }
+        
+        public bool IsAssociatedToPhrase { get; set; }
 
-		public bool IsAssociatedToPhrase { get; set; }
-
+        [Key]
         public int Id { get; set; }
 
         public bool IsDeleted { get; set; }

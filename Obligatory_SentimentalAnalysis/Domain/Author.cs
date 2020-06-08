@@ -1,25 +1,43 @@
 ﻿using BusinessLogicExceptions;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain
 {
+    [Table("Authors_Table")]
     public class Author
     {
+        [Required]
+        [MaxLength(10)]
+        [MinLength(1)]
         public string UserName { get; set; }
+
+        [Required]
+        [MaxLength(15)]
+        [MinLength(1)]
         public string Name { get; set; }
+
+        [Required]
+        [MaxLength(15)]
+        [MinLength(1)]
         public string LastName { get; set; }
+
+        [Required]
         public DateTime BirthDate { get; set; }
+
+        [Key]
         public int Id { get; set; }
 
-        private List<Phrase> authorPhraseList; 
+        public bool IsDeleted { get; set; }
         
         public Author()
         {
-            authorPhraseList = new List<Phrase>(); 
+            UserName = ""; 
         }
 
         public void VerifyFormat()
@@ -62,21 +80,7 @@ namespace Domain
 
             return age;
         } 
-
-        public void AddPhrase(Phrase phrase)
-        {
-            authorPhraseList.Add(phrase); 
-        }
-
-        public Phrase[] AllAuthorPhrases
-        {
-            get { return authorPhraseList.ToArray(); }
-        }
-
-        public void DeleteAllPhrases()
-        {
-            authorPhraseList.Clear(); 
-        }
+        
 
         public override string ToString()
         {

@@ -15,7 +15,16 @@ namespace Test
         [TestInitialize]
         public void SetUp()
         {
-            management = new AuthorManagement(); 
+            management = new AuthorManagement();
+            management.EmptyAll();
+
+        }
+
+        [TestCleanup]
+        public void CleanUp()
+        {
+            management = new AuthorManagement();
+            management.EmptyAll();
         }
 
         [TestMethod]
@@ -174,34 +183,7 @@ namespace Test
             };
             management.AddAuthor(author);
         }
-
-        [TestMethod]
-        public void AddPhraseToAuthor()
-        {
-            Author author = new Author()
-            {
-                UserName = "josami",
-                Name = "Joaquin",
-                LastName = "Lamela",
-                BirthDate = new DateTime(2000, 02, 29)
-            };
-            management.AddAuthor(author);
-            Entity entity = new Entity()
-            {
-                EntityName = "Disney"
-            };
-            Phrase phrase = new Phrase()
-            {
-                TextPhrase = "No me gusta Disney",
-                PhraseDate = DateTime.Now,
-                Entity = entity,
-                PhraseType = Phrase.TypePhrase.Negative,
-                PhraseAuthor = author
-            };
-            author.AddPhrase(phrase); 
-            CollectionAssert.Contains(author.AllAuthorPhrases, phrase);
-        }
-
+        
         [TestMethod]
         public void DeleteValidAuthor()
         {
@@ -231,35 +213,7 @@ namespace Test
             management.DeleteAuthor(author);
         }
 
-
-        [TestMethod]
-        public void DeleteAllPhrasesOfAuthor()
-        {
-            Author author = new Author()
-            {
-                UserName = "josami",
-                Name = "Joaquin",
-                LastName = "Lamela",
-                BirthDate = new DateTime(2000, 02, 29)
-            };
-            management.AddAuthor(author);
-            Entity entity = new Entity()
-            {
-                EntityName = "Disney"
-            };
-            Phrase phrase = new Phrase()
-            {
-                TextPhrase = "No me gusta Disney",
-                PhraseDate = DateTime.Now,
-                Entity = entity,
-                PhraseType = Phrase.TypePhrase.Negative,
-                PhraseAuthor = author
-            };
-            author.AddPhrase(phrase);
-            author.DeleteAllPhrases(); 
-            Assert.IsTrue(author.AllAuthorPhrases.Length==0);
-        }
-
+        
         [TestMethod]
         public void UpdateAuthorInfo()
         {
@@ -270,6 +224,7 @@ namespace Test
                 UserName = "agus",
                 BirthDate = new DateTime(2000, 04, 01)
             };
+            management.AddAuthor(authorToModificate); 
 
             Author copyAuthor = new Author()
             {
@@ -280,7 +235,8 @@ namespace Test
             };
 
             management.UpdateAuthorInformation(authorToModificate, copyAuthor);
-            Assert.AreEqual(authorToModificate, copyAuthor);
+
+            Assert.AreEqual(management.GetAuthor(authorToModificate), copyAuthor);
         }
 
         [TestMethod]
@@ -303,6 +259,7 @@ namespace Test
                 UserName = "agus",
                 BirthDate = new DateTime(2000, 04, 01)
             };
+            management.AddAuthor(authorToModificate); 
             
             Author copyAuthor = new Author()
             {
@@ -324,7 +281,7 @@ namespace Test
                 UserName = "agus",
                 BirthDate = new DateTime(2000, 04, 01)
             };
-
+            management.AddAuthor(authorToModificate); 
             Author copyAuthor = new Author()
             {
                 Name = "Agustin",

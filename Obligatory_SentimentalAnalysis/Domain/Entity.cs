@@ -1,12 +1,18 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using BusinessLogicExceptions; 
 
 
 namespace Domain
 {
+    [Table("Entities_Table")]
 	public class Entity
 	{
+        [Required]
 		public string EntityName { get; set; }
+
+        [Key]
         public int Id { get; set; }
         public bool IsDeleted { get; set; }
         public Entity()

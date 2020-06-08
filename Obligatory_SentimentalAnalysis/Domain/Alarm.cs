@@ -1,18 +1,35 @@
 ﻿using BusinessLogicExceptions;
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain
-{
+{   
+    [Table("Sentiments_Alarms_Table")]
 	public class Alarm : IAlarm
 	{
+        [Required]
 		public Entity Entity { get; set; }
+
 		public enum Type { Positive, Negative }
-		public int QuantityPost { get; set; }
-		public int QuantityTime { get; set; }
+
+        [Required]
+        public int QuantityPost { get; set; }
+
+        [Required]
+        public int QuantityTime { get; set; }
+
 		public bool IsActive { get; set; }
-		public bool IsInHours { get; set; }
-		public Type TypeOfAlarm { get; set; }
+    
+        [Required]
+        public bool IsInHours { get; set; }
+
+        [Required]
+        public Type TypeOfAlarm { get; set; }
+
+        [Key]
         public int Id { get; set; }
+
         public Alarm()
 		{
 			IsActive = false;

@@ -48,6 +48,7 @@ namespace BusinessLogic
 			phrase.SetTypeOfPhrase(positiveCounter, negetiveCounter);
 			if (entityFound.IsEmptyEntity())
 			{
+                phrase.Entity = null; 
 				phrase.PhraseType = Phrase.TypePhrase.Neutral;
 			}
 		}
@@ -75,7 +76,6 @@ namespace BusinessLogic
 
 		public void DeleteAuthorPhrases(Author author)
         {
-            author.DeleteAllPhrases();
             PhraseManagement.DeletePhrasesOfAuthor(author); 
         }
 
@@ -88,6 +88,7 @@ namespace BusinessLogic
 				foreach (IAlarm alarm in AlarmManagement.AllAlarms)
 				{
 					alarm.UpdateState(PhraseManagement.AllPhrases, minDate);
+                    AlarmManagement.Update(alarm); 
 				}
 			}
 		}

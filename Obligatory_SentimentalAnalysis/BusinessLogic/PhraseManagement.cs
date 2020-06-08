@@ -19,9 +19,12 @@ namespace BusinessLogic
 			phrase.TextPhrase = Utilities.DeleteSpaces(phrase.TextPhrase.Trim()); 
 			phrase.VerifyFormat(); 
 			phrasePersistence.AddPhrase(phrase);
-            phrase.PhraseAuthor.AddPhrase(phrase); 
 		}
 
+        public Author GetAuthor(Author author)
+        {
+            return phrasePersistence.GetAuthor(author); 
+        }
 
         public void DeletePhrasesOfAuthor(Author author)
         {

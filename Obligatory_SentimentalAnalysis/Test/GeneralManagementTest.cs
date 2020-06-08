@@ -23,7 +23,6 @@ namespace Test
                 LastName = "Lamela",
                 BirthDate = new DateTime(2000, 02, 29)
             };
-            management.AuthorManagement.AddAuthor(author);
             author2 = new Author()
             {
                 UserName = "agustinh",
@@ -31,10 +30,11 @@ namespace Test
                 LastName = "Hernandorena",
                 BirthDate = new DateTime(2000, 04, 01)
             };
-            management.AuthorManagement.AddAuthor(author2);
             management.EntityManagement.EmptyEntity();
             management.SentimentManagement.EmptySentiment();
 			management.PhraseManagement.EmptyPhrase();
+            management.AuthorManagement.EmptyAll();
+            management.AlarmManagement.DeleteAll(); 
         }
 
         [TestCleanup]
@@ -43,6 +43,8 @@ namespace Test
             management = new GeneralManagement();
             management.SentimentManagement.EmptySentiment();
 			management.PhraseManagement.EmptyPhrase();
+            management.AuthorManagement.EmptyAll();
+            management.AlarmManagement.DeleteAll(); 
         }
 
 
@@ -50,7 +52,8 @@ namespace Test
         [TestMethod]
 		public void AnalysisOfPhrasePositive()
 		{
-			Entity entityExpected = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+            Entity entityExpected = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -83,7 +86,9 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhraseNegative()
 		{
-			Entity entityExpected = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entityExpected = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -122,7 +127,9 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhraseNeutral()
 		{
-			Entity entityExpected = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entityExpected = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -159,7 +166,9 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhraseNeutralEmptyEntity()
 		{
-			Sentiment sentiment = new Sentiment()
+            management.AuthorManagement.AddAuthor(author);
+
+            Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Me encanta",
 				SentimentType= Sentiment.TypeSentiment.Positive
@@ -187,7 +196,9 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhraseNeutralEmptySentiment()
 		{
-			Entity entityExpected = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entityExpected = new Entity()
 			{
 				EntityName = "Rappi"
 			};
@@ -218,10 +229,13 @@ namespace Test
 		[TestMethod]
 		public void AnalysisUnregistredSentimentAndEntity()
 		{
-			Phrase phrase = new Phrase()
+            management.AuthorManagement.AddAuthor(author);
+
+            Phrase phrase = new Phrase()
 			{
 				TextPhrase= "Me gusta subway"
 			};
+            management.PhraseManagement.AddPhrase(phrase); 
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
@@ -238,7 +252,9 @@ namespace Test
 		[TestMethod]
 		public void AnalysisEmptyPhrase()
 		{
-			Phrase phrase = new Phrase()
+            management.AuthorManagement.AddAuthor(author);
+
+            Phrase phrase = new Phrase()
 			{
 				TextPhrase= ""
 			};
@@ -257,7 +273,9 @@ namespace Test
 		[TestMethod]
 		public void AnalysisPhraseTwoEntities()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "McDonald's"
 			};
@@ -294,7 +312,9 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhraseTwoSentimentPositive()
 		{
-			Entity entityExpected = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entityExpected = new Entity()
 			{
 				EntityName = "Rappi"
 			};
@@ -331,7 +351,9 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhraseNotContainsEntity()
 		{
-			Entity entityExpected = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entityExpected = new Entity()
 			{
 				EntityName = "Mc donalds"
 			};
@@ -378,7 +400,9 @@ namespace Test
 		[TestMethod]
 		public void VerifyAlarms()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -418,7 +442,9 @@ namespace Test
 		[TestMethod]
 		public void VerifyAlarms2()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -473,7 +499,9 @@ namespace Test
 		[TestMethod]
 		public void VerifyAlarms3()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -498,7 +526,9 @@ namespace Test
 		[TestMethod]
 		public void VerifyAlarms4()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -546,13 +576,15 @@ namespace Test
 				MockedDateTime = new DateTime(2020, 04, 26, 19, 10, 30)
 			};
 			management.UpdateAlarms(provider);
-			Assert.IsTrue(aAlarm.IsActive);
+			Assert.IsTrue(management.AlarmManagement.GetSentimentAlarm(aAlarm).IsActive);
 		}
 
 		[TestMethod]
 		public void VerifyAlarms5()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -615,7 +647,9 @@ namespace Test
 		[TestMethod]
 		public void VerifyAlarms6()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -688,15 +722,17 @@ namespace Test
 				MockedDateTime = new DateTime(2020, 04, 26, 19, 10, 30)
 			};
 			management.UpdateAlarms(provider);
-			Assert.IsTrue(aAlarm2.IsActive);
-			Assert.IsFalse(aAlarm.IsActive);
+			Assert.IsTrue(management.AlarmManagement.GetSentimentAlarm(aAlarm2).IsActive);
+			Assert.IsFalse(management.AlarmManagement.GetSentimentAlarm(aAlarm).IsActive);
 		}
 
 
 		[TestMethod]
 		public void VerifyAlarms7()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -737,6 +773,8 @@ namespace Test
         [TestMethod]
         public void DeleteAllPhrases()
         {
+            management.AuthorManagement.AddAuthor(author);
+
             Entity entityExpected = new Entity()
             {
                 EntityName = "Mc donalds"
@@ -768,6 +806,8 @@ namespace Test
             {
                 TextPhrase = "Me gusta Mc       donalds",
                 PhraseDate = DateTime.Now,
+                Entity = entityExpected, 
+                PhraseType= Phrase.TypePhrase.Positive, 
                 PhraseAuthor = author
             };
             management.PhraseManagement.AddPhrase(phrase); 
@@ -780,9 +820,9 @@ namespace Test
                 PhraseAuthor = author
             };
             management.PhraseManagement.AddPhrase(phrase2);
+            Author prueba = management.AuthorManagement.GetAuthor(author); 
             management.DeleteAuthorPhrases(author);
             Assert.IsTrue(management.PhraseManagement.AllPhrases.Length == 0);
-            Assert.IsTrue(author.AllAuthorPhrases.Length == 0); 
         }
 
 
@@ -791,7 +831,9 @@ namespace Test
         [TestMethod]
 		public void VerifyAlarmsOfAuthors()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -831,6 +873,8 @@ namespace Test
         [TestMethod]
         public void VerifyAlarmsOfAuthors2()
         {
+            management.AuthorManagement.AddAuthor(author);
+
             Entity entity = new Entity()
             {
                 EntityName = "Coca Cola"
@@ -885,6 +929,8 @@ namespace Test
         [TestMethod]
         public void VerifyAlarmsAuthorsAlarms()
         {
+            management.AuthorManagement.AddAuthor(author);
+
             AuthorAlarm aAlarm = new AuthorAlarm()
             {
                 TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
@@ -905,8 +951,11 @@ namespace Test
 
 		[TestMethod]
 		public void VerifyAlarmsOfAuthors3()
-		{
-			Entity entity = new Entity()
+        {
+            management.AuthorManagement.AddAuthor(author);
+            management.AuthorManagement.AddAuthor(author2);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -976,7 +1025,10 @@ namespace Test
 		[TestMethod]
 		public void ShowActiveAlarm()
 		{
-			AuthorAlarm aAlarm = new AuthorAlarm()
+            management.AuthorManagement.AddAuthor(author);
+            management.AuthorManagement.AddAuthor(author2);
+
+            AuthorAlarm aAlarm = new AuthorAlarm()
 			{
 				TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
 				QuantityPost = 1,
@@ -1026,6 +1078,8 @@ namespace Test
 		[TestMethod]
         public void VerifyAlarmsOfAuthors4()
         {
+            management.AuthorManagement.AddAuthor(author);
+            management.AuthorManagement.AddAuthor(author2);
             Entity entity = new Entity()
             {
                 EntityName = "Coca Cola"
@@ -1081,6 +1135,9 @@ namespace Test
         [TestMethod]
         public void VerifyAlarmsOfAuthors5()
         {
+
+            management.AuthorManagement.AddAuthor(author);
+            management.AuthorManagement.AddAuthor(author2);
             Entity entity = new Entity()
             {
                 EntityName = "Coca Cola"

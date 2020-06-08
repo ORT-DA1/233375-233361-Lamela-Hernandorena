@@ -1,25 +1,34 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using BusinessLogicExceptions; 
 
 namespace Domain
 {
+    [Table("Phrases_Table")]
 	public class Phrase
 	{
+        [Required]
 		public string TextPhrase { get; set; }
 
-		public DateTime PhraseDate { get; set; }
-
-		public  Entity Entity { get; set; }
+        [Required]
+        public DateTime PhraseDate { get; set; }
+        
+        public Entity Entity { get; set; }
 
 		public enum TypePhrase { Positive, Neutral, Negative }
 
-		public TypePhrase PhraseType { get; set; }
+        [Required]
+        public TypePhrase PhraseType { get; set; }
 
+        [Key]
 		public int Id { get; set; }
 
-		public Author PhraseAuthor { get; set; }
+        [Required]
+        public Author PhraseAuthor { get; set; }
 
 		public bool IsDeleted {get;set;}
+
 		
         public Phrase ()
         {

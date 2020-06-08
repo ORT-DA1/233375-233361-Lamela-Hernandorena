@@ -12,6 +12,7 @@ namespace Test
 
         PhraseManagement management;
         EntityManagement entityManagement;
+        AuthorManagement authorManagement; 
         Author author;
 
         [TestInitialize]
@@ -19,8 +20,7 @@ namespace Test
         {
             management = new PhraseManagement();
             entityManagement = new EntityManagement();
-            management.EmptyPhrase();
-            entityManagement.EmptyEntity();
+            authorManagement = new AuthorManagement(); 
             author = new Author()
             {
                 UserName = "Josami",
@@ -28,7 +28,11 @@ namespace Test
                 LastName = "Lamela",
                 BirthDate = new DateTime(2000, 02, 29)
             };
+            management.EmptyPhrase();
+            entityManagement.EmptyEntity();
+            authorManagement.EmptyAll(); 
         }
+        
 
         [TestCleanup]
         public void CleanUp()
@@ -37,12 +41,14 @@ namespace Test
             management.EmptyPhrase();
             entityManagement = new EntityManagement();
             entityManagement.EmptyEntity();
+            authorManagement.EmptyAll();
         }
 
 
         [TestMethod]
         public void AddValidPhrase()
         {
+            authorManagement.AddAuthor(author);
             Entity entity = new Entity()
             {
                 EntityName = "Mc donalds"
@@ -63,6 +69,7 @@ namespace Test
         [TestMethod]
         public void AddValidPhrase2()
         {
+            authorManagement.AddAuthor(author);
             Entity entity = new Entity()
             {
                 EntityName = "Disney"
@@ -83,7 +90,7 @@ namespace Test
         [TestMethod]
         public void AddValidPhrase3()
         {
-
+            authorManagement.AddAuthor(author);
             Entity entity = new Entity()
             {
                 EntityName = "Disney"
@@ -115,6 +122,7 @@ namespace Test
         [TestMethod]
         public void AddPhraseWithTodayDate()
         {
+            authorManagement.AddAuthor(author);
             Entity entity = new Entity()
             {
                 EntityName = "Burger King"
@@ -136,6 +144,7 @@ namespace Test
         [ExpectedException(typeof(PhraseManagementException))]
         public void AddPhraseWithDateAfterToday()
         {
+            authorManagement.AddAuthor(author);
             DateTime aDate = new DateTime(2020, 12, 29);
             Entity entity = new Entity()
             {
@@ -157,6 +166,7 @@ namespace Test
         [ExpectedException(typeof(PhraseManagementException))]
         public void AddInvalidEmptyPhrase()
         {
+            authorManagement.AddAuthor(author);
             Entity entity = new Entity();
             Phrase phrase = new Phrase()
             {
@@ -174,6 +184,7 @@ namespace Test
         [ExpectedException(typeof(PhraseManagementException))]
         public void AddPhraseWithDateBeforeOneYear()
         {
+            authorManagement.AddAuthor(author);
             DateTime aDate = new DateTime(2019, 03, 22);
             Entity entity = new Entity()
             {
@@ -194,6 +205,7 @@ namespace Test
         [TestMethod]
         public void TryingEqualsMethod()
         {
+            authorManagement.AddAuthor(author);
             DateTime aDate = new DateTime(2020, 03, 22);
 
             Entity entity = new Entity()
@@ -224,6 +236,7 @@ namespace Test
         [TestMethod]
         public void TryingNotEquals()
         {
+            authorManagement.AddAuthor(author);
             DateTime aDate = new DateTime(2020, 03, 22);
             Entity entity = new Entity()
             {
@@ -257,15 +270,19 @@ namespace Test
         [TestMethod]
         public void DeleteAllPhrasesOfAuthor()
         {
+            authorManagement.AddAuthor(author);
             DateTime aDate = new DateTime(2020, 03, 22);
             Entity entity = new Entity()
             {
                 EntityName = "Burger King"
             };
+            entityManagement.AddEntity(entity);
+
             Entity entity2 = new Entity()
             {
                 EntityName = "Mc Donalds"
             };
+            entityManagement.AddEntity(entity2);
 
             Phrase phrase = new Phrase()
             {
@@ -274,7 +291,7 @@ namespace Test
                 Entity = entity,
                 PhraseType = Phrase.TypePhrase.Positive,
                 PhraseAuthor = author
-            };
+            }; 
             Phrase phrase2 = new Phrase()
             {
                 TextPhrase = "Amo Mc Donalds",

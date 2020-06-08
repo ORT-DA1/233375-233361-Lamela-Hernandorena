@@ -24,7 +24,23 @@ namespace Persistence
                 {
                     ctx.Phrases.Add(phrase);
                     ctx.Entry(phrase.Entity).State = EntityState.Unchanged;
+                    ctx.Entry(phrase.PhraseAuthor).State = EntityState.Unchanged; 
                     ctx.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new PhraseManagementException("Error agregando frase", ex);
+                }
+            }
+        }
+
+        public Author GetAuthor(Author author)
+        {
+            using (Context ctx = new Context())
+            {
+                try
+                {
+                    return ctx.Authors.Attach(author); 
                 }
                 catch (Exception ex)
                 {
@@ -47,7 +63,7 @@ namespace Persistence
             {
                 try
                 {
-                    List<Phrase> authorPhrases = ctx.Phrases.Where(p => p.PhraseAuthor.Id == author.Id).ToList();
+                    List<Phrase> authorPhrases = ctx.Phrases.Where(p => p.PhraseAuthor.Id == author.Id).Include("Entity").Include("PhraseAuthor").ToList();
                     foreach (Phrase phrase in authorPhrases)
                     {
                         phrase.IsDeleted = true;
@@ -80,12 +96,11 @@ namespace Persistence
             }
         }
         
-        //agregar include de author
         public Phrase[] AllPhrases()
         {
             using (Context ctx = new Context())
             {
-                return ctx.Phrases.Where(p => !p.IsDeleted).Include("Entity").ToArray();
+                return ctx.Phrases.Where(p => !p.IsDeleted).Include("Entity").Include("PhraseAuthor").ToArray();
             }
         }
     }

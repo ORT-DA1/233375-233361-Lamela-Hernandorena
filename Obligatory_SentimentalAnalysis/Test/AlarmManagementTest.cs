@@ -1,7 +1,8 @@
 ﻿using BusinessLogic;
 using BusinessLogicExceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Domain; 
+using Domain;
+using System.Collections.Generic;
 
 namespace Test
 {
@@ -16,10 +17,17 @@ namespace Test
 		public void SetUp()
 		{
 			management = new AlarmManagement();
+            management.DeleteAll(); 
 		}
 
+        [TestCleanup]
+        public void CleanUp()
+        {
+            management = new AlarmManagement();
+            management.DeleteAll();
+        }
 
-		[TestMethod]
+        [TestMethod]
 		public void CreateValidNewAlarm()
 		{
 			Entity entity = new Entity()

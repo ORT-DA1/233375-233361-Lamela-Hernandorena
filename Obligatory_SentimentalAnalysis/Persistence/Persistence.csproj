@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlarmPersistence.cs" />
+    <Compile Include="AuthorPersistence.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="EntityPersistence.cs" />
     <Compile Include="PhrasePersistence.cs" />
