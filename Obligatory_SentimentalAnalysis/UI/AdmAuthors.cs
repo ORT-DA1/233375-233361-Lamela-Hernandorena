@@ -64,9 +64,9 @@ namespace UI
             Author author = new Author()
             {
                 UserName = textBoxUserName.Text,
-                Name = textBoxName.Text, 
+                Name = textBoxName.Text,
                 LastName = textBoxLastname.Text,
-                BirthDate= dateTimePickerBirth.Value
+                BirthDate = dateTimePickerBirth.Value
             };
             generalManagement.AuthorManagement.AddAuthor(author);
         }
@@ -76,7 +76,7 @@ namespace UI
             if (generalManagement.AuthorManagement.AllAuthors.Length > 0)
             {
                 btnDeleteAuthor.Enabled = true;
-                btnModify.Enabled = true; 
+                btnModify.Enabled = true;
             }
             else
             {
@@ -95,7 +95,7 @@ namespace UI
             textBoxUserName.Text = "";
             textBoxName.Text = "";
             textBoxLastname.Text = "";
-            labelError.Visible = false; 
+            labelError.Visible = false;
         }
 
         private void btnDeleteAuthor_Click(object sender, EventArgs e)
@@ -118,13 +118,13 @@ namespace UI
         {
             Author author = (Author)listBoxAuthors.SelectedItem;
             generalManagement.AuthorManagement.DeleteAuthor(author);
-            generalManagement.DeleteAuthorPhrases(author); 
+            generalManagement.DeleteAuthorPhrases(author);
         }
 
         private void InitializeCalendar()
         {
             dateTimePickerBirth.Value = DateTime.Now.AddYears(-13);
-            dateTimePickerBirth.MinDate = DateTime.Now.AddYears(-100); 
+            dateTimePickerBirth.MinDate = DateTime.Now.AddYears(-100);
             dateTimePickerBirth.MaxDate = DateTime.Now.AddYears(-13);
         }
 
@@ -140,7 +140,7 @@ namespace UI
                 authorToModify = (Author)listBoxAuthors.SelectedItem;
                 ChargeAuthorInformation(authorToModify);
                 btnModifyAuthor.Visible = true;
-                btnModifyAuthor.Enabled = true; 
+                btnModifyAuthor.Enabled = true;
                 btnAddAuthor.Visible = false;
                 btnAddAuthor.Enabled = false;
             }
@@ -151,8 +151,30 @@ namespace UI
             textBoxUserName.Text = aAuthor.UserName;
             textBoxName.Text = aAuthor.Name;
             textBoxLastname.Text = aAuthor.LastName;
-            dateTimePickerBirth.Value = aAuthor.BirthDate;
+
+
+            if (dateTimePickerBirth.MaxDate.Year == aAuthor.BirthDate.Year
+                && dateTimePickerBirth.MaxDate.Month == aAuthor.BirthDate.Month
+                && dateTimePickerBirth.MaxDate.Day == aAuthor.BirthDate.Day && dateTimePickerBirth.MaxDate.Year == DateTime.Now.AddYears(-13).Year)
+            {
+                dateTimePickerBirth.Value = dateTimePickerBirth.MaxDate;
+            }
+            else
+            {
+                if (dateTimePickerBirth.MaxDate.Year == aAuthor.BirthDate.Year
+                && dateTimePickerBirth.MaxDate.Month == aAuthor.BirthDate.Month
+                && dateTimePickerBirth.MaxDate.Day == aAuthor.BirthDate.Day && dateTimePickerBirth.MaxDate.Year == DateTime.Now.AddYears(-100).Year)
+                {
+                    dateTimePickerBirth.Value = dateTimePickerBirth.MinDate;
+                }
+                else
+                {
+                    dateTimePickerBirth.Value = aAuthor.BirthDate;
+                }
+            }  
         }
+
+
 
         private void modifyAuthorUI()
         {
@@ -173,7 +195,7 @@ namespace UI
             btnModifyAuthor.Visible = false;
             btnModifyAuthor.Enabled = false;
         }
-        
+
 
         private void btnModifyAuthor_Click(object sender, EventArgs e)
         {

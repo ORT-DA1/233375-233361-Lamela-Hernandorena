@@ -24,7 +24,7 @@ namespace BusinessLogic
 		{
 			int positiveCounter = 0;
 			int negetiveCounter = 0;
-			string textOfPhrase = Utilities.DeleteSpaces(phrase.TextPhrase.ToLower()); 
+			string textOfPhrase = Utilities.DeleteSpaces(phrase.TextPhrase.ToLower());
 
 			foreach (Sentiment sentiment in SentimentManagement.AllSentiments)
 			{
@@ -35,48 +35,47 @@ namespace BusinessLogic
 					if (sentiment.SentimentType.Equals(Sentiment.TypeSentiment.Positive))
 					{
 						positiveCounter++;
-						sentiment.IsAssociatedToPhrase = true;  
 					}
 					else
 					{
 						negetiveCounter++;
-						sentiment.IsAssociatedToPhrase = true; 
 					}
+					SentimentManagement.UpdateAssociatedSentiment(sentiment);
 				}
 			}
-			Entity entityFound = FindEntity(textOfPhrase); 
+			Entity entityFound = FindEntity(textOfPhrase);
 			phrase.Entity = entityFound;
 			phrase.SetTypeOfPhrase(positiveCounter, negetiveCounter);
 			if (entityFound.IsEmptyEntity())
 			{
+                phrase.Entity = null; 
 				phrase.PhraseType = Phrase.TypePhrase.Neutral;
 			}
 		}
 
 		private Entity FindEntity(string textOfPhrase)
 		{
-			int minUbication = 9999; 
-			Entity entityFound = new Entity(); 
+			int minUbication = 9999;
+			Entity entityFound = new Entity();
 
 			foreach (Entity entity in EntityManagement.AllEntities)
 			{
 				string entityOfList = Utilities.DeleteSpaces(entity.EntityName.ToLower());
-				
+
 				if (textOfPhrase.Contains(entityOfList))
 				{
-					if(textOfPhrase.IndexOf(entityOfList) < minUbication)
+					if (textOfPhrase.IndexOf(entityOfList) < minUbication)
 					{
 						minUbication = textOfPhrase.IndexOf(entityOfList);
 						entityFound = entity;
 					}
 				}
 			}
-			return entityFound; 
+			return entityFound;
 		}
 
-        public void DeleteAuthorPhrases(Author author)
+		public void DeleteAuthorPhrases(Author author)
         {
-            author.DeleteAllPhrases();
             PhraseManagement.DeletePhrasesOfAuthor(author); 
         }
 
@@ -89,6 +88,7 @@ namespace BusinessLogic
 				foreach (IAlarm alarm in AlarmManagement.AllAlarms)
 				{
 					alarm.UpdateState(PhraseManagement.AllPhrases, minDate);
+                    AlarmManagement.Update(alarm); 
 				}
 			}
 		}

@@ -1,5 +1,6 @@
 ﻿using BusinessLogicExceptions;
 using Domain;
+using Persistence;
 using System.Collections.Generic;
 using System.Security.Permissions;
 
@@ -7,11 +8,11 @@ namespace BusinessLogic
 {
     public class AuthorManagement
     {
-        private List<Author> authorList; 
+        private AuthorPersistence authorPersistence; 
 
         public AuthorManagement()
         {
-            authorList = new List<Author>(); 
+            authorPersistence = new AuthorPersistence(); 
         }
 
         public void AddAuthor(Author author)
@@ -19,13 +20,13 @@ namespace BusinessLogic
             FormatFields(author); 
             author.VerifyFormat();
             VerifyFormatAdd(author);
-            authorList.Add(author); 
+            authorPersistence.AddAuthor(author); 
         }
         
         public void DeleteAuthor(Author author)
         {
             VerifyFormatDelete(author);
-            authorList.Remove(author);
+            authorPersistence.DeleteAuthor(author);
         }
 
         public void UpdateAuthorInformation(Author authorToModificate, Author copyAuthor)
@@ -50,10 +51,7 @@ namespace BusinessLogic
 
         private void CopyInformationAuthorToAuthor(Author authorToModificate, Author copyAuthor)
         {
-            authorToModificate.Name = copyAuthor.Name;
-            authorToModificate.LastName = copyAuthor.LastName;
-            authorToModificate.UserName = copyAuthor.UserName;
-            authorToModificate.BirthDate = copyAuthor.BirthDate;
+            authorPersistence.ModifyInformationAuthor(authorToModificate, copyAuthor); 
         }
 
 
@@ -68,7 +66,7 @@ namespace BusinessLogic
         
         private bool IsNotContained(Author author)
         {
-            return !authorList.Contains(author);
+            return !authorPersistence.ContainsAuthor(author);
         }
 
         private void VerifyFormatAdd(Author author)
@@ -79,9 +77,14 @@ namespace BusinessLogic
             }
         }
 
+        public Author GetAuthor(Author authorToGet)
+        {
+           return authorPersistence.GetAuthorById(authorToGet); 
+        }
+
         private bool IsContained(Author author)
         {
-            return authorList.Contains(author);
+            return authorPersistence.ContainsAuthor(author);
         }
 
         private void FormatFields(Author author)
@@ -93,8 +96,12 @@ namespace BusinessLogic
 
         public Author[] AllAuthors
         {
-            get { return authorList.ToArray(); }
+            get { return authorPersistence.AllAuthors(); }
         }
 
+        public void EmptyAll()
+        {
+            authorPersistence.DeleteAll(); 
+        }
     }
 }

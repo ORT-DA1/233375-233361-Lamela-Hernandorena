@@ -1,20 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using BusinessLogicExceptions; 
 
 namespace Domain
 {
+    [Table("Authors_Alarms_Table")]
     public class AuthorAlarm : IAlarm
     {
-        public enum Type { Positive, Negative }
-        public int QuantityPost { get; set; }
-        public int QuantityTime { get; set; }
-        public bool IsActive { get; set; }
-        public bool IsInHours { get; set; }
-        public Type TypeOfAlarm { get; set; }
+        public enum TypeOfNewAlarm { Positive, Negative }
 
-        private List<Author> participantsAuthors;
+        [Required]
+        public int QuantityPost { get; set; }
+
+        [Required]
+        public int QuantityTime { get; set; }
+
+        public bool IsActive { get; set; }
+
+        [Required]
+        public bool IsInHours { get; set; }
+
+        [Required]
+        public TypeOfNewAlarm TypeOfAlarm { get; set; }
+
+        [Key]
+        public int Id { get; set; }
+        
+        public List<Author> participantsAuthors { get;} 
 
         public AuthorAlarm()
         {
@@ -64,18 +79,15 @@ namespace Domain
 
         public void UpdateState(Phrase[] phrases, DateTime date)
         {
-
             participantsAuthors.Clear();
             IsActive = false;
             DateTime minDate = date;
             Author[] participants = new Author[phrases.Length];
-            List<Author> participants2 = new List<Author>();
-            for(int i=0; i < participants.Length; i++)
+            int[] quantity = new int[phrases.Length];
+            for (int i=0; i < participants.Length; i++)
             {
                 participants[i] = new Author();
-                participants[i].UserName = "";
             }
-            int[] quantity = new int[phrases.Length];
             int index = 0;
             foreach (Phrase phrase in phrases)
             {
@@ -135,6 +147,26 @@ namespace Domain
             if (Utilities.IsNegativeQuantity(QuantityTime))
             {
                 throw new AlarmManagementException(MessagesExceptions.ErrorIsNegativeTime);
+            }
+        }
+
+        public bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            else
+            {
+                if (GetType() != obj.GetType())
+                {
+                    return false;
+                }
+                else
+                {
+                    AuthorAlarm alarm = (AuthorAlarm)obj;
+                    return QuantityPost== alarm.QuantityPost;
+                }
             }
         }
     }

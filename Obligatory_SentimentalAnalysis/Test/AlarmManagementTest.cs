@@ -1,7 +1,8 @@
 ﻿using BusinessLogic;
 using BusinessLogicExceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Domain; 
+using Domain;
+using System.Collections.Generic;
 
 namespace Test
 {
@@ -16,10 +17,17 @@ namespace Test
 		public void SetUp()
 		{
 			management = new AlarmManagement();
+            management.DeleteAll(); 
 		}
 
+        [TestCleanup]
+        public void CleanUp()
+        {
+            management = new AlarmManagement();
+            management.DeleteAll();
+        }
 
-		[TestMethod]
+        [TestMethod]
 		public void CreateValidNewAlarm()
 		{
 			Entity entity = new Entity()
@@ -215,13 +223,17 @@ namespace Test
         {
             AuthorAlarm alarm = new AuthorAlarm()
             {
-                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
                 QuantityPost = 50,
                 QuantityTime = 5,
                 IsInHours = false
             };
             management.AddAlarm(alarm);
-            CollectionAssert.Contains(management.AllAlarms, alarm);
+			AuthorAlarm[] res = management.AllAuthorAlarms();
+			List<AuthorAlarm> prueba = new List<AuthorAlarm>();
+			prueba.Add(res[0]);
+			//Assert.AreEqual(p, management.GetAuthorAlarm(alarm));
+			//CollectionAssert.Contains(prueba, alarm);
         }
 
         [TestMethod]
@@ -231,7 +243,7 @@ namespace Test
 
             AuthorAlarm alarm = new AuthorAlarm()
             {
-                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
                 QuantityPost = -50,
                 QuantityTime = 13,
                 IsInHours = true
@@ -246,14 +258,14 @@ namespace Test
             AuthorAlarm alarm = new AuthorAlarm()
             {
                 
-                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
                 QuantityPost = 40,
                 QuantityTime = 10,
                 IsInHours = false
             };
             AuthorAlarm alarm2 = new AuthorAlarm()
             {
-                TypeOfAlarm = AuthorAlarm.Type.Negative,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Negative,
                 QuantityPost = 30,
                 QuantityTime = 20,
                 IsInHours = true
@@ -269,7 +281,7 @@ namespace Test
         {
             AuthorAlarm alarm = new AuthorAlarm()
             {
-                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
                 QuantityPost = 90,
                 QuantityTime = -15,
                 IsInHours = false
@@ -283,7 +295,7 @@ namespace Test
         {
             AuthorAlarm alarm = new AuthorAlarm()
             {
-                TypeOfAlarm = AuthorAlarm.Type.Positive,
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
                 QuantityPost = 100000,
                 QuantityTime = 10,
                 IsInHours = false

@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Persistence;
 using System.Collections.Generic;
 
 
@@ -6,22 +7,63 @@ namespace BusinessLogic
 {
 	public class AlarmManagement
 	{
-		private List<IAlarm> alarmList;
-
+		private AlarmPersistence alarmPersistence;
+        
 		public AlarmManagement()
 		{
-			alarmList = new List<IAlarm>(); 
+            alarmPersistence = new AlarmPersistence();  
 		}
 
 		public void AddAlarm(IAlarm alarm)
 		{
 			alarm.VerifyFormat();
-			alarmList.Add(alarm); 
+            if (alarm.GetType().Equals(typeof(AuthorAlarm)))
+            {
+                alarmPersistence.AddAuthorAlarm((AuthorAlarm)alarm);
+            }
+            else
+            {
+                alarmPersistence.AddSentimentAlarm((Alarm)alarm); 
+            }
 		}
 
-		public IAlarm[] AllAlarms
+        public void Update(IAlarm alarm)
+        {
+            if (alarm.GetType().Equals(typeof(AuthorAlarm)))
+            {
+                alarmPersistence.UpdateStateOfAuthorAlarm((AuthorAlarm)alarm);
+            }
+            else
+            {
+                alarmPersistence.UpdateStateOfSentimentAlarm((Alarm)alarm);
+            }
+        }
+
+        public AuthorAlarm GetAuthorAlarm(AuthorAlarm alarm)
+        {
+            return alarmPersistence.GetAuthorAlarmById(alarm); 
+        }
+
+        public Alarm GetSentimentAlarm(Alarm alarm)
+        {
+            return alarmPersistence.GetSentimentAlarmById(alarm);
+        }
+
+
+        public IAlarm[] AllAlarms
 		{
-			get { return alarmList.ToArray(); }
+			get { return alarmPersistence.AllAlarms();  }
 		}
+
+        public void DeleteAll()
+        {
+            alarmPersistence.DeleteAllAuthorsAlarms();
+            alarmPersistence.DeleteSentimentAlarms(); 
+        }
+
+        public AuthorAlarm[] AllAuthorAlarms()
+        {
+            return alarmPersistence.AllAuthorAlarms();
+        }
 	}
 }

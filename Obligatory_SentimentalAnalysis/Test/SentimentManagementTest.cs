@@ -15,13 +15,21 @@ namespace Test
 		[TestInitialize]
 		public void SetUp()
 		{
-			manegement = new SentimentManagement(); 
-			
-			
-		}
+			manegement = new SentimentManagement();
+            manegement.EmptySentiment(); 
+        }
+
+        
+        
+        [TestCleanup]
+        public void CleanUp()
+        {
+            manegement = new SentimentManagement();
+            manegement.EmptySentiment();
+        }
 
 
-		[TestMethod]
+        [TestMethod]
 		public void AddValidSentimentPositive1()
 		{
 			Sentiment sentiment = new Sentiment()
@@ -183,7 +191,7 @@ namespace Test
 			};
 			manegement.AddSentiment(sentiment);
 			manegement.DeleteSentiment(sentiment);
-			Assert.IsTrue(manegement.IsEmpty()); 
+            CollectionAssert.DoesNotContain(manegement.AllSentiments, sentiment); 
 		}
 
 
@@ -387,7 +395,7 @@ namespace Test
 			};
             manegement.AddSentiment(sentiment);
             manegement.DeleteSentiment(sentiment);
-            Assert.IsTrue(manegement.IsEmpty());
+            CollectionAssert.DoesNotContain(manegement.AllSentiments, sentiment); 
         }
 
         [TestMethod]
