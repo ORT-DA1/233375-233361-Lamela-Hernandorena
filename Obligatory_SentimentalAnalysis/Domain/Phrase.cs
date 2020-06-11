@@ -87,8 +87,8 @@ namespace Domain
 				else
 				{
 					Phrase phrase = (Phrase)obj;
-					return string.Equals(TextPhrase, phrase.TextPhrase, StringComparison.OrdinalIgnoreCase) && Entity.Equals(phrase.Entity)
-						&& PhraseType.Equals(phrase.PhraseType);
+					return string.Equals(TextPhrase, phrase.TextPhrase, StringComparison.OrdinalIgnoreCase) 
+						&& PhraseType.Equals(phrase.PhraseType) && PhraseAuthor.Equals(phrase.PhraseAuthor);
 				}
 			}
 		}

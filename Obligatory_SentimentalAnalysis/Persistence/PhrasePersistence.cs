@@ -23,7 +23,10 @@ namespace Persistence
                 try
                 {
                     ctx.Phrases.Add(phrase);
-                    ctx.Entry(phrase.Entity).State = EntityState.Unchanged;
+                    if (phrase.Entity != null)
+                    {
+                        ctx.Entry(phrase.Entity).State = EntityState.Unchanged;
+                    }
                     ctx.Entry(phrase.PhraseAuthor).State = EntityState.Unchanged; 
                     ctx.SaveChanges();
                 }

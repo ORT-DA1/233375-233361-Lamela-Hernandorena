@@ -40,6 +40,8 @@ namespace Domain
             UserName = ""; 
         }
 
+
+
         public void VerifyFormat()
         {
             if (string.IsNullOrEmpty(UserName))

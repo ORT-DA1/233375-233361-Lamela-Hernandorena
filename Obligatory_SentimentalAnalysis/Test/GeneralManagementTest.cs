@@ -30,26 +30,27 @@ namespace Test
                 LastName = "Hernandorena",
                 BirthDate = new DateTime(2000, 04, 01)
             };
-            management.EntityManagement.EmptyEntity();
-            management.SentimentManagement.EmptySentiment();
 			management.PhraseManagement.EmptyPhrase();
-            management.AuthorManagement.EmptyAll();
-            management.AlarmManagement.DeleteAll(); 
-        }
+			management.AuthorManagement.EmptyAll();
+			management.AlarmManagement.DeleteAll();
+			management.EntityManagement.EmptyEntity();
+			management.SentimentManagement.EmptySentiment();
+		}
 
-        [TestCleanup]
+		[TestCleanup]
         public void CleanUp()
         {
             management = new GeneralManagement();
-            management.SentimentManagement.EmptySentiment();
 			management.PhraseManagement.EmptyPhrase();
-            management.AuthorManagement.EmptyAll();
-            management.AlarmManagement.DeleteAll(); 
-        }
+			management.AuthorManagement.EmptyAll();
+			management.AlarmManagement.DeleteAll();
+			management.EntityManagement.EmptyEntity();
+			management.SentimentManagement.EmptySentiment();
+
+		}
 
 
-
-        [TestMethod]
+		[TestMethod]
 		public void AnalysisOfPhrasePositive()
 		{
             management.AuthorManagement.AddAuthor(author);
@@ -211,7 +212,8 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment);
 			Phrase phrase = new Phrase()
 			{
-				TextPhrase="Rappi"
+				TextPhrase="Rappi",
+				PhraseAuthor = author
 			};
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
@@ -233,9 +235,9 @@ namespace Test
 
             Phrase phrase = new Phrase()
 			{
-				TextPhrase= "Me gusta subway"
+				TextPhrase= "Me gusta subway",
+				PhraseAuthor= author
 			};
-            management.PhraseManagement.AddPhrase(phrase); 
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
@@ -253,17 +255,16 @@ namespace Test
 		public void AnalysisEmptyPhrase()
 		{
             management.AuthorManagement.AddAuthor(author);
-
             Phrase phrase = new Phrase()
 			{
-				TextPhrase= ""
+				TextPhrase= "",
+				PhraseAuthor = author
 			};
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
 				TextPhrase= "",
 				PhraseDate= DateTime.Now,
-				Entity= new Entity(),
 				PhraseType = Phrase.TypePhrase.Neutral,
                 PhraseAuthor = author
             };
@@ -293,7 +294,8 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment);
 			Phrase phrase = new Phrase()
 			{
-				TextPhrase= "Me encanta McDonald's y también Starbucks"
+				TextPhrase= "Me encanta McDonald's y también Starbucks",
+				PhraseAuthor = author
 			};
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
@@ -436,7 +438,7 @@ namespace Test
 				MockedDateTime = new DateTime(2019, 10, 1, 19, 10, 30)
 			};
 			management.UpdateAlarms(provider);
-			Assert.IsTrue(aAlarm.IsActive);
+			Assert.IsTrue(management.AlarmManagement.GetSentimentAlarm(aAlarm).IsActive);
 		}
 
 		[TestMethod]
@@ -866,8 +868,9 @@ namespace Test
 				MockedDateTime = new DateTime(2019, 10, 1, 19, 10, 30)
 			};
 			management.UpdateAlarms(provider);
-			Assert.IsTrue(aAlarm.IsActive);
-            CollectionAssert.Contains(aAlarm.AllAuthorsWhoActiveAlarm, author); 
+			AuthorAlarm dbAlarm = management.AlarmManagement.GetAuthorAlarm(aAlarm);
+			Assert.IsTrue(dbAlarm.IsActive);
+            CollectionAssert.Contains(dbAlarm.participantsAuthors, author); 
 		}
 
         [TestMethod]
@@ -1072,7 +1075,7 @@ namespace Test
 			management.UpdateAlarms(provider);
 			string resultExpected = "Alarma de tipo: " + "positiva" + " con estado: " + "activa" + " con los autores: "
 				+ " " + "Josami" + "  " + "agustinh ";
-			Assert.AreEqual(resultExpected, aAlarm.Show());
+			Assert.AreEqual(resultExpected, management.AlarmManagement.GetAuthorAlarm(aAlarm).Show());
 		}
 
 		[TestMethod]
@@ -1127,8 +1130,9 @@ namespace Test
                 MockedDateTime = new DateTime(2020, 04, 26, 19, 10, 30)
             };
             management.UpdateAlarms(provider);
-            Assert.IsTrue(aAlarm.IsActive);
-            CollectionAssert.Contains(aAlarm.AllAuthorsWhoActiveAlarm, author); 
+			AuthorAlarm dbAlarm = management.AlarmManagement.GetAuthorAlarm(aAlarm);
+			Assert.IsTrue(dbAlarm.IsActive);
+			CollectionAssert.Contains(dbAlarm.participantsAuthors, author);
         }
 
 
@@ -1193,12 +1197,14 @@ namespace Test
                 MockedDateTime = new DateTime(2020, 04, 30, 19, 10, 30)
             };
             management.UpdateAlarms(provider);
-            Assert.IsTrue(aAlarm2.IsActive);
-            Assert.IsFalse(aAlarm.IsActive);
-            CollectionAssert.Contains(aAlarm2.AllAuthorsWhoActiveAlarm, author2);
-            CollectionAssert.DoesNotContain(aAlarm2.AllAuthorsWhoActiveAlarm, author);
-            CollectionAssert.DoesNotContain(aAlarm.AllAuthorsWhoActiveAlarm, author);
-            CollectionAssert.DoesNotContain(aAlarm.AllAuthorsWhoActiveAlarm, author2);
+			AuthorAlarm dbAlarm = management.AlarmManagement.GetAuthorAlarm(aAlarm);
+			AuthorAlarm dbAlarm2 = management.AlarmManagement.GetAuthorAlarm(aAlarm2);
+			Assert.IsTrue(dbAlarm2.IsActive);
+            Assert.IsFalse(dbAlarm.IsActive);
+            CollectionAssert.Contains(dbAlarm2.participantsAuthors, author2);
+            CollectionAssert.DoesNotContain(dbAlarm2.participantsAuthors, author);
+            CollectionAssert.DoesNotContain(dbAlarm.participantsAuthors, author);
+            CollectionAssert.DoesNotContain(dbAlarm.participantsAuthors, author2);
 
         }
 

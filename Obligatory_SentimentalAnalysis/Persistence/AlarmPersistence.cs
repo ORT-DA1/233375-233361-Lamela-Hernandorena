@@ -54,7 +54,11 @@ namespace Persistence
             {
                 try
                 {
-                    var alarmOfAuthor = ctx.AuthorAlarms.SingleOrDefault();
+                    var alarmOfAuthor = ctx.AuthorAlarms.SingleOrDefault(a => a.Id == alarm.Id);
+                    foreach (Author author in alarm.participantsAuthors)
+                    {
+                        alarmOfAuthor.participantsAuthors.Add(author);
+                    }
                     alarmOfAuthor.IsActive = alarm.IsActive;
                     ctx.SaveChanges();
                 }
@@ -95,13 +99,21 @@ namespace Persistence
             }
         }
 
+        public AuthorAlarm[] AllAuthorAlarms()
+        {
+            using (Context ctx = new Context())
+            {
+                return ctx.AuthorAlarms.Include("participantsAuthors").ToArray();
+            }
+        }
+
         public AuthorAlarm GetAuthorAlarmById(AuthorAlarm alarm)
         {
             using (Context ctx = new Context())
             {
                 try
                 {
-                    return ctx.AuthorAlarms.SingleOrDefault(a=> a.Id==alarm.Id);
+                    return ctx.AuthorAlarms.Include("participantsAuthors").SingleOrDefault(a=> a.Id==alarm.Id);
                 }
                 catch (Exception ex)
                 {
@@ -162,6 +174,5 @@ namespace Persistence
                 }
             }
         }
-
     }
 }

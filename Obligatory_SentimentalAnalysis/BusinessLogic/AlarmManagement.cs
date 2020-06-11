@@ -60,5 +60,10 @@ namespace BusinessLogic
             alarmPersistence.DeleteAllAuthorsAlarms();
             alarmPersistence.DeleteSentimentAlarms(); 
         }
+
+        public AuthorAlarm[] AllAuthorAlarms()
+        {
+            return alarmPersistence.AllAuthorAlarms();
+        }
 	}
 }

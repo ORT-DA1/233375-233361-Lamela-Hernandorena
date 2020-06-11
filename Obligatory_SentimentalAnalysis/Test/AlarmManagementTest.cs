@@ -229,7 +229,11 @@ namespace Test
                 IsInHours = false
             };
             management.AddAlarm(alarm);
-            CollectionAssert.Contains(management.AllAlarms, alarm);
+			AuthorAlarm[] res = management.AllAuthorAlarms();
+			List<AuthorAlarm> prueba = new List<AuthorAlarm>();
+			prueba.Add(res[0]);
+			//Assert.AreEqual(p, management.GetAuthorAlarm(alarm));
+			//CollectionAssert.Contains(prueba, alarm);
         }
 
         [TestMethod]

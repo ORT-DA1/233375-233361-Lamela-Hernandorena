@@ -29,7 +29,7 @@ namespace Domain
         [Key]
         public int Id { get; set; }
         
-        public List<Author> participantsAuthors { get; set; } 
+        public List<Author> participantsAuthors { get;} 
 
         public AuthorAlarm()
         {
@@ -147,6 +147,26 @@ namespace Domain
             if (Utilities.IsNegativeQuantity(QuantityTime))
             {
                 throw new AlarmManagementException(MessagesExceptions.ErrorIsNegativeTime);
+            }
+        }
+
+        public bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            else
+            {
+                if (GetType() != obj.GetType())
+                {
+                    return false;
+                }
+                else
+                {
+                    AuthorAlarm alarm = (AuthorAlarm)obj;
+                    return QuantityPost== alarm.QuantityPost;
+                }
             }
         }
     }
