@@ -229,8 +229,8 @@ namespace Test
                 QuantityTime = 5,
                 IsInHours = false
             };
-            management.AddAlarm(alarm); 
-			CollectionAssert.Contains(management.AllAuthorAlarms(), management.GetAuthorAlarm(alarm));
+            management.AddAlarm(alarm);
+			CollectionAssert.Contains(management.AllAuthorAlarms(), alarm);
         }
 
         [TestMethod]

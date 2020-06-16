@@ -114,7 +114,7 @@ namespace Domain
 			}
 		}
 
-        public bool Equals(Object obj)
+        public override bool Equals(Object obj)
         {
             Alarm sentimentAlarm = obj as Alarm;
 

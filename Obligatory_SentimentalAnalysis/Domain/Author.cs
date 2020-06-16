@@ -90,15 +90,14 @@ namespace Domain
             return listOfEntityMentioned.Count;
         }
 
-        public double AverageOfDailyPhrases()
+        public double AverageOfDailyPhrases(DateTime actualDate)
         {
             DateTime dateOfTheFirstPhrase = ListOfPhraseOfAuthor.ElementAt(0).PhraseDate;
-            DateTime timeOfNow = DateTime.Now;
             double quantityOfPhrases = ListOfPhraseOfAuthor.Count;
 
-            double differenceOfTime = (timeOfNow - dateOfTheFirstPhrase).TotalDays;
+            double differenceOfTime = (actualDate - dateOfTheFirstPhrase).TotalDays;
 
-            if (differenceOfTime <= 1)
+            if (differenceOfTime < 1)
             {
                 return quantityOfPhrases; 
             }

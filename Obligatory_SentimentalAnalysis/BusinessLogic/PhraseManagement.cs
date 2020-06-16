@@ -26,11 +26,6 @@ namespace BusinessLogic
         {
 			phrasePersistence.DeletePhrasesOfAuthor(author);         
         }
-
-        public bool IsEmpty()
-		{
-			return phrasePersistence.IsEmpty();
-		}
 		
 		public Phrase[] AllPhrases
 		{

@@ -146,7 +146,7 @@ namespace Domain
             }
         }
 
-        public bool Equals(Object obj)
+        public override bool Equals(Object obj)
         {
             AuthorAlarm authorAlarm = obj as AuthorAlarm;
 
@@ -155,9 +155,10 @@ namespace Domain
                 return false;
             }
 
-            return QuantityPost == authorAlarm.QuantityPost && QuantityTime==authorAlarm.QuantityTime 
-                && ParticipantsAuthors.Equals(authorAlarm.ParticipantsAuthors) 
+            bool ret= QuantityPost == authorAlarm.QuantityPost && QuantityTime==authorAlarm.QuantityTime 
+                && ParticipantsAuthors.SequenceEqual(authorAlarm.ParticipantsAuthors) 
                 && TypeOfAlarm.Equals(authorAlarm.TypeOfAlarm);
+            return ret;
         }
     }
 }

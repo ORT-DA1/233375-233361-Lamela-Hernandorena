@@ -60,7 +60,8 @@ namespace Persistence
 
                     foreach (Author currentAuthor in alarm.ParticipantsAuthors)
                     {
-                        authorOfDB = ctx.Authors.SingleOrDefault(author => author.Id == currentAuthor.Id);
+                        authorOfDB = ctx.Authors.SingleOrDefault(author => author.Id == currentAuthor.Id && 
+                        !currentAuthor.IsDeleted);
                         alarmOfDB.ParticipantsAuthors.Add(authorOfDB);
                     }
                     alarmOfDB.IsActive = alarm.IsActive;

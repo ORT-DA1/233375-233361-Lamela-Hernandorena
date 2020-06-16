@@ -23,6 +23,7 @@ namespace Test
         Phrase phrase4;
         Phrase phrase2;
         Phrase phrase3;
+        Phrase phrase5;
         Phrase phrase1Negative;
         Phrase phrase2Negative;
         Phrase phrase3Negative;
@@ -60,7 +61,15 @@ namespace Test
                 EntityName = "Rappi"
             }; 
 
-             phrase = new Phrase()
+             phrase5 = new Phrase()
+            {
+                TextPhrase = "Me encanta Pepsi",
+                PhraseDate = new DateTime(2020, 06, 08),
+                Entity = entity2,
+                PhraseType = Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
+            phrase = new Phrase()
             {
                 TextPhrase = "Me encanta Mc Donalds",
                 PhraseDate = new DateTime(2020, 06, 08),
@@ -69,7 +78,7 @@ namespace Test
                 PhraseAuthor = author
             };
 
-             phrase4 = new Phrase()
+            phrase4 = new Phrase()
             {
                 TextPhrase = "Test sin entidad ni nada",
                 PhraseDate = DateTime.Now,
@@ -152,12 +161,13 @@ namespace Test
         [TestMethod]
         public void CreateAReport()
         {
-            ReportOfAuthors report = new ReportOfAuthors()
-            {
-                TypeOfSort = ReportOfAuthors.SortingType.Asc,
-                CriterionOfSort = ReportOfAuthors.SortingCriterion.PositivePhrasesPercentage
-            };
 
+            PhrasesPercentageReport report = new PhrasesPercentageReport()
+            {
+                TypeOfSort = AuthorReport.SortingType.Asc,
+                IsPercentageOfPositivePhrases = true
+            };
+   
             management.AuthorManagement.AddAuthor(author);
             management.AuthorManagement.AddAuthor(author2); 
             
@@ -181,15 +191,15 @@ namespace Test
         [TestMethod]
         public void CreateAReport1()
         {
-            ReportOfAuthors report = new ReportOfAuthors()
+            PhrasesPercentageReport report = new PhrasesPercentageReport()
             {
-                TypeOfSort = ReportOfAuthors.SortingType.Desc,
-                CriterionOfSort = ReportOfAuthors.SortingCriterion.PositivePhrasesPercentage
+                TypeOfSort = AuthorReport.SortingType.Desc,
+                IsPercentageOfPositivePhrases = true
             };
 
             management.AuthorManagement.AddAuthor(author);
             management.AuthorManagement.AddAuthor(author2);
-            
+
             management.EntityManagement.AddEntity(entity);
             management.EntityManagement.AddEntity(entity2);
             management.EntityManagement.AddEntity(entity3);
@@ -199,7 +209,7 @@ namespace Test
             management.PhraseManagement.AddPhrase(phrase3);
             management.PhraseManagement.AddPhrase(phrase4);
             management.AuthorManagement.GenerateReportOfAuthor(report);
-            
+
             Tuple<Author, double>[] listExcpected = new Tuple<Author, double>[2];
             listExcpected[1] = new Tuple<Author, double>(author, 0.5);
             listExcpected[0] = new Tuple<Author, double>(author2, 1.0);
@@ -212,11 +222,13 @@ namespace Test
         [TestMethod]
         public void CreateANegativeReportASC()
         {
-            ReportOfAuthors report = new ReportOfAuthors()
+            PhrasesPercentageReport report = new PhrasesPercentageReport()
             {
-                TypeOfSort = ReportOfAuthors.SortingType.Asc,
-                CriterionOfSort = ReportOfAuthors.SortingCriterion.NegativePhrasesPercentage
+                TypeOfSort = PhrasesPercentageReport.SortingType.Asc,
+                IsPercentageOfPositivePhrases = false
             };
+        
+           
 
             management.AuthorManagement.AddAuthor(author);
             management.AuthorManagement.AddAuthor(author2);
@@ -232,7 +244,7 @@ namespace Test
             management.PhraseManagement.AddPhrase(phrase1Negative);
             management.PhraseManagement.AddPhrase(phrase2Negative);
             management.PhraseManagement.AddPhrase(phrase3Negative);
-            management.PhraseManagement.AddPhrase(phrase4Negative); 
+            management.PhraseManagement.AddPhrase(phrase4Negative);
             management.AuthorManagement.GenerateReportOfAuthor(report);
 
             Tuple<Author, double>[] listExcpected = new Tuple<Author, double>[2];
@@ -243,14 +255,15 @@ namespace Test
 
 
         }
-        
+
         [TestMethod]
         public void CreateANegativeReportDESC()
         {
-            ReportOfAuthors report = new ReportOfAuthors()
+
+            PhrasesPercentageReport report = new PhrasesPercentageReport()
             {
-                TypeOfSort = ReportOfAuthors.SortingType.Desc,
-                CriterionOfSort = ReportOfAuthors.SortingCriterion.NegativePhrasesPercentage
+                TypeOfSort = PhrasesPercentageReport.SortingType.Desc,
+                IsPercentageOfPositivePhrases = false
             };
 
             management.AuthorManagement.AddAuthor(author);
@@ -275,25 +288,25 @@ namespace Test
             listExcpected[1] = new Tuple<Author, double>(author2, 0.25);
 
             CollectionAssert.AreEqual(listExcpected, report.AllAuthorsParticipants);
-            
+
         }
 
 
         [TestMethod]
         public void CreateAEntityReportAsc()
         {
-            ReportOfAuthors report = new ReportOfAuthors()
-            {
-                TypeOfSort = ReportOfAuthors.SortingType.Asc,
-                CriterionOfSort = ReportOfAuthors.SortingCriterion.QuantityOfEntities
-            };
 
+            EntitiesMentionedReport report = new EntitiesMentionedReport()
+            {
+                TypeOfSort = EntitiesMentionedReport.SortingType.Asc
+            };
+            
             management.AuthorManagement.AddAuthor(author);
             management.AuthorManagement.AddAuthor(author2);
 
             management.EntityManagement.AddEntity(entity);
             management.EntityManagement.AddEntity(entity2);
-            management.EntityManagement.AddEntity(entity3); 
+            management.EntityManagement.AddEntity(entity3);
 
             management.PhraseManagement.AddPhrase(phrase);
             management.PhraseManagement.AddPhrase(phrase2);
@@ -305,6 +318,7 @@ namespace Test
             management.PhraseManagement.AddPhrase(phrase4Negative);
             management.AuthorManagement.GenerateReportOfAuthor(report);
 
+
             Tuple<Author, double>[] listExcpected = new Tuple<Author, double>[2];
             listExcpected[0] = new Tuple<Author, double>(author, 2);
             listExcpected[1] = new Tuple<Author, double>(author2, 3);
@@ -312,16 +326,18 @@ namespace Test
             CollectionAssert.AreEqual(listExcpected, report.AllAuthorsParticipants);
 
         }
-        
+
 
         [TestMethod]
         public void CreateAAverageReportAsc2()
         {
-            ReportOfAuthors report = new ReportOfAuthors()
+
+            DailyAveragePhraseReport report = new DailyAveragePhraseReport()
             {
-                TypeOfSort = ReportOfAuthors.SortingType.Asc,
-                CriterionOfSort = ReportOfAuthors.SortingCriterion.PhrasesAverage
+                TypeOfSort = DailyAveragePhraseReport.SortingType.Asc,
+                ReportDate = new DateTime(2020, 06, 15)
             };
+           
 
             management.AuthorManagement.AddAuthor(author);
             management.AuthorManagement.AddAuthor(author2);
@@ -337,11 +353,13 @@ namespace Test
             management.PhraseManagement.AddPhrase(phrase1Negative);
             management.PhraseManagement.AddPhrase(phrase2Negative);
             management.PhraseManagement.AddPhrase(phrase3Negative);
-            management.AuthorManagement.GenerateReportOfAuthor(report); 
+            management.AuthorManagement.GenerateReportOfAuthor(report);
 
             Tuple<Author, double>[] listExcpected = new Tuple<Author, double>[2];
-            listExcpected[1] = new Tuple<Author, double>(author, 4.0/7.0);
-            listExcpected[0] = new Tuple<Author, double>(author2, 3.0/96.0);
+            listExcpected[1] = new Tuple<Author, double>(author, 4.0 / 7.0);
+            listExcpected[0] = new Tuple<Author, double>(author2, 3.0 / 96.0);
+
+
 
             CollectionAssert.AreEqual(listExcpected, report.AllAuthorsParticipants);
 
@@ -350,12 +368,11 @@ namespace Test
         [TestMethod]
         public void CreateAAverageReportDesc()
         {
-            ReportOfAuthors report = new ReportOfAuthors()
+            DailyAveragePhraseReport report = new DailyAveragePhraseReport()
             {
-                TypeOfSort = ReportOfAuthors.SortingType.Desc,
-                CriterionOfSort = ReportOfAuthors.SortingCriterion.PhrasesAverage
+                TypeOfSort = DailyAveragePhraseReport.SortingType.Desc,
+                ReportDate = new DateTime(2020, 06, 15)
             };
-
             management.AuthorManagement.AddAuthor(author);
             management.AuthorManagement.AddAuthor(author2);
 
@@ -379,6 +396,37 @@ namespace Test
             CollectionAssert.AreEqual(listExcpected, report.AllAuthorsParticipants);
         }
 
+
+        [TestMethod]
+        public void CreateAAverageReportDesc22()
+        {
+            DailyAveragePhraseReport report = new DailyAveragePhraseReport()
+            {
+                TypeOfSort = DailyAveragePhraseReport.SortingType.Desc,
+                ReportDate = new DateTime(2020, 06, 08)
+            };
+            
+            management.AuthorManagement.AddAuthor(author);
+            management.AuthorManagement.AddAuthor(author2);
+
+            management.EntityManagement.AddEntity(entity);
+            management.EntityManagement.AddEntity(entity2);
+            management.EntityManagement.AddEntity(entity3);
+
+            management.PhraseManagement.AddPhrase(phrase);
+            management.PhraseManagement.AddPhrase(phrase5);
+            management.PhraseManagement.AddPhrase(phrase2);
+            management.PhraseManagement.AddPhrase(phrase3);
+            management.PhraseManagement.AddPhrase(phrase3Negative);
+
+            management.AuthorManagement.GenerateReportOfAuthor(report);
+
+            Tuple<Author, double>[] listExcpected = new Tuple<Author, double>[2];
+            listExcpected[0] = new Tuple<Author, double>(author, 2.0);
+            listExcpected[1] = new Tuple<Author, double>(author2, 3.0 / 89.0);
+
+            CollectionAssert.AreEqual(listExcpected, report.AllAuthorsParticipants);
+        }
 
     }
 }

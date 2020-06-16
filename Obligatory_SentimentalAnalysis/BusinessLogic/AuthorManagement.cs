@@ -110,7 +110,7 @@ namespace BusinessLogic
             authorPersistence.DeleteAll();
         }
 
-        public void GenerateReportOfAuthor(ReportOfAuthors report)
+        public void GenerateReportOfAuthor(AuthorReport report)
         {
             report.GenerateReport(AllAuthorsForReports());
         }

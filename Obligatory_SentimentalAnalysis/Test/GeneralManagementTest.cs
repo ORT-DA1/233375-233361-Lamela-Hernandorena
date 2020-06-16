@@ -186,7 +186,7 @@ namespace Test
 			{
 				TextPhrase= "Me encanta",
 				PhraseDate= DateTime.Now,
-				Entity= entityExpected,
+				Entity= null,
 				PhraseType = Phrase.TypePhrase.Neutral,
                 PhraseAuthor = author
             };
@@ -243,7 +243,7 @@ namespace Test
 			{
 				TextPhrase= "Me gusta subway",
 				PhraseDate= DateTime.Now,
-				Entity= new Entity(),
+				Entity= null,
 				PhraseType = Phrase.TypePhrase.Neutral,
                 PhraseAuthor = author
             };

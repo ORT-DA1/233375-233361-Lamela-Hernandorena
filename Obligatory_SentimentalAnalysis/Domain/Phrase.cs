@@ -75,15 +75,25 @@ namespace Domain
 		public override bool Equals(object obj)
 		{
             Phrase phrase = obj as Phrase;
-
             if (phrase == null || Convert.IsDBNull(phrase))
             {
                 return false;
             }
-            return string.Equals(TextPhrase, phrase.TextPhrase, StringComparison.OrdinalIgnoreCase) 
-			&& PhraseType.Equals(phrase.PhraseType) && PhraseAuthor.Equals(phrase.PhraseAuthor) && 
-            Entity.Equals(phrase.Entity);
-			
+			bool toReturn = string.Equals(TextPhrase, phrase.TextPhrase, StringComparison.OrdinalIgnoreCase)
+			&& PhraseType.Equals(phrase.PhraseType) && PhraseAuthor.Equals(phrase.PhraseAuthor);
+			if (phrase.Entity == null)
+			{
+				toReturn = toReturn && Entity == null;
+			}
+			if (Entity == null)
+			{
+				toReturn = toReturn && phrase.Entity == null;
+			}
+			else
+			{
+				toReturn = toReturn && Entity.Equals(phrase.Entity);
+			}
+			return toReturn;
 		}
 	}
 }
