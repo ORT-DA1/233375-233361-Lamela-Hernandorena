@@ -29,11 +29,11 @@ namespace Domain
         [Key]
         public int Id { get; set; }
         
-        public List<Author> participantsAuthors { get;} 
+        public virtual List<Author> ParticipantsAuthors { get; set; } 
 
         public AuthorAlarm()
         {
-            participantsAuthors = new List<Author>(); 
+            ParticipantsAuthors = new List<Author>(); 
         }
         
         public string Show()
@@ -52,7 +52,7 @@ namespace Domain
             if (IsActive)
             {
                 returnText = returnText + " con los autores: ";
-                foreach (Author author in participantsAuthors)
+                foreach (Author author in ParticipantsAuthors)
                 {
                     returnText = returnText + " " + author.UserName + " ";
                 }
@@ -71,15 +71,11 @@ namespace Domain
                 return "negativa";
             }
         }
-
-        public Author[] AllAuthorsWhoActiveAlarm
-        {
-            get { return participantsAuthors.ToArray(); }
-        }
+        
 
         public void UpdateState(Phrase[] phrases, DateTime date)
         {
-            participantsAuthors.Clear();
+            ParticipantsAuthors.Clear();
             IsActive = false;
             DateTime minDate = date;
             Author[] participants = new Author[phrases.Length];
@@ -114,7 +110,7 @@ namespace Domain
             {
                 if(quantity[i] >= QuantityPost)
                 {
-                    participantsAuthors.Add(participants[i]);
+                    ParticipantsAuthors.Add(participants[i]);
                     IsActive = true;
                 }
             }
@@ -152,22 +148,16 @@ namespace Domain
 
         public bool Equals(Object obj)
         {
-            if (obj == null)
+            AuthorAlarm authorAlarm = obj as AuthorAlarm;
+
+            if (authorAlarm == null || Convert.IsDBNull(authorAlarm))
             {
                 return false;
             }
-            else
-            {
-                if (GetType() != obj.GetType())
-                {
-                    return false;
-                }
-                else
-                {
-                    AuthorAlarm alarm = (AuthorAlarm)obj;
-                    return QuantityPost== alarm.QuantityPost;
-                }
-            }
+
+            return QuantityPost == authorAlarm.QuantityPost && QuantityTime==authorAlarm.QuantityTime 
+                && ParticipantsAuthors.Equals(authorAlarm.ParticipantsAuthors) 
+                && TypeOfAlarm.Equals(authorAlarm.TypeOfAlarm);
         }
     }
 }

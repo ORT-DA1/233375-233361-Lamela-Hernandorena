@@ -54,13 +54,17 @@ namespace Persistence
             {
                 try
                 {
-                    var alarmOfAuthor = ctx.AuthorAlarms.SingleOrDefault(a => a.Id == alarm.Id);
-                    foreach (Author author in alarm.participantsAuthors)
+                   AuthorAlarm alarmOfDB= ctx.AuthorAlarms.SingleOrDefault(a => a.Id == alarm.Id);
+                   Author authorOfDB;
+                   alarmOfDB.ParticipantsAuthors.Clear();
+
+                    foreach (Author currentAuthor in alarm.ParticipantsAuthors)
                     {
-                        alarmOfAuthor.participantsAuthors.Add(author);
+                        authorOfDB = ctx.Authors.SingleOrDefault(author => author.Id == currentAuthor.Id);
+                        alarmOfDB.ParticipantsAuthors.Add(authorOfDB);
                     }
-                    alarmOfAuthor.IsActive = alarm.IsActive;
-                    ctx.SaveChanges();
+                    alarmOfDB.IsActive = alarm.IsActive;
+                    ctx.SaveChanges(); 
                 }
                 catch (Exception ex)
                 {
@@ -90,7 +94,7 @@ namespace Persistence
         {
             using (Context ctx = new Context())
             {
-                AuthorAlarm[] allAuthorsAlarms = ctx.AuthorAlarms.Include("participantsAuthors").ToArray();
+                AuthorAlarm[] allAuthorsAlarms = ctx.AuthorAlarms.Include("ParticipantsAuthors").ToArray();
                 Alarm[] allSentimentAlarm = ctx.SentimentAlarms.Include("Entity").ToArray();
                 IAlarm[] union = new IAlarm[allSentimentAlarm.Length + allAuthorsAlarms.Length];
                 allSentimentAlarm.CopyTo(union, 0);
@@ -103,7 +107,7 @@ namespace Persistence
         {
             using (Context ctx = new Context())
             {
-                return ctx.AuthorAlarms.Include("participantsAuthors").ToArray();
+                return ctx.AuthorAlarms.Include("ParticipantsAuthors").ToArray();
             }
         }
 
@@ -113,7 +117,7 @@ namespace Persistence
             {
                 try
                 {
-                    return ctx.AuthorAlarms.Include("participantsAuthors").SingleOrDefault(a=> a.Id==alarm.Id);
+                    return ctx.AuthorAlarms.Include("ParticipantsAuthors").SingleOrDefault(a=> a.Id==alarm.Id);
                 }
                 catch (Exception ex)
                 {
@@ -128,7 +132,7 @@ namespace Persistence
             {
                 try
                 {
-                    return ctx.SentimentAlarms.SingleOrDefault(a => a.Id == alarm.Id);
+                    return ctx.SentimentAlarms.Include("Entity").SingleOrDefault(a => a.Id == alarm.Id);
                 }
                 catch (Exception ex)
                 {

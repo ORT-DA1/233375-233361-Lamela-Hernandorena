@@ -870,7 +870,7 @@ namespace Test
 			management.UpdateAlarms(provider);
 			AuthorAlarm dbAlarm = management.AlarmManagement.GetAuthorAlarm(aAlarm);
 			Assert.IsTrue(dbAlarm.IsActive);
-            CollectionAssert.Contains(dbAlarm.participantsAuthors, author); 
+            CollectionAssert.Contains(dbAlarm.ParticipantsAuthors, author); 
 		}
 
         [TestMethod]
@@ -926,7 +926,7 @@ namespace Test
             };
             management.UpdateAlarms(provider);
             Assert.IsFalse(aAlarm.IsActive);
-            CollectionAssert.DoesNotContain(aAlarm.AllAuthorsWhoActiveAlarm, author); 
+            CollectionAssert.DoesNotContain(aAlarm.ParticipantsAuthors, author); 
         }
 
         [TestMethod]
@@ -948,7 +948,7 @@ namespace Test
             };
             management.UpdateAlarms(provider);
             Assert.IsFalse(aAlarm.IsActive);
-            CollectionAssert.DoesNotContain(aAlarm.AllAuthorsWhoActiveAlarm, author); 
+            CollectionAssert.DoesNotContain(aAlarm.ParticipantsAuthors, author); 
         }
 
 
@@ -1006,9 +1006,9 @@ namespace Test
 			};
 			management.UpdateAlarms(provider);
 			Assert.IsFalse(aAlarm.IsActive); 
-			Assert.IsFalse(aAlarm.AllAuthorsWhoActiveAlarm.Length == 2); 
-			CollectionAssert.DoesNotContain(aAlarm.AllAuthorsWhoActiveAlarm, author);
-			CollectionAssert.DoesNotContain(aAlarm.AllAuthorsWhoActiveAlarm, author2);
+			Assert.IsFalse(aAlarm.ParticipantsAuthors.Count == 2); 
+			CollectionAssert.DoesNotContain(aAlarm.ParticipantsAuthors, author);
+			CollectionAssert.DoesNotContain(aAlarm.ParticipantsAuthors, author2);
 		}
 
 		[TestMethod]
@@ -1132,7 +1132,7 @@ namespace Test
             management.UpdateAlarms(provider);
 			AuthorAlarm dbAlarm = management.AlarmManagement.GetAuthorAlarm(aAlarm);
 			Assert.IsTrue(dbAlarm.IsActive);
-			CollectionAssert.Contains(dbAlarm.participantsAuthors, author);
+			CollectionAssert.Contains(dbAlarm.ParticipantsAuthors, author);
         }
 
 
@@ -1201,10 +1201,10 @@ namespace Test
 			AuthorAlarm dbAlarm2 = management.AlarmManagement.GetAuthorAlarm(aAlarm2);
 			Assert.IsTrue(dbAlarm2.IsActive);
             Assert.IsFalse(dbAlarm.IsActive);
-            CollectionAssert.Contains(dbAlarm2.participantsAuthors, author2);
-            CollectionAssert.DoesNotContain(dbAlarm2.participantsAuthors, author);
-            CollectionAssert.DoesNotContain(dbAlarm.participantsAuthors, author);
-            CollectionAssert.DoesNotContain(dbAlarm.participantsAuthors, author2);
+            CollectionAssert.Contains(dbAlarm2.ParticipantsAuthors, author2);
+            CollectionAssert.DoesNotContain(dbAlarm2.ParticipantsAuthors, author);
+            CollectionAssert.DoesNotContain(dbAlarm.ParticipantsAuthors, author);
+            CollectionAssert.DoesNotContain(dbAlarm.ParticipantsAuthors, author2);
 
         }
 

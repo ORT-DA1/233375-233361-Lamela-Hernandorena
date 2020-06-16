@@ -14,7 +14,7 @@ namespace Domain
         [Required]
         public DateTime PhraseDate { get; set; }
         
-        public Entity Entity { get; set; }
+        public virtual Entity Entity { get; set; }
 
 		public enum TypePhrase { Positive, Neutral, Negative }
 
@@ -25,7 +25,7 @@ namespace Domain
 		public int Id { get; set; }
 
         [Required]
-        public Author PhraseAuthor { get; set; }
+        public virtual Author PhraseAuthor { get; set; }
 
 		public bool IsDeleted {get;set;}
 
@@ -74,23 +74,16 @@ namespace Domain
 		
 		public override bool Equals(object obj)
 		{
-			if(obj == null)
-			{
-				return false;
-			}
-			else
-			{
-				if(GetType() != obj.GetType())
-				{
-					return false;
-				}
-				else
-				{
-					Phrase phrase = (Phrase)obj;
-					return string.Equals(TextPhrase, phrase.TextPhrase, StringComparison.OrdinalIgnoreCase) 
-						&& PhraseType.Equals(phrase.PhraseType) && PhraseAuthor.Equals(phrase.PhraseAuthor);
-				}
-			}
+            Phrase phrase = obj as Phrase;
+
+            if (phrase == null || Convert.IsDBNull(phrase))
+            {
+                return false;
+            }
+            return string.Equals(TextPhrase, phrase.TextPhrase, StringComparison.OrdinalIgnoreCase) 
+			&& PhraseType.Equals(phrase.PhraseType) && PhraseAuthor.Equals(phrase.PhraseAuthor) && 
+            Entity.Equals(phrase.Entity);
+			
 		}
 	}
 }

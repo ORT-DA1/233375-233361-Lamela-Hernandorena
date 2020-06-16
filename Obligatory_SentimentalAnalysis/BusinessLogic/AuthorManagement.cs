@@ -1,6 +1,7 @@
 ﻿using BusinessLogicExceptions;
 using Domain;
 using Persistence;
+using System;
 using System.Collections.Generic;
 using System.Security.Permissions;
 
@@ -8,21 +9,21 @@ namespace BusinessLogic
 {
     public class AuthorManagement
     {
-        private AuthorPersistence authorPersistence; 
+        private AuthorPersistence authorPersistence;
 
         public AuthorManagement()
         {
-            authorPersistence = new AuthorPersistence(); 
+            authorPersistence = new AuthorPersistence();
         }
 
         public void AddAuthor(Author author)
         {
-            FormatFields(author); 
+            FormatFields(author);
             author.VerifyFormat();
             VerifyFormatAdd(author);
-            authorPersistence.AddAuthor(author); 
+            authorPersistence.AddAuthor(author);
         }
-        
+
         public void DeleteAuthor(Author author)
         {
             VerifyFormatDelete(author);
@@ -51,7 +52,7 @@ namespace BusinessLogic
 
         private void CopyInformationAuthorToAuthor(Author authorToModificate, Author copyAuthor)
         {
-            authorPersistence.ModifyInformationAuthor(authorToModificate, copyAuthor); 
+            authorPersistence.ModifyInformationAuthor(authorToModificate, copyAuthor);
         }
 
 
@@ -63,7 +64,7 @@ namespace BusinessLogic
             }
 
         }
-        
+
         private bool IsNotContained(Author author)
         {
             return !authorPersistence.ContainsAuthor(author);
@@ -77,9 +78,14 @@ namespace BusinessLogic
             }
         }
 
+        public Author[] AllAuthorsForReports()
+        {
+            return authorPersistence.AllAuthorsForReport(); 
+        }
+
         public Author GetAuthor(Author authorToGet)
         {
-           return authorPersistence.GetAuthorById(authorToGet); 
+            return authorPersistence.GetAuthorById(authorToGet);
         }
 
         private bool IsContained(Author author)
@@ -101,7 +107,14 @@ namespace BusinessLogic
 
         public void EmptyAll()
         {
-            authorPersistence.DeleteAll(); 
+            authorPersistence.DeleteAll();
         }
+
+        public void GenerateReportOfAuthor(ReportOfAuthors report)
+        {
+            report.GenerateReport(AllAuthorsForReports());
+        }
+
     }
+
 }

@@ -39,11 +39,19 @@ namespace Persistence
             }
         }
 
-        public Author[] AllAuthors() //Si se usa la lista poner include
+        public Author[] AllAuthorsForReport()
         {
             using (Context ctx = new Context())
             {
-                return ctx.Authors.Where(e => !e.IsDeleted).ToArray();
+                return ctx.Authors.Include("ListOfPhraseOfAuthor").Include("ListOfPhraseOfAuthor.Entity").Where(e => !e.IsDeleted).ToArray();
+            }
+        }
+
+        public Author[] AllAuthors()
+        {
+            using (Context ctx = new Context())
+            {
+                return ctx.Authors.Include("ListOfPhraseOfAuthor").Where(e => !e.IsDeleted).ToArray();
             }
         }
 
@@ -71,7 +79,8 @@ namespace Persistence
         {
             using (Context ctx = new Context())
             {
-               return ctx.Authors.SingleOrDefault(a => a.Id == author.Id && !a.IsDeleted); 
+               Author authorToReturn = ctx.Authors.SingleOrDefault(a => a.Id == author.Id && !a.IsDeleted);
+               return authorToReturn; 
             }
         }
 

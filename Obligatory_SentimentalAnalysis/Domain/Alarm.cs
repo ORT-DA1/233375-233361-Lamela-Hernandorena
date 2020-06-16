@@ -9,7 +9,7 @@ namespace Domain
 	public class Alarm : IAlarm
 	{
         [Required]
-		public Entity Entity { get; set; }
+		public virtual Entity Entity { get; set; }
 
 		public enum Type { Positive, Negative }
 
@@ -113,5 +113,21 @@ namespace Domain
 				throw new AlarmManagementException(MessagesExceptions.ErrorIsNegativeTime);
 			}
 		}
-	} 
+
+        public bool Equals(Object obj)
+        {
+            Alarm sentimentAlarm = obj as Alarm;
+
+            if (sentimentAlarm == null || Convert.IsDBNull(sentimentAlarm))
+            {
+                return false;
+            }
+
+            return QuantityPost == sentimentAlarm.QuantityPost && QuantityTime == sentimentAlarm.QuantityTime
+                && Entity.Equals(sentimentAlarm.Entity)
+                && TypeOfAlarm.Equals(sentimentAlarm.TypeOfAlarm);
+        }
+
+
+    } 
 }

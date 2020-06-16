@@ -22,12 +22,20 @@ namespace Persistence
             {
                 try
                 {
+                    ctx.Authors.Attach(phrase.PhraseAuthor);
+                    
                     ctx.Phrases.Add(phrase);
+
+                    
                     if (phrase.Entity != null)
                     {
-                        ctx.Entry(phrase.Entity).State = EntityState.Unchanged;
-                    }
-                    ctx.Entry(phrase.PhraseAuthor).State = EntityState.Unchanged; 
+                       ctx.Entry(phrase.Entity).State = EntityState.Unchanged;
+                    } 
+                    
+                    ctx.Entry(phrase.PhraseAuthor).State = EntityState.Modified;
+
+                    
+                    
                     ctx.SaveChanges();
                 }
                 catch (Exception ex)
@@ -37,13 +45,18 @@ namespace Persistence
             }
         }
 
-        public Author GetAuthor(Author author)
+        public void UpdatePhraseToAuthor(Phrase phrase)
         {
             using (Context ctx = new Context())
             {
                 try
                 {
-                    return ctx.Authors.Attach(author); 
+                    Author authorOfDb = ctx.Authors.Attach(phrase.PhraseAuthor);
+                    Phrase phraseOfDb = ctx.Phrases.Attach(phrase);
+                    authorOfDb.ListOfPhraseOfAuthor.Clear();  
+                    authorOfDb.ListOfPhraseOfAuthor.Add(phraseOfDb);
+                    ctx.SaveChanges(); 
+
                 }
                 catch (Exception ex)
                 {
@@ -51,7 +64,7 @@ namespace Persistence
                 }
             }
         }
-
+        
         public bool IsEmpty()
         {
             using (Context ctx = new Context())

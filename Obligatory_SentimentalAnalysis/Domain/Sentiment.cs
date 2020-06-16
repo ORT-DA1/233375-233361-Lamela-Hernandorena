@@ -51,24 +51,18 @@ namespace Domain
 
 		public override bool Equals(object obj)
 		{
-			if(obj== null)
-			{
-				return false;
-			}
-			else
-			{
-				if (this.GetType() != obj.GetType())
-				{
-					return false;
-				}
-				else
-				{
-					Sentiment sentiment = (Sentiment)obj;
-					return string.Equals(Utilities.DeleteSpaces(SentimientText.Trim()), 
-						Utilities.DeleteSpaces(sentiment.SentimientText.Trim()), 
-						StringComparison.OrdinalIgnoreCase) && SentimentType.Equals(sentiment.SentimentType);
-				}
-			}
+
+            Sentiment sentiment = obj as Sentiment;
+
+            if (sentiment == null || Convert.IsDBNull(sentiment))
+            {
+                return false;
+            }
+           	return string.Equals(Utilities.DeleteSpaces(SentimientText.Trim()), 
+			Utilities.DeleteSpaces(sentiment.SentimientText.Trim()), 
+			StringComparison.OrdinalIgnoreCase) && SentimentType.Equals(sentiment.SentimentType);
+				
+			
 		}
 	}
 }
