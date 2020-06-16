@@ -42,7 +42,7 @@ namespace UI
 				labelError.Visible = true;
 				labelError.Text = exp.Message; 
 			}
-			catch(Exception)
+			catch(Exception ex)
 			{
 				MessageBox.Show("Error interno del sistema."); 
 			}
@@ -79,8 +79,6 @@ namespace UI
                 MessageBox.Show("Se ha agregado una frase correctamente");
                 ClearAllFields();
             }
-
-            
 		}
 
 		private void ClearAllFields()

@@ -23,10 +23,6 @@ namespace BusinessLogic
             sentimentPersistence.AddSentiment(sentiment); 
 		}
 
-		public bool IsEmpty()
-		{
-			return sentimentPersistence.IsEmpty(); 
-		}
 
 		public void UpdateAssociatedSentiment(Sentiment sentiment)
 		{

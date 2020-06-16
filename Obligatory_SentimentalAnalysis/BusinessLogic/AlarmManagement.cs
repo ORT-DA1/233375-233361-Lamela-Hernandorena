@@ -29,14 +29,16 @@ namespace BusinessLogic
 
         public void Update(IAlarm alarm)
         {
-            if (alarm.GetType().Equals(typeof(AuthorAlarm)))
+            if (alarm.GetType().BaseType.Equals(typeof(AuthorAlarm)))
             {
+
                 alarmPersistence.UpdateStateOfAuthorAlarm((AuthorAlarm)alarm);
             }
             else
             {
-                alarmPersistence.UpdateStateOfSentimentAlarm((Alarm)alarm);
+                alarmPersistence.UpdateStateOfSentimentAlarm((Alarm)alarm); 
             }
+ 
         }
 
         public AuthorAlarm GetAuthorAlarm(AuthorAlarm alarm)

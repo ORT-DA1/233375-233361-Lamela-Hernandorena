@@ -105,6 +105,7 @@ namespace Test
 			{
 				EntityName = "Pedidos ya"
 			};
+           
 			Alarm alarm = new Alarm()
 			{
 				Entity = entity,
@@ -229,11 +230,7 @@ namespace Test
                 IsInHours = false
             };
             management.AddAlarm(alarm);
-			AuthorAlarm[] res = management.AllAuthorAlarms();
-			List<AuthorAlarm> prueba = new List<AuthorAlarm>();
-			prueba.Add(res[0]);
-			//Assert.AreEqual(p, management.GetAuthorAlarm(alarm));
-			//CollectionAssert.Contains(prueba, alarm);
+			CollectionAssert.Contains(management.AllAuthorAlarms(), alarm);
         }
 
         [TestMethod]

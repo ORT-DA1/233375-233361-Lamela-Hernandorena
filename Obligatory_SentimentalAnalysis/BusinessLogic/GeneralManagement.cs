@@ -82,15 +82,13 @@ namespace BusinessLogic
 		
 		public void UpdateAlarms(ITimeProvider provider)
 		{
-			if (PhraseManagement.AllPhrases.Length > 0)
-			{
 				DateTime minDate = provider.Now();
 				foreach (IAlarm alarm in AlarmManagement.AllAlarms)
 				{
 					alarm.UpdateState(PhraseManagement.AllPhrases, minDate);
                     AlarmManagement.Update(alarm); 
 				}
-			}
+			
 		}
 	}
 }

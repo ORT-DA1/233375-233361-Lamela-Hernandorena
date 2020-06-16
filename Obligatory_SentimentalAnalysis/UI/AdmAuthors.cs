@@ -119,6 +119,7 @@ namespace UI
             Author author = (Author)listBoxAuthors.SelectedItem;
             generalManagement.AuthorManagement.DeleteAuthor(author);
             generalManagement.DeleteAuthorPhrases(author);
+            generalManagement.UpdateAlarms(new RealTimeProvider());
         }
 
         private void InitializeCalendar()

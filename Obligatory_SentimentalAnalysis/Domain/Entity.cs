@@ -40,21 +40,17 @@ namespace Domain
 
 		public override bool Equals(object obj)
 		{
-			if (obj == null)
-			{
-				return false;
-			}
-			else if (this.GetType() != obj.GetType())
-			{
-				return false;
-			}
-			else
-			{
-				Entity entity = (Entity)obj;
-				return string.Equals(Utilities.DeleteSpaces(EntityName.Trim()), 
+            Entity entity = obj as Entity;
+
+            if (entity == null || Convert.IsDBNull(entity))
+            {
+                return false;
+            }
+
+            return string.Equals(Utilities.DeleteSpaces(EntityName.Trim()), 
 					Utilities.DeleteSpaces(entity.EntityName.Trim()), 
 					StringComparison.OrdinalIgnoreCase);
-			}
+			
 		}
 	}
 }

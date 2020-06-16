@@ -5,10 +5,6 @@ namespace Persistence
 {
     public class Context : DbContext
     {
-        public Context() 
-        {
-        }
-
         public DbSet<Sentiment> Sentiments { get; set; }
 
         public DbSet<Phrase> Phrases { get; set; }
@@ -20,6 +16,20 @@ namespace Persistence
         public DbSet<Alarm> SentimentAlarms { get; set; }
 
         public DbSet<AuthorAlarm> AuthorAlarms { get; set; }
-        
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Author>()
+            .HasMany<AuthorAlarm>(author => author.AlarmsWhoAuthorParticipate)
+            .WithMany(alarm => alarm.ParticipantsAuthors);
+
+
+            modelBuilder.Entity<Author>()
+            .HasMany<Phrase>(author => author.ListOfPhraseOfAuthor)
+            .WithRequired(phrase => phrase.PhraseAuthor); 
+        }
+
     }
 }

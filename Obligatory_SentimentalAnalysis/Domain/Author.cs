@@ -34,27 +34,94 @@ namespace Domain
         public int Id { get; set; }
 
         public bool IsDeleted { get; set; }
-        
+
+        public virtual List<AuthorAlarm> AlarmsWhoAuthorParticipate { get; set; }
+
+        public virtual List<Phrase> ListOfPhraseOfAuthor { get; set; }
+
         public Author()
         {
-            UserName = ""; 
+            UserName = "";
+            AlarmsWhoAuthorParticipate = new List<AuthorAlarm>();
+            ListOfPhraseOfAuthor = new List<Phrase>();
         }
 
+
+        public double GeneratePhrasesPercetageReportPositive()
+        {
+            double totalFindPhrases = 0;
+            foreach (Phrase phrase in ListOfPhraseOfAuthor)
+            {
+                if (phrase.PhraseType.Equals(Phrase.TypePhrase.Positive))
+                {
+                    totalFindPhrases++;
+                }
+            }
+            
+            return totalFindPhrases / (double)ListOfPhraseOfAuthor.Count;
+        }
+
+        public double GeneratePhrasesPercetageReportNegative()
+        {
+            double totalFindPhrases = 0;
+            foreach (Phrase phrase in ListOfPhraseOfAuthor)
+            {
+                if (phrase.PhraseType.Equals(Phrase.TypePhrase.Negative))
+                {
+                    totalFindPhrases++;
+                }
+            }
+
+            return totalFindPhrases / (double)ListOfPhraseOfAuthor.Count;
+        }
+
+        public int QuantityOfEntityMentioned()
+        {
+            List<Entity> listOfEntityMentioned = new List<Entity>(); 
+
+            foreach (Phrase phrase in ListOfPhraseOfAuthor)
+            {
+                if(!(phrase.PhraseType.Equals(Phrase.TypePhrase.Neutral) || listOfEntityMentioned.Contains(phrase.Entity)))
+                {
+                    listOfEntityMentioned.Add(phrase.Entity); 
+                }
+            }
+
+            return listOfEntityMentioned.Count;
+        }
+
+        public double AverageOfDailyPhrases(DateTime actualDate)
+        {
+            DateTime dateOfTheFirstPhrase = ListOfPhraseOfAuthor.ElementAt(0).PhraseDate;
+            double quantityOfPhrases = ListOfPhraseOfAuthor.Count;
+
+            double differenceOfTime = (actualDate - dateOfTheFirstPhrase).TotalDays;
+
+            if (differenceOfTime < 1)
+            {
+                return quantityOfPhrases; 
+            }
+            else
+            {
+                return quantityOfPhrases / Math.Floor(differenceOfTime);
+            }
+            
+        }
 
 
         public void VerifyFormat()
         {
             if (string.IsNullOrEmpty(UserName))
             {
-                throw new AuthorException(MessagesExceptions.ErrorIsEmpty); 
+                throw new AuthorException(MessagesExceptions.ErrorIsEmpty);
             }
             if (UserName.Length > 10)
             {
                 throw new AuthorException(MessagesExceptions.ErrorLengthUserName);
             }
-            if(Name.Length > 15 || LastName.Length > 15)
+            if (Name.Length > 15 || LastName.Length > 15)
             {
-                throw new AuthorException(MessagesExceptions.ErrorLengthNameOrLastName); 
+                throw new AuthorException(MessagesExceptions.ErrorLengthNameOrLastName);
             }
             if (string.IsNullOrEmpty(Name))
             {
@@ -64,16 +131,16 @@ namespace Domain
             {
                 throw new AuthorException(MessagesExceptions.ErrorIsEmpty);
             }
-            if(CalculateAge(BirthDate)< 13 || CalculateAge(BirthDate) > 100)
+            if (CalculateAge(BirthDate) < 13 || CalculateAge(BirthDate) > 100)
             {
-                throw new AuthorException(MessagesExceptions.ErrorAge); 
+                throw new AuthorException(MessagesExceptions.ErrorAge);
             }
-            
+
         }
 
         public static int CalculateAge(DateTime BirthDate)
         {
-            DateTime actualDate  = DateTime.Today;
+            DateTime actualDate = DateTime.Today;
             int age = actualDate.Year - BirthDate.Year;
             if (BirthDate.Month > actualDate.Month)
             {
@@ -81,34 +148,23 @@ namespace Domain
             }
 
             return age;
-        } 
-        
+        }
+
 
         public override string ToString()
         {
-            return " Usuario: " + UserName + " con nombre: " + Name; 
+            return " Usuario: " + UserName + " con nombre: " + Name;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj == null)
+            Author author = obj as Author; 
+
+            if (author == null || Convert.IsDBNull(author))
             {
                 return false;
             }
-            else if (GetType() != obj.GetType())
-            {
-                return false;
-            }
-            else
-            {
-                Author author = (Author)obj;
-                return string.Equals(Utilities.DeleteSpaces(UserName.Trim()),
-                    Utilities.DeleteSpaces(author.UserName.Trim()),
-                    StringComparison.OrdinalIgnoreCase);
-            }
+            return Utilities.DeleteSpaces(UserName.Trim()).Equals(Utilities.DeleteSpaces(author.UserName.Trim())); 
         }
-
-
-
     }
 }

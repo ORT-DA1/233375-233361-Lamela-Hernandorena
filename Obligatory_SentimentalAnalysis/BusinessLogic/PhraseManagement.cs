@@ -20,21 +20,12 @@ namespace BusinessLogic
 			phrase.VerifyFormat(); 
 			phrasePersistence.AddPhrase(phrase);
 		}
-
-        public Author GetAuthor(Author author)
-        {
-            return phrasePersistence.GetAuthor(author); 
-        }
+        
 
         public void DeletePhrasesOfAuthor(Author author)
         {
 			phrasePersistence.DeletePhrasesOfAuthor(author);         
         }
-
-        public bool IsEmpty()
-		{
-			return phrasePersistence.IsEmpty();
-		}
 		
 		public Phrase[] AllPhrases
 		{
