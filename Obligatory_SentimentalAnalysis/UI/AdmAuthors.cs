@@ -11,6 +11,7 @@ using BusinessLogic;
 using BusinessLogicExceptions;
 using Domain;
 using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace UI
 {
@@ -40,22 +41,36 @@ namespace UI
 
         private void btnAddAuthor_Click(object sender, EventArgs e)
         {
-            try
-            {
-                AddAuthorUI();
-                MessageBox.Show("Autor agregado correctamente.");
-                InitializeListOfAuthors();
-                ClearAllFields();
-                DisplayDeleteAndModifyButton();
-            }
-            catch (AuthorException ex)
+
+            if (ContainNumeric(textBoxName.Text))
             {
                 labelError.Visible = true;
-                labelError.Text = ex.Message;
+                labelError.Text = "El nombre no puede contener caracteres numericos.";
             }
-            catch (Exception)
+            else if (ContainNumeric(textBoxLastname.Text))
             {
-                MessageBox.Show("Error interno del sistema");
+                labelError.Visible = true;
+                labelError.Text = "El apellido no puede contener caracteres numericos.";
+            }
+            else
+            {
+                try
+                {
+                    AddAuthorUI();
+                    MessageBox.Show("Autor agregado correctamente.");
+                    InitializeListOfAuthors();
+                    ClearAllFields();
+                    DisplayDeleteAndModifyButton();
+                }
+                catch (AuthorException ex)
+                {
+                    labelError.Visible = true;
+                    labelError.Text = ex.Message;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error interno del sistema");
+                }
             }
         }
 
@@ -136,6 +151,7 @@ namespace UI
                 labelError.Visible = true;
                 labelError.Text = "Error seleccione un autor a modificar.";
             }
+
             else
             {
                 authorToModify = (Author)listBoxAuthors.SelectedItem;
@@ -172,7 +188,7 @@ namespace UI
                 {
                     dateTimePickerBirth.Value = aAuthor.BirthDate;
                 }
-            }  
+            }
         }
 
 
@@ -200,24 +216,45 @@ namespace UI
 
         private void btnModifyAuthor_Click(object sender, EventArgs e)
         {
-            try
-            {
-                modifyAuthorUI();
-                MessageBox.Show("Autor modificado correctamente.");
-                InitializeListOfAuthors();
-                ClearAllFields();
-                DisplayDeleteAndModifyButton();
-                DisplayAddButton();
-            }
-            catch (AuthorException ex)
+
+            if (ContainNumeric(textBoxName.Text))
             {
                 labelError.Visible = true;
-                labelError.Text = ex.Message;
+                labelError.Text = "El nombre no puede contener caracteres numericos.";
             }
-            catch (Exception)
+            else if (ContainNumeric(textBoxLastname.Text))
             {
-                MessageBox.Show("Error interno del sistema");
+                labelError.Visible = true;
+                labelError.Text = "El apellido no puede contener caracteres numericos.";
+            }
+            else
+            {
+                try
+                {
+                    modifyAuthorUI();
+                    MessageBox.Show("Autor modificado correctamente.");
+                    InitializeListOfAuthors();
+                    ClearAllFields();
+                    DisplayDeleteAndModifyButton();
+                    DisplayAddButton();
+                }
+                catch (AuthorException ex)
+                {
+                    labelError.Visible = true;
+                    labelError.Text = ex.Message;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error interno del sistema");
+                }
             }
         }
+
+
+        private bool ContainNumeric(String text)
+        {
+            return !Regex.IsMatch(text, @"^[a-zA-Z]+$");
+        }
+
     }
 }

@@ -38,6 +38,7 @@ namespace UI
             this.btnReport = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnAuthors = new System.Windows.Forms.Button();
+            this.btnAuthorReport = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAddSentiment
@@ -160,12 +161,23 @@ namespace UI
             this.btnAuthors.UseVisualStyleBackColor = false;
             this.btnAuthors.Click += new System.EventHandler(this.btnAuthors_Click);
             // 
+            // btnAuthorReport
+            // 
+            this.btnAuthorReport.Location = new System.Drawing.Point(190, 12);
+            this.btnAuthorReport.Name = "btnAuthorReport";
+            this.btnAuthorReport.Size = new System.Drawing.Size(105, 23);
+            this.btnAuthorReport.TabIndex = 9;
+            this.btnAuthorReport.Text = "Reporte autor";
+            this.btnAuthorReport.UseVisualStyleBackColor = true;
+            this.btnAuthorReport.Click += new System.EventHandler(this.btnAuthorReport_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::UI.Properties.Resources.MenuPrincipal;
             this.ClientSize = new System.Drawing.Size(775, 638);
+            this.Controls.Add(this.btnAuthorReport);
             this.Controls.Add(this.btnAuthors);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnAddSentiment);
@@ -195,6 +207,7 @@ namespace UI
 		private System.Windows.Forms.Button btnReport;
 		private Button btnExit;
         private Button btnAuthors;
+        private Button btnAuthorReport;
     }
 }
 
