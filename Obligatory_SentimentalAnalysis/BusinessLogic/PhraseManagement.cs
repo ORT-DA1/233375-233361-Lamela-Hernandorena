@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Persistence;
+using System;
 using System.Collections.Generic;
 
 
@@ -36,6 +37,11 @@ namespace BusinessLogic
 		{
 			phrasePersistence.DeleteAll();
 		}
-	}
+
+        internal void UpdatePhrase(Phrase phrase)
+        {
+            phrasePersistence.Update(phrase); 
+        }
+    }
 }
 	

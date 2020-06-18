@@ -51,6 +51,8 @@ namespace BusinessLogic
                 phrase.Entity = null; 
 				phrase.PhraseType = Phrase.TypePhrase.Neutral;
 			}
+            PhraseManagement.UpdatePhrase(phrase); 
+
 		}
 
 		private Entity FindEntity(string textOfPhrase)

@@ -89,9 +89,12 @@ namespace Domain
 
             foreach (Phrase phrase in ListOfPhraseOfAuthor)
             {
-                if (!(phrase.PhraseType.Equals(Phrase.TypePhrase.Neutral) || listOfEntityMentioned.Contains(phrase.Entity)))
+                if (phrase.Entity != null)
                 {
-                    listOfEntityMentioned.Add(phrase.Entity);
+                    if (!(phrase.PhraseType.Equals(Phrase.TypePhrase.Neutral) || listOfEntityMentioned.Contains(phrase.Entity)))
+                    {
+                        listOfEntityMentioned.Add(phrase.Entity);
+                    }
                 }
             }
 

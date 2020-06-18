@@ -45,6 +45,32 @@ namespace Persistence
             }
         }
 
+        public void Update(Phrase phrase)
+        {
+            using (Context ctx = new Context())
+            {
+                try
+                {
+                    Phrase phraseOfDb = ctx.Phrases.SingleOrDefault(p => p.Id == phrase.Id);
+                    phraseOfDb.PhraseType = phrase.PhraseType;
+                    if (phrase.Entity != null)
+                    {
+                        phraseOfDb.Entity = ctx.Entities.SingleOrDefault(entity => entity.Id == phrase.Entity.Id);
+                    }
+                    else
+                    {
+                        phraseOfDb.Entity = null; 
+                    }
+                    ctx.SaveChanges(); 
+                }
+                catch (Exception ex)
+                {
+                    throw new PhraseManagementException("Error actualizando frase", ex);
+                }
+            }
+        }
+
+
         public void UpdatePhraseToAuthor(Phrase phrase)
         {
             using (Context ctx = new Context())

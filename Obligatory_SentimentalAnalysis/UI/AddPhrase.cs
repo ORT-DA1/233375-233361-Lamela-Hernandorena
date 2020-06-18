@@ -72,8 +72,8 @@ namespace UI
                     PhraseDate = phraseDate,
                     PhraseAuthor = (Author)listBoxAuthors.SelectedItem
                 };
-                generalManagement.AnalysisPhrase(phrase);
-                generalManagement.PhraseManagement.AddPhrase(phrase); 
+                generalManagement.PhraseManagement.AddPhrase(phrase);
+                generalManagement.AnalysisPhrase(phrase); 
                 RealTimeProvider timeNow = new RealTimeProvider();
                 generalManagement.UpdateAlarms(timeNow);
                 MessageBox.Show("Se ha agregado una frase correctamente");
