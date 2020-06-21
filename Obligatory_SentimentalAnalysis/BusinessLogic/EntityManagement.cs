@@ -48,6 +48,11 @@ namespace BusinessLogic
             entityPersistence.DeleteEntity(entity);
         }
 
+		public void AssociateEntityToPhrase(Phrase phrase)
+		{
+			phrase.AssociateEntity(AllEntities);
+		}
+
 		private void VerifyFormatDelete(Entity entity)
 		{
 			if (!IsContained(entity))

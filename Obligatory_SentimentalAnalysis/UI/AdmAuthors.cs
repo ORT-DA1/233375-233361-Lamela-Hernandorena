@@ -133,7 +133,8 @@ namespace UI
         {
             Author author = (Author)listBoxAuthors.SelectedItem;
             generalManagement.AuthorManagement.DeleteAuthor(author);
-            generalManagement.DeleteAuthorPhrases(author);
+            generalManagement.PhraseManagement.DeletePhrasesOfAuthor(author);
+            generalManagement.SentimentManagement.UpdateSentiments(generalManagement.PhraseManagement.AllPhrases); 
             generalManagement.UpdateAlarms(new RealTimeProvider());
         }
 
@@ -253,7 +254,7 @@ namespace UI
 
         private bool ContainNumeric(String text)
         {
-            return !Regex.IsMatch(text, @"^[a-zA-Z]+$");
+            return !Regex.IsMatch(text.Replace(" ", ""), @"^[a-zA-Z]+$");
         }
 
     }

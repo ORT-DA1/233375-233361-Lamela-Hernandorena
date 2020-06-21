@@ -15,22 +15,6 @@ namespace Persistence
 
         }
 
-        public void AddAuthorAlarm(AuthorAlarm alarm)
-        {
-
-            using (Context ctx = new Context())
-            {
-                try
-                {
-                    ctx.AuthorAlarms.Add(alarm);
-                    ctx.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    throw new AlarmManagementException("Error agregando alarma.", ex);
-                }
-            }
-        }
 
         public void AddAlarm(IAlarm alarm)
         {
@@ -47,7 +31,6 @@ namespace Persistence
                     {
 
                         Alarm sentimentAlarm = (Alarm)alarm;
-                        ctx.Entities.Attach(sentimentAlarm.Entity);
                         ctx.SentimentAlarms.Add(sentimentAlarm);
                     }
                     ctx.SaveChanges();
@@ -59,21 +42,6 @@ namespace Persistence
             }
         }
 
-        public void AddSentimentAlarm(Alarm alarm)
-        {
-            using (Context ctx = new Context())
-            {
-                try
-                {
-                    ctx.SentimentAlarms.Add(alarm);
-                    ctx.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    throw new AlarmManagementException("Error agregando alarma.", ex);
-                }
-            }
-        }
 
         public void UpdateStateOfAuthorAlarm(AuthorAlarm alarm)
         {
@@ -131,13 +99,7 @@ namespace Persistence
             }
         }
 
-        public AuthorAlarm[] AllAuthorAlarms()
-        {
-            using (Context ctx = new Context())
-            {
-                return ctx.AuthorAlarms.Include("ParticipantsAuthors").ToArray();
-            }
-        }
+        
 
         public AuthorAlarm GetAuthorAlarmById(AuthorAlarm alarm)
         {

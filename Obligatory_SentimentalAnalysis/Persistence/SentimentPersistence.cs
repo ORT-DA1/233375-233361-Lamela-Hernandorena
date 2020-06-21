@@ -2,7 +2,9 @@
 using Domain;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,29 +33,22 @@ namespace Persistence
             }
         }
 
-        public void UpdateAssociatedSentiment(Sentiment sentiment)
+        public void UpdateAssociatedSentiment(Sentiment[] sentimentsContainedInPhrase)
         {
-
             using (Context ctx = new Context())
             {
                 try
                 {
-                    var sentimentOfDb = ctx.Sentiments.SingleOrDefault(s => s.Id == sentiment.Id);
-                    sentimentOfDb.IsAssociatedToPhrase = true;
+                    foreach(Sentiment sentiment in sentimentsContainedInPhrase)
+                    {
+                       ctx.Entry(sentiment).State = EntityState.Modified;
+                    }
                     ctx.SaveChanges();
                 }
                 catch (Exception ex)
                 {
                     throw new EntityManagementException("Error asociando sentimiento.", ex);
                 }
-            }
-        }
-
-        public bool IsEmpty()
-        {
-            using (Context ctx = new Context())
-            {
-                return ctx.Sentiments.Count() == 0;
             }
         }
 
@@ -66,6 +61,23 @@ namespace Persistence
                     var sentimentOfDb = ctx.Sentiments.SingleOrDefault(s => s.Id == sentiment.Id);
                     sentimentOfDb.IsDeleted = true;
                     ctx.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new EntityManagementException("Error eliminando sentimiento.", ex);
+                }
+            }
+        }
+
+        public void UpdateSentiment(Sentiment sentiment)
+        {
+            using (Context ctx = new Context())
+            {
+                try
+                {
+                    Sentiment sentimentOfDb = ctx.Sentiments.SingleOrDefault(sentim => sentim.Id == sentiment.Id);
+                    sentimentOfDb.IsAssociatedToPhrase = sentiment.IsAssociatedToPhrase;
+                    ctx.SaveChanges(); 
                 }
                 catch (Exception ex)
                 {

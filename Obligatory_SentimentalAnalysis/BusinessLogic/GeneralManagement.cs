@@ -1,5 +1,6 @@
 ﻿using Domain;
 using System;
+using System.Collections.Generic;
 
 namespace BusinessLogic
 {
@@ -22,66 +23,16 @@ namespace BusinessLogic
 
 		public void AnalysisPhrase(Phrase phrase)
 		{
-			int positiveCounter = 0;
-			int negetiveCounter = 0;
 			string textOfPhrase = Utilities.DeleteSpaces(phrase.TextPhrase.ToLower());
-
-			foreach (Sentiment sentiment in SentimentManagement.AllSentiments)
-			{
-				string sentimentOfList = Utilities.DeleteSpaces(sentiment.SentimientText.ToLower());
-
-				if (textOfPhrase.Contains(sentimentOfList))
-				{
-					if (sentiment.SentimentType.Equals(Sentiment.TypeSentiment.Positive))
-					{
-						positiveCounter++;
-					}
-					else
-					{
-						negetiveCounter++;
-					}
-					SentimentManagement.UpdateAssociatedSentiment(sentiment);
-				}
-			}
-			Entity entityFound = FindEntity(textOfPhrase);
-			phrase.Entity = entityFound;
-			phrase.SetTypeOfPhrase(positiveCounter, negetiveCounter);
-			if (entityFound.IsEmptyEntity())
-			{
-                phrase.Entity = null; 
-				phrase.PhraseType = Phrase.TypePhrase.Neutral;
-			}
-            PhraseManagement.UpdatePhrase(phrase); 
-
+			Sentiment[] sentimentsContainedInPhrase = phrase.AllAssociatedSentiments(SentimentManagement.AllSentiments);
+			int quantityOfPositiveSentiments = phrase.QuantityOfAssociatedPositiveSentiments(sentimentsContainedInPhrase);
+			int quantityOfNegativeSentiments = phrase.QuantityOfAssociatedNegativeSentiments(sentimentsContainedInPhrase);
+			SentimentManagement.UpdateAssociatedSentiment(sentimentsContainedInPhrase);
+			EntityManagement.AssociateEntityToPhrase(phrase);
+			phrase.SetTypeOfPhrase(quantityOfPositiveSentiments, quantityOfNegativeSentiments);
+			PhraseManagement.UpdatePhrase(phrase); 
 		}
 
-		private Entity FindEntity(string textOfPhrase)
-		{
-			int minUbication = 9999;
-			Entity entityFound = new Entity();
-
-			foreach (Entity entity in EntityManagement.AllEntities)
-			{
-				string entityOfList = Utilities.DeleteSpaces(entity.EntityName.ToLower());
-
-				if (textOfPhrase.Contains(entityOfList))
-				{
-					if (textOfPhrase.IndexOf(entityOfList) < minUbication)
-					{
-						minUbication = textOfPhrase.IndexOf(entityOfList);
-						entityFound = entity;
-					}
-				}
-			}
-			return entityFound;
-		}
-
-		public void DeleteAuthorPhrases(Author author)
-        {
-            PhraseManagement.DeletePhrasesOfAuthor(author); 
-        }
-
-		
 		public void UpdateAlarms(ITimeProvider provider)
 		{
 				DateTime minDate = provider.Now();

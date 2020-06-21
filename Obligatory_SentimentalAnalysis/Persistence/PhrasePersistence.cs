@@ -70,35 +70,6 @@ namespace Persistence
             }
         }
 
-
-        public void UpdatePhraseToAuthor(Phrase phrase)
-        {
-            using (Context ctx = new Context())
-            {
-                try
-                {
-                    Author authorOfDb = ctx.Authors.Attach(phrase.PhraseAuthor);
-                    Phrase phraseOfDb = ctx.Phrases.Attach(phrase);
-                    authorOfDb.ListOfPhraseOfAuthor.Clear();  
-                    authorOfDb.ListOfPhraseOfAuthor.Add(phraseOfDb);
-                    ctx.SaveChanges(); 
-
-                }
-                catch (Exception ex)
-                {
-                    throw new PhraseManagementException("Error agregando frase", ex);
-                }
-            }
-        }
-        
-        public bool IsEmpty()
-        {
-            using (Context ctx = new Context())
-            {
-                return ctx.Phrases.Count() == 0;
-            }
-        }
-
         public void DeletePhrasesOfAuthor(Author author)
         {
             using (Context ctx = new Context())

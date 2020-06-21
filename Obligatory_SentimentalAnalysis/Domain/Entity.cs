@@ -33,11 +33,6 @@ namespace Domain
 			}
 		}
 
-		public bool IsEmptyEntity()
-		{
-			return EntityName.Equals("");  
-		}
-
 		public override bool Equals(object obj)
 		{
             Entity entity = obj as Entity;

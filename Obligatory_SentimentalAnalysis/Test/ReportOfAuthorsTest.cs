@@ -24,6 +24,7 @@ namespace Test
         Phrase phrase2;
         Phrase phrase3;
         Phrase phrase5;
+        Phrase phrase6;
         Phrase phrase1Negative;
         Phrase phrase2Negative;
         Phrase phrase3Negative;
@@ -75,6 +76,15 @@ namespace Test
                 PhraseDate = new DateTime(2020, 06, 08),
                 Entity = entity,
                 PhraseType = Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
+
+            phrase6 = new Phrase()
+            {
+                TextPhrase = "Me encanta y Detesto demasiado Mc Donalds",
+                PhraseDate = new DateTime(2020, 06, 08),
+                Entity = entity,
+                PhraseType = Phrase.TypePhrase.Neutral,
                 PhraseAuthor = author
             };
 
@@ -277,6 +287,8 @@ namespace Test
             management.PhraseManagement.AddPhrase(phrase2);
             management.PhraseManagement.AddPhrase(phrase3);
             management.PhraseManagement.AddPhrase(phrase4);
+           
+
             management.PhraseManagement.AddPhrase(phrase1Negative);
             management.PhraseManagement.AddPhrase(phrase2Negative);
             management.PhraseManagement.AddPhrase(phrase3Negative);
@@ -312,6 +324,7 @@ namespace Test
             management.PhraseManagement.AddPhrase(phrase2);
             management.PhraseManagement.AddPhrase(phrase3);
             management.PhraseManagement.AddPhrase(phrase4);
+            management.PhraseManagement.AddPhrase(phrase6);
             management.PhraseManagement.AddPhrase(phrase1Negative);
             management.PhraseManagement.AddPhrase(phrase2Negative);
             management.PhraseManagement.AddPhrase(phrase3Negative);
@@ -356,13 +369,9 @@ namespace Test
             management.AuthorManagement.GenerateReportOfAuthor(report);
 
             Tuple<Author, double>[] listExcpected = new Tuple<Author, double>[2];
-            listExcpected[1] = new Tuple<Author, double>(author, 4.0 / 7.0);
-            listExcpected[0] = new Tuple<Author, double>(author2, 3.0 / 96.0);
-
-
-
+            listExcpected[1] = new Tuple<Author, double>(author, Math.Round(4.0/7.0,2));
+            listExcpected[0] = new Tuple<Author, double>(author2, Math.Round(3.0 / 96.0,2));
             CollectionAssert.AreEqual(listExcpected, report.AllAuthorsParticipants);
-
         }
 
         [TestMethod]
@@ -390,8 +399,8 @@ namespace Test
             management.AuthorManagement.GenerateReportOfAuthor(report);
 
             Tuple<Author, double>[] listExcpected = new Tuple<Author, double>[2];
-            listExcpected[0] = new Tuple<Author, double>(author, 4.0 / 7.0);
-            listExcpected[1] = new Tuple<Author, double>(author2, 3.0 / 96.0);
+            listExcpected[0] = new Tuple<Author, double>(author, Math.Round(4.0 / 7.0, 2));
+            listExcpected[1] = new Tuple<Author, double>(author2, Math.Round(3.0 / 96.0, 2));
 
             CollectionAssert.AreEqual(listExcpected, report.AllAuthorsParticipants);
         }
@@ -422,9 +431,8 @@ namespace Test
             management.AuthorManagement.GenerateReportOfAuthor(report);
 
             Tuple<Author, double>[] listExcpected = new Tuple<Author, double>[2];
-            listExcpected[0] = new Tuple<Author, double>(author, 2.0);
-            listExcpected[1] = new Tuple<Author, double>(author2, 3.0 / 89.0);
-
+            listExcpected[0] = new Tuple<Author, double>(author, 2.00);
+            listExcpected[1] = new Tuple<Author, double>(author2, Math.Round(3.0 / 89.0,2));
             CollectionAssert.AreEqual(listExcpected, report.AllAuthorsParticipants);
         }
 

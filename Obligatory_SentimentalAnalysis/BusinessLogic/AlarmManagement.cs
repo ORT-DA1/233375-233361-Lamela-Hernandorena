@@ -15,23 +15,13 @@ namespace BusinessLogic
 		}
 
 		
-        
-        // Unico metodo de agregar alarma en Persistence,
-        //que pregunto por el tipo y ahi mande a la tabla correspondiente.
         public void AddAlarm(IAlarm alarm)
 		{
 			alarm.VerifyFormat();
             alarmPersistence.AddAlarm(alarm);
-            //if (alarm.GetType().Equals(typeof(AuthorAlarm)))
-            //{
-            //    alarmPersistence.AddAuthorAlarm((AuthorAlarm)alarm);
-            //}
-            //else
-            //{
-            //    alarmPersistence.AddSentimentAlarm((Alarm)alarm); 
-            //}
 		}
 
+        //Poner un solo metodo
         public void Update(IAlarm alarm)
         {
             if (alarm.GetType().BaseType.Equals(typeof(AuthorAlarm)))
@@ -66,11 +56,6 @@ namespace BusinessLogic
         {
             alarmPersistence.DeleteAllAuthorsAlarms();
             alarmPersistence.DeleteSentimentAlarms(); 
-        }
-
-        public AuthorAlarm[] AllAuthorAlarms()
-        {
-            return alarmPersistence.AllAuthorAlarms();
         }
 	}
 }

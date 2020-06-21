@@ -91,7 +91,7 @@ namespace Domain
             {
                 if (phrase.Entity != null)
                 {
-                    if (!(phrase.PhraseType.Equals(Phrase.TypePhrase.Neutral) || listOfEntityMentioned.Contains(phrase.Entity)))
+                    if (!phrase.PhraseType.Equals(Phrase.TypePhrase.Neutral) && !listOfEntityMentioned.Contains(phrase.Entity))
                     {
                         listOfEntityMentioned.Add(phrase.Entity);
                     }
@@ -147,14 +147,14 @@ namespace Domain
             {
                 throw new AuthorException(MessagesExceptions.ErrorIsEmpty);
             }
-            if (CalculateAge(BirthDate) < 13 || CalculateAge(BirthDate) > 100)
+            if (CalculateAge() < 13 || CalculateAge() > 100)
             {
                 throw new AuthorException(MessagesExceptions.ErrorAge);
             }
 
         }
 
-        public static int CalculateAge(DateTime BirthDate)
+        public int CalculateAge()
         {
             DateTime actualDate = DateTime.Today;
             int age = actualDate.Year - BirthDate.Year;
@@ -162,7 +162,6 @@ namespace Domain
             {
                 --age;
             }
-
             return age;
         }
 
