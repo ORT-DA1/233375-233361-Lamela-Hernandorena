@@ -34,11 +34,11 @@ namespace BusinessLogic
         {
             FormatFields(copyAuthor);
             copyAuthor.VerifyFormat();
-            verifyFormatModificateAuthor(copyAuthor, authorToModificate);
+            VerifyFormatModificateAuthor(copyAuthor, authorToModificate);
             CopyInformationAuthorToAuthor(authorToModificate, copyAuthor);
         }
 
-        private void verifyFormatModificateAuthor(Author copyAuthor, Author authorToModificate)
+        private void VerifyFormatModificateAuthor(Author copyAuthor, Author authorToModificate)
         {
             if (!copyAuthor.Equals(authorToModificate))
             {

@@ -14,19 +14,14 @@ namespace BusinessLogic
             alarmPersistence = new AlarmPersistence();  
 		}
 
-		public void AddAlarm(IAlarm alarm)
+		
+        public void AddAlarm(IAlarm alarm)
 		{
 			alarm.VerifyFormat();
-            if (alarm.GetType().Equals(typeof(AuthorAlarm)))
-            {
-                alarmPersistence.AddAuthorAlarm((AuthorAlarm)alarm);
-            }
-            else
-            {
-                alarmPersistence.AddSentimentAlarm((Alarm)alarm); 
-            }
+            alarmPersistence.AddAlarm(alarm);
 		}
 
+        //Poner un solo metodo
         public void Update(IAlarm alarm)
         {
             if (alarm.GetType().BaseType.Equals(typeof(AuthorAlarm)))
@@ -61,11 +56,6 @@ namespace BusinessLogic
         {
             alarmPersistence.DeleteAllAuthorsAlarms();
             alarmPersistence.DeleteSentimentAlarms(); 
-        }
-
-        public AuthorAlarm[] AllAuthorAlarms()
-        {
-            return alarmPersistence.AllAuthorAlarms();
         }
 	}
 }

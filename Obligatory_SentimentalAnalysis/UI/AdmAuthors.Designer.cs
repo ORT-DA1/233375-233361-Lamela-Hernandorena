@@ -53,6 +53,7 @@
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(196, 20);
             this.textBoxName.TabIndex = 1;
+        
             // 
             // textBoxLastname
             // 

@@ -230,7 +230,7 @@ namespace Test
                 IsInHours = false
             };
             management.AddAlarm(alarm);
-			CollectionAssert.Contains(management.AllAuthorAlarms(), alarm);
+			CollectionAssert.Contains(management.AllAlarms, alarm);
         }
 
         [TestMethod]

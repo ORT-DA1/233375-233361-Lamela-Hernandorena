@@ -10,6 +10,11 @@ namespace Domain
     {
         public DateTime ReportDate { get; set; }
 
+        public DailyAveragePhraseReport()
+        {
+            ReportDate = DateTime.Now;
+        }
+
         public override void GenerateReport(Author[] AuthorsExistents)
         {
             foreach (Author author in AuthorsExistents)

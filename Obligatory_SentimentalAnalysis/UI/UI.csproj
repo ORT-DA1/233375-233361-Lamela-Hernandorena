@@ -92,6 +92,12 @@
     <Compile Include="AdmAuthors.Designer.cs">
       <DependentUpon>AdmAuthors.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportOfAuthors.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ReportOfAuthors.Designer.cs">
+      <DependentUpon>ReportOfAuthors.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdmAuthors.resx">
       <DependentUpon>AdmAuthors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportOfAuthors.resx">
+      <DependentUpon>ReportOfAuthors.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
@@ -182,6 +191,7 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Images\ReporteAutor.png" />
     <None Include="Images\btnModificar.png" />
     <None Include="Images\AgregadoAutores.png" />
     <Content Include="Images\AgregarAlarma.png" />

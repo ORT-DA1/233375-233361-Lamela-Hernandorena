@@ -123,7 +123,6 @@ namespace UI
 					labelError.Visible = true;
 					labelError.Text = exc.Message; 
 				}
-				
 			}
 		}
 		

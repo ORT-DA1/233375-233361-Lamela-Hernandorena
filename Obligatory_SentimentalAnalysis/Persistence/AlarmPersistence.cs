@@ -15,14 +15,24 @@ namespace Persistence
 
         }
 
-        public void AddAuthorAlarm(AuthorAlarm alarm)
+
+        public void AddAlarm(IAlarm alarm)
         {
 
             using (Context ctx = new Context())
             {
                 try
                 {
-                    ctx.AuthorAlarms.Add(alarm);
+                    if (alarm.GetType().Equals(typeof(AuthorAlarm)))
+                    {
+                        ctx.AuthorAlarms.Add((AuthorAlarm)alarm);
+                    }
+                    else
+                    {
+
+                        Alarm sentimentAlarm = (Alarm)alarm;
+                        ctx.SentimentAlarms.Add(sentimentAlarm);
+                    }
                     ctx.SaveChanges();
                 }
                 catch (Exception ex)
@@ -32,21 +42,6 @@ namespace Persistence
             }
         }
 
-        public void AddSentimentAlarm(Alarm alarm)
-        {
-            using (Context ctx = new Context())
-            {
-                try
-                {
-                    ctx.SentimentAlarms.Add(alarm);
-                    ctx.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    throw new AlarmManagementException("Error agregando alarma.", ex);
-                }
-            }
-        }
 
         public void UpdateStateOfAuthorAlarm(AuthorAlarm alarm)
         {
@@ -54,18 +49,18 @@ namespace Persistence
             {
                 try
                 {
-                   AuthorAlarm alarmOfDB= ctx.AuthorAlarms.SingleOrDefault(a => a.Id == alarm.Id);
-                   Author authorOfDB;
-                   alarmOfDB.ParticipantsAuthors.Clear();
+                    AuthorAlarm alarmOfDB = ctx.AuthorAlarms.SingleOrDefault(a => a.Id == alarm.Id);
+                    Author authorOfDB;
+                    alarmOfDB.ParticipantsAuthors.Clear();
 
                     foreach (Author currentAuthor in alarm.ParticipantsAuthors)
                     {
-                        authorOfDB = ctx.Authors.SingleOrDefault(author => author.Id == currentAuthor.Id && 
+                        authorOfDB = ctx.Authors.SingleOrDefault(author => author.Id == currentAuthor.Id &&
                         !currentAuthor.IsDeleted);
                         alarmOfDB.ParticipantsAuthors.Add(authorOfDB);
                     }
                     alarmOfDB.IsActive = alarm.IsActive;
-                    ctx.SaveChanges(); 
+                    ctx.SaveChanges();
                 }
                 catch (Exception ex)
                 {
@@ -80,7 +75,7 @@ namespace Persistence
             {
                 try
                 {
-                    var alarmOfSentiment = ctx.SentimentAlarms.SingleOrDefault(a => a.Id== alarm.Id);
+                    var alarmOfSentiment = ctx.SentimentAlarms.SingleOrDefault(a => a.Id == alarm.Id);
                     alarmOfSentiment.IsActive = alarm.IsActive;
                     ctx.SaveChanges();
                 }
@@ -100,17 +95,11 @@ namespace Persistence
                 IAlarm[] union = new IAlarm[allSentimentAlarm.Length + allAuthorsAlarms.Length];
                 allSentimentAlarm.CopyTo(union, 0);
                 allAuthorsAlarms.CopyTo(union, allSentimentAlarm.Length);
-                return union; 
+                return union;
             }
         }
 
-        public AuthorAlarm[] AllAuthorAlarms()
-        {
-            using (Context ctx = new Context())
-            {
-                return ctx.AuthorAlarms.Include("ParticipantsAuthors").ToArray();
-            }
-        }
+        
 
         public AuthorAlarm GetAuthorAlarmById(AuthorAlarm alarm)
         {
@@ -118,7 +107,7 @@ namespace Persistence
             {
                 try
                 {
-                    return ctx.AuthorAlarms.Include("ParticipantsAuthors").SingleOrDefault(a=> a.Id==alarm.Id);
+                    return ctx.AuthorAlarms.Include("ParticipantsAuthors").SingleOrDefault(a => a.Id == alarm.Id);
                 }
                 catch (Exception ex)
                 {

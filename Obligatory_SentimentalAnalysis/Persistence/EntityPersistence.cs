@@ -77,7 +77,7 @@ namespace Persistence
         public void DeleteAll()
         {
             using (Context ctx = new Context())
-            {
+            {                                     
                 try
                 {
                     foreach (Entity entity in ctx.Entities.ToList())

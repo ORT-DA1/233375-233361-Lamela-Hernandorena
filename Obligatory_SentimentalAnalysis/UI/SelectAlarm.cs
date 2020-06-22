@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
+using Domain;
 
 namespace UI
 {
 	public partial class SelectAlarm : UserControl
 	{
 		private GeneralManagement generalManagement;
+		
 		public SelectAlarm(GeneralManagement management)
 		{
 			InitializeComponent();
@@ -30,6 +32,7 @@ namespace UI
 
 		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			
 			if (cmbSelectTypeAlarm.SelectedIndex != -1)
 			{
 				int index = cmbSelectTypeAlarm.SelectedIndex;

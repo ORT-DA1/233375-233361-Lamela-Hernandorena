@@ -3,89 +3,111 @@ using System.Collections.Generic;
 using System.Linq;
 using BusinessLogicExceptions;
 using Persistence;
+using System;
 
 namespace BusinessLogic
 {
     public class SentimentManagement
     {
-        private SentimentPersistence sentimentPersistence; 
-		
-		public SentimentManagement()
-		{
-            sentimentPersistence = new SentimentPersistence(); 
-		}
+        private SentimentPersistence sentimentPersistence;
 
-		public void AddSentiment(Sentiment sentiment)
-		{
-			sentiment.VerifyFormat(); 
-			VerifyFormatAdd(sentiment);
-			sentiment.SentimientText = Utilities.DeleteSpaces(sentiment.SentimientText).Trim();
-            sentimentPersistence.AddSentiment(sentiment); 
-		}
+        public SentimentManagement()
+        {
+            sentimentPersistence = new SentimentPersistence();
+        }
+
+        public void AddSentiment(Sentiment sentiment)
+        {
+            sentiment.VerifyFormat();
+            VerifyFormatAdd(sentiment);
+            sentiment.SentimientText = Utilities.DeleteSpaces(sentiment.SentimientText).Trim();
+            sentimentPersistence.AddSentiment(sentiment);
+        }
 
 
-		public void UpdateAssociatedSentiment(Sentiment sentiment)
-		{
-			sentimentPersistence.UpdateAssociatedSentiment(sentiment);
-		}
+        public void UpdateAssociatedSentiment(Sentiment[] sentimentsContainedInPhrase)
+        {
+            sentimentPersistence.UpdateAssociatedSentiment(sentimentsContainedInPhrase);
+        }
 
-		private void VerifyFormatAdd(Sentiment sentiment)
-		{
-			if (IsPartOfAnotherSentiment(sentiment))
-			{
-				throw new TextManagementException(MessagesExceptions.ErrorIsContained); 
-			}
-		}
+        private void VerifyFormatAdd(Sentiment sentiment)
+        {
+            if (IsPartOfAnotherSentiment(sentiment))
+            {
+                throw new TextManagementException(MessagesExceptions.ErrorIsContained);
+            }
+        }
 
-		private bool IsPartOfAnotherSentiment(Sentiment sentiment)
-		{
-			bool toReturn = false;
+        public void UpdateSentiments(Phrase[] allPhrasesOfSystem)
+        {
 
-			string sentimentText= Utilities.DeleteSpaces(sentiment.SentimientText.ToLower().Trim()); 
-			
-			for (int i = 0; i < QuantityOFAllSentiments() && !toReturn; i++)
-			{
-				string currentSentiment = AllSentiments[i].SentimientText;
-				currentSentiment = Utilities.DeleteSpaces(currentSentiment.ToLower().Trim()); 
+            foreach (Sentiment sentiment in AllSentiments)
+            {
+                sentiment.IsAssociatedToPhrase = false;
+                foreach (Phrase phrase in allPhrasesOfSystem)
+                {
 
-				if (sentimentText.Contains(currentSentiment) || currentSentiment.Contains(sentimentText)) 
-				{                                    
-					toReturn = true;
-				}
+                    string textOfPhrase = Utilities.DeleteSpaces(phrase.TextPhrase.Trim().ToLower());
+                    string textOfSentiment = Utilities.DeleteSpaces(sentiment.SentimientText.Trim().ToLower());
+                    if (textOfPhrase.Contains(textOfSentiment))
+                    {
+                        sentiment.IsAssociatedToPhrase = true;
+                    }
+                }
+                sentimentPersistence.UpdateSentiment(sentiment);
+            }
+        }
 
-			}
-			return toReturn;
-		}
+        private bool IsPartOfAnotherSentiment(Sentiment sentiment)
+        {
+            bool toReturn = false;
 
-		private void VerifyFormatDelete(Sentiment sentiment)
-		{
-			if (IsNotContained(sentiment))
-			{
-				throw new TextManagementException(MessagesExceptions.ErrorDontExist); 
-			}
+            string sentimentText = Utilities.DeleteSpaces(sentiment.SentimientText.ToLower().Trim());
 
-		}
+            for (int i = 0; i < QuantityOfAllSentiments() && !toReturn; i++)
+            {
+                string currentSentiment = AllSentiments[i].SentimientText;
+                currentSentiment = Utilities.DeleteSpaces(currentSentiment.ToLower().Trim());
 
-		public void DeleteSentiment(Sentiment sentiment)
-		{
-			sentiment.VerifyFormatToDelete(); 
-			VerifyFormatDelete(sentiment);
-			sentimentPersistence.DeleteSentiment(sentiment); 
-		}
+                if (sentimentText.Contains(currentSentiment) || currentSentiment.Contains(sentimentText))
+                {
+                    toReturn = true;
+                }
 
-		private bool IsNotContained(Sentiment sentiment)
-		{
-			return !sentimentPersistence.IsContained(sentiment); 
-		}
+            }
+            return toReturn;
+        }
 
-		public Sentiment[] AllSentiments
-		{
+        private void VerifyFormatDelete(Sentiment sentiment)
+        {
+            if (IsNotContained(sentiment))
+            {
+                throw new TextManagementException(MessagesExceptions.ErrorDontExist);
+            }
+
+        }
+
+        public void DeleteSentiment(Sentiment sentiment)
+        {
+            sentiment.VerifyFormatToDelete();
+            VerifyFormatDelete(sentiment);
+            sentimentPersistence.DeleteSentiment(sentiment);
+        }
+
+        private bool IsNotContained(Sentiment sentiment)
+        {
+            return !sentimentPersistence.IsContained(sentiment);
+        }
+
+
+        public Sentiment[] AllSentiments
+        {
             get { return sentimentPersistence.AllSentiments(); }
         }
 
-        private int QuantityOFAllSentiments()
+        private int QuantityOfAllSentiments()
         {
-            return sentimentPersistence.QuantityOfAllSentiments(); 
+            return sentimentPersistence.QuantityOfAllSentiments();
         }
 
         public void EmptySentiment()

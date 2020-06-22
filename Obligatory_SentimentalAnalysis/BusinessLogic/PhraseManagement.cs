@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Persistence;
+using System;
 using System.Collections.Generic;
 
 
@@ -24,8 +25,9 @@ namespace BusinessLogic
 
         public void DeletePhrasesOfAuthor(Author author)
         {
-			phrasePersistence.DeletePhrasesOfAuthor(author);         
-        }
+			phrasePersistence.DeletePhrasesOfAuthor(author);
+			
+		}
 		
 		public Phrase[] AllPhrases
 		{
@@ -36,6 +38,11 @@ namespace BusinessLogic
 		{
 			phrasePersistence.DeleteAll();
 		}
-	}
+
+        public void UpdatePhrase(Phrase phrase)
+        {
+            phrasePersistence.Update(phrase); 
+        }
+    }
 }
 	

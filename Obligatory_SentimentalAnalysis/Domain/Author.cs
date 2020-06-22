@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -49,41 +47,54 @@ namespace Domain
 
         public double GeneratePhrasesPercetageReportPositive()
         {
-            double totalFindPhrases = 0;
-            foreach (Phrase phrase in ListOfPhraseOfAuthor)
+
+            double percentage = 0;
+            if (ListOfPhraseOfAuthor.Count > 0)
             {
-                if (phrase.PhraseType.Equals(Phrase.TypePhrase.Positive))
+                double totalFindPhrases = 0;
+                foreach (Phrase phrase in ListOfPhraseOfAuthor)
                 {
-                    totalFindPhrases++;
+                    if (phrase.PhraseType.Equals(Phrase.TypePhrase.Positive))
+                    {
+                        totalFindPhrases++;
+                    }
                 }
+                percentage = Math.Round(totalFindPhrases / (double)ListOfPhraseOfAuthor.Count, 2);
             }
-            
-            return totalFindPhrases / (double)ListOfPhraseOfAuthor.Count;
+            return percentage;
         }
 
         public double GeneratePhrasesPercetageReportNegative()
         {
             double totalFindPhrases = 0;
-            foreach (Phrase phrase in ListOfPhraseOfAuthor)
+            double percentage = 0;
+            if (ListOfPhraseOfAuthor.Count > 0)
             {
-                if (phrase.PhraseType.Equals(Phrase.TypePhrase.Negative))
+                foreach (Phrase phrase in ListOfPhraseOfAuthor)
                 {
-                    totalFindPhrases++;
+                    if (phrase.PhraseType.Equals(Phrase.TypePhrase.Negative))
+                    {
+                        totalFindPhrases++;
+                    }
                 }
+                percentage = Math.Round(totalFindPhrases / (double)ListOfPhraseOfAuthor.Count,2);
             }
+            return percentage;
 
-            return totalFindPhrases / (double)ListOfPhraseOfAuthor.Count;
         }
 
         public int QuantityOfEntityMentioned()
         {
-            List<Entity> listOfEntityMentioned = new List<Entity>(); 
+            List<Entity> listOfEntityMentioned = new List<Entity>();
 
             foreach (Phrase phrase in ListOfPhraseOfAuthor)
             {
-                if(!(phrase.PhraseType.Equals(Phrase.TypePhrase.Neutral) || listOfEntityMentioned.Contains(phrase.Entity)))
+                if (phrase.Entity != null)
                 {
-                    listOfEntityMentioned.Add(phrase.Entity); 
+                    if (!phrase.PhraseType.Equals(Phrase.TypePhrase.Neutral) && !listOfEntityMentioned.Contains(phrase.Entity))
+                    {
+                        listOfEntityMentioned.Add(phrase.Entity);
+                    }
                 }
             }
 
@@ -92,23 +103,28 @@ namespace Domain
 
         public double AverageOfDailyPhrases(DateTime actualDate)
         {
-            DateTime dateOfTheFirstPhrase = ListOfPhraseOfAuthor.ElementAt(0).PhraseDate;
-            double quantityOfPhrases = ListOfPhraseOfAuthor.Count;
-
-            double differenceOfTime = (actualDate - dateOfTheFirstPhrase).TotalDays;
-
-            if (differenceOfTime < 1)
+            double averageDailyPhrases = 0;
+            if (ListOfPhraseOfAuthor.Count > 0)
             {
-                return quantityOfPhrases; 
+                List<Phrase> phrasesOfAuthor = ListOfPhraseOfAuthor.OrderBy(list => list.PhraseDate).ToList();
+                DateTime dateOfTheFirstPhrase = phrasesOfAuthor.ElementAt(0).PhraseDate;
+                double quantityOfPhrases = ListOfPhraseOfAuthor.Count;
+
+                double differenceOfTime = (actualDate - dateOfTheFirstPhrase).TotalDays;
+
+                if (differenceOfTime < 1)
+                {
+                    averageDailyPhrases= quantityOfPhrases;
+                }
+                else
+                {
+                    averageDailyPhrases =  Math.Round(quantityOfPhrases / Math.Floor(differenceOfTime), 2);
+                }
             }
-            else
-            {
-                return quantityOfPhrases / Math.Floor(differenceOfTime);
-            }
-            
+            return averageDailyPhrases;
         }
 
-
+        
         public void VerifyFormat()
         {
             if (string.IsNullOrEmpty(UserName))
@@ -131,14 +147,14 @@ namespace Domain
             {
                 throw new AuthorException(MessagesExceptions.ErrorIsEmpty);
             }
-            if (CalculateAge(BirthDate) < 13 || CalculateAge(BirthDate) > 100)
+            if (CalculateAge() < 13 || CalculateAge() > 100)
             {
                 throw new AuthorException(MessagesExceptions.ErrorAge);
             }
 
         }
 
-        public static int CalculateAge(DateTime BirthDate)
+        public int CalculateAge()
         {
             DateTime actualDate = DateTime.Today;
             int age = actualDate.Year - BirthDate.Year;
@@ -146,7 +162,6 @@ namespace Domain
             {
                 --age;
             }
-
             return age;
         }
 
@@ -158,13 +173,13 @@ namespace Domain
 
         public override bool Equals(object obj)
         {
-            Author author = obj as Author; 
+            Author author = obj as Author;
 
             if (author == null || Convert.IsDBNull(author))
             {
                 return false;
             }
-            return Utilities.DeleteSpaces(UserName.Trim()).Equals(Utilities.DeleteSpaces(author.UserName.Trim())); 
+            return Utilities.DeleteSpaces(UserName.Trim()).Equals(Utilities.DeleteSpaces(author.UserName.Trim()));
         }
     }
 }
