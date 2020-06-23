@@ -3,8 +3,6 @@ using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity;
 
 namespace Persistence
@@ -18,38 +16,31 @@ namespace Persistence
 
         public void AddPhrase(Phrase phrase)
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     ctx.Authors.Attach(phrase.PhraseAuthor);
-                    
                     ctx.Phrases.Add(phrase);
-
-                    
                     if (phrase.Entity != null)
                     {
-                       ctx.Entry(phrase.Entity).State = EntityState.Unchanged;
-                    } 
-                    
+                        ctx.Entry(phrase.Entity).State = EntityState.Unchanged;
+                    }
                     ctx.Entry(phrase.PhraseAuthor).State = EntityState.Modified;
-
-                    
-                    
                     ctx.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                    throw new PhraseManagementException("Error agregando frase", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error agregando frase.", ex);
             }
         }
 
         public void Update(Phrase phrase)
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     Phrase phraseOfDb = ctx.Phrases.SingleOrDefault(p => p.Id == phrase.Id);
                     phraseOfDb.PhraseType = phrase.PhraseType;
@@ -59,22 +50,22 @@ namespace Persistence
                     }
                     else
                     {
-                        phraseOfDb.Entity = null; 
+                        phraseOfDb.Entity = null;
                     }
-                    ctx.SaveChanges(); 
+                    ctx.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                    throw new PhraseManagementException("Error actualizando frase", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error actualizando frase.", ex);
             }
         }
 
         public void DeletePhrasesOfAuthor(Author author)
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     List<Phrase> authorPhrases = ctx.Phrases.Where(p => p.PhraseAuthor.Id == author.Id).Include("Entity").Include("PhraseAuthor").ToList();
                     foreach (Phrase phrase in authorPhrases)
@@ -83,18 +74,18 @@ namespace Persistence
                     }
                     ctx.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                    throw new PhraseManagementException("Error eliminado frases", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error eliminado frases de autor.", ex);
             }
         }
 
         public void DeleteAll()
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     foreach (Phrase phrase in ctx.Phrases.ToList())
                     {
@@ -102,22 +93,29 @@ namespace Persistence
                         ctx.SaveChanges();
                     }
                 }
-                catch (Exception ex)
-                {
-                    throw new PhraseManagementException("Error eliminando las phrases", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error eliminando las frases.", ex);
             }
         }
-        
+
         public Phrase[] AllPhrases()
         {
-            using (Context ctx = new Context())
+            try
             {
-                return ctx.Phrases.Where(p => !p.IsDeleted).Include("Entity").Include("PhraseAuthor").ToArray();
+                using (Context ctx = new Context())
+                {
+                    return ctx.Phrases.Where(p => !p.IsDeleted).Include("Entity").Include("PhraseAuthor").ToArray();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error obteniendo todas las frases.", ex);
             }
         }
     }
 }
 
-    
+
 

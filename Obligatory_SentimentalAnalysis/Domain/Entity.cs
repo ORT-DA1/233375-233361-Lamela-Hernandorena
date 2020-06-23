@@ -14,7 +14,9 @@ namespace Domain
 
         [Key]
         public int Id { get; set; }
+
         public bool IsDeleted { get; set; }
+
         public Entity()
 		{
 			EntityName = "";

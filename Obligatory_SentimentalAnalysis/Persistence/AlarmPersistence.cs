@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BusinessLogicExceptions;
 using Domain;
 
@@ -14,14 +11,12 @@ namespace Persistence
         {
 
         }
-
-
+        
         public void AddAlarm(IAlarm alarm)
         {
-
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     if (alarm.GetType().Equals(typeof(AuthorAlarm)))
                     {
@@ -29,26 +24,39 @@ namespace Persistence
                     }
                     else
                     {
-
-                        Alarm sentimentAlarm = (Alarm)alarm;
+                        EntityAlarm sentimentAlarm = (EntityAlarm)alarm;
                         ctx.SentimentAlarms.Add(sentimentAlarm);
                     }
                     ctx.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                    throw new AlarmManagementException("Error agregando alarma.", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error agregando alarma.", ex);
             }
         }
 
 
-        public void UpdateStateOfAuthorAlarm(AuthorAlarm alarm)
+        public void UpdateAlarms(IAlarm alarm)
         {
-            using (Context ctx = new Context())
+            if (alarm.GetType().BaseType.Equals(typeof(AuthorAlarm)))
             {
-                try
+                UpdateStateOfAuthorAlarm((AuthorAlarm)alarm);
+            }
+            else
+            {
+                UpdateStateOfEntityAlarm((EntityAlarm)alarm);
+            }
+        }
+
+
+        private void UpdateStateOfAuthorAlarm(AuthorAlarm alarm)
+        {
+            try
+            {
+                using (Context ctx = new Context())
                 {
+
                     AuthorAlarm alarmOfDB = ctx.AuthorAlarms.SingleOrDefault(a => a.Id == alarm.Id);
                     Author authorOfDB;
                     alarmOfDB.ParticipantsAuthors.Clear();
@@ -62,80 +70,86 @@ namespace Persistence
                     alarmOfDB.IsActive = alarm.IsActive;
                     ctx.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                    throw new AlarmManagementException("Error actualizando alarma.", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error actualizando alarma.", ex);
             }
         }
 
-        public void UpdateStateOfSentimentAlarm(Alarm alarm)
+        private void UpdateStateOfEntityAlarm(EntityAlarm alarm)
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     var alarmOfSentiment = ctx.SentimentAlarms.SingleOrDefault(a => a.Id == alarm.Id);
                     alarmOfSentiment.IsActive = alarm.IsActive;
                     ctx.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                    throw new AlarmManagementException("Error actualizando alarma.", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error actualizando alarma.", ex);
             }
         }
 
         public IAlarm[] AllAlarms()
         {
-            using (Context ctx = new Context())
+            try
             {
-                AuthorAlarm[] allAuthorsAlarms = ctx.AuthorAlarms.Include("ParticipantsAuthors").ToArray();
-                Alarm[] allSentimentAlarm = ctx.SentimentAlarms.Include("Entity").ToArray();
-                IAlarm[] union = new IAlarm[allSentimentAlarm.Length + allAuthorsAlarms.Length];
-                allSentimentAlarm.CopyTo(union, 0);
-                allAuthorsAlarms.CopyTo(union, allSentimentAlarm.Length);
-                return union;
+                using (Context ctx = new Context())
+                {
+                    AuthorAlarm[] allAuthorsAlarms = ctx.AuthorAlarms.Include("ParticipantsAuthors").ToArray();
+                    EntityAlarm[] allEntitiesAlarms = ctx.SentimentAlarms.Include("Entity").ToArray();
+                    IAlarm[] union = new IAlarm[allEntitiesAlarms.Length + allAuthorsAlarms.Length];
+                    allEntitiesAlarms.CopyTo(union, 0);
+                    allAuthorsAlarms.CopyTo(union, allEntitiesAlarms.Length);
+                    return union;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error obteniendo todas las alarmas.", ex);
             }
         }
-
-        
 
         public AuthorAlarm GetAuthorAlarmById(AuthorAlarm alarm)
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     return ctx.AuthorAlarms.Include("ParticipantsAuthors").SingleOrDefault(a => a.Id == alarm.Id);
                 }
-                catch (Exception ex)
-                {
-                    throw new AlarmManagementException("Error obteniendo alarma.", ex);
-                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error obteniendo alarma.", ex);
             }
         }
 
-        public Alarm GetSentimentAlarmById(Alarm alarm)
+        public EntityAlarm GetEntityAlarmById(EntityAlarm alarm)
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     return ctx.SentimentAlarms.Include("Entity").SingleOrDefault(a => a.Id == alarm.Id);
                 }
-                catch (Exception ex)
-                {
-                    throw new AlarmManagementException("Error obteniendo alarma.", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error obteniendo alarma.", ex);
             }
         }
 
         public void DeleteAllAuthorsAlarms()
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     foreach (AuthorAlarm authorAlarm in ctx.AuthorAlarms.ToList())
                     {
@@ -143,29 +157,29 @@ namespace Persistence
                         ctx.SaveChanges();
                     }
                 }
-                catch (Exception ex)
-                {
-                    throw new EntityManagementException("Error eliminando las alarmas de autor", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error eliminando las alarmas de autor", ex);
             }
         }
 
-        public void DeleteSentimentAlarms()
+        public void DeleteEntitiesAlarms()
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
-                    foreach (Alarm sentimentAlarm in ctx.SentimentAlarms.ToList())
+                    foreach (EntityAlarm sentimentAlarm in ctx.SentimentAlarms.ToList())
                     {
                         ctx.SentimentAlarms.Remove(sentimentAlarm);
                         ctx.SaveChanges();
                     }
                 }
-                catch (Exception ex)
-                {
-                    throw new EntityManagementException("Error eliminando las alarmas de sentimiento", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error eliminando las alarmas de sentimiento", ex);
             }
         }
     }

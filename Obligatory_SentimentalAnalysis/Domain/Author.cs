@@ -44,10 +44,8 @@ namespace Domain
             ListOfPhraseOfAuthor = new List<Phrase>();
         }
 
-
-        public double GeneratePhrasesPercetageReportPositive()
+        public double PositivePercentagePhrases()
         {
-
             double percentage = 0;
             if (ListOfPhraseOfAuthor.Count > 0)
             {
@@ -64,7 +62,7 @@ namespace Domain
             return percentage;
         }
 
-        public double GeneratePhrasesPercetageReportNegative()
+        public double NegativePercentagePhrases()
         {
             double totalFindPhrases = 0;
             double percentage = 0;

@@ -100,7 +100,7 @@ namespace UI
 		private void AddAlarmUI()
 		{
 
-			Alarm alarmToAdd = new Alarm()
+			EntityAlarm alarmToAdd = new EntityAlarm()
 			{
 				Entity = (Entity)cmbEntities.SelectedItem,
 				QuantityPost = int.Parse(textBoxQuantityPost.Text),
@@ -112,15 +112,15 @@ namespace UI
 			InitializeAlarms();
 		}
 
-		private Alarm.Type TypeOfAlarmChecked()
+		private EntityAlarm.Type TypeOfAlarmChecked()
 		{
 			if (radioButtonPositive.Checked)
 			{
-				return Alarm.Type.Positive;
+				return EntityAlarm.Type.Positive;
 			}
 			else
 			{
-				return Alarm.Type.Negative;
+				return EntityAlarm.Type.Negative;
 			}
 		}
 

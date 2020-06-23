@@ -30,22 +30,22 @@ namespace Test
                 LastName = "Hernandorena",
                 BirthDate = new DateTime(2000, 04, 01)
             };
-			management.PhraseManagement.EmptyPhrase();
+			management.PhraseManagement.DeleteAllPhrases();
 			management.AuthorManagement.EmptyAll();
 			management.AlarmManagement.DeleteAll();
-			management.EntityManagement.EmptyEntity();
-			management.SentimentManagement.EmptySentiment();
+			management.EntityManagement.DeleteAllEntities();
+			management.SentimentManagement.DeleteAllSentiments();
 		}
 
 		[TestCleanup]
         public void CleanUp()
         {
             management = new GeneralManagement();
-			management.PhraseManagement.EmptyPhrase();
+			management.PhraseManagement.DeleteAllPhrases();
 			management.AuthorManagement.EmptyAll();
 			management.AlarmManagement.DeleteAll();
-			management.EntityManagement.EmptyEntity();
-			management.SentimentManagement.EmptySentiment();
+			management.EntityManagement.DeleteAllEntities();
+			management.SentimentManagement.DeleteAllSentiments();
 
 		}
 
@@ -413,10 +413,10 @@ namespace Test
 				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
-			Alarm aAlarm = new Alarm()
+			EntityAlarm aAlarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 1,
 				QuantityTime = 1,
 				IsInHours = true
@@ -436,7 +436,7 @@ namespace Test
 				MockedDateTime = new DateTime(2019, 10, 1, 19, 10, 30)
 			};
 			management.UpdateAlarms(provider);
-			Assert.IsTrue(management.AlarmManagement.GetSentimentAlarm(aAlarm).IsActive);
+			Assert.IsTrue(management.AlarmManagement.GetEntityAlarm(aAlarm).IsActive);
 		}
 
 		[TestMethod]
@@ -460,10 +460,10 @@ namespace Test
 				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
-			Alarm aAlarm = new Alarm()
+			EntityAlarm aAlarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 1,
 				QuantityTime = 1,
 				IsInHours = false
@@ -506,10 +506,10 @@ namespace Test
 				EntityName = "Coca Cola"
 			};
 			management.EntityManagement.AddEntity(entity);
-			Alarm aAlarm = new Alarm()
+			EntityAlarm aAlarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 1,
 				QuantityTime = 1,
 				IsInHours = false
@@ -545,10 +545,10 @@ namespace Test
 				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
-			Alarm aAlarm = new Alarm()
+			EntityAlarm aAlarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 1,
 				QuantityTime = 2,
 				IsInHours = false
@@ -577,7 +577,7 @@ namespace Test
 				MockedDateTime = new DateTime(2020, 04, 26, 19, 10, 30)
 			};
 			management.UpdateAlarms(provider);
-			Assert.IsTrue(management.AlarmManagement.GetSentimentAlarm(aAlarm).IsActive);
+			Assert.IsTrue(management.AlarmManagement.GetEntityAlarm(aAlarm).IsActive);
 		}
 
 		[TestMethod]
@@ -601,18 +601,18 @@ namespace Test
 				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
-			Alarm aAlarm = new Alarm()
+			EntityAlarm aAlarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 1,
 				QuantityTime = 2,
 				IsInHours = false
 			};
-			Alarm aAlarm2 = new Alarm()
+			EntityAlarm aAlarm2 = new EntityAlarm()
 			{
 				Entity = entity2,
-				TypeOfAlarm = Alarm.Type.Negative,
+				TypeOfAlarm = EntityAlarm.Type.Negative,
 				QuantityPost = 1,
 				QuantityTime = 2,
 				IsInHours = false
@@ -672,18 +672,18 @@ namespace Test
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
 			management.SentimentManagement.AddSentiment(sentiment2);
-			Alarm aAlarm = new Alarm()
+			EntityAlarm aAlarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost=10,
 				QuantityTime = 1,
 				IsInHours = false
 			};
-			Alarm aAlarm2 = new Alarm()
+			EntityAlarm aAlarm2 = new EntityAlarm()
 			{
 				Entity = entity2,
-				TypeOfAlarm = Alarm.Type.Negative,
+				TypeOfAlarm = EntityAlarm.Type.Negative,
 				QuantityPost = 2,
 				QuantityTime = 2,
 				IsInHours = false
@@ -723,8 +723,8 @@ namespace Test
 				MockedDateTime = new DateTime(2020, 04, 26, 19, 10, 30)
 			};
 			management.UpdateAlarms(provider);
-			Assert.IsTrue(management.AlarmManagement.GetSentimentAlarm(aAlarm2).IsActive);
-			Assert.IsFalse(management.AlarmManagement.GetSentimentAlarm(aAlarm).IsActive);
+			Assert.IsTrue(management.AlarmManagement.GetEntityAlarm(aAlarm2).IsActive);
+			Assert.IsFalse(management.AlarmManagement.GetEntityAlarm(aAlarm).IsActive);
 		}
 
 
@@ -744,10 +744,10 @@ namespace Test
 				SentimentType= Sentiment.TypeSentiment.Negative
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
-			Alarm aAlarm = new Alarm()
+			EntityAlarm aAlarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 1,
 				QuantityTime = 1,
 				IsInHours = false

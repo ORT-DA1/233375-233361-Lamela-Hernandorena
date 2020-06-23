@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using BusinessLogicExceptions; 
+using BusinessLogicExceptions;
 
 namespace Domain
 {
@@ -28,14 +28,14 @@ namespace Domain
 
         [Key]
         public int Id { get; set; }
-        
-        public virtual List<Author> ParticipantsAuthors { get; set; } 
+
+        public virtual List<Author> ParticipantsAuthors { get; set; }
 
         public AuthorAlarm()
         {
-            ParticipantsAuthors = new List<Author>(); 
+            ParticipantsAuthors = new List<Author>();
         }
-        
+
         public string Show()
         {
             string state = "";
@@ -71,7 +71,7 @@ namespace Domain
                 return "negativa";
             }
         }
-        
+
 
         public void UpdateState(Phrase[] phrases, DateTime date)
         {
@@ -80,7 +80,7 @@ namespace Domain
             DateTime minDate = date;
             Author[] participants = new Author[phrases.Length];
             int[] quantity = new int[phrases.Length];
-            for (int i=0; i < participants.Length; i++)
+            for (int i = 0; i < participants.Length; i++)
             {
                 participants[i] = new Author();
             }
@@ -106,9 +106,9 @@ namespace Domain
                     }
                 }
             }
-            for(int i=0; i<quantity.Length; i++)
+            for (int i = 0; i < quantity.Length; i++)
             {
-                if(quantity[i] >= QuantityPost)
+                if (quantity[i] >= QuantityPost)
                 {
                     ParticipantsAuthors.Add(participants[i]);
                     IsActive = true;
@@ -138,7 +138,7 @@ namespace Domain
             }
             if (QuantityPost >= 1000)
             {
-                throw new AlarmManagementException(MessagesExceptions.ErrorIsNegativePosts);
+                throw new AlarmManagementException(MessagesExceptions.ErrorQuantityOfPost);
             }
             if (Utilities.IsNegativeQuantity(QuantityTime))
             {
@@ -154,11 +154,9 @@ namespace Domain
             {
                 return false;
             }
-
-            bool ret= QuantityPost == authorAlarm.QuantityPost && QuantityTime==authorAlarm.QuantityTime 
-                && ParticipantsAuthors.SequenceEqual(authorAlarm.ParticipantsAuthors) 
+            return QuantityPost == authorAlarm.QuantityPost && QuantityTime == authorAlarm.QuantityTime
+                && ParticipantsAuthors.SequenceEqual(authorAlarm.ParticipantsAuthors)
                 && TypeOfAlarm.Equals(authorAlarm.TypeOfAlarm);
-            return ret;
         }
     }
 }

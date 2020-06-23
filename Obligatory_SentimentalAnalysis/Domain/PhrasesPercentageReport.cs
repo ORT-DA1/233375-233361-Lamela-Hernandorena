@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
     public class PhrasesPercentageReport : AuthorReport
     {
         public bool IsPercentageOfPositivePhrases { get; set; }
-
 
         public override void GenerateReport(Author[] AuthorsExistents)
         {
@@ -18,11 +13,11 @@ namespace Domain
             {
                 if (IsPercentageOfPositivePhrases)
                 {
-                    tupleOfAuthor = new Tuple<Author, double>(author, author.GeneratePhrasesPercetageReportPositive());
+                    tupleOfAuthor = new Tuple<Author, double>(author, author.PositivePercentagePhrases());
                 }
                 else
                 {
-                    tupleOfAuthor = new Tuple<Author, double>(author, author.GeneratePhrasesPercetageReportNegative());
+                    tupleOfAuthor = new Tuple<Author, double>(author, author.NegativePercentagePhrases());
                 }
                 listOfAuthorsParticipants.Add(tupleOfAuthor);
             }

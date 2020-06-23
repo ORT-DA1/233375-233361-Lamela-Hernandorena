@@ -30,6 +30,7 @@ namespace UI
 		/// </summary>
 		private void InitializeComponent()
 		{
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             this.btnAddSentiment = new System.Windows.Forms.Button();
             this.btnAddEntity = new System.Windows.Forms.Button();
             this.btnAddPhrase = new System.Windows.Forms.Button();
@@ -49,10 +50,10 @@ namespace UI
             this.btnAddSentiment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnAddSentiment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnAddSentiment.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAddSentiment.Location = new System.Drawing.Point(11, 271);
+            this.btnAddSentiment.Location = new System.Drawing.Point(11, 345);
             this.btnAddSentiment.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddSentiment.Name = "btnAddSentiment";
-            this.btnAddSentiment.Size = new System.Drawing.Size(284, 47);
+            this.btnAddSentiment.Size = new System.Drawing.Size(284, 38);
             this.btnAddSentiment.TabIndex = 1;
             this.btnAddSentiment.UseVisualStyleBackColor = false;
             this.btnAddSentiment.Click += new System.EventHandler(this.btnAddSentiment_Click);
@@ -65,10 +66,10 @@ namespace UI
             this.btnAddEntity.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnAddEntity.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnAddEntity.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAddEntity.Location = new System.Drawing.Point(11, 334);
+            this.btnAddEntity.Location = new System.Drawing.Point(12, 401);
             this.btnAddEntity.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddEntity.Name = "btnAddEntity";
-            this.btnAddEntity.Size = new System.Drawing.Size(284, 53);
+            this.btnAddEntity.Size = new System.Drawing.Size(284, 37);
             this.btnAddEntity.TabIndex = 2;
             this.btnAddEntity.UseVisualStyleBackColor = false;
             this.btnAddEntity.Click += new System.EventHandler(this.btnAddEntity_Click);
@@ -81,9 +82,9 @@ namespace UI
             this.btnAddPhrase.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnAddPhrase.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnAddPhrase.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAddPhrase.Location = new System.Drawing.Point(11, 419);
+            this.btnAddPhrase.Location = new System.Drawing.Point(11, 461);
             this.btnAddPhrase.Name = "btnAddPhrase";
-            this.btnAddPhrase.Size = new System.Drawing.Size(284, 51);
+            this.btnAddPhrase.Size = new System.Drawing.Size(284, 35);
             this.btnAddPhrase.TabIndex = 3;
             this.btnAddPhrase.UseVisualStyleBackColor = false;
             this.btnAddPhrase.Click += new System.EventHandler(this.btnAddPhrase_Click);
@@ -96,10 +97,10 @@ namespace UI
             this.btnAddAlarm.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnAddAlarm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnAddAlarm.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAddAlarm.Location = new System.Drawing.Point(11, 498);
+            this.btnAddAlarm.Location = new System.Drawing.Point(11, 519);
             this.btnAddAlarm.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddAlarm.Name = "btnAddAlarm";
-            this.btnAddAlarm.Size = new System.Drawing.Size(284, 49);
+            this.btnAddAlarm.Size = new System.Drawing.Size(284, 38);
             this.btnAddAlarm.TabIndex = 4;
             this.btnAddAlarm.UseVisualStyleBackColor = false;
             this.btnAddAlarm.Click += new System.EventHandler(this.BtnAddAlarm_Click);
@@ -121,10 +122,10 @@ namespace UI
             this.btnReport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnReport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnReport.Location = new System.Drawing.Point(11, 572);
+            this.btnReport.Location = new System.Drawing.Point(12, 575);
             this.btnReport.Margin = new System.Windows.Forms.Padding(2);
             this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(284, 46);
+            this.btnReport.Size = new System.Drawing.Size(284, 38);
             this.btnReport.TabIndex = 5;
             this.btnReport.UseVisualStyleBackColor = false;
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
@@ -138,7 +139,7 @@ namespace UI
             this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.Location = new System.Drawing.Point(12, 37);
+            this.btnExit.Location = new System.Drawing.Point(12, 38);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(58, 52);
             this.btnExit.TabIndex = 7;
@@ -153,29 +154,34 @@ namespace UI
             this.btnAuthors.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.btnAuthors.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.btnAuthors.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAuthors.Location = new System.Drawing.Point(11, 215);
+            this.btnAuthors.Location = new System.Drawing.Point(11, 231);
             this.btnAuthors.Margin = new System.Windows.Forms.Padding(2);
             this.btnAuthors.Name = "btnAuthors";
-            this.btnAuthors.Size = new System.Drawing.Size(284, 43);
+            this.btnAuthors.Size = new System.Drawing.Size(284, 35);
             this.btnAuthors.TabIndex = 8;
             this.btnAuthors.UseVisualStyleBackColor = false;
             this.btnAuthors.Click += new System.EventHandler(this.btnAuthors_Click);
             // 
             // btnAuthorReport
             // 
-            this.btnAuthorReport.Location = new System.Drawing.Point(190, 12);
+            this.btnAuthorReport.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnAuthorReport.BackColor = System.Drawing.Color.Transparent;
+            this.btnAuthorReport.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.btnAuthorReport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnAuthorReport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnAuthorReport.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAuthorReport.Location = new System.Drawing.Point(11, 289);
             this.btnAuthorReport.Name = "btnAuthorReport";
-            this.btnAuthorReport.Size = new System.Drawing.Size(105, 23);
+            this.btnAuthorReport.Size = new System.Drawing.Size(284, 37);
             this.btnAuthorReport.TabIndex = 9;
-            this.btnAuthorReport.Text = "Reporte autor";
-            this.btnAuthorReport.UseVisualStyleBackColor = true;
+            this.btnAuthorReport.UseVisualStyleBackColor = false;
             this.btnAuthorReport.Click += new System.EventHandler(this.btnAuthorReport_Click);
             // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::UI.Properties.Resources.MenuPrincipal;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(775, 638);
             this.Controls.Add(this.btnAuthorReport);
             this.Controls.Add(this.btnAuthors);

@@ -1,11 +1,7 @@
 ﻿using BusinessLogicExceptions;
 using Domain;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence
 {
@@ -15,53 +11,72 @@ namespace Persistence
         {
         }
 
-       
-        //HACER QUE EL TRY TOME EL USING TAMBIEN
         public void AddAuthor(Author author)
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     ctx.Authors.Add(author);
                     ctx.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                    throw new AuthorException("Error agregando autor.", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error agregando autor.", ex);
             }
         }
 
         public bool ContainsAuthor(Author author)
         {
-            using (Context ctx = new Context())
+            try
             {
-                return ctx.Authors.Any(a => !a.IsDeleted && a.UserName.ToLower().Equals(author.UserName.ToLower()));
+                using (Context ctx = new Context())
+                {
+                    return ctx.Authors.Any(a => !a.IsDeleted && a.UserName.ToLower().Equals(author.UserName.ToLower()));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error verificando si autor esta contenido.", ex);
             }
         }
 
         public Author[] AllAuthorsForReport()
         {
-            using (Context ctx = new Context())
+            try
             {
-                return ctx.Authors.Include("ListOfPhraseOfAuthor").Include("ListOfPhraseOfAuthor.Entity").Where(e => !e.IsDeleted).ToArray();
+                using (Context ctx = new Context())
+                {
+                    return ctx.Authors.Include("ListOfPhraseOfAuthor").Include("ListOfPhraseOfAuthor.Entity").Where(e => !e.IsDeleted).ToArray();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error obteniendo todos los autores.", ex);
             }
         }
 
         public Author[] AllAuthors()
         {
-            using (Context ctx = new Context())
+            try
             {
-                return ctx.Authors.Include("ListOfPhraseOfAuthor").Where(e => !e.IsDeleted).ToArray();
+                using (Context ctx = new Context())
+                {
+                    return ctx.Authors.Include("ListOfPhraseOfAuthor").Where(e => !e.IsDeleted).ToArray();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error obteniendo todos los autores.", ex);
             }
         }
 
         public void ModifyInformationAuthor(Author authorToModificate, Author authorCopy)
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     var authorOfDb = ctx.Authors.SingleOrDefault(a => a.Id == authorToModificate.Id);
                     authorOfDb.Name = authorCopy.Name;
@@ -70,45 +85,51 @@ namespace Persistence
                     authorOfDb.BirthDate = authorCopy.BirthDate;
                     ctx.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                    throw new EntityManagementException("Error eliminando autor.", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error modificando autor.", ex);
             }
         }
 
         public Author GetAuthorById(Author author)
         {
-            using (Context ctx = new Context())
+            try
             {
-               Author authorToReturn = ctx.Authors.SingleOrDefault(a => a.Id == author.Id && !a.IsDeleted);
-               return authorToReturn; 
+                using (Context ctx = new Context())
+                {
+                    return ctx.Authors.SingleOrDefault(a => a.Id == author.Id && !a.IsDeleted);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error obteniendo autor.", ex);
             }
         }
 
 
         public void DeleteAuthor(Author author)
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     var authorOfDb = ctx.Authors.SingleOrDefault(a => a.Id == author.Id);
                     authorOfDb.IsDeleted = true;
                     ctx.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                    throw new EntityManagementException("Error eliminando autor.", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error eliminando autor.", ex);
             }
         }
 
         public void DeleteAll()
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     foreach (Author author in ctx.Authors.ToList())
                     {
@@ -116,13 +137,11 @@ namespace Persistence
                         ctx.SaveChanges();
                     }
                 }
-                catch (Exception ex)
-                {
-                    throw new EntityManagementException("Error eliminando los autor", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error eliminando los autores", ex);
             }
         }
-
-        
     }
 }

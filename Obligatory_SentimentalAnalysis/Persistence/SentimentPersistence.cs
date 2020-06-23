@@ -1,12 +1,8 @@
 ﻿using BusinessLogicExceptions;
 using Domain;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence
 {
@@ -19,102 +15,123 @@ namespace Persistence
 
         public void AddSentiment(Sentiment sentiment)
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     ctx.Sentiments.Add(sentiment);
                     ctx.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                    throw new TextManagementException("Error agregando sentimiento.", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error agregando sentimiento.", ex);
             }
         }
 
-        public void UpdateAssociatedSentiment(Sentiment[] sentimentsContainedInPhrase)
+        public void UpdateAssociatedSentiments(Sentiment[] sentimentsContainedInPhrase)
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
-                    foreach(Sentiment sentiment in sentimentsContainedInPhrase)
+                    foreach (Sentiment sentiment in sentimentsContainedInPhrase)
                     {
-                       ctx.Entry(sentiment).State = EntityState.Modified;
+                        ctx.Entry(sentiment).State = EntityState.Modified;
                     }
                     ctx.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                    throw new EntityManagementException("Error asociando sentimiento.", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error asociando sentimiento.", ex);
             }
         }
 
         public void DeleteSentiment(Sentiment sentiment)
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     var sentimentOfDb = ctx.Sentiments.SingleOrDefault(s => s.Id == sentiment.Id);
                     sentimentOfDb.IsDeleted = true;
                     ctx.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                    throw new EntityManagementException("Error eliminando sentimiento.", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error eliminando sentimiento.", ex);
             }
         }
 
         public void UpdateSentiment(Sentiment sentiment)
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     Sentiment sentimentOfDb = ctx.Sentiments.SingleOrDefault(sentim => sentim.Id == sentiment.Id);
                     sentimentOfDb.IsAssociatedToPhrase = sentiment.IsAssociatedToPhrase;
-                    ctx.SaveChanges(); 
+                    ctx.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                    throw new EntityManagementException("Error eliminando sentimiento.", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error actualizando sentimiento.", ex);
             }
         }
 
         public bool IsContained(Sentiment sentiment)
         {
-            using (Context ctx = new Context())
+            try
             {
-                return ctx.Sentiments.Any(s => !s.IsDeleted && s.Id==sentiment.Id && s.SentimientText.ToLower().Equals(sentiment.SentimientText.ToLower()));
+                using (Context ctx = new Context())
+                {
+                    return ctx.Sentiments.Any(s => !s.IsDeleted && s.Id == sentiment.Id && s.SentimientText.ToLower().Equals(sentiment.SentimientText.ToLower()));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error verificando que el sentimiento este contenido.", ex);
             }
         }
 
         public Sentiment[] AllSentiments()
         {
-            using (Context ctx = new Context())
+            try
             {
-                return ctx.Sentiments.Where(e => !e.IsDeleted).ToArray();
+                using (Context ctx = new Context())
+                {
+                    return ctx.Sentiments.Where(e => !e.IsDeleted).ToArray();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error obteniendo todos los sentimientos.", ex);
             }
         }
 
         public int QuantityOfAllSentiments()
         {
-            using (Context ctx = new Context())
+            try
             {
-                return ctx.Sentiments.Where(e => !e.IsDeleted).ToArray().Length;
+                using (Context ctx = new Context())
+                {
+                    return ctx.Sentiments.Where(e => !e.IsDeleted).ToArray().Length;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error obteniendo la cantidad de sentimientos.", ex);
             }
         }
 
         public void DeleteAll()
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     foreach (Sentiment sentiment in ctx.Sentiments.ToList())
                     {
@@ -122,10 +139,10 @@ namespace Persistence
                         ctx.SaveChanges();
                     }
                 }
-                catch (Exception ex)
-                {
-                    throw new EntityManagementException("Error eliminando los sentimientos", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error eliminando los sentimientos.", ex);
             }
         }
     }

@@ -13,7 +13,7 @@ namespace Persistence
 
         public DbSet<Author> Authors { get; set; }
 
-        public DbSet<Alarm> SentimentAlarms { get; set; }
+        public DbSet<EntityAlarm> SentimentAlarms { get; set; }
 
         public DbSet<AuthorAlarm> AuthorAlarms { get; set; }
 
@@ -24,7 +24,6 @@ namespace Persistence
             modelBuilder.Entity<Author>()
             .HasMany<AuthorAlarm>(author => author.AlarmsWhoAuthorParticipate)
             .WithMany(alarm => alarm.ParticipantsAuthors);
-
 
             modelBuilder.Entity<Author>()
             .HasMany<Phrase>(author => author.ListOfPhraseOfAuthor)

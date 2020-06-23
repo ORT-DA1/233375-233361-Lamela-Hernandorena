@@ -1,7 +1,6 @@
 ﻿using BusinessLogicExceptions;
 using Domain;
 using Persistence;
-using System.Collections.Generic;
 
 
 namespace BusinessLogic
@@ -19,7 +18,6 @@ namespace BusinessLogic
 		{
             return entityPersistence.IsEmpty();
         }
-
 
 		public void AddEntity(Entity entity)
 		{
@@ -66,7 +64,7 @@ namespace BusinessLogic
             get { return entityPersistence.AllEntities(); }
         }
  
-        public void EmptyEntity()
+        public void DeleteAllEntities()
         {
             entityPersistence.DeleteAll();
         }

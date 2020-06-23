@@ -150,22 +150,22 @@ namespace Test
             };
 
 
-            management.PhraseManagement.EmptyPhrase();
+            management.PhraseManagement.DeleteAllPhrases();
             management.AuthorManagement.EmptyAll();
             management.AlarmManagement.DeleteAll();
-            management.EntityManagement.EmptyEntity();
-            management.SentimentManagement.EmptySentiment();
+            management.EntityManagement.DeleteAllEntities();
+            management.SentimentManagement.DeleteAllSentiments();
         }
 
         [TestCleanup]
         public void CleanUp()
         {
             management = new GeneralManagement();
-            management.PhraseManagement.EmptyPhrase();
+            management.PhraseManagement.DeleteAllPhrases();
             management.AuthorManagement.EmptyAll();
             management.AlarmManagement.DeleteAll();
-            management.EntityManagement.EmptyEntity();
-            management.SentimentManagement.EmptySentiment();
+            management.EntityManagement.DeleteAllEntities();
+            management.SentimentManagement.DeleteAllSentiments();
         }
         
         [TestMethod]
