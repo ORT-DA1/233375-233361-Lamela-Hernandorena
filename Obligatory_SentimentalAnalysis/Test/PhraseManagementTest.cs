@@ -28,8 +28,8 @@ namespace Test
                 LastName = "Lamela",
                 BirthDate = new DateTime(2000, 02, 29)
             };
-            management.EmptyPhrase();
-            entityManagement.EmptyEntity();
+            management.DeleteAllPhrases();
+            entityManagement.DeleteAllEntities();
             authorManagement.EmptyAll(); 
         }
         
@@ -38,9 +38,9 @@ namespace Test
         public void CleanUp()
         {
             management = new PhraseManagement();
-            management.EmptyPhrase();
+            management.DeleteAllPhrases();
             entityManagement = new EntityManagement();
-            entityManagement.EmptyEntity();
+            entityManagement.DeleteAllEntities();
             authorManagement.EmptyAll();
         }
 
@@ -164,7 +164,7 @@ namespace Test
 
         [TestMethod]
         [ExpectedException(typeof(PhraseManagementException))]
-        public void AddInvalidEmptyPhrase()
+        public void AddInvalidEmptyPhrases()
         {
             authorManagement.AddAuthor(author);
             Entity entity = new Entity();

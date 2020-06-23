@@ -1,6 +1,5 @@
 ﻿using Domain;
 using System;
-using System.Collections.Generic;
 
 namespace BusinessLogic
 {
@@ -23,11 +22,10 @@ namespace BusinessLogic
 
 		public void AnalysisPhrase(Phrase phrase)
 		{
-			string textOfPhrase = Utilities.DeleteSpaces(phrase.TextPhrase.ToLower());
 			Sentiment[] sentimentsContainedInPhrase = phrase.AllAssociatedSentiments(SentimentManagement.AllSentiments);
 			int quantityOfPositiveSentiments = phrase.QuantityOfAssociatedPositiveSentiments(sentimentsContainedInPhrase);
 			int quantityOfNegativeSentiments = phrase.QuantityOfAssociatedNegativeSentiments(sentimentsContainedInPhrase);
-			SentimentManagement.UpdateAssociatedSentiment(sentimentsContainedInPhrase);
+			SentimentManagement.UpdateAssociatedSentiments(sentimentsContainedInPhrase);
 			EntityManagement.AssociateEntityToPhrase(phrase);
 			phrase.SetTypeOfPhrase(quantityOfPositiveSentiments, quantityOfNegativeSentiments);
 			PhraseManagement.UpdatePhrase(phrase); 

@@ -73,5 +73,6 @@ namespace UI
 			UserControl authorReport = new ReportOfAuthors(GeneralManagement);
 			panelMain.Controls.Add(authorReport);
 		}
-	}
+        
+    }
 }

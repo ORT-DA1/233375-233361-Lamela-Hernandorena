@@ -1,9 +1,6 @@
 ﻿using Domain;
-using System.Collections.Generic;
-using System.Linq;
 using BusinessLogicExceptions;
 using Persistence;
-using System;
 
 namespace BusinessLogic
 {
@@ -25,28 +22,26 @@ namespace BusinessLogic
         }
 
 
-        public void UpdateAssociatedSentiment(Sentiment[] sentimentsContainedInPhrase)
+        public void UpdateAssociatedSentiments(Sentiment[] sentimentsContainedInPhrase)
         {
-            sentimentPersistence.UpdateAssociatedSentiment(sentimentsContainedInPhrase);
+            sentimentPersistence.UpdateAssociatedSentiments(sentimentsContainedInPhrase);
         }
 
         private void VerifyFormatAdd(Sentiment sentiment)
         {
             if (IsPartOfAnotherSentiment(sentiment))
             {
-                throw new TextManagementException(MessagesExceptions.ErrorIsContained);
+                throw new SentimentManagementException(MessagesExceptions.ErrorIsContained);
             }
         }
 
         public void UpdateSentiments(Phrase[] allPhrasesOfSystem)
         {
-
             foreach (Sentiment sentiment in AllSentiments)
             {
                 sentiment.IsAssociatedToPhrase = false;
                 foreach (Phrase phrase in allPhrasesOfSystem)
                 {
-
                     string textOfPhrase = Utilities.DeleteSpaces(phrase.TextPhrase.Trim().ToLower());
                     string textOfSentiment = Utilities.DeleteSpaces(sentiment.SentimientText.Trim().ToLower());
                     if (textOfPhrase.Contains(textOfSentiment))
@@ -60,31 +55,30 @@ namespace BusinessLogic
 
         private bool IsPartOfAnotherSentiment(Sentiment sentiment)
         {
-            bool toReturn = false;
+            bool isContained = false;
 
             string sentimentText = Utilities.DeleteSpaces(sentiment.SentimientText.ToLower().Trim());
 
-            for (int i = 0; i < QuantityOfAllSentiments() && !toReturn; i++)
+            for (int i = 0; i < QuantityOfAllSentiments() && !isContained; i++)
             {
                 string currentSentiment = AllSentiments[i].SentimientText;
                 currentSentiment = Utilities.DeleteSpaces(currentSentiment.ToLower().Trim());
 
                 if (sentimentText.Contains(currentSentiment) || currentSentiment.Contains(sentimentText))
                 {
-                    toReturn = true;
+                    isContained = true;
                 }
 
             }
-            return toReturn;
+            return isContained;
         }
 
         private void VerifyFormatDelete(Sentiment sentiment)
         {
             if (IsNotContained(sentiment))
             {
-                throw new TextManagementException(MessagesExceptions.ErrorDontExist);
+                throw new SentimentManagementException(MessagesExceptions.ErrorDontExist);
             }
-
         }
 
         public void DeleteSentiment(Sentiment sentiment)
@@ -110,7 +104,7 @@ namespace BusinessLogic
             return sentimentPersistence.QuantityOfAllSentiments();
         }
 
-        public void EmptySentiment()
+        public void DeleteAllSentiments()
         {
             sentimentPersistence.DeleteAll();
         }

@@ -1,6 +1,4 @@
-﻿
-
-namespace Domain
+﻿namespace Domain
 {
 	public class Utilities
 	{
@@ -15,7 +13,6 @@ namespace Domain
 			{
 				text = text.Replace("  ", " ");
 			}
-
 			return text;
 		}
 

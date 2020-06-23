@@ -35,10 +35,10 @@ namespace Test
 				EntityName = "Pedidos Ya"
 			};
 
-			Alarm alarm = new Alarm()
+			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 50,
 				QuantityTime = 5,
 				IsInHours = false
@@ -55,10 +55,10 @@ namespace Test
 			{
 				EntityName = "Pedidos ya"
 			};
-			Alarm alarm = new Alarm()
+			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = -50,
 				QuantityTime = 13,
 				IsInHours = true
@@ -77,18 +77,18 @@ namespace Test
 			{
 				EntityName = "Mc Donalds"
 			};
-			Alarm alarm = new Alarm() 
+			EntityAlarm alarm = new EntityAlarm() 
 			{
 			Entity = entity,
-			TypeOfAlarm = Alarm.Type.Positive,
+			TypeOfAlarm = EntityAlarm.Type.Positive,
 			QuantityPost = 40,
 			QuantityTime = 10,
 			IsInHours = false
 			};
-			Alarm alarm2 = new Alarm()
+			EntityAlarm alarm2 = new EntityAlarm()
 			{
 				Entity = entity2,
-				TypeOfAlarm = Alarm.Type.Negative,
+				TypeOfAlarm = EntityAlarm.Type.Negative,
 				QuantityPost=30,
 				QuantityTime = 20,
 				IsInHours = true
@@ -106,10 +106,10 @@ namespace Test
 				EntityName = "Pedidos ya"
 			};
            
-			Alarm alarm = new Alarm()
+			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 150,
 				QuantityTime = 30,
 				IsInHours = false
@@ -125,10 +125,10 @@ namespace Test
 		public void CreateInvalidAlarm2()
 		{
 			Entity entity = new Entity();
-			Alarm alarm = new Alarm()
+			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 90,
 				QuantityTime = 15,
 				IsInHours = false
@@ -145,10 +145,10 @@ namespace Test
 			{
 				EntityName = "Coca Cola"
 			};
-			Alarm alarm = new Alarm()
+			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 90,
 				QuantityTime = -15,
 				IsInHours = false
@@ -163,10 +163,10 @@ namespace Test
 			{
 				EntityName = "Pedidos ya"
 			};
-			Alarm alarm = new Alarm()
+			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 150,
 				QuantityTime = 30,
 				IsInHours = false
@@ -183,10 +183,10 @@ namespace Test
 			{
 				EntityName = "Pedidos ya"
 			};
-			Alarm alarm = new Alarm()
+			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Negative,
+				TypeOfAlarm = EntityAlarm.Type.Negative,
 				QuantityPost = 150,
 				QuantityTime = 30,
 				IsInHours = false, 
@@ -204,10 +204,10 @@ namespace Test
 			{
 				EntityName = "Pedidos ya"
 			};
-			Alarm alarm = new Alarm()
+			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 150,
 				QuantityTime = 30,
 				IsInHours = false,

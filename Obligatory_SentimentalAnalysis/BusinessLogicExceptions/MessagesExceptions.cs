@@ -16,5 +16,6 @@ namespace BusinessLogicExceptions
         public static string ErrorLengthNameOrLastName = "Error. El largo del nombre o apellido no puede ser mayor a 15 caracteres.";
         public static string ErrorAge = "Error. La edad debe estar entre 13 y 100 años.";
         public static string ErrorAuthorExist = "Error. Ya existe el nombre de usuario. ";
+        public static string ErrorQuantityOfPost = "Error. La cantidad de posts debe ser menor o igual a 1000."; 
     }
 }

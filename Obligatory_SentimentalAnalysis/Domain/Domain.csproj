@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alarm.cs" />
+    <Compile Include="EntityAlarm.cs" />
     <Compile Include="Author.cs" />
     <Compile Include="AuthorAlarm.cs" />
     <Compile Include="AuthorReport.cs" />

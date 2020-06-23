@@ -1,6 +1,5 @@
 ﻿using Domain;
 using Persistence;
-using System.Collections.Generic;
 
 
 namespace BusinessLogic
@@ -13,27 +12,16 @@ namespace BusinessLogic
 		{
             alarmPersistence = new AlarmPersistence();  
 		}
-
-		
+        
         public void AddAlarm(IAlarm alarm)
 		{
 			alarm.VerifyFormat();
             alarmPersistence.AddAlarm(alarm);
 		}
 
-        //Poner un solo metodo
         public void Update(IAlarm alarm)
         {
-            if (alarm.GetType().BaseType.Equals(typeof(AuthorAlarm)))
-            {
-
-                alarmPersistence.UpdateStateOfAuthorAlarm((AuthorAlarm)alarm);
-            }
-            else
-            {
-                alarmPersistence.UpdateStateOfSentimentAlarm((Alarm)alarm); 
-            }
- 
+            alarmPersistence.UpdateAlarms(alarm); 
         }
 
         public AuthorAlarm GetAuthorAlarm(AuthorAlarm alarm)
@@ -41,9 +29,9 @@ namespace BusinessLogic
             return alarmPersistence.GetAuthorAlarmById(alarm); 
         }
 
-        public Alarm GetSentimentAlarm(Alarm alarm)
+        public EntityAlarm GetEntityAlarm(EntityAlarm alarm)
         {
-            return alarmPersistence.GetSentimentAlarmById(alarm);
+            return alarmPersistence.GetEntityAlarmById(alarm);
         }
 
 
@@ -55,7 +43,7 @@ namespace BusinessLogic
         public void DeleteAll()
         {
             alarmPersistence.DeleteAllAuthorsAlarms();
-            alarmPersistence.DeleteSentimentAlarms(); 
+            alarmPersistence.DeleteEntitiesAlarms(); 
         }
 	}
 }

@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
     public abstract class AuthorReport
     {
-
         protected List<Tuple<Author, double>> listOfAuthorsParticipants;
 
         public enum SortingType { Asc, Desc }

@@ -17,7 +17,7 @@ namespace Test
         public void SetUp()
         {
             management = new EntityManagement();
-            management.EmptyEntity();
+            management.DeleteAllEntities();
         }
 
 
@@ -25,7 +25,7 @@ namespace Test
         public void CleanUp()
         {
             management = new EntityManagement();
-            management.EmptyEntity();
+            management.DeleteAllEntities();
         }
 
 

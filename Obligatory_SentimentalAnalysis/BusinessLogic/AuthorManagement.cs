@@ -1,9 +1,6 @@
 ﻿using BusinessLogicExceptions;
 using Domain;
 using Persistence;
-using System;
-using System.Collections.Generic;
-using System.Security.Permissions;
 
 namespace BusinessLogic
 {
@@ -62,7 +59,6 @@ namespace BusinessLogic
             {
                 throw new AuthorException(MessagesExceptions.ErrorDontExist);
             }
-
         }
 
         private bool IsNotContained(Author author)

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Domain
 {
     [Table("Sentiments_Alarms_Table")]
-    public class Alarm : IAlarm
+    public class EntityAlarm : IAlarm
     {
         [Required]
         public virtual Entity Entity { get; set; }
@@ -30,7 +30,7 @@ namespace Domain
         [Key]
         public int Id { get; set; }
 
-        public Alarm()
+        public EntityAlarm()
         {
             IsActive = false;
         }
@@ -71,7 +71,8 @@ namespace Domain
             {
                 state = "inactiva";
             }
-            return "Alarma con entidad asociada: " + Entity.ToString() + ", con tipo: " + TranslateTypeOfAlarm() + " y estado: " + state;
+            return "Alarma con entidad asociada: " + Entity.ToString() + ", con tipo: " 
+                + TranslateTypeOfAlarm() + " y estado: " + state;
         }
 
         private string TranslateTypeOfAlarm()
@@ -119,7 +120,7 @@ namespace Domain
 
         public override bool Equals(Object obj)
         {
-            Alarm sentimentAlarm = obj as Alarm;
+            EntityAlarm sentimentAlarm = obj as EntityAlarm;
 
             if (sentimentAlarm == null || Convert.IsDBNull(sentimentAlarm))
             {

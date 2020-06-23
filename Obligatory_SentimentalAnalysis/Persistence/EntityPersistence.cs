@@ -1,10 +1,7 @@
 ﻿using BusinessLogicExceptions;
 using Domain;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence
 {
@@ -15,70 +12,91 @@ namespace Persistence
 
         }
 
-
         public bool IsEmpty()
         {
-            using (Context ctx = new Context())
+            try
             {
-                return ctx.Entities.Count() == 0;
+                using (Context ctx = new Context())
+                {
+                    return ctx.Entities.Count() == 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error verificando si no hay entidades.", ex);
             }
         }
 
         public bool IsContained(Entity entity)
         {
-            using (Context ctx = new Context())
+            try
             {
-                return ctx.Entities.Any(e => !e.IsDeleted && e.EntityName.ToLower().Equals(entity.EntityName.ToLower()));
+                using (Context ctx = new Context())
+                {
+                    return ctx.Entities.Any(e => !e.IsDeleted && e.EntityName.ToLower().Equals(entity.EntityName.ToLower()));
+                }
             }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error verificando si la entidad esta contenida.", ex);
+            }
+
         }
 
         public void AddEntity(Entity entity)
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     ctx.Entities.Add(entity);
                     ctx.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                    throw new EntityManagementException("Error agregando entidad.", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error agregando entidad.", ex);
             }
         }
 
         public void DeleteEntity(Entity entity)
         {
-            using (Context ctx = new Context())
+            try
             {
-                try
+                using (Context ctx = new Context())
                 {
                     var entityOfDb = ctx.Entities.SingleOrDefault(e => e.Id == entity.Id);
                     entityOfDb.IsDeleted = true;
                     ctx.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                    throw new EntityManagementException("Error eliminando entidad.", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error eliminando entidad.", ex);
             }
         }
 
 
         public Entity[] AllEntities()
         {
-            using (Context ctx = new Context())
+            try
             {
-                return ctx.Entities.Where(e => !e.IsDeleted).ToArray();
+                using (Context ctx = new Context())
+                {
+                    return ctx.Entities.Where(e => !e.IsDeleted).ToArray();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error obteniendo entidades.", ex);
             }
         }
 
         public void DeleteAll()
         {
-            using (Context ctx = new Context())
-            {                                     
-                try
+            try
+            {
+                using (Context ctx = new Context())
                 {
                     foreach (Entity entity in ctx.Entities.ToList())
                     {
@@ -86,10 +104,10 @@ namespace Persistence
                         ctx.SaveChanges();
                     }
                 }
-                catch (Exception ex)
-                {
-                    throw new EntityManagementException("Error eliminando las entidades", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new DataBaseException("Error eliminando las entidades.", ex);
             }
         }
     }

@@ -22,7 +22,7 @@ namespace UI
 		private void InitializeCalendar()
 		{
 			dateTimePickerPhraseDate.Value = DateTime.Now;
-			dateTimePickerPhraseDate.MinDate = DateTime.Now.AddYears(-1);
+			dateTimePickerPhraseDate.MinDate = DateTime.Now.AddYears(-1).AddDays(1);
 			dateTimePickerPhraseDate.MaxDate = DateTime.Now; 
 		}
 

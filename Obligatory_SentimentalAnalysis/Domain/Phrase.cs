@@ -74,17 +74,14 @@ namespace Domain
         }
 
         public int QuantityOfAssociatedPositiveSentiments(Sentiment[] sentiments)
-
         {
             return sentiments.Count(s => s.SentimentType.Equals(Sentiment.TypeSentiment.Positive));
         }
 
         public int QuantityOfAssociatedNegativeSentiments(Sentiment[] sentiments)
-
         {
             return sentiments.Count(s => s.SentimentType.Equals(Sentiment.TypeSentiment.Negative));
         }
-
 
         public void VerifyFormat()
         {
@@ -106,7 +103,6 @@ namespace Domain
 
         public void SetTypeOfPhrase(int counterPositive, int counterNegative)
         {
-
             if (Entity == null)
             {
                 PhraseType = TypePhrase.Neutral;

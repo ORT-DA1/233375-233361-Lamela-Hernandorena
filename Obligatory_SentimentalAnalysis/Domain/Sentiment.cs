@@ -37,7 +37,7 @@ namespace Domain
 		{
 			if (String.IsNullOrEmpty(SentimientText.Trim()))
 			{
-				throw new TextManagementException(MessagesExceptions.ErrorIsEmpty);
+				throw new SentimentManagementException(MessagesExceptions.ErrorIsEmpty);
 			}
 		}
 
@@ -45,13 +45,12 @@ namespace Domain
 		{
 			if (IsAssociatedToPhrase)
 			{
-				throw new TextManagementException(MessagesExceptions.ErrorIsAssociated); 
+				throw new SentimentManagementException(MessagesExceptions.ErrorIsAssociated); 
 			}
 		}
 
 		public override bool Equals(object obj)
 		{
-
             Sentiment sentiment = obj as Sentiment;
 
             if (sentiment == null || Convert.IsDBNull(sentiment))
@@ -61,8 +60,6 @@ namespace Domain
            	return string.Equals(Utilities.DeleteSpaces(SentimientText.Trim()), 
 			Utilities.DeleteSpaces(sentiment.SentimientText.Trim()), 
 			StringComparison.OrdinalIgnoreCase) && SentimentType.Equals(sentiment.SentimentType);
-				
-			
 		}
 	}
 }
