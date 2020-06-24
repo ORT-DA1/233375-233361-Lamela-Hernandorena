@@ -74,9 +74,9 @@ namespace UI
             // 
             this.labelError.AutoSize = true;
             this.labelError.ForeColor = System.Drawing.Color.Red;
-            this.labelError.Location = new System.Drawing.Point(138, 325);
+            this.labelError.Location = new System.Drawing.Point(149, 540);
             this.labelError.Name = "labelError";
-            this.labelError.Size = new System.Drawing.Size(0, 13);
+            this.labelError.Size = new System.Drawing.Size(58, 13);
             this.labelError.TabIndex = 4;
             this.labelError.Visible = false;
             // 

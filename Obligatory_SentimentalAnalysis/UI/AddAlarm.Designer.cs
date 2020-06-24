@@ -163,6 +163,8 @@
             // listBoxAlarms
             // 
             this.listBoxAlarms.FormattingEnabled = true;
+            this.listBoxAlarms.HorizontalExtent = 1000;
+            this.listBoxAlarms.HorizontalScrollbar = true;
             this.listBoxAlarms.Location = new System.Drawing.Point(31, 387);
             this.listBoxAlarms.Name = "listBoxAlarms";
             this.listBoxAlarms.Size = new System.Drawing.Size(411, 134);

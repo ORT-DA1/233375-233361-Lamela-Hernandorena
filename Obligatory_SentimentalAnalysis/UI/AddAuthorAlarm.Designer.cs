@@ -93,6 +93,8 @@
             // listBoxAuthorAlarms
             // 
             this.listBoxAuthorAlarms.FormattingEnabled = true;
+            this.listBoxAuthorAlarms.HorizontalExtent = 1000;
+            this.listBoxAuthorAlarms.HorizontalScrollbar = true;
             this.listBoxAuthorAlarms.Location = new System.Drawing.Point(29, 300);
             this.listBoxAuthorAlarms.Name = "listBoxAuthorAlarms";
             this.listBoxAuthorAlarms.Size = new System.Drawing.Size(395, 186);
@@ -116,9 +118,10 @@
             // labelError
             // 
             this.labelError.AutoSize = true;
+            this.labelError.ForeColor = System.Drawing.Color.Red;
             this.labelError.Location = new System.Drawing.Point(187, 265);
             this.labelError.Name = "labelError";
-            this.labelError.Size = new System.Drawing.Size(0, 13);
+            this.labelError.Size = new System.Drawing.Size(33, 13);
             this.labelError.TabIndex = 10;
             // 
             // groupBoxTypeTime
