@@ -1,33 +1,46 @@
 ﻿using Domain;
-using System.Collections.Generic;
+using Persistence;
 
 
 namespace BusinessLogic
 {
 	public class PhraseManagement
 	{
-		private List<Phrase> phraseList; 
+		private PhrasePersistence phrasePersistence;
 
 		public PhraseManagement()
 		{
-			phraseList = new List<Phrase>(); 
+			phrasePersistence = new PhrasePersistence();
 		}
 
 		public void AddPhrase(Phrase phrase)
 		{
 			phrase.TextPhrase = Utilities.DeleteSpaces(phrase.TextPhrase.Trim()); 
 			phrase.VerifyFormat(); 
-			phraseList.Add(phrase); 
+			phrasePersistence.AddPhrase(phrase);
 		}
+        
 
-		public bool IsEmpty()
-		{
-			return phraseList.Count == 0; 
+        public void DeletePhrasesOfAuthor(Author author)
+        {
+			phrasePersistence.DeletePhrasesOfAuthor(author);
+			
 		}
 		
 		public Phrase[] AllPhrases
 		{
-			get { return phraseList.ToArray();  }
+			get { return phrasePersistence.AllPhrases(); }
 		}
-	}
+
+		public void DeleteAllPhrases()
+		{
+			phrasePersistence.DeleteAll();
+		}
+
+        public void UpdatePhrase(Phrase phrase)
+        {
+            phrasePersistence.Update(phrase); 
+        }
+    }
 }
+	

@@ -8,19 +8,53 @@ namespace Test
 	[TestClass]
 	public class GeneralManagementTest
 	{
-		GeneralManagement management; 
+		GeneralManagement management;
+        Author author;
+        Author author2; 
 
 		[TestInitialize]
 		public void SetUp()
 		{
-			management = new GeneralManagement();
+			management = GeneralManagement.GetInstance();
+            author = new Author()
+            {
+                UserName = "Josami",
+                Name = "Joaquin",
+                LastName = "Lamela",
+                BirthDate = new DateTime(2000, 02, 29)
+            };
+            author2 = new Author()
+            {
+                UserName = "agustinh",
+                Name = "Agustin",
+                LastName = "Hernandorena",
+                BirthDate = new DateTime(2000, 04, 01)
+            };
+			management.PhraseManagement.DeleteAllPhrases();
+			management.AuthorManagement.EmptyAll();
+			management.AlarmManagement.DeleteAll();
+			management.EntityManagement.DeleteAllEntities();
+			management.SentimentManagement.DeleteAllSentiments();
+		}
+
+		[TestCleanup]
+        public void CleanUp()
+        {
+            management = GeneralManagement.GetInstance();
+			management.PhraseManagement.DeleteAllPhrases();
+			management.AuthorManagement.EmptyAll();
+			management.AlarmManagement.DeleteAll();
+			management.EntityManagement.DeleteAllEntities();
+			management.SentimentManagement.DeleteAllSentiments();
+
 		}
 
 
 		[TestMethod]
 		public void AnalysisOfPhrasePositive()
 		{
-			Entity entityExpected = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+            Entity entityExpected = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -33,16 +67,20 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment); 
 			Phrase phrase = new Phrase()
 			{
-				TextPhrase= "Me gusta Coca Cola"
-			}; 
+				TextPhrase= "Me gusta Coca Cola",
+                PhraseAuthor = author,
+				PhraseDate = DateTime.Now
+            };
+			management.PhraseManagement.AddPhrase(phrase);
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase); 
 			
 		}
@@ -51,7 +89,9 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhraseNegative()
 		{
-			Entity entityExpected = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entityExpected = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -70,16 +110,20 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment2);
 			Phrase phrase = new Phrase()
 			{
-				TextPhrase= "Me disgusta Coca Cola"
-			};
+				TextPhrase= "Me disgusta Coca Cola",
+                PhraseAuthor = author,
+				PhraseDate = DateTime.Now
+            };
+			management.PhraseManagement.AddPhrase(phrase);
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
 				TextPhrase= "Me disgusta Coca Cola",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				PhraseType = Phrase.TypePhrase.Negative
-			};
+				PhraseType = Phrase.TypePhrase.Negative,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
@@ -88,7 +132,9 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhraseNeutral()
 		{
-			Entity entityExpected = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entityExpected = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -107,41 +153,50 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment2);
 			Phrase phrase = new Phrase()
 			{
-				TextPhrase= "Me disgusta me encanta Coca Cola"
-			};
+				TextPhrase= "Me disgusta me encanta Coca Cola",
+                PhraseAuthor = author,
+				PhraseDate = DateTime.Now
+            };
+			management.PhraseManagement.AddPhrase(phrase);
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
 				TextPhrase= "Me disgusta me encanta Coca Cola",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				PhraseType= Phrase.TypePhrase.Neutral
-			};
+				PhraseType= Phrase.TypePhrase.Neutral,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
 		[TestMethod]
 		public void AnalysisOfPhraseNeutralEmptyEntity()
 		{
-			Sentiment sentiment = new Sentiment()
+            management.AuthorManagement.AddAuthor(author);
+
+            Sentiment sentiment = new Sentiment()
 			{
 				SentimientText= "Me encanta",
 				SentimentType= Sentiment.TypeSentiment.Positive
 			};
-			Entity entityExpected = new Entity(); 
 			management.SentimentManagement.AddSentiment(sentiment);
 			Phrase phrase = new Phrase()
 			{
-				TextPhrase= "Me encanta"
-			};
+				TextPhrase= "Me encanta",
+                PhraseAuthor = author,
+				PhraseDate = DateTime.Now
+            };
+			management.PhraseManagement.AddPhrase(phrase);
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
 				TextPhrase= "Me encanta",
 				PhraseDate= DateTime.Now,
-				Entity= entityExpected,
-				PhraseType = Phrase.TypePhrase.Neutral
-			};
+				Entity= null,
+				PhraseType = Phrase.TypePhrase.Neutral,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
@@ -149,7 +204,9 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhraseNeutralEmptySentiment()
 		{
-			Entity entityExpected = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entityExpected = new Entity()
 			{
 				EntityName = "Rappi"
 			};
@@ -162,16 +219,20 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment);
 			Phrase phrase = new Phrase()
 			{
-				TextPhrase="Rappi"
+				TextPhrase="Rappi",
+				PhraseAuthor = author,
+				PhraseDate = DateTime.Now
 			};
+			management.PhraseManagement.AddPhrase(phrase);
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
 				TextPhrase= "Rappi",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				PhraseType = Phrase.TypePhrase.Neutral
-			};
+				PhraseType = Phrase.TypePhrase.Neutral,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
@@ -179,44 +240,35 @@ namespace Test
 		[TestMethod]
 		public void AnalysisUnregistredSentimentAndEntity()
 		{
-			Phrase phrase = new Phrase()
+            management.AuthorManagement.AddAuthor(author);
+
+            Phrase phrase = new Phrase()
 			{
-				TextPhrase= "Me gusta subway"
+				TextPhrase= "Me gusta subway",
+				PhraseAuthor= author,
+				PhraseDate = DateTime.Now
 			};
+			management.PhraseManagement.AddPhrase(phrase);
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
 				TextPhrase= "Me gusta subway",
 				PhraseDate= DateTime.Now,
-				Entity= new Entity(),
-				PhraseType = Phrase.TypePhrase.Neutral
-			};
+				Entity= null,
+				PhraseType = Phrase.TypePhrase.Neutral,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
 
-		[TestMethod]
-		public void AnalysisEmptyPhrase()
-		{
-			Phrase phrase = new Phrase()
-			{
-				TextPhrase= ""
-			};
-			management.AnalysisPhrase(phrase);
-			Phrase expectedPhrase = new Phrase()
-			{
-				TextPhrase= "",
-				PhraseDate= DateTime.Now,
-				Entity= new Entity(),
-				PhraseType = Phrase.TypePhrase.Neutral
-			};
-			Assert.AreEqual(expectedPhrase, phrase);
-		}
 
 		[TestMethod]
 		public void AnalysisPhraseTwoEntities()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "McDonald's"
 			};
@@ -234,16 +286,20 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment);
 			Phrase phrase = new Phrase()
 			{
-				TextPhrase= "Me encanta McDonald's y también Starbucks"
+				TextPhrase= "Me encanta McDonald's y también Starbucks",
+				PhraseDate = DateTime.Now,
+				PhraseAuthor = author,
 			};
+			management.PhraseManagement.AddPhrase(phrase);
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
 				TextPhrase= "Me encanta McDonald's y también Starbucks",
 				PhraseDate= DateTime.Now,
 				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
@@ -252,7 +308,9 @@ namespace Test
 		[TestMethod]
 		public void AnalysisOfPhraseTwoSentimentPositive()
 		{
-			Entity entityExpected = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entityExpected = new Entity()
 			{
 				EntityName = "Rappi"
 			};
@@ -271,25 +329,29 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment2);
 			Phrase phrase = new Phrase()
 			{
-				TextPhrase= "Me gusta me encanta Rappi"
-			};
+				TextPhrase= "Me gusta me encanta Rappi",
+                PhraseAuthor = author,
+				PhraseDate = DateTime.Now
+            };
+			management.PhraseManagement.AddPhrase(phrase);
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
 				TextPhrase= "Me gusta me encanta Rappi",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
-
-
-
+        
 		[TestMethod]
 		public void AnalysisOfPhraseNotContainsEntity()
 		{
-			Entity entityExpected = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entityExpected = new Entity()
 			{
 				EntityName = "Mc donalds"
 			};
@@ -318,23 +380,29 @@ namespace Test
 			management.SentimentManagement.AddSentiment(sentiment2);
 			Phrase phrase = new Phrase()
 			{
-				TextPhrase= "Me gusta Mc       donalds"
-			};
+				TextPhrase= "Me gusta Mc       donalds",
+                PhraseAuthor = author,
+				PhraseDate = DateTime.Now
+            };
+			management.PhraseManagement.AddPhrase(phrase);
 			management.AnalysisPhrase(phrase);
 			Phrase expectedPhrase = new Phrase()
 			{
-				TextPhrase= "Me gusta Mc       donalds",
+				TextPhrase= "Me gusta Mc donalds",
 				PhraseDate= DateTime.Now,
 				Entity= entityExpected,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			Assert.AreEqual(expectedPhrase, phrase);
 		}
 
 		[TestMethod]
 		public void VerifyAlarms()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -345,10 +413,10 @@ namespace Test
 				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
-			Alarm aAlarm = new Alarm()
+			EntityAlarm aAlarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 1,
 				QuantityTime = 1,
 				IsInHours = true
@@ -359,21 +427,24 @@ namespace Test
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= DateTime.Now,
 				Entity= entity,
-				PhraseType = Phrase.TypePhrase.Positive
-			};
+				PhraseType = Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			management.PhraseManagement.AddPhrase(phrase);
 			MockedTimeProvider provider = new MockedTimeProvider()
 			{
 				MockedDateTime = new DateTime(2019, 10, 1, 19, 10, 30)
 			};
 			management.UpdateAlarms(provider);
-			Assert.IsTrue(aAlarm.IsActive);
+			Assert.IsTrue(management.AlarmManagement.GetEntityAlarm(aAlarm).IsActive);
 		}
 
 		[TestMethod]
 		public void VerifyAlarms2()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -389,10 +460,10 @@ namespace Test
 				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
-			Alarm aAlarm = new Alarm()
+			EntityAlarm aAlarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 1,
 				QuantityTime = 1,
 				IsInHours = false
@@ -403,15 +474,17 @@ namespace Test
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= new DateTime(2020,04,28),
 				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			Phrase phrase2 = new Phrase()
 			{
 				TextPhrase= "Me gusta Pepsi",
 				PhraseDate= DateTime.Now,
 				Entity= entity2,
-				PhraseType = Phrase.TypePhrase.Positive
-			};
+				PhraseType = Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
 			MockedTimeProvider provider = new MockedTimeProvider()
@@ -426,14 +499,17 @@ namespace Test
 		[TestMethod]
 		public void VerifyAlarms3()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
-			Alarm aAlarm = new Alarm()
+			management.EntityManagement.AddEntity(entity);
+			EntityAlarm aAlarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 1,
 				QuantityTime = 1,
 				IsInHours = false
@@ -451,7 +527,9 @@ namespace Test
 		[TestMethod]
 		public void VerifyAlarms4()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -467,10 +545,10 @@ namespace Test
 				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
-			Alarm aAlarm = new Alarm()
+			EntityAlarm aAlarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 1,
 				QuantityTime = 2,
 				IsInHours = false
@@ -481,15 +559,17 @@ namespace Test
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= new DateTime(2020, 04, 25),
 				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			Phrase phrase2 = new Phrase()
 			{
 				TextPhrase="Me gusta Pepsi",
 				PhraseDate= new DateTime(2020, 04, 26),
 				Entity= entity2,
-				PhraseType = Phrase.TypePhrase.Positive
-			};
+				PhraseType = Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
 			MockedTimeProvider provider = new MockedTimeProvider()
@@ -497,13 +577,15 @@ namespace Test
 				MockedDateTime = new DateTime(2020, 04, 26, 19, 10, 30)
 			};
 			management.UpdateAlarms(provider);
-			Assert.IsTrue(aAlarm.IsActive);
+			Assert.IsTrue(management.AlarmManagement.GetEntityAlarm(aAlarm).IsActive);
 		}
 
 		[TestMethod]
 		public void VerifyAlarms5()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -519,18 +601,18 @@ namespace Test
 				SentimentType= Sentiment.TypeSentiment.Positive
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
-			Alarm aAlarm = new Alarm()
+			EntityAlarm aAlarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 1,
 				QuantityTime = 2,
 				IsInHours = false
 			};
-			Alarm aAlarm2 = new Alarm()
+			EntityAlarm aAlarm2 = new EntityAlarm()
 			{
 				Entity = entity2,
-				TypeOfAlarm = Alarm.Type.Negative,
+				TypeOfAlarm = EntityAlarm.Type.Negative,
 				QuantityPost = 1,
 				QuantityTime = 2,
 				IsInHours = false
@@ -542,15 +624,17 @@ namespace Test
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= new DateTime(2020, 04, 25),
 				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			Phrase phrase2 = new Phrase()
 			{
 				TextPhrase= "Me gusta Pepsi",
 				PhraseDate= new DateTime(2020,04,30),
 				Entity= entity2,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
 			MockedTimeProvider provider = new MockedTimeProvider()
@@ -564,7 +648,9 @@ namespace Test
 		[TestMethod]
 		public void VerifyAlarms6()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -586,18 +672,18 @@ namespace Test
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
 			management.SentimentManagement.AddSentiment(sentiment2);
-			Alarm aAlarm = new Alarm()
+			EntityAlarm aAlarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost=10,
 				QuantityTime = 1,
 				IsInHours = false
 			};
-			Alarm aAlarm2 = new Alarm()
+			EntityAlarm aAlarm2 = new EntityAlarm()
 			{
 				Entity = entity2,
-				TypeOfAlarm = Alarm.Type.Negative,
+				TypeOfAlarm = EntityAlarm.Type.Negative,
 				QuantityPost = 2,
 				QuantityTime = 2,
 				IsInHours = false
@@ -609,22 +695,25 @@ namespace Test
 				TextPhrase= "Me gusta Coca Cola",
 				PhraseDate= new DateTime(2020, 04, 25),
 				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Positive
-			};
+				PhraseType= Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
 			Phrase phrase2 = new Phrase()
 			{
 				TextPhrase= "Odio Pepsi",
 				PhraseDate= new DateTime(2020, 04, 25),
 				Entity= entity2,
-				PhraseType= Phrase.TypePhrase.Negative
-			};
+				PhraseType= Phrase.TypePhrase.Negative,
+                PhraseAuthor = author
+            };
 			Phrase phrase3 = new Phrase()
 			{
 				TextPhrase= "Odio con todo mi ser a Pepsi",
 				PhraseDate=  new DateTime(2020, 04, 25),
 				Entity= entity2,
-				PhraseType= Phrase.TypePhrase.Negative
-			};
+				PhraseType= Phrase.TypePhrase.Negative,
+                PhraseAuthor = author
+            };
 			management.PhraseManagement.AddPhrase(phrase);
 			management.PhraseManagement.AddPhrase(phrase2);
 			management.PhraseManagement.AddPhrase(phrase3);
@@ -634,15 +723,17 @@ namespace Test
 				MockedDateTime = new DateTime(2020, 04, 26, 19, 10, 30)
 			};
 			management.UpdateAlarms(provider);
-			Assert.IsTrue(aAlarm2.IsActive);
-			Assert.IsFalse(aAlarm.IsActive);
+			Assert.IsTrue(management.AlarmManagement.GetEntityAlarm(aAlarm2).IsActive);
+			Assert.IsFalse(management.AlarmManagement.GetEntityAlarm(aAlarm).IsActive);
 		}
 
 
 		[TestMethod]
 		public void VerifyAlarms7()
 		{
-			Entity entity = new Entity()
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
 			{
 				EntityName = "Coca Cola"
 			};
@@ -653,10 +744,10 @@ namespace Test
 				SentimentType= Sentiment.TypeSentiment.Negative
 			};
 			management.SentimentManagement.AddSentiment(sentiment);
-			Alarm aAlarm = new Alarm()
+			EntityAlarm aAlarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 1,
 				QuantityTime = 1,
 				IsInHours = false
@@ -667,8 +758,9 @@ namespace Test
 				TextPhrase= "Odio Coca Cola",
 				PhraseDate= new DateTime(2020,02,10),
 				Entity= entity,
-				PhraseType= Phrase.TypePhrase.Negative
-			};
+				PhraseType= Phrase.TypePhrase.Negative,
+                PhraseAuthor = author
+            };
 			management.PhraseManagement.AddPhrase(phrase);
 			MockedTimeProvider provider = new MockedTimeProvider()
 			{
@@ -678,5 +770,498 @@ namespace Test
 			management.UpdateAlarms(provider);
 			Assert.IsFalse(aAlarm.IsActive);
 		}
+
+        [TestMethod]
+        public void DeleteAllPhrases()
+        {
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entityExpected = new Entity()
+            {
+                EntityName = "Mc donalds"
+            };
+            management.EntityManagement.AddEntity(entityExpected);
+            Entity entity2 = new Entity()
+            {
+                EntityName = "Rappi"
+            };
+            management.EntityManagement.AddEntity(entity2);
+            Entity entity = new Entity()
+            {
+                EntityName = "Coca cola"
+            };
+            management.EntityManagement.AddEntity(entity);
+            Sentiment sentiment = new Sentiment()
+            {
+                SentimientText = "Me encanta",
+                SentimentType = Sentiment.TypeSentiment.Positive
+            };
+            management.SentimentManagement.AddSentiment(sentiment);
+            Sentiment sentiment2 = new Sentiment()
+            {
+                SentimientText = "Me gusta",
+                SentimentType = Sentiment.TypeSentiment.Positive
+            };
+            management.SentimentManagement.AddSentiment(sentiment2);
+            Phrase phrase = new Phrase()
+            {
+                TextPhrase = "Me gusta Mc       donalds",
+                PhraseDate = DateTime.Now,
+                Entity = entityExpected, 
+                PhraseType= Phrase.TypePhrase.Positive, 
+                PhraseAuthor = author
+            };
+            management.PhraseManagement.AddPhrase(phrase); 
+            Phrase phrase2 = new Phrase()
+            {
+                TextPhrase = "No me gusta Rappi",
+                PhraseDate = DateTime.Now,
+                Entity = entity2,
+                PhraseType = Phrase.TypePhrase.Negative,
+                PhraseAuthor = author
+            };
+            management.PhraseManagement.AddPhrase(phrase2);
+            Author prueba = management.AuthorManagement.GetAuthor(author); 
+            management.PhraseManagement.DeletePhrasesOfAuthor(author);
+            Assert.IsTrue(management.PhraseManagement.AllPhrases.Length == 0);
+        }
+
+
+        //Test of the new type of alarms about Authors: 
+
+        [TestMethod]
+		public void VerifyAlarmsOfAuthors()
+		{
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
+			management.EntityManagement.AddEntity(entity);
+			Sentiment sentiment = new Sentiment()
+			{
+				SentimientText= "Me gusta",
+				SentimentType= Sentiment.TypeSentiment.Positive
+			};
+			management.SentimentManagement.AddSentiment(sentiment);
+            AuthorAlarm aAlarm = new AuthorAlarm()
+			{
+				TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
+				QuantityPost = 1,
+				QuantityTime = 1,
+				IsInHours = true
+			};
+			management.AlarmManagement.AddAlarm(aAlarm);
+			Phrase phrase = new Phrase()
+			{
+				TextPhrase= "Me gusta Coca Cola",
+				PhraseDate= DateTime.Now,
+				Entity= entity,
+				PhraseType = Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
+			management.PhraseManagement.AddPhrase(phrase);
+			MockedTimeProvider provider = new MockedTimeProvider()
+			{
+				MockedDateTime = new DateTime(2019, 10, 1, 19, 10, 30)
+			};
+			management.UpdateAlarms(provider);
+			AuthorAlarm dbAlarm = management.AlarmManagement.GetAuthorAlarm(aAlarm);
+			Assert.IsTrue(dbAlarm.IsActive);
+            CollectionAssert.Contains(dbAlarm.ParticipantsAuthors, author); 
+		}
+
+        [TestMethod]
+        public void VerifyAlarmsOfAuthors2()
+        {
+            management.AuthorManagement.AddAuthor(author);
+
+            Entity entity = new Entity()
+            {
+                EntityName = "Coca Cola"
+            };
+            Entity entity2 = new Entity()
+            {
+                EntityName = "Pepsi"
+            };
+            management.EntityManagement.AddEntity(entity);
+            management.EntityManagement.AddEntity(entity2);
+            Sentiment sentiment = new Sentiment()
+            {
+                SentimientText = "Me gusta",
+                SentimentType = Sentiment.TypeSentiment.Positive
+            };
+            management.SentimentManagement.AddSentiment(sentiment);
+            AuthorAlarm aAlarm = new AuthorAlarm()
+            {
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
+                QuantityPost = 1,
+                QuantityTime = 1,
+                IsInHours = false
+            };
+            management.AlarmManagement.AddAlarm(aAlarm);
+            Phrase phrase = new Phrase()
+            {
+                TextPhrase = "Me gusta Coca Cola",
+                PhraseDate = new DateTime(2020, 04, 28),
+                Entity = entity,
+                PhraseType = Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
+            Phrase phrase2 = new Phrase()
+            {
+                TextPhrase = "Me gusta Pepsi",
+                PhraseDate = new DateTime(2020, 04, 25),
+                Entity = entity2,
+                PhraseType = Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
+            management.PhraseManagement.AddPhrase(phrase);
+            management.PhraseManagement.AddPhrase(phrase2);
+            MockedTimeProvider provider = new MockedTimeProvider()
+            {
+                MockedDateTime = new DateTime(2020, 04, 30, 19, 10, 30)
+            };
+            management.UpdateAlarms(provider);
+            Assert.IsFalse(aAlarm.IsActive);
+            CollectionAssert.DoesNotContain(aAlarm.ParticipantsAuthors, author); 
+        }
+
+        [TestMethod]
+        public void VerifyAlarmsAuthorsAlarms()
+        {
+            management.AuthorManagement.AddAuthor(author);
+
+            AuthorAlarm aAlarm = new AuthorAlarm()
+            {
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
+                QuantityPost = 1,
+                QuantityTime = 1,
+                IsInHours = false
+            };
+            management.AlarmManagement.AddAlarm(aAlarm);
+            MockedTimeProvider provider = new MockedTimeProvider()
+            {
+                MockedDateTime = new DateTime(2020, 04, 30, 19, 10, 30)
+            };
+            management.UpdateAlarms(provider);
+            Assert.IsFalse(aAlarm.IsActive);
+            CollectionAssert.DoesNotContain(aAlarm.ParticipantsAuthors, author); 
+        }
+
+
+		[TestMethod]
+		public void VerifyAlarmsOfAuthors3()
+        {
+            management.AuthorManagement.AddAuthor(author);
+            management.AuthorManagement.AddAuthor(author2);
+
+            Entity entity = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
+			Entity entity2 = new Entity()
+			{
+				EntityName = "Pepsi"
+			};
+			management.EntityManagement.AddEntity(entity);
+			management.EntityManagement.AddEntity(entity2);
+			Sentiment sentiment = new Sentiment()
+			{
+				SentimientText = "Me gusta",
+				SentimentType = Sentiment.TypeSentiment.Positive
+			};
+			management.SentimentManagement.AddSentiment(sentiment);
+			AuthorAlarm aAlarm = new AuthorAlarm()
+			{
+				TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
+				QuantityPost = 2,
+				QuantityTime = 1,
+				IsInHours = false
+			};
+			management.AlarmManagement.AddAlarm(aAlarm);
+			Phrase phrase = new Phrase()
+			{
+				TextPhrase = "Me gusta Coca Cola",
+				PhraseDate = new DateTime(2020, 04, 30),
+				Entity = entity,
+				PhraseType = Phrase.TypePhrase.Positive,
+				PhraseAuthor = author
+			};
+			Phrase phrase2 = new Phrase()
+			{
+				TextPhrase = "Me gusta Pepsi",
+				PhraseDate = new DateTime(2020, 04, 30),
+				Entity = entity2,
+				PhraseType = Phrase.TypePhrase.Positive,
+				PhraseAuthor = author2
+			};
+			management.PhraseManagement.AddPhrase(phrase);
+			management.PhraseManagement.AddPhrase(phrase2);
+			MockedTimeProvider provider = new MockedTimeProvider()
+			{
+				MockedDateTime = new DateTime(2020, 04, 30, 19, 10, 30)
+			};
+			management.UpdateAlarms(provider);
+			Assert.IsFalse(aAlarm.IsActive); 
+			Assert.IsFalse(aAlarm.ParticipantsAuthors.Count == 2); 
+			CollectionAssert.DoesNotContain(aAlarm.ParticipantsAuthors, author);
+			CollectionAssert.DoesNotContain(aAlarm.ParticipantsAuthors, author2);
+		}
+
+		[TestMethod]
+		public void ShowInactiveAlarm()
+		{
+			AuthorAlarm aAlarm = new AuthorAlarm()
+			{
+				TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
+				QuantityPost = 2,
+				QuantityTime = 1,
+				IsInHours = false
+			};
+			string resultExpected = "Alarma de tipo: " + "positiva" + " con estado: " + "inactiva";
+			Assert.AreEqual(resultExpected, aAlarm.Show());
+		}
+
+		[TestMethod]
+		public void ShowActiveAlarm()
+		{
+            management.AuthorManagement.AddAuthor(author);
+            management.AuthorManagement.AddAuthor(author2);
+
+            AuthorAlarm aAlarm = new AuthorAlarm()
+			{
+				TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
+				QuantityPost = 1,
+				QuantityTime = 1,
+				IsInHours = false
+			};
+			management.AlarmManagement.AddAlarm(aAlarm);
+			Entity entity = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
+			management.EntityManagement.AddEntity(entity);
+			Sentiment sentiment = new Sentiment()
+			{
+				SentimientText = "Me gusta",
+				SentimentType = Sentiment.TypeSentiment.Positive
+			};
+			management.SentimentManagement.AddSentiment(sentiment);
+			Phrase phrase = new Phrase()
+			{
+				TextPhrase = "Me gusta Coca Cola",
+				PhraseDate = new DateTime(2020, 04, 30),
+				Entity = entity,
+				PhraseType = Phrase.TypePhrase.Positive,
+				PhraseAuthor = author
+			};
+			Phrase phrase2 = new Phrase()
+			{
+				TextPhrase = "Me gusta Coca Cola",
+				PhraseDate = new DateTime(2020, 04, 30),
+				Entity = entity,
+				PhraseType = Phrase.TypePhrase.Positive,
+				PhraseAuthor = author2
+			};
+			management.PhraseManagement.AddPhrase(phrase);
+			management.PhraseManagement.AddPhrase(phrase2);
+			MockedTimeProvider provider = new MockedTimeProvider()
+			{
+				MockedDateTime = new DateTime(2020, 04, 30, 19, 10, 30)
+			};
+			management.UpdateAlarms(provider);
+			string resultExpected = "Alarma de tipo: " + "positiva" + " con estado: " + "activa" + " con los autores: "
+				+ " " + "Josami" + "  " + "agustinh ";
+			Assert.AreEqual(resultExpected, management.AlarmManagement.GetAuthorAlarm(aAlarm).Show());
+		}
+
+		[TestMethod]
+        public void VerifyAlarmsOfAuthors4()
+        {
+            management.AuthorManagement.AddAuthor(author);
+            management.AuthorManagement.AddAuthor(author2);
+            Entity entity = new Entity()
+            {
+                EntityName = "Coca Cola"
+            };
+            Entity entity2 = new Entity()
+            {
+                EntityName = "Pepsi"
+            };
+            management.EntityManagement.AddEntity(entity);
+            management.EntityManagement.AddEntity(entity2);
+            Sentiment sentiment = new Sentiment()
+            {
+                SentimientText = "Me gusta",
+                SentimentType = Sentiment.TypeSentiment.Positive
+            };
+            management.SentimentManagement.AddSentiment(sentiment);
+            AuthorAlarm aAlarm = new AuthorAlarm()
+            {
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
+                QuantityPost = 1,
+                QuantityTime = 2,
+                IsInHours = false
+            };
+            management.AlarmManagement.AddAlarm(aAlarm);
+            Phrase phrase = new Phrase()
+            {
+                TextPhrase = "Me gusta Coca Cola",
+                PhraseDate = new DateTime(2020, 04, 25),
+                Entity = entity,
+                PhraseType = Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
+            Phrase phrase2 = new Phrase()
+            {
+                TextPhrase = "Me gusta Pepsi",
+                PhraseDate = new DateTime(2020, 04, 26),
+                Entity = entity2,
+                PhraseType = Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
+            management.PhraseManagement.AddPhrase(phrase);
+            management.PhraseManagement.AddPhrase(phrase2);
+            MockedTimeProvider provider = new MockedTimeProvider()
+            {
+                MockedDateTime = new DateTime(2020, 04, 26, 19, 10, 30)
+            };
+            management.UpdateAlarms(provider);
+			AuthorAlarm dbAlarm = management.AlarmManagement.GetAuthorAlarm(aAlarm);
+			Assert.IsTrue(dbAlarm.IsActive);
+			CollectionAssert.Contains(dbAlarm.ParticipantsAuthors, author);
+        }
+
+
+        [TestMethod]
+        public void VerifyAlarmsOfAuthors5()
+        {
+
+            management.AuthorManagement.AddAuthor(author);
+            management.AuthorManagement.AddAuthor(author2);
+            Entity entity = new Entity()
+            {
+                EntityName = "Coca Cola"
+            };
+            Entity entity2 = new Entity()
+            {
+                EntityName = "Pepsi"
+            };
+            management.EntityManagement.AddEntity(entity);
+            management.EntityManagement.AddEntity(entity2);
+            Sentiment sentiment = new Sentiment()
+            {
+                SentimientText = "Me gusta",
+                SentimentType = Sentiment.TypeSentiment.Positive
+            };
+            management.SentimentManagement.AddSentiment(sentiment);
+            AuthorAlarm aAlarm = new AuthorAlarm()
+            {
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Negative,
+                QuantityPost = 1,
+                QuantityTime = 2,
+                IsInHours = false
+            };
+            AuthorAlarm aAlarm2 = new AuthorAlarm()
+            {
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
+                QuantityPost = 1,
+                QuantityTime = 2,
+                IsInHours = false
+            };
+            management.AlarmManagement.AddAlarm(aAlarm);
+            management.AlarmManagement.AddAlarm(aAlarm2);
+            Phrase phrase = new Phrase()
+            {
+                TextPhrase = "Me gusta Coca Cola",
+                PhraseDate = new DateTime(2020, 04, 25),
+                Entity = entity,
+                PhraseType = Phrase.TypePhrase.Positive,
+                PhraseAuthor = author
+            };
+            Phrase phrase2 = new Phrase()
+            {
+                TextPhrase = "Me gusta Pepsi",
+                PhraseDate = new DateTime(2020, 04, 30),
+                Entity = entity2,
+                PhraseType = Phrase.TypePhrase.Positive,
+                PhraseAuthor = author2
+            };
+            management.PhraseManagement.AddPhrase(phrase);
+            management.PhraseManagement.AddPhrase(phrase2);
+            MockedTimeProvider provider = new MockedTimeProvider()
+            {
+                MockedDateTime = new DateTime(2020, 04, 30, 19, 10, 30)
+            };
+            management.UpdateAlarms(provider);
+			AuthorAlarm dbAlarm = management.AlarmManagement.GetAuthorAlarm(aAlarm);
+			AuthorAlarm dbAlarm2 = management.AlarmManagement.GetAuthorAlarm(aAlarm2);
+			Assert.IsTrue(dbAlarm2.IsActive);
+            Assert.IsFalse(dbAlarm.IsActive);
+            CollectionAssert.Contains(dbAlarm2.ParticipantsAuthors, author2);
+            CollectionAssert.DoesNotContain(dbAlarm2.ParticipantsAuthors, author);
+            CollectionAssert.DoesNotContain(dbAlarm.ParticipantsAuthors, author);
+            CollectionAssert.DoesNotContain(dbAlarm.ParticipantsAuthors, author2);
+
+        }
+
+		[TestMethod]
+		public void VerifyUpdateSentiment()
+		{
+
+			management.AuthorManagement.AddAuthor(author);
+			management.AuthorManagement.AddAuthor(author2);
+			Entity entity = new Entity()
+			{
+				EntityName = "Coca Cola"
+			};
+			Entity entity2 = new Entity()
+			{
+				EntityName = "Pepsi"
+			};
+			management.EntityManagement.AddEntity(entity);
+			management.EntityManagement.AddEntity(entity2);
+			Sentiment sentiment = new Sentiment()
+			{
+				SentimientText = "Me gusta",
+				SentimentType = Sentiment.TypeSentiment.Positive
+			};
+			management.SentimentManagement.AddSentiment(sentiment); 
+			Phrase phrase = new Phrase()
+			{
+				TextPhrase = "Me gusta Coca Cola",
+				PhraseDate = new DateTime(2020, 04, 25),
+				Entity = entity,
+				PhraseType = Phrase.TypePhrase.Positive,
+				PhraseAuthor = author
+			};
+			Phrase phrase2 = new Phrase()
+			{
+				TextPhrase = "Me gusta Pepsi",
+				PhraseDate = new DateTime(2020, 04, 30),
+				Entity = entity2,
+				PhraseType = Phrase.TypePhrase.Positive,
+				PhraseAuthor = author2
+			};
+			management.PhraseManagement.AddPhrase(phrase);
+			management.PhraseManagement.AddPhrase(phrase2);
+			management.AnalysisPhrase(phrase);
+			management.AnalysisPhrase(phrase2);
+			MockedTimeProvider provider = new MockedTimeProvider()
+			{
+				MockedDateTime = new DateTime(2020, 04, 30, 19, 10, 30)
+			};
+
+			management.AuthorManagement.DeleteAuthor(author);
+			management.SentimentManagement.UpdateSentiments(management.PhraseManagement.AllPhrases);
+			Assert.IsFalse(sentiment.IsAssociatedToPhrase);
+
+		}
+
+
+
+
 	}
 }

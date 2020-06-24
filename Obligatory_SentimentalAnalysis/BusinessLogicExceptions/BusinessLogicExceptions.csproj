@@ -42,11 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlarmManagementException.cs" />
+    <Compile Include="AuthorException.cs" />
+    <Compile Include="DataBaseException.cs" />
     <Compile Include="EntityManagementException.cs" />
     <Compile Include="MessagesExceptions.cs" />
     <Compile Include="PhraseManagementException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TextManagementException.cs" />
+    <Compile Include="SentimentManagementException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

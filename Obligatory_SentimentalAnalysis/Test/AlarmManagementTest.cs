@@ -1,7 +1,8 @@
 ﻿using BusinessLogic;
 using BusinessLogicExceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Domain; 
+using Domain;
+using System.Collections.Generic;
 
 namespace Test
 {
@@ -16,11 +17,17 @@ namespace Test
 		public void SetUp()
 		{
 			management = new AlarmManagement();
-
+            management.DeleteAll(); 
 		}
 
+        [TestCleanup]
+        public void CleanUp()
+        {
+            management = new AlarmManagement();
+            management.DeleteAll();
+        }
 
-		[TestMethod]
+        [TestMethod]
 		public void CreateValidNewAlarm()
 		{
 			Entity entity = new Entity()
@@ -28,10 +35,10 @@ namespace Test
 				EntityName = "Pedidos Ya"
 			};
 
-			Alarm alarm = new Alarm()
+			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 50,
 				QuantityTime = 5,
 				IsInHours = false
@@ -48,10 +55,10 @@ namespace Test
 			{
 				EntityName = "Pedidos ya"
 			};
-			Alarm alarm = new Alarm()
+			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = -50,
 				QuantityTime = 13,
 				IsInHours = true
@@ -70,18 +77,18 @@ namespace Test
 			{
 				EntityName = "Mc Donalds"
 			};
-			Alarm alarm = new Alarm() 
+			EntityAlarm alarm = new EntityAlarm() 
 			{
 			Entity = entity,
-			TypeOfAlarm = Alarm.Type.Positive,
+			TypeOfAlarm = EntityAlarm.Type.Positive,
 			QuantityPost = 40,
 			QuantityTime = 10,
 			IsInHours = false
 			};
-			Alarm alarm2 = new Alarm()
+			EntityAlarm alarm2 = new EntityAlarm()
 			{
 				Entity = entity2,
-				TypeOfAlarm = Alarm.Type.Negative,
+				TypeOfAlarm = EntityAlarm.Type.Negative,
 				QuantityPost=30,
 				QuantityTime = 20,
 				IsInHours = true
@@ -98,10 +105,11 @@ namespace Test
 			{
 				EntityName = "Pedidos ya"
 			};
-			Alarm alarm = new Alarm()
+           
+			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 150,
 				QuantityTime = 30,
 				IsInHours = false
@@ -117,10 +125,10 @@ namespace Test
 		public void CreateInvalidAlarm2()
 		{
 			Entity entity = new Entity();
-			Alarm alarm = new Alarm()
+			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 90,
 				QuantityTime = 15,
 				IsInHours = false
@@ -137,10 +145,10 @@ namespace Test
 			{
 				EntityName = "Coca Cola"
 			};
-			Alarm alarm = new Alarm()
+			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 90,
 				QuantityTime = -15,
 				IsInHours = false
@@ -155,10 +163,10 @@ namespace Test
 			{
 				EntityName = "Pedidos ya"
 			};
-			Alarm alarm = new Alarm()
+			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 150,
 				QuantityTime = 30,
 				IsInHours = false
@@ -175,10 +183,10 @@ namespace Test
 			{
 				EntityName = "Pedidos ya"
 			};
-			Alarm alarm = new Alarm()
+			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Negative,
+				TypeOfAlarm = EntityAlarm.Type.Negative,
 				QuantityPost = 150,
 				QuantityTime = 30,
 				IsInHours = false, 
@@ -196,10 +204,10 @@ namespace Test
 			{
 				EntityName = "Pedidos ya"
 			};
-			Alarm alarm = new Alarm()
+			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
-				TypeOfAlarm = Alarm.Type.Positive,
+				TypeOfAlarm = EntityAlarm.Type.Positive,
 				QuantityPost = 150,
 				QuantityTime = 30,
 				IsInHours = false,
@@ -208,5 +216,91 @@ namespace Test
 			management.AddAlarm(alarm);
 			Assert.AreEqual(alarm.Show(), management.AllAlarms[0].Show());
 		}
-	}
+
+        //Test of the new type of Alarm
+
+        [TestMethod]
+        public void CreateValidAuthorAlarm()
+        {
+            AuthorAlarm alarm = new AuthorAlarm()
+            {
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
+                QuantityPost = 50,
+                QuantityTime = 5,
+                IsInHours = false
+            };
+            management.AddAlarm(alarm);
+			CollectionAssert.Contains(management.AllAlarms, alarm);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(AlarmManagementException))]
+        public void CreateInvalidAuthorAlarm()
+        {
+
+            AuthorAlarm alarm = new AuthorAlarm()
+            {
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
+                QuantityPost = -50,
+                QuantityTime = 13,
+                IsInHours = true
+            };
+            management.AddAlarm(alarm);
+        }
+
+
+        [TestMethod]
+        public void AddTwoAuthorsAlarms()
+        {
+            AuthorAlarm alarm = new AuthorAlarm()
+            {
+                
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
+                QuantityPost = 40,
+                QuantityTime = 10,
+                IsInHours = false
+            };
+            AuthorAlarm alarm2 = new AuthorAlarm()
+            {
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Negative,
+                QuantityPost = 30,
+                QuantityTime = 20,
+                IsInHours = true
+            };
+            management.AddAlarm(alarm);
+            management.AddAlarm(alarm2);
+            Assert.IsTrue(management.AllAlarms.Length == 2);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(AlarmManagementException))]
+        public void CreateInvalidAuthorAlarmQuantityTimeNegative()
+        {
+            AuthorAlarm alarm = new AuthorAlarm()
+            {
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
+                QuantityPost = 90,
+                QuantityTime = -15,
+                IsInHours = false
+            };
+            management.AddAlarm(alarm);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(AlarmManagementException))]
+        public void CreateInvalidQuantityPostAuthorAlarm()
+        {
+            AuthorAlarm alarm = new AuthorAlarm()
+            {
+                TypeOfAlarm = AuthorAlarm.TypeOfNewAlarm.Positive,
+                QuantityPost = 100000,
+                QuantityTime = 10,
+                IsInHours = false
+            };
+            management.AddAlarm(alarm);
+        }
+
+
+
+    }
 }
