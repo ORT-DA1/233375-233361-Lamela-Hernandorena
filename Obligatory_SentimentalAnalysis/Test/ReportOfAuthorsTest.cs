@@ -34,7 +34,7 @@ namespace Test
         [TestInitialize]
         public void SetUp()
         {
-            management = new GeneralManagement();
+            management = GeneralManagement.GetInstance();
             author = new Author()
             {
                 UserName = "Josami",
@@ -160,7 +160,7 @@ namespace Test
         [TestCleanup]
         public void CleanUp()
         {
-            management = new GeneralManagement();
+            management = GeneralManagement.GetInstance();
             management.PhraseManagement.DeleteAllPhrases();
             management.AuthorManagement.EmptyAll();
             management.AlarmManagement.DeleteAll();
