@@ -39,12 +39,11 @@ namespace Domain
         {
             int counterPost = 0;
             IsActive = false;
-            DateTime minDate = date;
+            DateTime minDate = DeterminateMinDate(date); ;
             foreach (Phrase phrase in phrases)
             {
                 if (phrase.Entity != null)
                 {
-                    minDate = DeterminateMinDate(date);
                     if (phrase.PhraseDate >= minDate)
                     {
                         if (phrase.Entity.Equals(Entity) && phrase.PhraseType.ToString().Equals(TypeOfAlarm.ToString()))

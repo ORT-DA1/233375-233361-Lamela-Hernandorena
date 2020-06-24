@@ -254,7 +254,11 @@ namespace UI
 
         private bool ContainNumeric(String text)
         {
-            return !Regex.IsMatch(text.Replace(" ", ""), @"^[a-zA-Z]+$");
+            if (!text.Trim().Equals(""))
+            {
+                return !Regex.IsMatch(text.Replace(" ", ""), @"^[a-zA-Z]+$");
+            }
+            return false; 
         }
 
     }

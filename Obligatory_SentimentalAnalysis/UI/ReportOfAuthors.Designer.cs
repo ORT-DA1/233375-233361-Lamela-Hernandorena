@@ -43,7 +43,7 @@
             this.cmbCriterion.Location = new System.Drawing.Point(202, 86);
             this.cmbCriterion.Name = "cmbCriterion";
             this.cmbCriterion.Size = new System.Drawing.Size(182, 21);
-            this.cmbCriterion.TabIndex = 0;
+            this.cmbCriterion.TabIndex = 1;
             // 
             // radioButtonAsc
             // 
@@ -52,7 +52,7 @@
             this.radioButtonAsc.Location = new System.Drawing.Point(186, 142);
             this.radioButtonAsc.Name = "radioButtonAsc";
             this.radioButtonAsc.Size = new System.Drawing.Size(82, 17);
-            this.radioButtonAsc.TabIndex = 1;
+            this.radioButtonAsc.TabIndex = 2;
             this.radioButtonAsc.TabStop = true;
             this.radioButtonAsc.Text = "Ascendente";
             this.radioButtonAsc.UseVisualStyleBackColor = false;
@@ -64,7 +64,7 @@
             this.radioButtonDesc.Location = new System.Drawing.Point(295, 142);
             this.radioButtonDesc.Name = "radioButtonDesc";
             this.radioButtonDesc.Size = new System.Drawing.Size(89, 17);
-            this.radioButtonDesc.TabIndex = 2;
+            this.radioButtonDesc.TabIndex = 3;
             this.radioButtonDesc.TabStop = true;
             this.radioButtonDesc.Text = "Descendente";
             this.radioButtonDesc.UseVisualStyleBackColor = false;
@@ -80,7 +80,7 @@
             this.btnGenerateReport.Location = new System.Drawing.Point(141, 178);
             this.btnGenerateReport.Name = "btnGenerateReport";
             this.btnGenerateReport.Size = new System.Drawing.Size(182, 51);
-            this.btnGenerateReport.TabIndex = 3;
+            this.btnGenerateReport.TabIndex = 4;
             this.btnGenerateReport.UseVisualStyleBackColor = false;
             this.btnGenerateReport.Click += new System.EventHandler(this.btnGenerateReport_Click);
             // 
