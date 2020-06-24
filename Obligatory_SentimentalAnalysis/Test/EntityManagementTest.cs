@@ -9,28 +9,20 @@ namespace Test
 	public class EntityManagementTest
 	{
 
-		EntityManagement management;
+		EntityManagement management; 
+		
+
+
+		[TestInitialize]
+		public void SetUp()
+		{
+			management = new EntityManagement(); 	
+			
+		}
 
 
 
-        [TestInitialize]
-        public void SetUp()
-        {
-            management = new EntityManagement();
-            management.DeleteAllEntities();
-        }
-
-
-        [TestCleanup]
-        public void CleanUp()
-        {
-            management = new EntityManagement();
-            management.DeleteAllEntities();
-        }
-
-
-
-        [TestMethod]
+		[TestMethod]
 		public void AddValidEntity()
 		{
 			Entity entity = new Entity()
@@ -89,8 +81,8 @@ namespace Test
 			};
 			management.AddEntity(entity);
 			management.DeleteEntity(entity);
-            CollectionAssert.DoesNotContain(management.AllEntities, entity);
-        }
+			Assert.IsTrue(management.IsEmpty()); 
+		}
 
 
 		[TestMethod]

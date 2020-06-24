@@ -1,49 +1,27 @@
 ﻿using Domain;
-using Persistence;
+using System.Collections.Generic;
 
 
 namespace BusinessLogic
 {
 	public class AlarmManagement
 	{
-		private AlarmPersistence alarmPersistence;
-        
+		private List<IAlarm> alarmList;
+
 		public AlarmManagement()
 		{
-            alarmPersistence = new AlarmPersistence();  
+			alarmList = new List<IAlarm>(); 
 		}
-        
-        public void AddAlarm(IAlarm alarm)
+
+		public void AddAlarm(IAlarm alarm)
 		{
 			alarm.VerifyFormat();
-            alarmPersistence.AddAlarm(alarm);
+			alarmList.Add(alarm); 
 		}
 
-        public void Update(IAlarm alarm)
-        {
-            alarmPersistence.UpdateAlarms(alarm); 
-        }
-
-        public AuthorAlarm GetAuthorAlarm(AuthorAlarm alarm)
-        {
-            return alarmPersistence.GetAuthorAlarmById(alarm); 
-        }
-
-        public EntityAlarm GetEntityAlarm(EntityAlarm alarm)
-        {
-            return alarmPersistence.GetEntityAlarmById(alarm);
-        }
-
-
-        public IAlarm[] AllAlarms
+		public IAlarm[] AllAlarms
 		{
-			get { return alarmPersistence.AllAlarms();  }
+			get { return alarmList.ToArray(); }
 		}
-
-        public void DeleteAll()
-        {
-            alarmPersistence.DeleteAllAuthorsAlarms();
-            alarmPersistence.DeleteEntitiesAlarms(); 
-        }
 	}
 }

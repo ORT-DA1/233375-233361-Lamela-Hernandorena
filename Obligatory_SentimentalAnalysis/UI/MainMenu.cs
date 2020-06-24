@@ -11,7 +11,8 @@ namespace UI
 		public MainMenu()
 		{
 			InitializeComponent();
-			GeneralManagement = GeneralManagement.GetInstance(); 
+			GeneralManagement = new GeneralManagement(); 
+			
 		}
 
 		private void btnAddSentiment_Click(object sender, EventArgs e)
@@ -58,20 +59,5 @@ namespace UI
 		{
 			Application.Exit(); 
 		}
-
-        private void btnAuthors_Click(object sender, EventArgs e)
-        {
-            panelMain.Controls.Clear();
-            UserControl admAuthors = new AdmAuthors(GeneralManagement);
-            panelMain.Controls.Add(admAuthors); 
-        }
-
-		private void btnAuthorReport_Click(object sender, EventArgs e)
-		{
-			panelMain.Controls.Clear();
-			UserControl authorReport = new ReportOfAuthors(GeneralManagement);
-			panelMain.Controls.Add(authorReport);
-		}
-        
-    }
+	}
 }

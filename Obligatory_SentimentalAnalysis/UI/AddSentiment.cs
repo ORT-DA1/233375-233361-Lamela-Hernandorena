@@ -43,7 +43,7 @@ namespace UI
 					ClearAllFields();
 					DisplayDeleteButton(); 
 				}
-				catch (SentimentManagementException exc)
+				catch (TextManagementException exc)
 				{
 					labelError.Visible = true; 
 					labelError.Text = exc.Message; 
@@ -118,11 +118,12 @@ namespace UI
 					DisplayDeleteButton();
 					MessageBox.Show("El sentimiento se ha eliminado con exito.");
 					InitializeListOfSentiment();
-				}catch(SentimentManagementException exc)
+				}catch(TextManagementException exc)
 				{
 					labelError.Visible = true;
 					labelError.Text = exc.Message; 
 				}
+				
 			}
 		}
 		

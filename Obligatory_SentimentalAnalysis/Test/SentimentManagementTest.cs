@@ -15,21 +15,13 @@ namespace Test
 		[TestInitialize]
 		public void SetUp()
 		{
-			manegement = new SentimentManagement();
-            manegement.DeleteAllSentiments(); 
-        }
-
-        
-        
-        [TestCleanup]
-        public void CleanUp()
-        {
-            manegement = new SentimentManagement();
-            manegement.DeleteAllSentiments();
-        }
+			manegement = new SentimentManagement(); 
+			
+			
+		}
 
 
-        [TestMethod]
+		[TestMethod]
 		public void AddValidSentimentPositive1()
 		{
 			Sentiment sentiment = new Sentiment()
@@ -61,7 +53,7 @@ namespace Test
 		}
 
 
-		[ExpectedException(typeof(SentimentManagementException))]
+		[ExpectedException(typeof(TextManagementException))]
 		[TestMethod]
 		public void VerifySentimentContained1()
 		{
@@ -82,7 +74,7 @@ namespace Test
 
 		}
 
-		[ExpectedException(typeof(SentimentManagementException))]
+		[ExpectedException(typeof(TextManagementException))]
 		[TestMethod]
 		public void VerifySentimentContained2()
 		{
@@ -153,7 +145,7 @@ namespace Test
 		}
 
 
-		[ExpectedException(typeof(SentimentManagementException))]
+		[ExpectedException(typeof(TextManagementException))]
 		[TestMethod]
 		public void NotAddInvalidadSentimentPositive1()
 		{
@@ -168,7 +160,7 @@ namespace Test
 
 		
 		[TestMethod]
-		[ExpectedException(typeof(SentimentManagementException))]
+		[ExpectedException(typeof(TextManagementException))]
 		public void NotAddInvalidSentimentPositive2()
 		{
 			Sentiment sentiment = new Sentiment()
@@ -191,7 +183,7 @@ namespace Test
 			};
 			manegement.AddSentiment(sentiment);
 			manegement.DeleteSentiment(sentiment);
-            CollectionAssert.DoesNotContain(manegement.AllSentiments, sentiment); 
+			Assert.IsTrue(manegement.IsEmpty()); 
 		}
 
 
@@ -232,7 +224,7 @@ namespace Test
 		
 
 		[TestMethod]
-		[ExpectedException(typeof(SentimentManagementException))]
+		[ExpectedException(typeof(TextManagementException))]
 		public void DeleteNotExistSentiment()
 		{
 			Sentiment sentiment = new Sentiment()
@@ -247,7 +239,7 @@ namespace Test
 
 
 		[TestMethod]
-		[ExpectedException(typeof(SentimentManagementException))]
+		[ExpectedException(typeof(TextManagementException))]
 		public void DeleteNotExistSentiment2()
 		{
 			Sentiment sentiment = new Sentiment()
@@ -269,7 +261,7 @@ namespace Test
 		}
 
 		[TestMethod]
-		[ExpectedException(typeof(SentimentManagementException))]
+		[ExpectedException(typeof(TextManagementException))]
 		public void TryingDeleteEmptySentiment()
 		{
 			Sentiment sentiment = new Sentiment()
@@ -313,7 +305,7 @@ namespace Test
 			CollectionAssert.Contains(manegement.AllSentiments, sentiment); 
         }
 
-        [ExpectedException(typeof(SentimentManagementException))]
+        [ExpectedException(typeof(TextManagementException))]
         [TestMethod]
         public void VerifyNegativeSentimentContained1()
         {
@@ -331,7 +323,7 @@ namespace Test
             manegement.AddSentiment(sentiment2);
         }
 
-        [ExpectedException(typeof(SentimentManagementException))]
+        [ExpectedException(typeof(TextManagementException))]
         [TestMethod]
         public void VerifyNegativeSentimentContained2()
         {
@@ -395,7 +387,7 @@ namespace Test
 			};
             manegement.AddSentiment(sentiment);
             manegement.DeleteSentiment(sentiment);
-            CollectionAssert.DoesNotContain(manegement.AllSentiments, sentiment); 
+            Assert.IsTrue(manegement.IsEmpty());
         }
 
         [TestMethod]
@@ -434,7 +426,7 @@ namespace Test
        
 
         [TestMethod]
-        [ExpectedException(typeof(SentimentManagementException))]
+        [ExpectedException(typeof(TextManagementException))]
         public void DeleteNotExistNegativeSentiment()
         {
             Sentiment sentiment = new Sentiment()
@@ -449,7 +441,7 @@ namespace Test
 
 
 		[TestMethod]
-		[ExpectedException(typeof(SentimentManagementException))]
+		[ExpectedException(typeof(TextManagementException))]
 		public void TryingAddInvalidSentiment()
 		{
 			Sentiment sentiment = new Sentiment()
@@ -467,7 +459,7 @@ namespace Test
 		}
 
 		[TestMethod]
-		[ExpectedException(typeof(SentimentManagementException))]
+		[ExpectedException(typeof(TextManagementException))]
 		public void TryingAddInvalidSentiment2()
 		{
 			Sentiment sentiment = new Sentiment()
@@ -486,7 +478,7 @@ namespace Test
 
 
 		[TestMethod]
-		[ExpectedException(typeof(SentimentManagementException))]
+		[ExpectedException(typeof(TextManagementException))]
 		public void TryingAddRepeteadSentiment()
 		{
 			Sentiment sentiment = new Sentiment()
@@ -535,7 +527,7 @@ namespace Test
 		}
 
 		[TestMethod]
-		[ExpectedException(typeof(SentimentManagementException))]
+		[ExpectedException(typeof(TextManagementException))]
 		public void TestDeleteAssosiatedPhrase()
 		{
 			Sentiment sentiment = new Sentiment()

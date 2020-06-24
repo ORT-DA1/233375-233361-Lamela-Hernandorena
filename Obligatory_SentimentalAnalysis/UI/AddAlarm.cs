@@ -100,7 +100,7 @@ namespace UI
 		private void AddAlarmUI()
 		{
 
-			EntityAlarm alarmToAdd = new EntityAlarm()
+			Alarm alarmToAdd = new Alarm()
 			{
 				Entity = (Entity)cmbEntities.SelectedItem,
 				QuantityPost = int.Parse(textBoxQuantityPost.Text),
@@ -112,15 +112,15 @@ namespace UI
 			InitializeAlarms();
 		}
 
-		private EntityAlarm.Type TypeOfAlarmChecked()
+		private Alarm.Type TypeOfAlarmChecked()
 		{
 			if (radioButtonPositive.Checked)
 			{
-				return EntityAlarm.Type.Positive;
+				return Alarm.Type.Positive;
 			}
 			else
 			{
-				return EntityAlarm.Type.Negative;
+				return Alarm.Type.Negative;
 			}
 		}
 
@@ -163,8 +163,6 @@ namespace UI
 				MessageBox.Show("Debe ingresar solo numeros");
 			}
 		}
-
-		
 	}
 }
 

@@ -1,31 +1,32 @@
 ﻿using BusinessLogicExceptions;
 using Domain;
-using Persistence;
+using System.Collections.Generic;
 
 
 namespace BusinessLogic
 {
 	public class EntityManagement
 	{
-        private EntityPersistence entityPersistence;
+		private List<Entity> entityList;
 
-        public EntityManagement()
+		public EntityManagement()
 		{
-            entityPersistence = new EntityPersistence();
-        }
+			entityList = new List<Entity>(); 
+		}
 
 		public bool IsEmpty()
 		{
-            return entityPersistence.IsEmpty();
-        }
+			return entityList.Count == 0; 
+		}
+
 
 		public void AddEntity(Entity entity)
 		{
 			entity.EntityName = Utilities.DeleteSpaces(entity.EntityName.Trim());
 			entity.VerifyFormat(); 
 			VerifyFormatAdd(entity);
-            entityPersistence.AddEntity(entity);
-        }
+			entityList.Add(entity); 
+		}
 
 		private void VerifyFormatAdd(Entity entity)
 		{
@@ -37,18 +38,13 @@ namespace BusinessLogic
 
 		private bool IsContained(Entity entity)
 		{
-            return entityPersistence.IsContained(entity);
-        }
+			return entityList.Contains(entity); 
+		}
 
 		public void DeleteEntity(Entity entity)
 		{
 			VerifyFormatDelete(entity);
-            entityPersistence.DeleteEntity(entity);
-        }
-
-		public void AssociateEntityToPhrase(Phrase phrase)
-		{
-			phrase.AssociateEntity(AllEntities);
+			entityList.Remove(entity);
 		}
 
 		private void VerifyFormatDelete(Entity entity)
@@ -61,12 +57,7 @@ namespace BusinessLogic
 
 		public Entity [] AllEntities
 		{
-            get { return entityPersistence.AllEntities(); }
-        }
- 
-        public void DeleteAllEntities()
-        {
-            entityPersistence.DeleteAll();
-        }
-    }
+			get { return entityList.ToArray(); }
+		}
+	}
 }
