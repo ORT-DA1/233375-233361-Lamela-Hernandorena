@@ -63,6 +63,16 @@ namespace UI.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AgregadoAutores {
+            get {
+                object obj = ResourceManager.GetObject("AgregadoAutores", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AgregarAlarma1 {
             get {
                 object obj = ResourceManager.GetObject("AgregarAlarma1", resourceCulture);
@@ -103,6 +113,16 @@ namespace UI.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AlarmaAutores {
+            get {
+                object obj = ResourceManager.GetObject("AlarmaAutores", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap AnalisisDeFrase1 {
             get {
                 object obj = ResourceManager.GetObject("AnalisisDeFrase1", resourceCulture);
@@ -113,9 +133,29 @@ namespace UI.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap btnModificar {
+            get {
+                object obj = ResourceManager.GetObject("btnModificar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap MenuPrincipal {
             get {
                 object obj = ResourceManager.GetObject("MenuPrincipal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ReporteAutor {
+            get {
+                object obj = ResourceManager.GetObject("ReporteAutor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

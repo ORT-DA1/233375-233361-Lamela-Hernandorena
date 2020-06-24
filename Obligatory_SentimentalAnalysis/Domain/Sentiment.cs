@@ -1,20 +1,30 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using BusinessLogicExceptions; 
 
 
 namespace Domain 
 {
+    [Table("Sentiments_Table")]
 	public class Sentiment
 	{
 		public enum TypeSentiment { Positive, Neutral, Negative }
 
-		public string SentimientText { get; set;  }
+        [Required]
+        public string SentimientText { get; set;  }
 
-		public TypeSentiment SentimentType { get; set; }
+        [Required]
+        public TypeSentiment SentimentType { get; set; }
+        
+        public bool IsAssociatedToPhrase { get; set; }
 
-		public bool IsAssociatedToPhrase { get; set; }
+        [Key]
+        public int Id { get; set; }
 
-		public Sentiment(){
+        public bool IsDeleted { get; set; }
+
+        public Sentiment(){
 			IsAssociatedToPhrase = false; 
 		}
 
@@ -27,7 +37,7 @@ namespace Domain
 		{
 			if (String.IsNullOrEmpty(SentimientText.Trim()))
 			{
-				throw new TextManagementException(MessagesExceptions.ErrorIsEmpty);
+				throw new SentimentManagementException(MessagesExceptions.ErrorIsEmpty);
 			}
 		}
 
@@ -35,30 +45,21 @@ namespace Domain
 		{
 			if (IsAssociatedToPhrase)
 			{
-				throw new TextManagementException(MessagesExceptions.ErrorIsAssociated); 
+				throw new SentimentManagementException(MessagesExceptions.ErrorIsAssociated); 
 			}
 		}
 
 		public override bool Equals(object obj)
 		{
-			if(obj== null)
-			{
-				return false;
-			}
-			else
-			{
-				if (this.GetType() != obj.GetType())
-				{
-					return false;
-				}
-				else
-				{
-					Sentiment sentiment = (Sentiment)obj;
-					return string.Equals(Utilities.DeleteSpaces(SentimientText.Trim()), 
-						Utilities.DeleteSpaces(sentiment.SentimientText.Trim()), 
-						StringComparison.OrdinalIgnoreCase) && SentimentType.Equals(sentiment.SentimentType);
-				}
-			}
+            Sentiment sentiment = obj as Sentiment;
+
+            if (sentiment == null || Convert.IsDBNull(sentiment))
+            {
+                return false;
+            }
+           	return string.Equals(Utilities.DeleteSpaces(SentimientText.Trim()), 
+			Utilities.DeleteSpaces(sentiment.SentimientText.Trim()), 
+			StringComparison.OrdinalIgnoreCase) && SentimentType.Equals(sentiment.SentimentType);
 		}
 	}
 }

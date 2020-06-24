@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlarmManagement.cs" />
+    <Compile Include="AuthorManagement.cs" />
     <Compile Include="EntityManagement.cs" />
     <Compile Include="GeneralManagement.cs" />
     <Compile Include="ITimeProvider.cs" />
@@ -58,6 +59,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{58fa009c-9b73-40e4-83ae-af3a484183be}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistence\Persistence.csproj">
+      <Project>{22C73A2D-F173-4939-B0D2-E6D350DAA0D1}</Project>
+      <Name>Persistence</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
