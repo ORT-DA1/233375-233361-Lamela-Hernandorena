@@ -152,7 +152,7 @@ namespace Domain
 
         }
 
-        public int CalculateAge()
+        private int CalculateAge()
         {
             DateTime actualDate = DateTime.Today;
             int age = actualDate.Year - BirthDate.Year;

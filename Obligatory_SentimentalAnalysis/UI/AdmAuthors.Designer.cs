@@ -45,29 +45,28 @@
             this.textBoxUserName.Location = new System.Drawing.Point(150, 82);
             this.textBoxUserName.Name = "textBoxUserName";
             this.textBoxUserName.Size = new System.Drawing.Size(223, 20);
-            this.textBoxUserName.TabIndex = 0;
+            this.textBoxUserName.TabIndex = 1;
             // 
             // textBoxName
             // 
             this.textBoxName.Location = new System.Drawing.Point(91, 120);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(196, 20);
-            this.textBoxName.TabIndex = 1;
-        
+            this.textBoxName.TabIndex = 2;
             // 
             // textBoxLastname
             // 
             this.textBoxLastname.Location = new System.Drawing.Point(91, 163);
             this.textBoxLastname.Name = "textBoxLastname";
             this.textBoxLastname.Size = new System.Drawing.Size(196, 20);
-            this.textBoxLastname.TabIndex = 2;
+            this.textBoxLastname.TabIndex = 3;
             // 
             // dateTimePickerBirth
             // 
             this.dateTimePickerBirth.Location = new System.Drawing.Point(186, 201);
             this.dateTimePickerBirth.Name = "dateTimePickerBirth";
             this.dateTimePickerBirth.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePickerBirth.TabIndex = 3;
+            this.dateTimePickerBirth.TabIndex = 4;
             // 
             // btnAddAuthor
             // 
@@ -80,7 +79,7 @@
             this.btnAddAuthor.Location = new System.Drawing.Point(150, 238);
             this.btnAddAuthor.Name = "btnAddAuthor";
             this.btnAddAuthor.Size = new System.Drawing.Size(163, 42);
-            this.btnAddAuthor.TabIndex = 4;
+            this.btnAddAuthor.TabIndex = 5;
             this.btnAddAuthor.UseVisualStyleBackColor = false;
             this.btnAddAuthor.Click += new System.EventHandler(this.btnAddAuthor_Click);
             // 
@@ -95,7 +94,7 @@
             this.btnDeleteAuthor.Location = new System.Drawing.Point(236, 541);
             this.btnDeleteAuthor.Name = "btnDeleteAuthor";
             this.btnDeleteAuthor.Size = new System.Drawing.Size(163, 42);
-            this.btnDeleteAuthor.TabIndex = 5;
+            this.btnDeleteAuthor.TabIndex = 6;
             this.btnDeleteAuthor.UseVisualStyleBackColor = false;
             this.btnDeleteAuthor.Click += new System.EventHandler(this.btnDeleteAuthor_Click);
             // 
@@ -110,7 +109,7 @@
             this.btnModify.Location = new System.Drawing.Point(58, 541);
             this.btnModify.Name = "btnModify";
             this.btnModify.Size = new System.Drawing.Size(163, 42);
-            this.btnModify.TabIndex = 6;
+            this.btnModify.TabIndex = 7;
             this.btnModify.UseVisualStyleBackColor = false;
             this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
             // 
@@ -138,7 +137,7 @@
             this.btnModifyAuthor.Location = new System.Drawing.Point(150, 238);
             this.btnModifyAuthor.Name = "btnModifyAuthor";
             this.btnModifyAuthor.Size = new System.Drawing.Size(163, 42);
-            this.btnModifyAuthor.TabIndex = 9;
+            this.btnModifyAuthor.TabIndex = 8;
             this.btnModifyAuthor.UseVisualStyleBackColor = true;
             this.btnModifyAuthor.Click += new System.EventHandler(this.btnModifyAuthor_Click);
             // 

@@ -51,7 +51,7 @@
             this.groupBoxTypeAlarm.Location = new System.Drawing.Point(159, 76);
             this.groupBoxTypeAlarm.Name = "groupBoxTypeAlarm";
             this.groupBoxTypeAlarm.Size = new System.Drawing.Size(175, 39);
-            this.groupBoxTypeAlarm.TabIndex = 3;
+            this.groupBoxTypeAlarm.TabIndex = 1;
             this.groupBoxTypeAlarm.TabStop = false;
             // 
             // radioButtonPositive
@@ -61,7 +61,7 @@
             this.radioButtonPositive.Location = new System.Drawing.Point(6, 14);
             this.radioButtonPositive.Name = "radioButtonPositive";
             this.radioButtonPositive.Size = new System.Drawing.Size(62, 17);
-            this.radioButtonPositive.TabIndex = 3;
+            this.radioButtonPositive.TabIndex = 2;
             this.radioButtonPositive.TabStop = true;
             this.radioButtonPositive.Text = "Positiva";
             this.radioButtonPositive.UseVisualStyleBackColor = true;
@@ -72,7 +72,7 @@
             this.radioButtonNegative.Location = new System.Drawing.Point(89, 13);
             this.radioButtonNegative.Name = "radioButtonNegative";
             this.radioButtonNegative.Size = new System.Drawing.Size(68, 17);
-            this.radioButtonNegative.TabIndex = 4;
+            this.radioButtonNegative.TabIndex = 3;
             this.radioButtonNegative.Text = "Negativa";
             this.radioButtonNegative.UseVisualStyleBackColor = true;
             // 
@@ -81,14 +81,14 @@
             this.textBoxQuantityPost.Location = new System.Drawing.Point(159, 130);
             this.textBoxQuantityPost.Name = "textBoxQuantityPost";
             this.textBoxQuantityPost.Size = new System.Drawing.Size(110, 20);
-            this.textBoxQuantityPost.TabIndex = 6;
+            this.textBoxQuantityPost.TabIndex = 4;
             // 
             // textBoxQuantityTime
             // 
             this.textBoxQuantityTime.Location = new System.Drawing.Point(159, 174);
             this.textBoxQuantityTime.Name = "textBoxQuantityTime";
             this.textBoxQuantityTime.Size = new System.Drawing.Size(110, 20);
-            this.textBoxQuantityTime.TabIndex = 7;
+            this.textBoxQuantityTime.TabIndex = 5;
             // 
             // listBoxAuthorAlarms
             // 
@@ -96,7 +96,7 @@
             this.listBoxAuthorAlarms.Location = new System.Drawing.Point(29, 300);
             this.listBoxAuthorAlarms.Name = "listBoxAuthorAlarms";
             this.listBoxAuthorAlarms.Size = new System.Drawing.Size(395, 186);
-            this.listBoxAuthorAlarms.TabIndex = 8;
+            this.listBoxAuthorAlarms.TabIndex = 9;
             // 
             // addAlarm
             // 
@@ -129,9 +129,8 @@
             this.groupBoxTypeTime.Location = new System.Drawing.Point(300, 160);
             this.groupBoxTypeTime.Name = "groupBoxTypeTime";
             this.groupBoxTypeTime.Size = new System.Drawing.Size(146, 39);
-            this.groupBoxTypeTime.TabIndex = 11;
+            this.groupBoxTypeTime.TabIndex = 6;
             this.groupBoxTypeTime.TabStop = false;
-         
             // 
             // radioButtonDays
             // 
@@ -140,7 +139,7 @@
             this.radioButtonDays.Location = new System.Drawing.Point(6, 14);
             this.radioButtonDays.Name = "radioButtonDays";
             this.radioButtonDays.Size = new System.Drawing.Size(46, 17);
-            this.radioButtonDays.TabIndex = 8;
+            this.radioButtonDays.TabIndex = 7;
             this.radioButtonDays.TabStop = true;
             this.radioButtonDays.Text = "Dias";
             this.radioButtonDays.UseVisualStyleBackColor = true;
@@ -151,7 +150,7 @@
             this.radioButtonHours.Location = new System.Drawing.Point(71, 15);
             this.radioButtonHours.Name = "radioButtonHours";
             this.radioButtonHours.Size = new System.Drawing.Size(53, 17);
-            this.radioButtonHours.TabIndex = 9;
+            this.radioButtonHours.TabIndex = 8;
             this.radioButtonHours.Text = "Horas";
             this.radioButtonHours.UseVisualStyleBackColor = true;
             // 

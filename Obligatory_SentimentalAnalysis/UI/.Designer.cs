@@ -54,7 +54,7 @@ namespace UI
             this.btnAddSentiment.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddSentiment.Name = "btnAddSentiment";
             this.btnAddSentiment.Size = new System.Drawing.Size(284, 38);
-            this.btnAddSentiment.TabIndex = 1;
+            this.btnAddSentiment.TabIndex = 3;
             this.btnAddSentiment.UseVisualStyleBackColor = false;
             this.btnAddSentiment.Click += new System.EventHandler(this.btnAddSentiment_Click);
             // 
@@ -70,7 +70,7 @@ namespace UI
             this.btnAddEntity.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddEntity.Name = "btnAddEntity";
             this.btnAddEntity.Size = new System.Drawing.Size(284, 37);
-            this.btnAddEntity.TabIndex = 2;
+            this.btnAddEntity.TabIndex = 4;
             this.btnAddEntity.UseVisualStyleBackColor = false;
             this.btnAddEntity.Click += new System.EventHandler(this.btnAddEntity_Click);
             // 
@@ -85,7 +85,7 @@ namespace UI
             this.btnAddPhrase.Location = new System.Drawing.Point(11, 461);
             this.btnAddPhrase.Name = "btnAddPhrase";
             this.btnAddPhrase.Size = new System.Drawing.Size(284, 35);
-            this.btnAddPhrase.TabIndex = 3;
+            this.btnAddPhrase.TabIndex = 5;
             this.btnAddPhrase.UseVisualStyleBackColor = false;
             this.btnAddPhrase.Click += new System.EventHandler(this.btnAddPhrase_Click);
             // 
@@ -101,7 +101,7 @@ namespace UI
             this.btnAddAlarm.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddAlarm.Name = "btnAddAlarm";
             this.btnAddAlarm.Size = new System.Drawing.Size(284, 38);
-            this.btnAddAlarm.TabIndex = 4;
+            this.btnAddAlarm.TabIndex = 6;
             this.btnAddAlarm.UseVisualStyleBackColor = false;
             this.btnAddAlarm.Click += new System.EventHandler(this.BtnAddAlarm_Click);
             // 
@@ -126,7 +126,7 @@ namespace UI
             this.btnReport.Margin = new System.Windows.Forms.Padding(2);
             this.btnReport.Name = "btnReport";
             this.btnReport.Size = new System.Drawing.Size(284, 38);
-            this.btnReport.TabIndex = 5;
+            this.btnReport.TabIndex = 7;
             this.btnReport.UseVisualStyleBackColor = false;
             this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
             // 
@@ -142,7 +142,7 @@ namespace UI
             this.btnExit.Location = new System.Drawing.Point(12, 38);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(58, 52);
-            this.btnExit.TabIndex = 7;
+            this.btnExit.TabIndex = 8;
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
@@ -158,7 +158,7 @@ namespace UI
             this.btnAuthors.Margin = new System.Windows.Forms.Padding(2);
             this.btnAuthors.Name = "btnAuthors";
             this.btnAuthors.Size = new System.Drawing.Size(284, 35);
-            this.btnAuthors.TabIndex = 8;
+            this.btnAuthors.TabIndex = 1;
             this.btnAuthors.UseVisualStyleBackColor = false;
             this.btnAuthors.Click += new System.EventHandler(this.btnAuthors_Click);
             // 
@@ -173,7 +173,7 @@ namespace UI
             this.btnAuthorReport.Location = new System.Drawing.Point(11, 289);
             this.btnAuthorReport.Name = "btnAuthorReport";
             this.btnAuthorReport.Size = new System.Drawing.Size(284, 37);
-            this.btnAuthorReport.TabIndex = 9;
+            this.btnAuthorReport.TabIndex = 2;
             this.btnAuthorReport.UseVisualStyleBackColor = false;
             this.btnAuthorReport.Click += new System.EventHandler(this.btnAuthorReport_Click);
             // 

@@ -125,7 +125,7 @@
             this.btnAddAlarm.Location = new System.Drawing.Point(153, 323);
             this.btnAddAlarm.Name = "btnAddAlarm";
             this.btnAddAlarm.Size = new System.Drawing.Size(154, 40);
-            this.btnAddAlarm.TabIndex = 9;
+            this.btnAddAlarm.TabIndex = 10;
             this.btnAddAlarm.UseVisualStyleBackColor = false;
             this.btnAddAlarm.Click += new System.EventHandler(this.BtnAddAlarm_Click);
             // 
@@ -166,7 +166,7 @@
             this.listBoxAlarms.Location = new System.Drawing.Point(31, 387);
             this.listBoxAlarms.Name = "listBoxAlarms";
             this.listBoxAlarms.Size = new System.Drawing.Size(411, 134);
-            this.listBoxAlarms.TabIndex = 10;
+            this.listBoxAlarms.TabIndex = 11;
             // 
             // AddAlarm
             // 
