@@ -11,8 +11,7 @@ namespace UI
 		public MainMenu()
 		{
 			InitializeComponent();
-			GeneralManagement = new GeneralManagement(); 
-			
+			GeneralManagement = GeneralManagement.GetInstance(); 
 		}
 
 		private void btnAddSentiment_Click(object sender, EventArgs e)
