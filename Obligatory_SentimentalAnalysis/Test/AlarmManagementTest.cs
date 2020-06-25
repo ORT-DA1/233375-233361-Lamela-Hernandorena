@@ -11,20 +11,25 @@ namespace Test
 	{
 
 		AlarmManagement management;
+        EntityManagement entityManagement; 
 
 
 		[TestInitialize]
 		public void SetUp()
 		{
 			management = new AlarmManagement();
-            management.DeleteAll(); 
-		}
+            entityManagement = new EntityManagement();
+            management.DeleteAll();
+            entityManagement.DeleteAllEntities();
+        }
 
         [TestCleanup]
         public void CleanUp()
         {
             management = new AlarmManagement();
+            entityManagement = new EntityManagement();
             management.DeleteAll();
+            entityManagement.DeleteAllEntities();
         }
 
         [TestMethod]
@@ -34,7 +39,7 @@ namespace Test
 			{
 				EntityName = "Pedidos Ya"
 			};
-
+            entityManagement.AddEntity(entity); 
 			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
@@ -73,10 +78,12 @@ namespace Test
 			{
 				EntityName = "Pedidos ya"
 			};
+            entityManagement.AddEntity(entity); 
 			Entity entity2 = new Entity()
 			{
 				EntityName = "Mc Donalds"
 			};
+            entityManagement.AddEntity(entity2); 
 			EntityAlarm alarm = new EntityAlarm() 
 			{
 			Entity = entity,
@@ -105,7 +112,7 @@ namespace Test
 			{
 				EntityName = "Pedidos ya"
 			};
-           
+            entityManagement.AddEntity(entity); 
 			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
@@ -163,6 +170,7 @@ namespace Test
 			{
 				EntityName = "Pedidos ya"
 			};
+            entityManagement.AddEntity(entity); 
 			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
@@ -183,6 +191,7 @@ namespace Test
 			{
 				EntityName = "Pedidos ya"
 			};
+            entityManagement.AddEntity(entity); 
 			EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
@@ -204,7 +213,8 @@ namespace Test
 			{
 				EntityName = "Pedidos ya"
 			};
-			EntityAlarm alarm = new EntityAlarm()
+            entityManagement.AddEntity(entity);
+            EntityAlarm alarm = new EntityAlarm()
 			{
 				Entity = entity,
 				TypeOfAlarm = EntityAlarm.Type.Positive,
@@ -216,9 +226,7 @@ namespace Test
 			management.AddAlarm(alarm);
 			Assert.AreEqual(alarm.Show(), management.AllAlarms[0].Show());
 		}
-
-        //Test of the new type of Alarm
-
+        
         [TestMethod]
         public void CreateValidAuthorAlarm()
         {
