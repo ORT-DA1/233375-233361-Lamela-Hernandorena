@@ -25,6 +25,7 @@ namespace Persistence
                     else
                     {
                         EntityAlarm sentimentAlarm = (EntityAlarm)alarm;
+                        ctx.Entities.Attach(sentimentAlarm.Entity); 
                         ctx.SentimentAlarms.Add(sentimentAlarm);
                     }
                     ctx.SaveChanges();
@@ -35,8 +36,7 @@ namespace Persistence
                 throw new DataBaseException("Error agregando alarma.", ex);
             }
         }
-
-
+        
         public void UpdateAlarms(IAlarm alarm)
         {
             if (alarm.GetType().BaseType.Equals(typeof(AuthorAlarm)))
